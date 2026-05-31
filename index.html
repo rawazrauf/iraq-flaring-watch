@@ -21,8 +21,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        body {
+        html, body {
+            height: 100%;
+            height: -webkit-fill-available;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+        }
+        /* Mobile-friendly map fill viewport calculation avoiding Safari address bar overlap */
+        .map-fill-height {
+            height: calc(100vh - 56px); /* 56px corresponds to header h-14 */
+            height: calc(-webkit-fill-available - 56px);
         }
         /* Custom scrollbar styling for control drawer elements */
         ::-webkit-scrollbar {
@@ -130,7 +138,7 @@
 <body class="bg-gray-950 text-gray-100 flex flex-col h-full overflow-hidden">
 
     <!-- Header / Navbar -->
-    <header class="bg-gray-900 border-b border-gray-800 px-4 py-3 flex justify-between items-center z-30 shadow-lg shrink-0">
+    <header class="bg-gray-900 border-b border-gray-800 px-4 py-3 flex justify-between items-center z-30 shadow-lg shrink-0 h-14">
         <div class="flex items-center space-x-3">
             <!-- Mobile Toggle Menu Button -->
             <button onclick="toggleControlDrawer()" class="lg:hidden p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition focus:outline-none" aria-label="Toggle Control Panel">
@@ -168,7 +176,7 @@
     </header>
 
     <!-- Main Content Layout -->
-    <div class="flex-1 flex min-h-0 relative">
+    <div class="flex-1 flex min-h-0 relative map-fill-height">
         
         <!-- Mobile Sidebar Backdrop Overlay -->
         <div id="drawer-backdrop" onclick="toggleControlDrawer()" class="hidden fixed inset-0 bg-black/70 z-20 transition-opacity duration-300 lg:hidden"></div>
@@ -208,6 +216,18 @@
             <!-- Scrollable Settings Container -->
             <div class="flex-1 overflow-y-auto p-4 space-y-4">
                 
+                <!-- Search Component (Cleanly integrated to prevent viewport collision) -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block">Search Basin or Operator</label>
+                    <div class="bg-gray-950 border border-gray-800 p-1.5 rounded-xl shadow-inner flex items-center w-full">
+                        <svg class="w-4 h-4 text-gray-400 ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" id="map-search-input" placeholder="Search oil fields, operator..." onkeydown="handleSearchKeyPress(event)" class="bg-transparent border-none text-xs text-gray-100 placeholder-gray-500 px-2 py-1.5 focus:ring-0 focus:outline-none w-full">
+                        <button onclick="executeMapSearch()" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs px-3.5 py-1.5 rounded-lg transition shrink-0 h-8">Go</button>
+                    </div>
+                </div>
+
                 <!-- Data Source toggle -->
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Data Engine Source</label>
@@ -292,7 +312,7 @@
                 <div class="bg-gray-950/40 p-3 rounded-xl border border-gray-800 space-y-2.5">
                     <div class="flex items-center justify-between">
                         <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Distance Analyzer</h4>
-                        <span class="text-[9px] text-gray-500 font-semibold bg-gray-850 px-1.5 py-0.5 rounded uppercase border border-gray-700">Ruler</span>
+                        <span class="text-[9px] text-gray-500 font-semibold bg-gray-900 px-1.5 py-0.5 rounded uppercase border border-gray-700">Ruler</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-normal">
                         Assess local impact by calculating the exact distance between any flare stack and community settlements.
@@ -313,7 +333,7 @@
                             <span class="text-gray-400 font-medium">Proximity:</span>
                             <span id="measure-distance-val" class="font-bold text-amber-400">0.0 km</span>
                         </div>
-                        <div class="text-[9px] text-gray-400 leading-normal pt-1.5 border-t border-gray-800" id="proximity-alert-msg">
+                        <div class="text-[9px] text-gray-400 leading-normal pt-1.5 border-t border-gray-800 animate-fade-in" id="proximity-alert-msg">
                             Click anywhere on the map to compute geodesic distance.
                         </div>
                     </div>
@@ -353,7 +373,7 @@
             </div>
 
             <!-- Footer -->
-            <div class="p-3 border-t border-gray-850 bg-gray-950 text-center shrink-0">
+            <div class="p-3 border-t border-gray-800 bg-gray-950 text-center shrink-0">
                 <p class="text-[9px] text-gray-500 leading-normal">
                     OpenStreetMap Contributors © ODbL &bull; Esri Tiles. No server required. Runs client-side.
                 </p>
@@ -363,17 +383,6 @@
         <!-- Main Map Viewport Area -->
         <main class="flex-1 flex flex-col min-h-0 relative bg-gray-950 z-0">
             
-            <!-- Floating Unified Search Container (Positions cleanly across mobile viewports) -->
-            <div class="absolute top-3 left-3 right-3 sm:left-4 sm:right-auto sm:w-80 z-10">
-                <div class="bg-gray-900/95 border border-gray-800 p-1.5 rounded-xl shadow-2xl flex items-center w-full backdrop-blur">
-                    <svg class="w-4 h-4 text-gray-400 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                    <input type="text" id="map-search-input" placeholder="Search oil basins, coordinates, operator..." onkeydown="handleSearchKeyPress(event)" class="bg-transparent border-none text-xs text-gray-100 placeholder-gray-500 px-2 py-1.5 focus:ring-0 focus:outline-none w-full">
-                    <button onclick="executeMapSearch()" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs px-3.5 py-1.5 rounded-lg transition h-8">Go</button>
-                </div>
-            </div>
-
             <!-- Leaflet Map Canvas element -->
             <div id="leaflet-map-canvas" class="w-full h-full bg-gray-950"></div>
 
@@ -392,7 +401,7 @@
                         </button>
                     </div>
                     <p class="text-[10px] text-gray-400 mt-1 leading-relaxed">
-                        To view physical flare stacks on mobile, select **🛰️ Satellite** and pinch-zoom to level 18.
+                        To view physical flare stacks on mobile, select <strong>🛰️ Satellite</strong> and pinch-zoom to level 18.
                     </p>
                 </div>
             </div>
@@ -570,7 +579,7 @@
             { id: 13072785085, type: "node", lat: 30.5938230, lon: 46.7115741, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785113, type: "node", lat: 30.5445393, lon: 46.6876225, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785199, type: "node", lat: 30.5592278, lon: 46.7042854, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
-            { id: 13072785207, type: "node", lat: 30.5604236, lon: 47.7045228, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
+            { id: 13072785207, type: "node", lat: 30.5604236, lon: 46.7045228, field: "West Qurna", operator: "Basra Oil Company / Lukoil", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785211, type: "node", lat: 30.5587320, lon: 46.7039146, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785214, type: "node", lat: 30.3518539, lon: 46.8382683, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785217, type: "node", lat: 30.3514238, lon: 46.8384609, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
@@ -794,6 +803,11 @@
                 drawer.classList.add('-translate-x-full');
                 backdrop.classList.add('hidden');
             }
+
+            // Invalidate Leaflet view bounds once transition animation completes to prevent grey edge bars
+            setTimeout(() => {
+                if (map) map.invalidateSize();
+            }, 310);
         }
 
         // Mobile drawer close helper when triggering presets or zoom options
@@ -803,6 +817,9 @@
             if (window.innerWidth < 1024) { // Mobile/Tablet breakpoints
                 drawer.classList.add('-translate-x-full');
                 backdrop.classList.add('hidden');
+                setTimeout(() => {
+                    if (map) map.invalidateSize();
+                }, 310);
             }
         }
 
@@ -1040,8 +1057,13 @@
                     </div>
                 `;
 
-                // Constrain the popup bounds on small mobile viewports
-                marker.bindPopup(popupContent, { maxWidth: 260, minWidth: 220 });
+                // Constrain popups, prevent closing during map pan gestures, and pad boundaries nicely
+                marker.bindPopup(popupContent, { 
+                    maxWidth: 260, 
+                    minWidth: 220,
+                    closeOnClick: false,
+                    autoPanPadding: [20, 80]
+                });
                 markerClusterGroup.addLayer(marker);
 
                 // Add 5km health safety buffer overlays
@@ -1107,9 +1129,30 @@
             closeDrawerOnMobile();
         }
 
-        // Layer Toggling Controls
+        // High-performance direct Layer toggles without total rebuild stutters
         function toggleLayer(layerType) {
-            loadLayersAndData();
+            if (layerType === 'cluster') {
+                const checked = document.getElementById('layer-cluster').checked;
+                if (checked) {
+                    if (!map.hasLayer(markerClusterGroup)) map.addLayer(markerClusterGroup);
+                } else {
+                    map.removeLayer(markerClusterGroup);
+                }
+            } else if (layerType === 'heatmap') {
+                const checked = document.getElementById('layer-heatmap').checked;
+                if (checked) {
+                    if (!map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
+                } else {
+                    map.removeLayer(heatmapLayer);
+                }
+            } else if (layerType === 'radius') {
+                const checked = document.getElementById('layer-radius').checked;
+                if (checked) {
+                    if (!map.hasLayer(safeRadiusGroup)) map.addLayer(safeRadiusGroup);
+                } else {
+                    map.removeLayer(safeRadiusGroup);
+                }
+            }
         }
 
         // Switch between Preloaded Data and Live OSM API Query
@@ -1183,6 +1226,14 @@
             selectedMeasureFlare = null;
         }
 
+        // Resets the measuring segment dynamically without requiring total cancellation
+        function resetMeasurementOrigin() {
+            clearMeasurementLines();
+            document.getElementById('measure-flare-name').textContent = "Tap Flare Stack";
+            document.getElementById('measure-distance-val').textContent = "Waiting...";
+            document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active flare stack marker.";
+        }
+
         function onMapClickForDistance(e) {
             if (!isMeasuringMode) return;
 
@@ -1225,10 +1276,12 @@
                     dashArray: '5, 5'
                 }).addTo(map);
 
+                const resetBtn = `<button onclick="resetMeasurementOrigin()" class="underline text-amber-400 hover:text-amber-300 ml-1.5 font-semibold">Pick new flare</button>`;
+
                 if (distanceInKm < 5) {
-                    document.getElementById('proximity-alert-msg').innerHTML = `<span class="text-red-400 font-bold">⚠️ Warning: High Exposure Risk.</span> Within 5km zone. Flare emissions can directly degrade local air quality.`;
+                    document.getElementById('proximity-alert-msg').innerHTML = `<span class="text-red-400 font-bold">⚠️ Warning: High Exposure Risk.</span> Within 5km zone. Flare emissions can directly degrade local air quality. ${resetBtn}`;
                 } else {
-                    document.getElementById('proximity-alert-msg').innerHTML = `<span class="text-green-400 font-bold">✓ Safe Distance Zone.</span> Beyond 5km distance threshold. Exposure level to surface particulates is minimized.`;
+                    document.getElementById('proximity-alert-msg').innerHTML = `<span class="text-green-400 font-bold">✓ Safe Distance Zone.</span> Beyond 5km distance threshold. Exposure level to surface particulates is minimized. ${resetBtn}`;
                 }
             }
         }
@@ -1278,6 +1331,7 @@
                     map.setView([found.lat, found.lon], 13);
                 }
             }
+            closeDrawerOnMobile();
         }
 
         // Easy regional presets
