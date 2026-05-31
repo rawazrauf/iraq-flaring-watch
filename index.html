@@ -173,8 +173,8 @@
         <!-- Mobile Sidebar Backdrop Overlay -->
         <div id="drawer-backdrop" onclick="toggleControlDrawer()" class="hidden fixed inset-0 bg-black/70 z-20 transition-opacity duration-300 lg:hidden"></div>
 
-        <!-- Left Side Control Drawer Panel (Collapsible slide-over drawer on mobile, fixed side-column on desktop) -->
-        <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-25 w-80 sm:w-85 bg-gray-900 border-r border-gray-800 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-10 shrink-0">
+        <!-- Left Side Control Drawer Panel (Collapsible slide-over drawer on mobile, relative side-column on desktop) -->
+        <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 top-0 z-30 w-80 bg-gray-900 border-r border-gray-800 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 lg:z-10 shrink-0">
             
             <!-- Quick Insights Tracker -->
             <div class="p-4 border-b border-gray-800 bg-gray-950/40">
@@ -270,34 +270,34 @@
                 </div>
 
                 <!-- Display layers -->
-            <div>
-                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Display layers</label>
-                <div class="space-y-1 bg-gray-950 p-2 rounded-lg border border-gray-800">
-                    <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-                        <input type="checkbox" id="layer-cluster" checked onchange="toggleLayer('cluster')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
-                        <span>Interactive Point Clusters</span>
-                    </label>
-                    <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-                        <input type="checkbox" id="layer-heatmap" onchange="toggleLayer('heatmap')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
-                        <span>Density Heatmap Overlay</span>
-                    </label>
-                    <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-                        <input type="checkbox" id="layer-radius" onchange="toggleLayer('radius')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
-                        <span>Safe Range Circle (5km radius)</span>
-                    </label>
+                <div>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Display layers</label>
+                    <div class="space-y-1 bg-gray-950 p-2 rounded-lg border border-gray-800">
+                        <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
+                            <input type="checkbox" id="layer-cluster" checked onchange="toggleLayer('cluster')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                            <span>Interactive Point Clusters</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
+                            <input type="checkbox" id="layer-heatmap" onchange="toggleLayer('heatmap')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                            <span>Density Heatmap Overlay</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
+                            <input type="checkbox" id="layer-radius" onchange="toggleLayer('radius')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                            <span>Safe Range Circle (5km radius)</span>
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Distance Analyzer Card -->
+                <!-- Distance Analyzer Card -->
                 <div class="bg-gray-950/40 p-3 rounded-xl border border-gray-800 space-y-2.5">
                     <div class="flex items-center justify-between">
                         <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Distance Analyzer</h4>
-                        <span class="text-[9px] text-gray-500 font-semibold bg-gray-800 px-1.5 py-0.5 rounded uppercase border border-gray-700">Ruler</span>
+                        <span class="text-[9px] text-gray-500 font-semibold bg-gray-850 px-1.5 py-0.5 rounded uppercase border border-gray-700">Ruler</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-normal">
                         Assess local impact by calculating the exact distance between any flare stack and community settlements.
                     </p>
-                    <button id="btn-measure" onclick="toggleMeasuringMode()" class="w-full bg-gray-850 hover:bg-gray-800 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow h-10">
+                    <button id="btn-measure" onclick="toggleMeasuringMode()" class="w-full bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow h-10">
                         <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
                         </svg>
@@ -323,9 +323,9 @@
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Regional Quick Zoom</label>
                     <div class="grid grid-cols-3 gap-1.5">
-                        <button onclick="focusBasra(); closeDrawerOnMobile();" class="bg-gray-850 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Basra Core</button>
-                        <button onclick="focusMaysan(); closeDrawerOnMobile();" class="bg-gray-850 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Maysan</button>
-                        <button onclick="focusKirkuk(); closeDrawerOnMobile();" class="bg-gray-850 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Kirkuk</button>
+                        <button onclick="focusBasra(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Basra Core</button>
+                        <button onclick="focusMaysan(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Maysan</button>
+                        <button onclick="focusKirkuk(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Kirkuk</button>
                     </div>
                 </div>
 
@@ -364,7 +364,7 @@
         <main class="flex-1 flex flex-col min-h-0 relative bg-gray-950 z-0">
             
             <!-- Floating Unified Search Container (Positions cleanly across mobile viewports) -->
-            <div class="absolute top-3 left-3 right-3 sm:left-4 sm:right-auto sm:w-85 z-10">
+            <div class="absolute top-3 left-3 right-3 sm:left-4 sm:right-auto sm:w-80 z-10">
                 <div class="bg-gray-900/95 border border-gray-800 p-1.5 rounded-xl shadow-2xl flex items-center w-full backdrop-blur">
                     <svg class="w-4 h-4 text-gray-400 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -378,7 +378,7 @@
             <div id="leaflet-map-canvas" class="w-full h-full bg-gray-950"></div>
 
             <!-- Collapsible bottom-right helper dialog (Removes screenspace clutter on mobile) -->
-            <div id="map-helper-box" class="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-85 z-10 bg-gray-900/95 border border-gray-800 rounded-xl shadow-2xl p-3.5 flex space-x-3 items-start backdrop-blur">
+            <div id="map-helper-box" class="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 z-10 bg-gray-900/95 border border-gray-800 rounded-xl shadow-2xl p-3.5 flex space-x-3 items-start backdrop-blur">
                 <div class="p-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg shrink-0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -398,7 +398,7 @@
             </div>
 
             <!-- Floating Measurement Active Notification (Fitted for thumb cancellation touch targets) -->
-            <div id="measure-active-banner" class="hidden absolute bottom-24 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 z-15 bg-red-600 text-white px-4 py-3 rounded-xl shadow-2xl text-xs font-bold animate-bounce flex items-center justify-between space-x-3">
+            <div id="measure-active-banner" class="hidden absolute bottom-24 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 z-30 bg-red-600 text-white px-4 py-3 rounded-xl shadow-2xl text-xs font-bold animate-bounce flex items-center justify-between space-x-3">
                 <span class="flex-1">📍 Measurement Mode Active: Tap any community coordinate to check radius proximity!</span>
                 <button onclick="toggleMeasuringMode()" class="bg-black/30 hover:bg-black/50 px-3 py-1.5 rounded-lg border border-white/20 uppercase text-[10px] font-extrabold shadow shrink-0">Cancel</button>
             </div>
@@ -570,7 +570,7 @@
             { id: 13072785085, type: "node", lat: 30.5938230, lon: 46.7115741, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785113, type: "node", lat: 30.5445393, lon: 46.6876225, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785199, type: "node", lat: 30.5592278, lon: 46.7042854, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
-            { id: 13072785207, type: "node", lat: 30.5604236, lon: 46.7045228, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
+            { id: 13072785207, type: "node", lat: 30.5604236, lon: 47.7045228, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785211, type: "node", lat: 30.5587320, lon: 46.7039146, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785214, type: "node", lat: 30.3518539, lon: 46.8382683, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13072785217, type: "node", lat: 30.3514238, lon: 46.8384609, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
@@ -896,7 +896,7 @@
                         break;
                     }
                 } catch (e) {
-                    console.warn(`Overpass endpoint failed or timed out. Attempting backup server...`);
+                    console.warn("Overpass endpoint failed or timed out. Attempting backup server...");
                 }
             }
 
@@ -1040,7 +1040,8 @@
                     </div>
                 `;
 
-                marker.bindPopup(popupContent);
+                // Constrain the popup bounds on small mobile viewports
+                marker.bindPopup(popupContent, { maxWidth: 260, minWidth: 220 });
                 markerClusterGroup.addLayer(marker);
 
                 // Add 5km health safety buffer overlays
@@ -1161,7 +1162,7 @@
                 selectedMeasureFlare = null;
                 closeDrawerOnMobile();
             } else {
-                btn.className = "w-full bg-gray-850 hover:bg-gray-800 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow h-10";
+                btn.className = "w-full bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow h-10";
                 btnText.textContent = "Measure Flare Proximity";
                 activeBanner.classList.add('hidden');
                 document.getElementById('measure-output-box').classList.add('hidden');
