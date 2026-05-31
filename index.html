@@ -127,7 +127,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 flex flex-col h-full overflow-hidden select-none">
+<body class="bg-gray-950 text-gray-100 flex flex-col h-full overflow-hidden">
 
     <!-- Header / Navbar -->
     <header class="bg-gray-900 border-b border-gray-800 px-4 py-3 flex justify-between items-center z-30 shadow-lg shrink-0">
@@ -270,25 +270,25 @@
                 </div>
 
                 <!-- Display layers -->
-                <div>
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Toggle Display Layers</label>
-                    <div class="space-y-2.5 bg-gray-950 p-3 rounded-lg border border-gray-800">
-                        <label class="flex items-center space-x-2.5 text-xs text-gray-300 cursor-pointer h-8">
-                            <input type="checkbox" id="layer-cluster" checked onchange="toggleLayer('cluster')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-4 h-4">
-                            <span>Interactive Clusters</span>
-                        </label>
-                        <label class="flex items-center space-x-2.5 text-xs text-gray-300 cursor-pointer h-8">
-                            <input type="checkbox" id="layer-heatmap" onchange="toggleLayer('heatmap')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-4 h-4">
-                            <span>Density Heatmap Overlay</span>
-                        </label>
-                        <label class="flex items-center space-x-2.5 text-xs text-gray-300 cursor-pointer h-8">
-                            <input type="checkbox" id="layer-radius" onchange="toggleLayer('radius')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-4 h-4">
-                            <span>Safe Range Circle (5km radius)</span>
-                        </label>
-                    </div>
+            <div>
+                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Display layers</label>
+                <div class="space-y-1 bg-gray-950 p-2 rounded-lg border border-gray-800">
+                    <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
+                        <input type="checkbox" id="layer-cluster" checked onchange="toggleLayer('cluster')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                        <span>Interactive Point Clusters</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
+                        <input type="checkbox" id="layer-heatmap" onchange="toggleLayer('heatmap')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                        <span>Density Heatmap Overlay</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
+                        <input type="checkbox" id="layer-radius" onchange="toggleLayer('radius')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                        <span>Safe Range Circle (5km radius)</span>
+                    </label>
                 </div>
+            </div>
 
-                <!-- Distance Analyzer Card -->
+            <!-- Distance Analyzer Card -->
                 <div class="bg-gray-950/40 p-3 rounded-xl border border-gray-800 space-y-2.5">
                     <div class="flex items-center justify-between">
                         <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Distance Analyzer</h4>
@@ -731,7 +731,7 @@
         };
 
         function initMap() {
-            // Initial center setup targeting the national core of Iraq
+            // Center the map viewport to cover northern, central, and southern Iraq oil basins
             map = L.map('leaflet-map-canvas', {
                 center: [33.0, 45.0],
                 zoom: 6.5,
@@ -740,7 +740,14 @@
                 minZoom: 5
             });
 
-            // Reposition map navigation indicators to bottom right
+            // Prevent Leaflet map gestures from capturing drawer element actions on mobile
+            const drawerElement = document.getElementById('sidebar-drawer');
+            if (drawerElement) {
+                L.DomEvent.disableClickPropagation(drawerElement);
+                L.DomEvent.disableScrollPropagation(drawerElement);
+            }
+
+            // Relocate zoom control to bottom right for premium UX
             map.zoomControl.setPosition('bottomright');
 
             // Define base satellite map imagery tiles
