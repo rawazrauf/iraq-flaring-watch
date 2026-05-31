@@ -935,7 +935,7 @@
                 // 1. Create interactive marker
                 const marker = L.marker(coord, { icon: flareIcon });
                 
-                // Construct premium Popup Card template
+                // Construct premium Popup Card template (with updated precise iD editor URL construction)
                 const popupContent = `
                     <div class="p-1 space-y-3 max-w-xs text-xs">
                         <div class="flex items-center justify-between border-b border-gray-700 pb-2">
@@ -982,7 +982,7 @@
                             <button onclick="inspectSatellite(${flare.lat}, ${flare.lon})" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-1.5 px-2 rounded text-center transition flex items-center justify-center space-x-1">
                                 <span>🛰️ Zoom Flare</span>
                             </button>
-                            <a href="https://www.openstreetmap.org/edit?${flare.type || 'node'}=${flare.id}" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold py-1.5 px-2 rounded text-center border border-gray-700 transition flex items-center justify-center space-x-1">
+                            <a href="https://www.openstreetmap.org/edit?editor=id#map=19/${flare.lat}/${flare.lon}&${flare.type || 'node'}=${flare.id}" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold py-1.5 px-2 rounded text-center border border-gray-700 transition flex items-center justify-center space-x-1">
                                 <span>✏️ Edit OSM</span>
                             </a>
                         </div>
