@@ -46,7 +46,7 @@
                 box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
             }
             50% {
-                transform: scale(1.1);
+                transform: scale(1.2);
                 opacity: 1;
                 box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
             }
@@ -56,7 +56,21 @@
                 box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
             }
         }
+        
+        /* Outer Leaflet container wrapper (neutralized to prevent transform alignment override) */
+        .custom-flare-container {
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Nested animated child div - isolates scale transform away from Leaflet's parent positioner */
         .pulsing-flare {
+            width: 12px;
+            height: 12px;
             background: #f59e0b;
             border: 2px solid #ef4444;
             border-radius: 50%;
@@ -675,11 +689,12 @@
         let heatmapLayer;
         let safeRadiusGroup;
 
-        // Custom orange pulsing icon for gas flares
+        // Custom orange pulsing icon for gas flares (Class container remains neutral to not conflict with translate3d positioning)
         const flareIcon = L.divIcon({
-            className: 'pulsing-flare',
-            iconSize: [12, 12],
-            iconAnchor: [6, 6]
+            className: 'custom-flare-container',
+            html: '<div class="pulsing-flare"></div>',
+            iconSize: [16, 16],
+            iconAnchor: [8, 8]
         });
 
         // Measurement system state
@@ -989,26 +1004,31 @@
                 safeRadiusGroup.addLayer(radiusCircle);
             });
 
-            // Update interactive cluster overlays on map based on checkboxes
-            if (document.getElementById('layer-cluster').checked) {
-                map.addLayer(markerClusterGroup);
-            } else {
-                map.removeLayer(markerClusterGroup);
-            }
-
-            // Update Heatmap
+            // Update interactive overlays on map in correct stacking order (Heatmap -> Radius Buffer -> Clusters)
             heatmapLayer.setLatLngs(heatmapPoints);
             if (document.getElementById('layer-heatmap').checked) {
-                map.addLayer(heatmapLayer);
+                if (!map.hasLayer(heatmapLayer)) {
+                    map.addLayer(heatmapLayer);
+                }
+                heatmapLayer.redraw();
             } else {
                 map.removeLayer(heatmapLayer);
             }
 
-            // Update Radii Group
             if (document.getElementById('layer-radius').checked) {
-                map.addLayer(safeRadiusGroup);
+                if (!map.hasLayer(safeRadiusGroup)) {
+                    map.addLayer(safeRadiusGroup);
+                }
             } else {
                 map.removeLayer(safeRadiusGroup);
+            }
+
+            if (document.getElementById('layer-cluster').checked) {
+                if (!map.hasLayer(markerClusterGroup)) {
+                    map.addLayer(markerClusterGroup);
+                }
+            } else {
+                map.removeLayer(markerClusterGroup);
             }
         }
 
@@ -1038,19 +1058,7 @@
 
         // Layer Toggling Controls
         function toggleLayer(layerType) {
-            if (layerType === 'cluster') {
-                const checked = document.getElementById('layer-cluster').checked;
-                if (checked) map.addLayer(markerClusterGroup);
-                else map.removeLayer(markerClusterGroup);
-            } else if (layerType === 'heatmap') {
-                const checked = document.getElementById('layer-heatmap').checked;
-                if (checked) map.addLayer(heatmapLayer);
-                else map.removeLayer(heatmapLayer);
-            } else if (layerType === 'radius') {
-                const checked = document.getElementById('layer-radius').checked;
-                if (checked) map.addLayer(safeRadiusGroup);
-                else map.removeLayer(safeRadiusGroup);
-            }
+            loadLayersAndData();
         }
 
         // Switch between Preloaded Data and Live OSM API Query
