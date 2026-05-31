@@ -2,20 +2,20 @@
 <html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Iraq Gas Flaring Watch - Powered by OpenStreetMap</title>
     
-    <!-- Tailwind CSS for modern responsive UI styling -->
+    <!-- Tailwind CSS for responsive framework layout utility classes -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     
-    <!-- Leaflet.js CSS for mapping components -->
+    <!-- Leaflet.js CSS for touch-optimized mapping systems -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <!-- Leaflet Marker Cluster CSS for grouping overlapping flares -->
+    <!-- Leaflet Marker Cluster CSS for high-performance mobile point grouping -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     
-    <!-- Google Fonts for sleek typography -->
+    <!-- Google Fonts for premium user interface typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,9 +24,9 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        /* Custom scrollbar styling for slick dashboard design */
+        /* Custom scrollbar styling for control drawer elements */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         ::-webkit-scrollbar-track {
             background: #111827;
@@ -41,23 +41,23 @@
         /* Pulse Animation for active gas flaring markers */
         @keyframes flarePulse {
             0% {
-                transform: scale(0.8);
-                opacity: 0.5;
+                transform: scale(0.85);
+                opacity: 0.6;
                 box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
             }
             50% {
-                transform: scale(1.2);
+                transform: scale(1.15);
                 opacity: 1;
                 box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
             }
             100% {
-                transform: scale(0.8);
-                opacity: 0.5;
+                transform: scale(0.85);
+                opacity: 0.6;
                 box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
             }
         }
         
-        /* Outer Leaflet container wrapper (neutralized to prevent transform alignment override) */
+        /* Outer Leaflet container wrapper (neutralized to prevent scale conflicts with translation rendering) */
         .custom-flare-container {
             background: none !important;
             border: none !important;
@@ -69,14 +69,14 @@
         
         /* Nested animated child div - isolates scale transform away from Leaflet's parent positioner */
         .pulsing-flare {
-            width: 12px;
-            height: 12px;
+            width: 13px;
+            height: 13px;
             background: #f59e0b;
             border: 2px solid #ef4444;
             border-radius: 50%;
             animation: flarePulse 2s infinite ease-in-out;
         }
-        /* Custom clustering marker style override */
+        /* Custom clustering marker style overrides */
         .marker-cluster-small {
             background-color: rgba(245, 158, 11, 0.4) !important;
         }
@@ -101,7 +101,7 @@
             color: #ffffff !important;
             font-weight: bold;
         }
-        /* Keep map tooltips and popups looking modern */
+        /* Keep map tooltips and popups looking modern and responsive */
         .leaflet-popup-content-wrapper {
             background: #1f2937 !important;
             color: #f3f4f6 !important;
@@ -127,109 +127,140 @@
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 flex flex-col h-full overflow-hidden">
+<body class="bg-gray-950 text-gray-100 flex flex-col h-full overflow-hidden select-none">
 
     <!-- Header / Navbar -->
-    <header class="bg-gray-900 border-b border-gray-800 px-6 py-4 flex flex-col md:flex-row justify-between items-center z-10 shadow-lg">
-        <div class="flex items-center space-x-3 mb-3 md:mb-0">
-            <div class="p-2 bg-gradient-to-br from-amber-500 to-red-600 rounded-lg shadow-inner">
-                <!-- Fire SVG Icon -->
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.01 11c0 1.11-.5 2.4-2.131 5.121z"></path>
+    <header class="bg-gray-900 border-b border-gray-800 px-4 py-3 flex justify-between items-center z-30 shadow-lg shrink-0">
+        <div class="flex items-center space-x-3">
+            <!-- Mobile Toggle Menu Button -->
+            <button onclick="toggleControlDrawer()" class="lg:hidden p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition focus:outline-none" aria-label="Toggle Control Panel">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-            </div>
-            <div>
-                <h1 class="text-lg md:text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-red-500">
-                    Iraq Gas Flaring Watch <span class="text-xs bg-gray-800 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded ml-2 uppercase font-mono">OSM Data Portal</span>
-                </h1>
-                <p class="text-xs text-gray-400 mt-0.5">Crowdsourced Environmental Monitoring via OpenStreetMap and Esri Satellite Imagery</p>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="p-1.5 bg-gradient-to-br from-amber-500 to-red-600 rounded-lg shadow-inner">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-sm sm:text-base font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-red-500">
+                        Iraq Gas Flaring Watch
+                    </h1>
+                    <p class="hidden sm:block text-[10px] text-gray-400">OSM Environmental Monitor via Esri Satellite</p>
+                </div>
             </div>
         </div>
+        
         <div class="flex items-center space-x-2">
             <!-- Share/Export Button -->
-            <button onclick="copyShareLink()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-3 py-2 rounded-lg border border-gray-700 transition flex items-center space-x-1.5 font-semibold">
+            <button onclick="copyShareLink()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center space-x-1.5 font-semibold h-9">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.006-2.003m0 6.52l-4.006-2.003M18 12a3 3 0 11-6 0 3 3 0 016 0zm-11 5a3 3 0 11-6 0 3 3 0 016 0zm0-10a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
-                <span>Share Map</span>
+                <span class="hidden md:inline">Share Map</span>
             </button>
-            <a href="https://www.openstreetmap.org" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-white text-xs px-3.5 py-2 rounded-lg font-bold transition flex items-center space-x-1.5 shadow-md">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                </svg>
-                <span>OpenStreetMap</span>
+            <a href="https://www.openstreetmap.org" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-white text-xs px-3 py-2 rounded-lg font-bold transition flex items-center space-x-1.5 shadow-md h-9">
+                <span>OSM</span>
             </a>
         </div>
     </header>
 
-    <!-- Main Content Grid -->
-    <div class="flex-1 flex flex-col lg:flex-row min-h-0 relative">
+    <!-- Main Content Layout -->
+    <div class="flex-1 flex min-h-0 relative">
         
-        <!-- Left Side Dashboard Controls (Sidebar) -->
-        <aside class="w-full lg:w-96 bg-gray-900 border-r border-gray-800 flex flex-col overflow-y-auto z-10">
+        <!-- Mobile Sidebar Backdrop Overlay -->
+        <div id="drawer-backdrop" onclick="toggleControlDrawer()" class="hidden fixed inset-0 bg-black/70 z-20 transition-opacity duration-300 lg:hidden"></div>
+
+        <!-- Left Side Control Drawer Panel (Collapsible slide-over drawer on mobile, fixed side-column on desktop) -->
+        <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-25 w-80 sm:w-85 bg-gray-900 border-r border-gray-800 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-10 shrink-0">
             
             <!-- Quick Insights Tracker -->
-            <div class="p-5 border-b border-gray-800 bg-gray-900/50">
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">National Stats Dashboard</h3>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 flex flex-col justify-between">
-                        <span class="text-xs text-gray-400 font-medium">Mapped Flares</span>
-                        <div class="flex items-baseline space-x-1.5 mt-1">
-                            <span id="stat-flare-count" class="text-2xl font-extrabold text-amber-500">0</span>
-                            <span class="text-[10px] text-gray-500 font-mono">active</span>
+            <div class="p-4 border-b border-gray-800 bg-gray-950/40">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">National Stats</h3>
+                    <!-- Mobile Close Button inside Drawer -->
+                    <button onclick="toggleControlDrawer()" class="lg:hidden p-1 text-gray-400 hover:text-white hover:bg-gray-800 rounded">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex flex-col justify-between">
+                        <span class="text-[10px] text-gray-400 font-medium">Mapped Flares</span>
+                        <div class="flex items-baseline space-x-1 mt-0.5">
+                            <span id="stat-flare-count" class="text-xl font-extrabold text-amber-500">0</span>
+                            <span class="text-[9px] text-gray-500 font-mono">active</span>
                         </div>
                     </div>
-                    <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 flex flex-col justify-between">
-                        <span class="text-xs text-gray-400 font-medium">Main Basins</span>
-                        <div class="flex items-baseline space-x-1.5 mt-1">
-                            <span id="stat-basin-count" class="text-2xl font-extrabold text-red-500">0</span>
-                            <span class="text-[10px] text-gray-500 font-mono">provinces</span>
+                    <div class="bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex flex-col justify-between">
+                        <span class="text-[10px] text-gray-400 font-medium">Main Basins</span>
+                        <div class="flex items-baseline space-x-1 mt-0.5">
+                            <span id="stat-basin-count" class="text-xl font-extrabold text-red-500">0</span>
+                            <span class="text-[9px] text-gray-500 font-mono">basins</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Configuration & Loading Controls -->
-            <div class="p-5 border-b border-gray-800 space-y-4">
+            <!-- Scrollable Settings Container -->
+            <div class="flex-1 overflow-y-auto p-4 space-y-4">
+                
+                <!-- Data Source toggle -->
                 <div>
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Data Source Selector</label>
-                    <div class="grid grid-cols-2 gap-2 p-1 bg-gray-950 rounded-lg border border-gray-800">
-                        <button id="btn-preload" onclick="toggleDataSource('preload')" class="text-xs font-semibold py-1.5 px-3 rounded-md transition duration-200 bg-amber-600 text-white">
-                            Static Preload
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Data Engine Source</label>
+                    <div class="grid grid-cols-2 gap-1.5 p-1 bg-gray-950 rounded-lg border border-gray-800">
+                        <button id="btn-preload" onclick="toggleDataSource('preload')" class="text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 bg-amber-600 text-white h-9">
+                            Preloaded
                         </button>
-                        <button id="btn-live" onclick="toggleDataSource('live')" class="text-xs font-semibold py-1.5 px-3 rounded-md transition duration-200 text-gray-400 hover:text-white">
-                            Live OSM Query
+                        <button id="btn-live" onclick="toggleDataSource('live')" class="text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 text-gray-400 hover:text-white h-9">
+                            Live OSM
                         </button>
                     </div>
                 </div>
 
                 <!-- Live Query Loader Indicator Box -->
-                <div id="live-loader-box" class="hidden bg-gray-950 p-4 rounded-xl border border-amber-500/20 space-y-3">
+                <div id="live-loader-box" class="hidden bg-gray-950 p-3 rounded-xl border border-amber-500/20 space-y-2">
                     <div class="flex justify-between items-center">
-                        <span class="text-xs text-amber-400 font-bold flex items-center space-x-1.5">
-                            <svg class="animate-spin w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <span class="text-[11px] text-amber-400 font-bold flex items-center space-x-1.5">
+                            <svg class="animate-spin w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
-                            <span id="loading-status-text">Fetching live data...</span>
+                            <span id="loading-status-text" class="truncate">Contacting Overpass...</span>
                         </span>
-                        <span id="loading-timer" class="text-[10px] font-mono text-gray-500">0.0s</span>
+                        <span id="loading-timer" class="text-[9px] font-mono text-gray-500">0.0s</span>
                     </div>
-                    <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                    <div class="w-full bg-gray-800 h-1 rounded-full overflow-hidden">
                         <div id="loader-progress-bar" class="bg-amber-500 h-full w-1/12 transition-all duration-300"></div>
                     </div>
-                    <p class="text-[10px] text-gray-400 leading-relaxed">
-                        This queries the OpenStreetMap Overpass Server directly for coordinates containing the tagging sequence <code class="bg-gray-800 text-red-400 px-1 rounded font-mono">man_made=flare</code> inside the sovereign boundary coordinates of Iraq.
-                    </p>
+                </div>
+
+                <!-- Interactive Base Maps Selector (Moved from floating layout to Sidebar for mobile clean look) -->
+                <div>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Base Satellite & Canvas</label>
+                    <div class="flex flex-col space-y-1 bg-gray-950 p-2 rounded-lg border border-gray-800">
+                        <button id="map-base-satellite" onclick="changeBaseMap('satellite')" class="text-left text-xs font-bold px-3 py-2 rounded transition bg-amber-600 text-white w-full h-10 flex items-center justify-between">
+                            <span>🛰️ Esri Satellite (Tracing)</span>
+                            <span class="text-[9px] bg-black/30 px-1 py-0.5 rounded font-normal uppercase">HD</span>
+                        </button>
+                        <button id="map-base-dark" onclick="changeBaseMap('dark')" class="text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center">
+                            <span>🌌 Black Canvas (Night Contrast)</span>
+                        </button>
+                        <button id="map-base-streets" onclick="changeBaseMap('streets')" class="text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center">
+                            <span>🗺️ Road Map (OpenStreetMap)</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Oil Field Spatial Filters -->
                 <div>
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Filter by Oil Field Area</label>
-                    <select id="oilfield-filter" onchange="filterFlares(this.value)" class="w-full bg-gray-950 text-xs text-gray-200 border border-gray-800 rounded-lg p-2 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Focal Oilfield Selection</label>
+                    <select id="oilfield-filter" onchange="filterFlares(this.value)" class="w-full bg-gray-950 text-xs text-gray-200 border border-gray-800 rounded-lg p-2.5 h-10 focus:ring-1 focus:ring-amber-500 focus:outline-none">
                         <option value="all">All Fields / Areas (Iraqwide)</option>
-                        <option value="Rumaila">Rumaila Oilfield Complex (Basra)</option>
+                        <option value="Rumaila">Rumaila Field (Basra)</option>
                         <option value="West Qurna">West Qurna Field (Basra)</option>
                         <option value="Majnoon">Majnoon Field (Basra)</option>
                         <option value="Zubair">Zubair Oil Field (Basra)</option>
@@ -238,161 +269,151 @@
                     </select>
                 </div>
 
-                <!-- Layer Controller Box -->
+                <!-- Display layers -->
                 <div>
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Display layers</label>
-                    <div class="space-y-2 bg-gray-950 p-3 rounded-lg border border-gray-800">
-                        <label class="flex items-center space-x-2 text-xs text-gray-300 cursor-pointer">
-                            <input type="checkbox" id="layer-cluster" checked onchange="toggleLayer('cluster')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0">
-                            <span>Interactive Point Clusters</span>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Toggle Display Layers</label>
+                    <div class="space-y-2.5 bg-gray-950 p-3 rounded-lg border border-gray-800">
+                        <label class="flex items-center space-x-2.5 text-xs text-gray-300 cursor-pointer h-8">
+                            <input type="checkbox" id="layer-cluster" checked onchange="toggleLayer('cluster')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-4 h-4">
+                            <span>Interactive Clusters</span>
                         </label>
-                        <label class="flex items-center space-x-2 text-xs text-gray-300 cursor-pointer">
-                            <input type="checkbox" id="layer-heatmap" onchange="toggleLayer('heatmap')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0">
+                        <label class="flex items-center space-x-2.5 text-xs text-gray-300 cursor-pointer h-8">
+                            <input type="checkbox" id="layer-heatmap" onchange="toggleLayer('heatmap')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-4 h-4">
                             <span>Density Heatmap Overlay</span>
                         </label>
-                        <label class="flex items-center space-x-2 text-xs text-gray-300 cursor-pointer">
-                            <input type="checkbox" id="layer-radius" onchange="toggleLayer('radius')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0">
+                        <label class="flex items-center space-x-2.5 text-xs text-gray-300 cursor-pointer h-8">
+                            <input type="checkbox" id="layer-radius" onchange="toggleLayer('radius')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-4 h-4">
                             <span>Safe Range Circle (5km radius)</span>
                         </label>
                     </div>
                 </div>
-            </div>
 
-            <!-- Distance Ruler / Proximity Analyzer -->
-            <div class="p-5 border-b border-gray-800 bg-gray-900/50">
-                <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Flaring Distance Analyzer</h3>
-                    <span class="text-[10px] text-amber-500 font-semibold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Citizen Tools</span>
+                <!-- Distance Analyzer Card -->
+                <div class="bg-gray-950/40 p-3 rounded-xl border border-gray-800 space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Distance Analyzer</h4>
+                        <span class="text-[9px] text-gray-500 font-semibold bg-gray-800 px-1.5 py-0.5 rounded uppercase border border-gray-700">Ruler</span>
+                    </div>
+                    <p class="text-[11px] text-gray-400 leading-normal">
+                        Assess local impact by calculating the exact distance between any flare stack and community settlements.
+                    </p>
+                    <button id="btn-measure" onclick="toggleMeasuringMode()" class="w-full bg-gray-850 hover:bg-gray-800 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow h-10">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                        </svg>
+                        <span id="measure-btn-text">Measure Flare Proximity</span>
+                    </button>
+                    
+                    <div id="measure-output-box" class="hidden p-2.5 bg-amber-500/10 border border-amber-500/20 rounded-lg text-[11px] space-y-1.5">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 font-medium">Selected Stack:</span>
+                            <span id="measure-flare-name" class="font-bold text-gray-100 truncate max-w-[120px]">None</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400 font-medium">Proximity:</span>
+                            <span id="measure-distance-val" class="font-bold text-amber-400">0.0 km</span>
+                        </div>
+                        <div class="text-[9px] text-gray-400 leading-normal pt-1.5 border-t border-gray-800" id="proximity-alert-msg">
+                            Click anywhere on the map to compute geodesic distance.
+                        </div>
+                    </div>
                 </div>
-                <p class="text-xs text-gray-400 mb-3 leading-relaxed">
-                    Gas flaring within 5 kilometers of communities is linked to elevated cancer risks and air quality degradation. Check proximity measurements below.
-                </p>
-                <button id="btn-measure" onclick="toggleMeasuringMode()" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow">
-                    <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
-                    </svg>
-                    <span id="measure-btn-text">Select Flare & Measure Distance</span>
-                </button>
-                <div id="measure-output-box" class="hidden mt-3 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg text-xs space-y-1">
-                    <div class="flex justify-between">
-                        <span class="text-gray-400 font-medium">Selected Flare:</span>
-                        <span id="measure-flare-name" class="font-bold text-gray-100">None</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-400 font-medium">Distance to Point:</span>
-                        <span id="measure-distance-val" class="font-bold text-amber-400">0.0 km</span>
-                    </div>
-                    <div class="text-[10px] text-gray-400 leading-relaxed pt-1 border-t border-gray-800" id="proximity-alert-msg">
-                        Click on any point on the map to calculate distance from the selected flaring point.
-                    </div>
-                </div>
-            </div>
 
-            <!-- OpenStreetMap Citizen Mapping Guide -->
-            <div class="p-5 flex-1 space-y-3">
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">How to Help Map Iraq</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    This visualization relies entirely on data curated by global and local OpenStreetMap users. If you locate a flare stack missing from our maps, you can add it directly:
-                </p>
-                <div class="bg-gray-950 p-3 rounded-lg border border-gray-800 text-xs space-y-2 font-mono text-gray-300">
-                    <div class="flex justify-between">
-                        <span class="text-amber-500">Key Tag:</span>
-                        <span>man_made</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-amber-500">Value:</span>
-                        <span>flare</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-amber-500">Secondary:</span>
-                        <span>man_made=flare_stack</span>
+                <!-- Zoom Controls Presets (Moved from floating clutter to Sidebar card) -->
+                <div>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Regional Quick Zoom</label>
+                    <div class="grid grid-cols-3 gap-1.5">
+                        <button onclick="focusBasra(); closeDrawerOnMobile();" class="bg-gray-850 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Basra Core</button>
+                        <button onclick="focusMaysan(); closeDrawerOnMobile();" class="bg-gray-850 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Maysan</button>
+                        <button onclick="focusKirkuk(); closeDrawerOnMobile();" class="bg-gray-850 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Kirkuk</button>
                     </div>
                 </div>
-                <div class="pt-2">
-                    <button onclick="zoomToRandomFlare()" class="w-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-1">
-                        <span>Inspect Random Flare Stack</span>
+
+                <!-- OSM Citizen Mapping Guide -->
+                <div class="p-3 bg-gray-950/40 rounded-xl border border-gray-800 space-y-2">
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Citizen Mapping Help</h4>
+                    <p class="text-[11px] text-gray-400 leading-relaxed">
+                        If a stack in Iraq is missing, please help update OpenStreetMap using standard tagging conventions:
+                    </p>
+                    <div class="bg-gray-950 p-2.5 rounded border border-gray-800 text-[10px] space-y-1 font-mono text-gray-300">
+                        <div class="flex justify-between">
+                            <span class="text-amber-500">Key:</span>
+                            <span>man_made</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-amber-500">Value:</span>
+                            <span>flare</span>
+                        </div>
+                    </div>
+                    <button onclick="zoomToRandomFlare(); closeDrawerOnMobile();" class="w-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs py-2 px-3 rounded-lg font-bold transition h-10">
+                        Inspect Random Flare
                     </button>
                 </div>
+
             </div>
 
-            <!-- Footer / Credits -->
-            <div class="p-4 border-t border-gray-800 bg-gray-950 text-center">
-                <p class="text-[10px] text-gray-500">
-                    OpenStreetMap Contributors © OpenStreetMap &bull; Esri Tiles. No personal server hosting needed. Runs client-side.
+            <!-- Footer -->
+            <div class="p-3 border-t border-gray-850 bg-gray-950 text-center shrink-0">
+                <p class="text-[9px] text-gray-500 leading-normal">
+                    OpenStreetMap Contributors © ODbL &bull; Esri Tiles. No server required. Runs client-side.
                 </p>
             </div>
         </aside>
 
-        <!-- Main Map Area -->
-        <main class="flex-1 flex flex-col min-h-0 relative">
+        <!-- Main Map Viewport Area -->
+        <main class="flex-1 flex flex-col min-h-0 relative bg-gray-950 z-0">
             
-            <!-- Floating Custom Layer Controls -->
-            <div class="absolute top-4 left-4 z-10 flex flex-col space-y-2">
-                <!-- Search Box -->
-                <div class="bg-gray-900 border border-gray-800 p-1.5 rounded-xl shadow-lg flex items-center w-72 md:w-80">
+            <!-- Floating Unified Search Container (Positions cleanly across mobile viewports) -->
+            <div class="absolute top-3 left-3 right-3 sm:left-4 sm:right-auto sm:w-85 z-10">
+                <div class="bg-gray-900/95 border border-gray-800 p-1.5 rounded-xl shadow-2xl flex items-center w-full backdrop-blur">
                     <svg class="w-4 h-4 text-gray-400 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
-                    <input type="text" id="map-search-input" placeholder="Search major oil fields or provinces..." onkeydown="handleSearchKeyPress(event)" class="bg-transparent border-none text-xs text-gray-100 placeholder-gray-500 px-2 py-1 focus:ring-0 focus:outline-none w-full">
-                    <button onclick="executeMapSearch()" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs px-2.5 py-1.5 rounded-lg transition">Go</button>
-                </div>
-                
-                <!-- Quick Zoom Control Badges -->
-                <div class="flex items-center space-x-1">
-                    <button onclick="focusBasra()" class="bg-gray-900/90 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] px-2 py-1 rounded shadow-md transition font-semibold">Basra Core</button>
-                    <button onclick="focusMaysan()" class="bg-gray-900/90 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] px-2 py-1 rounded shadow-md transition font-semibold">Maysan/Missan</button>
-                    <button onclick="focusKirkuk()" class="bg-gray-900/90 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] px-2 py-1 rounded shadow-md transition font-semibold">Kirkuk Hub</button>
+                    <input type="text" id="map-search-input" placeholder="Search oil basins, coordinates, operator..." onkeydown="handleSearchKeyPress(event)" class="bg-transparent border-none text-xs text-gray-100 placeholder-gray-500 px-2 py-1.5 focus:ring-0 focus:outline-none w-full">
+                    <button onclick="executeMapSearch()" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs px-3.5 py-1.5 rounded-lg transition h-8">Go</button>
                 </div>
             </div>
 
-            <!-- Floating Base Map Selector Overlay -->
-            <div class="absolute top-4 right-4 z-10 bg-gray-900 border border-gray-800 rounded-xl shadow-lg p-1 flex space-x-1">
-                <button id="map-base-satellite" onclick="changeBaseMap('satellite')" class="text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition bg-amber-600 text-white flex items-center space-x-1">
-                    <span>🛰️ Esri Satellite</span>
-                </button>
-                <button id="map-base-dark" onclick="changeBaseMap('dark')" class="text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition text-gray-400 hover:text-white flex items-center space-x-1">
-                    <span>🌌 Black Canvas</span>
-                </button>
-                <button id="map-base-streets" onclick="changeBaseMap('streets')" class="text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition text-gray-400 hover:text-white flex items-center space-x-1">
-                    <span>🗺️ Road Map</span>
-                </button>
-            </div>
+            <!-- Leaflet Map Canvas element -->
+            <div id="leaflet-map-canvas" class="w-full h-full bg-gray-950"></div>
 
-            <!-- Map Viewport -->
-            <div id="leaflet-map-canvas" class="w-full h-full bg-gray-950 z-0"></div>
-
-            <!-- Interactive Information Banner inside map -->
-            <div class="absolute bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-10 bg-gray-900/95 border border-gray-800 rounded-xl shadow-2xl p-4 flex space-x-3 items-start">
-                <div class="p-2 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg flex-shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- Collapsible bottom-right helper dialog (Removes screenspace clutter on mobile) -->
+            <div id="map-helper-box" class="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-85 z-10 bg-gray-900/95 border border-gray-800 rounded-xl shadow-2xl p-3.5 flex space-x-3 items-start backdrop-blur">
+                <div class="p-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
-                <div>
-                    <h4 class="text-xs font-bold text-gray-200">OSM Overlay Context</h4>
-                    <p class="text-[11px] text-gray-400 mt-1 leading-relaxed">
-                        To view individual flare stacks clearly, switch to **Satellite** mode and zoom to maximum magnification (`Level 18`). The imagery represents OSM-aligned Bing and Esri source files.
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-xs font-bold text-gray-200">Satellite Inspection Guide</h4>
+                        <button onclick="dismissHelperBox()" class="text-gray-400 hover:text-white p-0.5">
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-gray-400 mt-1 leading-relaxed">
+                        To view physical flare stacks on mobile, select **🛰️ Satellite** and pinch-zoom to level 18.
                     </p>
                 </div>
             </div>
 
-            <!-- Floating Measurement Active Notification -->
-            <div id="measure-active-banner" class="hidden absolute top-20 left-1/2 transform -translate-x-1/2 z-10 bg-red-600 text-white px-4 py-1.5 rounded-full shadow-lg text-xs font-bold animate-bounce flex items-center space-x-2">
-                <span>📍 Measurement Mode Active: Click any point on the map to calculate distance!</span>
-                <button onclick="toggleMeasuringMode()" class="bg-black/20 hover:bg-black/40 px-2 py-0.5 rounded text-[10px] border border-white/20">Cancel</button>
+            <!-- Floating Measurement Active Notification (Fitted for thumb cancellation touch targets) -->
+            <div id="measure-active-banner" class="hidden absolute bottom-24 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 z-15 bg-red-600 text-white px-4 py-3 rounded-xl shadow-2xl text-xs font-bold animate-bounce flex items-center justify-between space-x-3">
+                <span class="flex-1">📍 Measurement Mode Active: Tap any community coordinate to check radius proximity!</span>
+                <button onclick="toggleMeasuringMode()" class="bg-black/30 hover:bg-black/50 px-3 py-1.5 rounded-lg border border-white/20 uppercase text-[10px] font-extrabold shadow shrink-0">Cancel</button>
             </div>
 
         </main>
     </div>
 
-    <!-- Leaflet JS Dependencies -->
+    <!-- Leaflet JS Core and plugins dependencies -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 
     <!-- Map Application Engine -->
     <script>
-        // Sourced directly from modern live OpenStreetMap Node and Way datasets in Iraq.
+        // Sourced directly from live OpenStreetMap node data within Iraqi territory
         const preloadFlares = [
             { id: 2862208161, type: "node", lat: 35.3766436, lon: 44.2142736, field: "Kirkuk", operator: "North Oil Company (NOC)", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 2862208162, type: "node", lat: 35.3821309, lon: 44.2169451, field: "Kirkuk", operator: "North Oil Company (NOC)", status: "Active Gas Flare", source: "OSM Node Preload" },
@@ -673,17 +694,17 @@
             { id: 13876714818, type: "node", lat: 33.4492524, lon: 44.2886192, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13876756849, type: "node", lat: 33.0307858, lon: 46.0140215, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
             { id: 13895171978, type: "node", lat: 30.8770350, lon: 48.0232449, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare", source: "OSM Node Preload" },
-            { id: 1159050181, type: "way", lat: 32.3322490, lon: 44.0916980, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare Complex (Way Polygon Centroid)", source: "OSM Way Preload" }
+            { id: 1159050181, type: "way", lat: 32.3322490, lon: 44.0916980, field: "Other Iraqi Field", operator: "Unspecified Operator", status: "Active Gas Flare Complex (Way Centroid)", source: "OSM Way Preload" }
         ];
 
-        // Core variables
+        // Global engine configuration parameters
         let map;
         let currentFlares = [...preloadFlares];
         let currentBaseMapType = 'satellite';
         let currentDataSource = 'preload';
         let currentFilter = 'all';
 
-        // Layer objects
+        // Layer groupings reference cache
         let baseLayers = {};
         let markerClusterGroup;
         let heatmapLayer;
@@ -697,7 +718,7 @@
             iconAnchor: [8, 8]
         });
 
-        // Measurement system state
+        // Measurement system state variables
         let isMeasuringMode = false;
         let selectedMeasureFlare = null;
         let measureLine = null;
@@ -710,7 +731,7 @@
         };
 
         function initMap() {
-            // Center the map viewport to cover northern, central, and southern Iraq oil basins
+            // Initial center setup targeting the national core of Iraq
             map = L.map('leaflet-map-canvas', {
                 center: [33.0, 45.0],
                 zoom: 6.5,
@@ -719,26 +740,28 @@
                 minZoom: 5
             });
 
-            // Relocate zoom control to bottom right for premium UX
+            // Reposition map navigation indicators to bottom right
             map.zoomControl.setPosition('bottomright');
 
-            // Set up base tile providers
+            // Define base satellite map imagery tiles
             baseLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             });
 
+            // Define dark background canvas map tiles
             baseLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             });
 
+            // Define administrative outline map tiles
             baseLayers.streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             });
 
-            // Set default base layer
+            // Mount default base imagery layer
             baseLayers.satellite.addTo(map);
 
-            // Initialize Group Layers
+            // Initialize layered map data groups
             markerClusterGroup = L.markerClusterGroup({
                 showCoverageOnHover: false,
                 maxClusterRadius: 40
@@ -746,25 +769,56 @@
             heatmapLayer = L.heatLayer([], { radius: 25, blur: 15, maxZoom: 14 });
             safeRadiusGroup = L.layerGroup();
 
-            // Set event handler for clicking on map (distance calculation)
+            // Set map click interaction triggers
             map.on('click', onMapClickForDistance);
+        }
+
+        // Responsive Mobile Control Drawer Toggle Methods
+        function toggleControlDrawer() {
+            const drawer = document.getElementById('sidebar-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            
+            if (drawer.classList.contains('-translate-x-full')) {
+                // Slide Drawer In
+                drawer.classList.remove('-translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                // Slide Drawer Out
+                drawer.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        // Mobile drawer close helper when triggering presets or zoom options
+        function closeDrawerOnMobile() {
+            const drawer = document.getElementById('sidebar-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            if (window.innerWidth < 1024) { // Mobile/Tablet breakpoints
+                drawer.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        // Dismiss helper box overlay card
+        function dismissHelperBox() {
+            document.getElementById('map-helper-box').classList.add('hidden');
         }
 
         // Base Map Layer Control Switcher
         function changeBaseMap(type) {
             currentBaseMapType = type;
             
-            // Remove active bases
+            // Unmount existing base layers
             Object.values(baseLayers).forEach(layer => {
                 if (map.hasLayer(layer)) {
                     map.removeLayer(layer);
                 }
             });
 
-            // Add requested base
+            // Mount requested base layer
             baseLayers[type].addTo(map);
 
-            // Update UI buttons
+            // Update drawer preset styles
             const buttons = {
                 satellite: document.getElementById('map-base-satellite'),
                 dark: document.getElementById('map-base-dark'),
@@ -773,9 +827,9 @@
 
             Object.keys(buttons).forEach(key => {
                 if (key === type) {
-                    buttons[key].className = "text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition bg-amber-600 text-white flex items-center space-x-1";
+                    buttons[key].className = "text-left text-xs font-bold px-3 py-2 rounded transition bg-amber-600 text-white w-full h-10 flex items-center justify-between";
                 } else {
-                    buttons[key].className = "text-[10px] font-bold px-2.5 py-1.5 rounded-lg transition text-gray-400 hover:text-white flex items-center space-x-1";
+                    buttons[key].className = "text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center";
                 }
             });
         }
@@ -785,7 +839,7 @@
             const timerText = document.getElementById('loading-timer');
             const progressBar = document.getElementById('loader-progress-bar');
             
-            statusText.textContent = "Connecting to Overpass API...";
+            statusText.textContent = "Connecting Overpass...";
             progressBar.style.width = "20%";
 
             let seconds = 0;
@@ -794,7 +848,7 @@
                 timerText.textContent = seconds.toFixed(1) + "s";
             }, 100);
 
-            // Build Overpass QL Query looking for flares within the national boundary area of Iraq (ISO3166-1 = IQ)
+            // Fetch live flares within the national border area of Iraq
             const query = `
                 [out:json][timeout:60];
                 area["ISO3166-1"="IQ"]->.searchArea;
@@ -818,7 +872,7 @@
 
             for (let url of endpoints) {
                 try {
-                    statusText.textContent = `Querying OSM Node Database...`;
+                    statusText.textContent = `Querying OSM Node DB...`;
                     progressBar.style.width = "50%";
                     
                     const response = await fetch(url, {
@@ -835,14 +889,14 @@
                         break;
                     }
                 } catch (e) {
-                    console.warn(`Overpass server ${url} failed or timed out. Trying backup...`);
+                    console.warn(`Overpass endpoint failed or timed out. Attempting backup server...`);
                 }
             }
 
             clearInterval(timerInterval);
 
             if (!success || !data || !data.elements) {
-                statusText.textContent = "Error: Overpass servers busy. Try again.";
+                statusText.textContent = "Overpass busy. Retrying preload...";
                 progressBar.style.width = "100%";
                 setTimeout(() => {
                     toggleDataSource('preload');
@@ -850,17 +904,16 @@
                 return;
             }
 
-            statusText.textContent = "Parsing and validating spatial coordinates...";
+            statusText.textContent = "Validating coordinates...";
             progressBar.style.width = "85%";
 
-            // Process Overpass elements into our unified JSON structure
+            // Parse OSM objects into local memory data layers
             const liveParsedFlares = data.elements.map((element, idx) => {
                 const lat = element.lat || (element.center ? element.center.lat : null);
                 const lon = element.lon || (element.center ? element.center.lon : null);
 
                 if (!lat || !lon) return null;
 
-                // Extract oil field names and operators from tags if populated on OSM
                 const tags = element.tags || {};
                 const name = tags.name || tags.description || `OSM Flare Site #${element.id}`;
                 const operator = tags.operator || tags.owner || "Unspecified Oil Operator";
@@ -880,9 +933,9 @@
             }).filter(f => f !== null);
 
             progressBar.style.width = "100%";
-            statusText.textContent = `Success! Parsed ${liveParsedFlares.length} gas flares.`;
+            statusText.textContent = `Parsed ${liveParsedFlares.length} active flares.`;
 
-            // Populate global state
+            // Commit to global cache
             currentFlares = liveParsedFlares;
 
             setTimeout(() => {
@@ -891,51 +944,42 @@
             }, 1000);
         }
 
-        // Smart spatial heuristic helper to assign oilfield tags based on latitude/longitude quadrants
+        // Heuristics assigner mapping coordinate boundaries to local fields
         function detectOilFieldFromPosition(lat, lon) {
-            // Basra Rumaila quadrant bounds approx
             if (lat > 30.0 && lat < 30.4 && lon > 47.1 && lon < 47.6) return "Rumaila";
-            // West Qurna quadrant bounds approx
             if (lat > 30.5 && lat < 30.8 && lon > 47.1 && lon < 47.5) return "West Qurna";
-            // Majnoon quadrant bounds approx
             if (lat > 31.0 && lat < 31.4 && lon > 47.4 && lon < 47.7) return "Majnoon";
-            // Zubair quadrant bounds approx
             if (lat > 30.2 && lat < 30.5 && lon > 47.5 && lon < 47.9) return "Zubair";
-            // Halfaya quadrant bounds approx
             if (lat > 31.6 && lat < 31.9 && lon > 47.3 && lon < 47.6) return "Halfaya";
-            // Kirkuk bounds
             if (lat > 35.1 && lat < 35.6 && lon > 44.0 && lon < 44.5) return "Kirkuk";
-            
             return "Other Iraqi Field";
         }
 
         function loadLayersAndData() {
-            // Clear current layers
+            // Flush active layers
             markerClusterGroup.clearLayers();
             safeRadiusGroup.clearLayers();
             const heatmapPoints = [];
 
-            // Filter data
+            // Filter active arrays
             const filtered = currentFlares.filter(flare => {
                 if (currentFilter === 'all') return true;
                 return flare.field.toLowerCase() === currentFilter.toLowerCase();
             });
 
-            // Repopulate statistics display
+            // Update stats indices
             document.getElementById('stat-flare-count').textContent = filtered.length;
-            
-            // Count unique provinces/hubs dynamically
             const regions = new Set(filtered.map(f => f.field));
             document.getElementById('stat-basin-count').textContent = regions.size;
 
             filtered.forEach(flare => {
                 const coord = [flare.lat, flare.lon];
-                heatmapPoints.push([flare.lat, flare.lon, 1.0]); // Intensity factor 1.0
+                heatmapPoints.push([flare.lat, flare.lon, 1.0]);
 
-                // 1. Create interactive marker
+                // Create interactive map point marker
                 const marker = L.marker(coord, { icon: flareIcon });
                 
-                // Construct premium Popup Card template (with updated precise iD editor URL construction)
+                // Construct responsive, high-contrast touch friendly Popup card
                 const popupContent = `
                     <div class="p-1 space-y-3 max-w-xs text-xs">
                         <div class="flex items-center justify-between border-b border-gray-700 pb-2">
@@ -979,10 +1023,10 @@
                         </div>
 
                         <div class="grid grid-cols-2 gap-1.5 pt-1.5">
-                            <button onclick="inspectSatellite(${flare.lat}, ${flare.lon})" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-1.5 px-2 rounded text-center transition flex items-center justify-center space-x-1">
+                            <button onclick="inspectSatellite(${flare.lat}, ${flare.lon})" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-1.5 px-2 rounded text-center transition flex items-center justify-center space-x-1 h-9">
                                 <span>🛰️ Zoom Flare</span>
                             </button>
-                            <a href="https://www.openstreetmap.org/edit?editor=id#map=19/${flare.lat}/${flare.lon}&${flare.type || 'node'}=${flare.id}" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold py-1.5 px-2 rounded text-center border border-gray-700 transition flex items-center justify-center space-x-1">
+                            <a href="https://www.openstreetmap.org/edit?editor=id#map=19/${flare.lat}/${flare.lon}&${flare.type || 'node'}=${flare.id}" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold py-1.5 px-2 rounded text-center border border-gray-700 transition flex items-center justify-center space-x-1 h-9">
                                 <span>✏️ Edit OSM</span>
                             </a>
                         </div>
@@ -992,9 +1036,9 @@
                 marker.bindPopup(popupContent);
                 markerClusterGroup.addLayer(marker);
 
-                // 2. Add 5km Buffer circle for health impact research
+                // Add 5km health safety buffer overlays
                 const radiusCircle = L.circle(coord, {
-                    radius: 5000, // 5km radius
+                    radius: 5000,
                     color: '#ef4444',
                     fillColor: '#ef4444',
                     fillOpacity: 0.04,
@@ -1004,7 +1048,7 @@
                 safeRadiusGroup.addLayer(radiusCircle);
             });
 
-            // Update interactive overlays on map in correct stacking order (Heatmap -> Radius Buffer -> Clusters)
+            // Enforce explicit layering hierarchy (Heatmap -> Buffer bounds -> Interactive cluster markers)
             heatmapLayer.setLatLngs(heatmapPoints);
             if (document.getElementById('layer-heatmap').checked) {
                 if (!map.hasLayer(heatmapLayer)) {
@@ -1037,11 +1081,9 @@
             currentFilter = field;
             loadLayersAndData();
 
-            // Auto center view based on selection
             if (field === 'all') {
                 map.setView([33.0, 45.0], 6.5);
             } else {
-                // Pinpoint map focal view
                 const fieldCenters = {
                     rumaila: [30.156, 47.407],
                     "west qurna": [30.655, 47.305],
@@ -1054,6 +1096,7 @@
                     map.setView(fieldCenters[field.toLowerCase()], 10);
                 }
             }
+            closeDrawerOnMobile();
         }
 
         // Layer Toggling Controls
@@ -1069,15 +1112,15 @@
             const btnLive = document.getElementById('btn-live');
 
             if (source === 'preload') {
-                btnPreload.className = "text-xs font-semibold py-1.5 px-3 rounded-md transition duration-200 bg-amber-600 text-white";
-                btnLive.className = "text-xs font-semibold py-1.5 px-3 rounded-md transition duration-200 text-gray-400 hover:text-white";
+                btnPreload.className = "text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 bg-amber-600 text-white h-9";
+                btnLive.className = "text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 text-gray-400 hover:text-white h-9";
                 document.getElementById('live-loader-box').classList.add('hidden');
                 
                 currentFlares = [...preloadFlares];
                 loadLayersAndData();
             } else {
-                btnLive.className = "text-xs font-semibold py-1.5 px-3 rounded-md transition duration-200 bg-amber-600 text-white";
-                btnPreload.className = "text-xs font-semibold py-1.5 px-3 rounded-md transition duration-200 text-gray-400 hover:text-white";
+                btnLive.className = "text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 bg-amber-600 text-white h-9";
+                btnPreload.className = "text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 text-gray-400 hover:text-white h-9";
                 document.getElementById('live-loader-box').classList.remove('hidden');
                 
                 fetchLiveOSMData();
@@ -1087,7 +1130,7 @@
         // High-Magnification Inspection of Flare Stack Structure
         function inspectSatellite(lat, lon) {
             changeBaseMap('satellite');
-            map.setView([lat, lon], 17); // Level 17-18 reveals the industrial stack
+            map.setView([lat, lon], 17);
         }
 
         // Environmental Measurement / Distance Ruler System
@@ -1098,20 +1141,21 @@
             const activeBanner = document.getElementById('measure-active-banner');
 
             if (isMeasuringMode) {
-                btn.className = "w-full bg-red-600 hover:bg-red-500 text-white border border-red-500 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow-lg";
+                btn.className = "w-full bg-red-600 hover:bg-red-500 text-white border border-red-500 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow-lg h-10";
                 btnText.textContent = "Cancel Distance Mode";
                 activeBanner.classList.remove('hidden');
                 
                 // Show measurement display container
                 document.getElementById('measure-output-box').classList.remove('hidden');
-                document.getElementById('measure-flare-name').textContent = "Pick Flare On Map";
+                document.getElementById('measure-flare-name').textContent = "Tap Flare Stack";
                 document.getElementById('measure-distance-val').textContent = "Waiting...";
                 document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active flare stack marker.";
                 
                 selectedMeasureFlare = null;
+                closeDrawerOnMobile();
             } else {
-                btn.className = "w-full bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow";
-                btnText.textContent = "Select Flare & Measure Distance";
+                btn.className = "w-full bg-gray-850 hover:bg-gray-800 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow h-10";
+                btnText.textContent = "Measure Flare Proximity";
                 activeBanner.classList.add('hidden');
                 document.getElementById('measure-output-box').classList.add('hidden');
                 
@@ -1136,16 +1180,14 @@
 
             const clickCoords = e.latlng;
 
-            // Step 1: User hasn't chosen an active source point yet
             if (!selectedMeasureFlare) {
-                // Find closest flare in current active list
                 let closest = null;
                 let minDist = Infinity;
 
                 currentFlares.forEach(flare => {
                     const flareLatLng = L.latLng(flare.lat, flare.lon);
-                    const dist = clickCoords.distanceTo(flareLatLng); // meters
-                    if (dist < minDist && dist < 15000) { // Limit pick range to 15km
+                    const dist = clickCoords.distanceTo(flareLatLng);
+                    if (dist < minDist && dist < 15000) {
                         minDist = dist;
                         closest = flare;
                     }
@@ -1154,31 +1196,27 @@
                 if (closest) {
                     selectedMeasureFlare = closest;
                     document.getElementById('measure-flare-name').textContent = `${closest.field} (ID: ${closest.id})`;
-                    document.getElementById('proximity-alert-msg').textContent = "Step 2: Now click any community, city, or coordinate point to calculate exact proximity.";
+                    document.getElementById('proximity-alert-msg').textContent = "Step 2: Now tap any community center on the map to evaluate risk.";
                     
-                    // Put a temporary marker on the flare origin
                     if (tempMeasureMarker) map.removeLayer(tempMeasureMarker);
                     tempMeasureMarker = L.marker([closest.lat, closest.lon]).addTo(map);
                 } else {
                     document.getElementById('proximity-alert-msg').textContent = "Error: Please click closer to an active glowing orange flare stack icon.";
                 }
             } else {
-                // Step 2: Calculate line distance from origin stack to clicked point
                 const startPoint = L.latLng(selectedMeasureFlare.lat, selectedMeasureFlare.lon);
                 const distanceInMeters = startPoint.distanceTo(clickCoords);
                 const distanceInKm = (distanceInMeters / 1000).toFixed(2);
 
                 document.getElementById('measure-distance-val').textContent = `${distanceInKm} km`;
 
-                // Redraw line
                 if (measureLine) map.removeLayer(measureLine);
                 measureLine = L.polyline([startPoint, clickCoords], {
-                    color: distanceInKm < 5 ? '#ef4444' : '#10b981', // Red warning color if under safety threshold (5km)
+                    color: distanceInKm < 5 ? '#ef4444' : '#10b981',
                     weight: 3,
                     dashArray: '5, 5'
                 }).addTo(map);
 
-                // Set environmental context message based on computed proximity limit
                 if (distanceInKm < 5) {
                     document.getElementById('proximity-alert-msg').innerHTML = `<span class="text-red-400 font-bold">⚠️ Warning: High Exposure Risk.</span> Within 5km zone. Flare emissions can directly degrade local air quality.`;
                 } else {
@@ -1187,7 +1225,6 @@
             }
         }
 
-        // Randomly inspect active stacks for validation and trace review
         function zoomToRandomFlare() {
             if (currentFlares.length === 0) return;
             const randomIndex = Math.floor(Math.random() * currentFlares.length);
@@ -1195,7 +1232,6 @@
             inspectSatellite(selected.lat, selected.lon);
         }
 
-        // Floating Search Tools
         function handleSearchKeyPress(event) {
             if (event.key === 'Enter') {
                 executeMapSearch();
@@ -1206,7 +1242,6 @@
             const query = document.getElementById('map-search-input').value.toLowerCase().trim();
             if (!query) return;
 
-            // Broad regional matching keywords
             const targets = {
                 basra: [30.508, 47.783, 9],
                 baghdad: [33.315, 44.366, 10],
@@ -1230,7 +1265,6 @@
             });
 
             if (!matched) {
-                // Fallback: search within current flare list names
                 const found = currentFlares.find(f => f.field.toLowerCase().includes(query) || f.operator.toLowerCase().includes(query));
                 if (found) {
                     map.setView([found.lat, found.lon], 13);
@@ -1262,10 +1296,11 @@
             document.execCommand("copy");
             document.body.removeChild(tempInput);
 
-            const originalText = document.querySelector('button[onclick="copyShareLink()"] span').textContent;
-            document.querySelector('button[onclick="copyShareLink()"] span').textContent = "Coordinates Copied!";
+            const btnTextElement = document.querySelector('button[onclick="copyShareLink()"] span');
+            const originalText = btnTextElement ? btnTextElement.textContent : "Share Map";
+            if (btnTextElement) btnTextElement.textContent = "Copied!";
             setTimeout(() => {
-                document.querySelector('button[onclick="copyShareLink()"] span').textContent = "Share Map";
+                if (btnTextElement) btnTextElement.textContent = originalText;
             }, 2500);
         }
     </script>
