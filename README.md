@@ -2,6 +2,8 @@
 
 An interactive, serverless web application designed to map, track, and measure gas flaring operations across Iraq. Built entirely on client-side technology, this platform empowers citizens, environmental researchers, and public advocates to analyze localized air quality risks using live crowdsourced data from OpenStreetMap (OSM) and high-resolution Esri Satellite imagery.
 
+Live Map Link: https://rawazrauf.github.io/iraq-flaring-watch/
+
 ✨ Key Features
 
 ⚡ Double-Engine Data Architecture:
