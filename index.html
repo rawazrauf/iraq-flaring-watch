@@ -532,7 +532,7 @@
                 center: [33.0, 45.0],
                 zoom: 6.5,
                 zoomControl: true,
-                maxZoom: 18,
+                maxZoom: 19,
                 minZoom: 5
             });
 
@@ -548,17 +548,23 @@
 
             // Define base satellite map imagery tiles
             baseLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &bull; Esri Tiles',
+                maxNativeZoom: 18,
+                maxZoom: 19
             });
 
             // Define dark background canvas map tiles
             baseLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                maxNativeZoom: 19,
+                maxZoom: 19
             });
 
             // Define administrative outline map tiles
             baseLayers.streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxNativeZoom: 19,
+                maxZoom: 19
             });
 
             // Mount default base imagery layer
@@ -976,7 +982,7 @@
         // High-Magnification Inspection of Flare Stack Structure
         function inspectSatellite(lat, lon) {
             changeBaseMap('satellite');
-            map.setView([lat, lon], 17);
+            map.setView([lat, lon], 19);
         }
 
         // Environmental Measurement / Distance Ruler System
