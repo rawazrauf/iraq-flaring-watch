@@ -50,13 +50,13 @@ $r$ is the Earth's radius ($6,371 \text{ km}$).
 
 Why $5 \text{ km}$? Peer-reviewed environmental studies associate community proximity within 5 kilometers of active industrial gas flares with an elevated risk of cancer, respiratory disease, and heavy soot exposure. The app dynamically alerts users with a warning color if their selected point falls within this zone.
 
-🤝 How to Help Map Iraq on OpenStreetMap
+## 🤝 How to Help Map Iraq on OpenStreetMap
 
-This visualization is only as good as its underlying open data. If you notice a flare stack is missing, you can add it directly to OpenStreetMap using the following tagging standards:
+If you notice a flare stack is missing, you can add it directly to OpenStreetMap using these standard tags:
 
-Key: man_made
-
-Value: flare
+*   **man_made**: `flare` (or `flare_stack`) — Identifies the structure as an active gas flare.
+*   **operator**: [Company Name] — The oil company currently operating the field or facility.
+*   **field**: [Field Name] — The geographical name of the oil/gas field.
 
 
 ## 📸 Application Previews
