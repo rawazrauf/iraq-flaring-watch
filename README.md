@@ -59,6 +59,19 @@ Key: man_made
 Value: flare
 
 
+## 📸 Application Previews
+
+### 🌍 National Overview & Field Statistics
+Visualize the density and distribution of gas flaring across all major Iraqi oil fields.
+
+![National overview map of Iraq showing flare density](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.png)
+
+### 🔥 High-Resolution Flare Inspection
+Jump directly from nationwide statistics to inspecting individual emission points up close using high-resolution satellite imagery.
+
+![Close-up inspection view of an active gas flare stack with metadata popup](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/flare-inspection-satellite.png)
+
+
 ⚖️ License and Attributions
 
 Code: Distributed under the MIT License. Feel free to copy, modify, and host.
