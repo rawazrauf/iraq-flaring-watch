@@ -1,0 +1,2612 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-06-01T04:53:43Z",
+    "timestamp_areas_base": "2026-05-31T17:54:30Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 2862208161,
+  "lat": 35.3766436,
+  "lon": 44.2142736,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2862208162,
+  "lat": 35.3821309,
+  "lon": 44.2169451,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2862208164,
+  "lat": 35.3857173,
+  "lon": 44.2181396,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2862208179,
+  "lat": 35.4185248,
+  "lon": 44.2200409,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2862208180,
+  "lat": 35.4200441,
+  "lon": 44.2188886,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2862208181,
+  "lat": 35.4870688,
+  "lon": 44.1546674,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2866813919,
+  "lat": 35.3691876,
+  "lon": 44.1198534,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2866830522,
+  "lat": 35.4842021,
+  "lon": 44.1841930,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2866830523,
+  "lat": 35.4932184,
+  "lon": 44.2008736,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2866841301,
+  "lat": 35.5187213,
+  "lon": 44.1499170,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2866841302,
+  "lat": 35.5205377,
+  "lon": 44.1395476,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2884202133,
+  "lat": 35.4068674,
+  "lon": 44.2205101,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2884202134,
+  "lat": 35.4081120,
+  "lon": 44.2236181,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2887576971,
+  "lat": 35.4717718,
+  "lon": 44.2875274,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2887586438,
+  "lat": 35.4986880,
+  "lon": 44.1716065,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787022,
+  "lat": 35.5267148,
+  "lon": 44.3437298,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787023,
+  "lat": 35.5256582,
+  "lon": 44.3446525,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787024,
+  "lat": 35.5270553,
+  "lon": 44.3418201,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787025,
+  "lat": 35.5184193,
+  "lon": 44.3552760,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787026,
+  "lat": 35.5182971,
+  "lon": 44.3587735,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787027,
+  "lat": 35.5147647,
+  "lon": 44.3578802,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787028,
+  "lat": 35.5142887,
+  "lon": 44.3572525,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787029,
+  "lat": 35.5187490,
+  "lon": 44.3542614,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787031,
+  "lat": 35.5308889,
+  "lon": 44.3395077,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787032,
+  "lat": 35.5317159,
+  "lon": 44.3401108,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787033,
+  "lat": 35.5303154,
+  "lon": 44.3397283,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787034,
+  "lat": 35.5336768,
+  "lon": 44.3380922,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2889787035,
+  "lat": 35.5340115,
+  "lon": 44.3375355,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2893024770,
+  "lat": 35.5088391,
+  "lon": 44.3363309,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2894003732,
+  "lat": 35.5061783,
+  "lon": 44.3389406,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2894003733,
+  "lat": 35.5064042,
+  "lon": 44.3394082,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2894003734,
+  "lat": 35.5068499,
+  "lon": 44.3395375,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2894003735,
+  "lat": 35.5071285,
+  "lon": 44.3391649,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2899766852,
+  "lat": 35.4298694,
+  "lon": 44.2649505,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2899766853,
+  "lat": 35.4551368,
+  "lon": 44.3057913,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 2899781913,
+  "lat": 35.4364292,
+  "lon": 44.2620723,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 4557511170,
+  "lat": 35.5110478,
+  "lon": 44.3753010,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 5299394856,
+  "lat": 30.5304666,
+  "lon": 47.5986528,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 5299394857,
+  "lat": 30.5288678,
+  "lon": 47.5995111,
+  "tags": {
+    "man_made": "flare",
+    "substance": "oil"
+  }
+},
+{
+  "type": "node",
+  "id": 5299394858,
+  "lat": 30.5293761,
+  "lon": 47.5997364,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 5299394859,
+  "lat": 30.5317326,
+  "lon": 47.5980520,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 5299532779,
+  "lat": 30.2730966,
+  "lon": 47.7417728,
+  "tags": {
+    "man_made": "flare",
+    "source": "DigitalGlobal Premium Image 22-12-17"
+  }
+},
+{
+  "type": "node",
+  "id": 5299532781,
+  "lat": 30.2745606,
+  "lon": 47.7409628,
+  "tags": {
+    "man_made": "flare",
+    "source": "DigitalGlobal Premium Image 22-12-17"
+  }
+},
+{
+  "type": "node",
+  "id": 5299532784,
+  "lat": 30.2741797,
+  "lon": 47.7433570,
+  "tags": {
+    "man_made": "flare",
+    "source": "DigitalGlobal Premium Image 22-12-17"
+  }
+},
+{
+  "type": "node",
+  "id": 5299532786,
+  "lat": 30.2756868,
+  "lon": 47.7424303,
+  "tags": {
+    "man_made": "flare",
+    "source": "DigitalGlobal Premium Image 22-12-17"
+  }
+},
+{
+  "type": "node",
+  "id": 5299532792,
+  "lat": 30.2730016,
+  "lon": 47.7439079,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 5299532793,
+  "lat": 30.2727978,
+  "lon": 47.7440576,
+  "tags": {
+    "man_made": "flare",
+    "source": "DigitalGlobal Premium Image 22-12-17"
+  }
+},
+{
+  "type": "node",
+  "id": 5385397091,
+  "lat": 35.5639397,
+  "lon": 44.2846812,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 5943388186,
+  "lat": 30.5913937,
+  "lon": 47.3228240,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6373247748,
+  "lat": 35.9811980,
+  "lon": 43.7682060,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6373249899,
+  "lat": 35.9813955,
+  "lon": 43.7697572,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6861054614,
+  "lat": 35.2466323,
+  "lon": 44.4311586,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6861079495,
+  "lat": 35.2460835,
+  "lon": 44.4305071,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6875025865,
+  "lat": 35.1378701,
+  "lon": 44.8258245,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6877346779,
+  "lat": 35.5310451,
+  "lon": 44.3402713,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6877663240,
+  "lat": 35.2545271,
+  "lon": 44.4221718,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6877663241,
+  "lat": 35.2531521,
+  "lon": 44.4230137,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6877663242,
+  "lat": 35.2538396,
+  "lon": 44.4224185,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6880497191,
+  "lat": 35.6623430,
+  "lon": 43.9652857,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6881364418,
+  "lat": 36.4703991,
+  "lon": 43.5941963,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 6932961054,
+  "lat": 35.5273597,
+  "lon": 44.3429801,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 7274756486,
+  "lat": 35.9686215,
+  "lon": 43.7649555,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 7561991759,
+  "lat": 35.4594867,
+  "lon": 44.4198703,
+  "tags": {
+    "man_made": "flare",
+    "name": "ئاگری شۆرجە"
+  }
+},
+{
+  "type": "node",
+  "id": 8764870123,
+  "lat": 36.8689975,
+  "lon": 43.4886347,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 9186754059,
+  "lat": 33.0303033,
+  "lon": 46.0158759,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 9186754060,
+  "lat": 33.0295992,
+  "lon": 46.0145852,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 9934980916,
+  "lat": 35.9672403,
+  "lon": 43.7670186,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 9934981021,
+  "lat": 35.9806127,
+  "lon": 43.7695941,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 9934981049,
+  "lat": 35.9993185,
+  "lon": 43.7620205,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 9934981050,
+  "lat": 35.9978888,
+  "lon": 43.7626259,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_43.77300_35.97293%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250609t083616c06s4001-B#14.03/35.97285/43.77935"
+  }
+},
+{
+  "type": "node",
+  "id": 9934981051,
+  "lat": 35.9980942,
+  "lon": 43.7630067,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_43.77300_35.97293%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250609t083616c06s4001-B#14.03/35.97285/43.77935"
+  }
+},
+{
+  "type": "node",
+  "id": 9934981052,
+  "lat": 35.9982126,
+  "lon": 43.7609660,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_other_250m_43.76060_35.99622%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250324t082617c00s4001-A#13.13/35.99563/43.7668"
+  }
+},
+{
+  "type": "node",
+  "id": 9935086317,
+  "lat": 35.9521736,
+  "lon": 43.7341934,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 9935086406,
+  "lat": 36.0184803,
+  "lon": 43.6821592,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 10752205560,
+  "lat": 30.2768877,
+  "lon": 47.7186267,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 10752205563,
+  "lat": 30.2762706,
+  "lon": 47.7192318,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 10771692717,
+  "lat": 34.7541607,
+  "lon": 45.1507928,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 11012653420,
+  "lat": 34.7574344,
+  "lon": 45.1517941,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 11012653421,
+  "lat": 34.7573657,
+  "lon": 45.1528038,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 11012653422,
+  "lat": 34.7562934,
+  "lon": 45.1522345,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 11397550255,
+  "lat": 34.7550139,
+  "lon": 45.1539559,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 12149883784,
+  "lat": 32.1179413,
+  "lon": 47.4102729,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13011675167,
+  "lat": 32.1069279,
+  "lon": 47.5506797,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13011675168,
+  "lat": 32.1074961,
+  "lon": 47.5500934,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13011726439,
+  "lat": 32.1783848,
+  "lon": 47.5204596,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13011766752,
+  "lat": 31.6757106,
+  "lon": 47.4358387,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13012226562,
+  "lat": 32.0601827,
+  "lon": 47.4466415,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13012331383,
+  "lat": 32.1291485,
+  "lon": 47.4090126,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014224888,
+  "lat": 30.6157887,
+  "lon": 47.3252762,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014224889,
+  "lat": 30.6155141,
+  "lon": 47.3256760,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014224890,
+  "lat": 30.6106158,
+  "lon": 47.3250621,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014224891,
+  "lat": 30.6104187,
+  "lon": 47.3263413,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014224892,
+  "lat": 30.6097626,
+  "lon": 47.3273934,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014224893,
+  "lat": 30.6087885,
+  "lon": 47.3343547,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262393,
+  "lat": 30.6875670,
+  "lon": 47.3300835,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262394,
+  "lat": 30.6871718,
+  "lon": 47.3299012,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262395,
+  "lat": 30.6867841,
+  "lon": 47.3295803,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262396,
+  "lat": 30.6853008,
+  "lon": 47.3283257,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262566,
+  "lat": 30.5619702,
+  "lon": 47.3290837,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262567,
+  "lat": 30.5619968,
+  "lon": 47.3293665,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262568,
+  "lat": 30.5685333,
+  "lon": 47.3134595,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262569,
+  "lat": 30.5684890,
+  "lon": 47.3141058,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262570,
+  "lat": 30.5684840,
+  "lon": 47.3145635,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262571,
+  "lat": 30.5674809,
+  "lon": 47.3153041,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262572,
+  "lat": 30.5669451,
+  "lon": 47.3167843,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262573,
+  "lat": 30.5668932,
+  "lon": 47.3174958,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262574,
+  "lat": 30.5668271,
+  "lon": 47.3181212,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014262580,
+  "lat": 30.5576248,
+  "lon": 47.3438235,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908680,
+  "lat": 33.7092275,
+  "lon": 42.6856326,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_42.68620_33.70944%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250104t081034c00s4001-B#14.06/33.70484/42.69982"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908681,
+  "lat": 33.6358673,
+  "lon": 42.6938064,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_42.69373_33.63579%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250104t081034c00s4001-D#14.06/33.63407/42.70526"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908682,
+  "lat": 33.6150942,
+  "lon": 42.5942685,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_42.59644_33.61530%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250104t081034c00s4001-C#14.05/33.60921/42.59963"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908683,
+  "lat": 33.6147821,
+  "lon": 42.5927251,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_other_250m_42.59280_33.61452%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250104t081034c00s4001-C#15/33.61452/42.59818"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908684,
+  "lat": 33.4891820,
+  "lon": 44.3556657,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_44.35566_33.48906%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250104t081034c00s4001-C#15/33.48907/44.36104"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908685,
+  "lat": 33.4912128,
+  "lon": 44.3600231,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_44.36023_33.49051%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250531t082337c30s4001-B#14.06/33.48434/44.37568"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908686,
+  "lat": 32.8427396,
+  "lon": 44.2749748,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_44.27626_32.84216%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250215t081009c00s4001-A#14.08/32.83809/44.28782"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908687,
+  "lat": 31.6961513,
+  "lon": 47.2528400,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_47.25300_31.69622%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250313t075955c00s4001-F#14.08/31.69652/47.26044"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908689,
+  "lat": 31.0263217,
+  "lon": 47.2838729,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_47.28680_31.02374%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-A#14.09/31.02348/47.29686"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908690,
+  "lat": 30.4053303,
+  "lon": 47.5896921,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_47.58961_30.40540%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.40538/47.59498"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908691,
+  "lat": 30.8826418,
+  "lon": 47.3319429,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CO2_1A1_250m_47.34098_30.87807%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#14.08/30.87645/47.35523"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908692,
+  "lat": 30.8820901,
+  "lon": 47.3318772,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908693,
+  "lat": 30.8815981,
+  "lon": 47.3320218,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908694,
+  "lat": 30.8824982,
+  "lon": 47.3340616,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908695,
+  "lat": 30.8846983,
+  "lon": 47.3349994,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014908700,
+  "lat": 30.8468404,
+  "lon": 47.3303159,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.33049_30.84677%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.84677/47.33588"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928001,
+  "lat": 30.3563328,
+  "lon": 47.3382120,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.34029_30.35675%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.35677/47.34568"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928002,
+  "lat": 30.3567486,
+  "lon": 47.3395982,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.34029_30.35675%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.35677/47.34568"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928003,
+  "lat": 30.3572334,
+  "lon": 47.3410203,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.34029_30.35675%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.35677/47.34568"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928004,
+  "lat": 30.3595869,
+  "lon": 47.3394631,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928005,
+  "lat": 30.3594785,
+  "lon": 47.3407107,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.34029_30.35675%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.35677/47.34568"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928023,
+  "lat": 30.2777913,
+  "lon": 47.3608762,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.36511_30.27631%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.27632/47.37049"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928024,
+  "lat": 30.2791485,
+  "lon": 47.3614444,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.36511_30.27631%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.27632/47.37049"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928025,
+  "lat": 30.2791298,
+  "lon": 47.3619605,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.36511_30.27631%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.27632/47.37049"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928026,
+  "lat": 30.2808004,
+  "lon": 47.3627891,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.36511_30.27631%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.27632/47.37049"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928027,
+  "lat": 30.2839101,
+  "lon": 47.3618792,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.36511_30.27631%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.27632/47.37049"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928028,
+  "lat": 30.2812475,
+  "lon": 47.3498859,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.36511_30.27631%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.27632/47.37049"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928029,
+  "lat": 30.2799523,
+  "lon": 47.3500682,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.36511_30.27631%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.27632/47.37049"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928030,
+  "lat": 30.2081799,
+  "lon": 47.3936075,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928031,
+  "lat": 30.2104529,
+  "lon": 47.3933959,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13014928032,
+  "lat": 30.2106650,
+  "lon": 47.3951124,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13015737121,
+  "lat": 37.0807063,
+  "lon": 42.4966067,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13015737122,
+  "lat": 37.0804866,
+  "lon": 42.4979275,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13015737147,
+  "lat": 37.0781909,
+  "lon": 42.5579717,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13015988878,
+  "lat": 33.0479367,
+  "lon": 46.1129621,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13059447054,
+  "lat": 32.4537166,
+  "lon": 47.2982137,
+  "tags": {
+    "height": "10",
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13067365896,
+  "lat": 30.7047934,
+  "lon": 46.7307682,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13067365898,
+  "lat": 30.7068268,
+  "lon": 46.7024619,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13067365900,
+  "lat": 30.7124345,
+  "lon": 46.6919542,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13069046147,
+  "lat": 30.2062975,
+  "lon": 47.4064831,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785084,
+  "lat": 30.6030858,
+  "lon": 46.7297239,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785085,
+  "lat": 30.5938230,
+  "lon": 46.7115741,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785113,
+  "lat": 30.5445393,
+  "lon": 46.6876225,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785199,
+  "lat": 30.5592278,
+  "lon": 46.7042854,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785207,
+  "lat": 30.5604236,
+  "lon": 46.7045228,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785211,
+  "lat": 30.5587320,
+  "lon": 46.7039146,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785214,
+  "lat": 30.3518539,
+  "lon": 46.8382683,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785217,
+  "lat": 30.3514238,
+  "lon": 46.8384609,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13072785220,
+  "lat": 30.3522057,
+  "lon": 46.8379625,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13074203842,
+  "lat": 30.5244693,
+  "lon": 47.6130642,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13074203843,
+  "lat": 30.5235265,
+  "lon": 47.6111367,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13074203844,
+  "lat": 30.5233184,
+  "lon": 47.6097810,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13074203845,
+  "lat": 30.5251856,
+  "lon": 47.6086419,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13074203846,
+  "lat": 30.5260691,
+  "lon": 47.6096848,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13074203847,
+  "lat": 30.5269193,
+  "lon": 47.6116288,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13077765011,
+  "lat": 30.5219803,
+  "lon": 47.6187524,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13077765013,
+  "lat": 30.5245282,
+  "lon": 47.6224689,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13077765016,
+  "lat": 30.5324281,
+  "lon": 47.6219657,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13077765018,
+  "lat": 30.5336076,
+  "lon": 47.6240353,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13077765020,
+  "lat": 30.5090836,
+  "lon": 47.5994635,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13086594429,
+  "lat": 30.5642900,
+  "lon": 47.1031761,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13086594430,
+  "lat": 30.5640004,
+  "lon": 47.1035123,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13086594431,
+  "lat": 30.5634729,
+  "lon": 47.1040653,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13086594432,
+  "lat": 30.5631962,
+  "lon": 47.1043866,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13097098897,
+  "lat": 30.4203059,
+  "lon": 47.6057629,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13097098898,
+  "lat": 30.4202526,
+  "lon": 47.6059905,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13097098899,
+  "lat": 30.4186922,
+  "lon": 47.6088161,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13097098900,
+  "lat": 30.4183748,
+  "lon": 47.6090199,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13097109501,
+  "lat": 30.4179646,
+  "lon": 47.6093370,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13097109502,
+  "lat": 30.4175886,
+  "lon": 47.6095635,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13097109503,
+  "lat": 30.4183016,
+  "lon": 47.6078477,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13100292073,
+  "lat": 30.5481777,
+  "lon": 47.2879115,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13100292088,
+  "lat": 30.5225540,
+  "lon": 47.3179008,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13100292089,
+  "lat": 30.5223459,
+  "lon": 47.3151007,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13100292090,
+  "lat": 30.5202698,
+  "lon": 47.3147534,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13100292091,
+  "lat": 30.5201057,
+  "lon": 47.3150411,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13167983827,
+  "lat": 35.1245582,
+  "lon": 44.5698108,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13167983828,
+  "lat": 35.1241252,
+  "lon": 44.5687884,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13167986822,
+  "lat": 34.8638722,
+  "lon": 44.0229697,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13167986823,
+  "lat": 34.8639033,
+  "lon": 44.0220153,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13173351757,
+  "lat": 35.6852685,
+  "lon": 43.8763877,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13173351758,
+  "lat": 35.6851928,
+  "lon": 43.8769008,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13173419996,
+  "lat": 35.7291798,
+  "lon": 44.0329627,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13198684534,
+  "lat": 35.9700185,
+  "lon": 43.7638833,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13198711900,
+  "lat": 35.9241644,
+  "lon": 43.7896632,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13198755481,
+  "lat": 35.9526126,
+  "lon": 43.7283801,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13198767001,
+  "lat": 35.9242302,
+  "lon": 43.7898264,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13198787511,
+  "lat": 36.0184393,
+  "lon": 43.6818062,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13198787512,
+  "lat": 36.0189301,
+  "lon": 43.6829861,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13198787513,
+  "lat": 36.0187191,
+  "lon": 43.6830622,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13198854245,
+  "lat": 35.7725555,
+  "lon": 43.9959817,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13204639550,
+  "lat": 33.4887166,
+  "lon": 44.3447946,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13256644051,
+  "lat": 36.0833752,
+  "lon": 43.6407686,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13256644679,
+  "lat": 36.0185564,
+  "lon": 43.6832910,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13256644680,
+  "lat": 36.0184007,
+  "lon": 43.6835054,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13256644681,
+  "lat": 36.0185160,
+  "lon": 43.6825086,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13265059473,
+  "lat": 30.8632071,
+  "lon": 47.9222964,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13265059975,
+  "lat": 30.8656476,
+  "lon": 47.9205195,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13266922993,
+  "lat": 31.0821583,
+  "lon": 47.6265056,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13266922994,
+  "lat": 31.0824311,
+  "lon": 47.6274541,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13266922995,
+  "lat": 31.0815582,
+  "lon": 47.6253943,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13266922996,
+  "lat": 31.0627711,
+  "lon": 47.6174159,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13300905979,
+  "lat": 30.5684650,
+  "lon": 47.3351052,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13300905980,
+  "lat": 30.5679747,
+  "lon": 47.3350529,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13302378267,
+  "lat": 30.8253554,
+  "lon": 47.3298883,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13302378268,
+  "lat": 30.8263103,
+  "lon": 47.3298791,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13302378269,
+  "lat": 30.8267678,
+  "lon": 47.3299055,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13302522087,
+  "lat": 30.5683280,
+  "lon": 47.3152011,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13302522095,
+  "lat": 30.5683995,
+  "lon": 47.3177237,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13459991136,
+  "lat": 35.4587910,
+  "lon": 44.4205605,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460104249,
+  "lat": 31.3581934,
+  "lon": 45.9642151,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460104250,
+  "lat": 31.3576961,
+  "lon": 45.9641836,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460104251,
+  "lat": 31.3577752,
+  "lon": 45.9648702,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460104252,
+  "lat": 31.3571462,
+  "lon": 45.9652116,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460104253,
+  "lat": 31.3562842,
+  "lon": 45.9647310,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460104254,
+  "lat": 31.3558487,
+  "lon": 45.9655419,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460104255,
+  "lat": 31.3586858,
+  "lon": 45.9629783,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460160028,
+  "lat": 32.1076919,
+  "lon": 47.5494584,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13460227808,
+  "lat": 30.2802202,
+  "lon": 47.3624239,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?instruments=tan&details=CH4_1B2_250m_47.36511_30.27631%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id=tan20250301t081147c00s4001-B#15/30.27632/47.37049"
+  }
+},
+{
+  "type": "node",
+  "id": 13529449278,
+  "lat": 35.7964864,
+  "lon": 43.2747829,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?datetime=2025-01-01T00%3A00%3A00.000Z%2F2026-02-12T23%3A59%3A59.999Z&details=CH4_1B2_250m_43.27523_35.79685%3Fdatetime%3D2025-01-01T00%253A00%253A00.000Z%252F2026-02-12T23%253A59%253A59.999Z%26status%3Dnot_deleted&plume_id=t"
+  }
+},
+{
+  "type": "node",
+  "id": 13529449279,
+  "lat": 35.7972035,
+  "lon": 43.2748245,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?datetime=2025-01-01T00%3A00%3A00.000Z%2F2026-02-12T23%3A59%3A59.999Z&details=CH4_1B2_250m_43.27523_35.79685%3Fdatetime%3D2025-01-01T00%253A00%253A00.000Z%252F2026-02-12T23%253A59%253A59.999Z%26status%3Dnot_deleted&plume_id=t"
+  }
+},
+{
+  "type": "node",
+  "id": 13529467161,
+  "lat": 30.8788180,
+  "lon": 47.3420261,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?datetime=2025-01-01T00%3A00%3A00.000Z%2F2026-02-12T23%3A59%3A59.999Z&details=CO2_1A1_250m_47.34167_30.87867%3Fdatetime%3D2025-01-01T00%253A00%253A00.000Z%252F2026-02-12T23%253A59%253A59.999Z%26status%3Dnot_deleted&plume_id=t"
+  }
+},
+{
+  "type": "node",
+  "id": 13529484802,
+  "lat": 30.7646159,
+  "lon": 47.3273756,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?datetime=2025-01-01T00%3A00%3A00.000Z%2F2026-02-12T23%3A59%3A59.999Z&details=CH4_1B2_250m_47.32803_30.76516%3Fdatetime%3D2025-01-01T00%253A00%253A00.000Z%252F2026-02-12T23%253A59%253A59.999Z%26status%3Dnot_deleted&plume_id=t"
+  }
+},
+{
+  "type": "node",
+  "id": 13529484803,
+  "lat": 30.7636303,
+  "lon": 47.3272988,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?datetime=2025-01-01T00%3A00%3A00.000Z%2F2026-02-12T23%3A59%3A59.999Z&details=CH4_1B2_250m_47.32803_30.76516%3Fdatetime%3D2025-01-01T00%253A00%253A00.000Z%252F2026-02-12T23%253A59%253A59.999Z%26status%3Dnot_deleted&plume_id=t"
+  }
+},
+{
+  "type": "node",
+  "id": 13529484810,
+  "lat": 30.4429322,
+  "lon": 47.6067239,
+  "tags": {
+    "man_made": "flare",
+    "website": "https://data.carbonmapper.org/?datetime=2025-01-01T00%3A00%3A00.000Z%2F2026-02-12T23%3A59%3A59.999Z&details=CH4_1B2_250m_47.60666_30.44294%3Fdatetime%3D2025-01-01T00%253A00%253A00.000Z%252F2026-02-12T23%253A59%253A59.999Z%26status%3Dnot_deleted&plume_id=e"
+  }
+},
+{
+  "type": "node",
+  "id": 13704418266,
+  "lat": 30.4942475,
+  "lon": 47.3185927,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704418267,
+  "lat": 30.4950500,
+  "lon": 47.3180437,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704418268,
+  "lat": 30.4942875,
+  "lon": 47.3180668,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704418269,
+  "lat": 30.4950287,
+  "lon": 47.3165088,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704418270,
+  "lat": 30.4950402,
+  "lon": 47.3159793,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704418271,
+  "lat": 30.4955887,
+  "lon": 47.3194888,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704418272,
+  "lat": 30.4957957,
+  "lon": 47.3189443,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704418273,
+  "lat": 30.4970757,
+  "lon": 47.3126342,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704482130,
+  "lat": 33.1581820,
+  "lon": 44.7865186,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704485155,
+  "lat": 31.6771343,
+  "lon": 47.4368221,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704485435,
+  "lat": 30.4778745,
+  "lon": 47.6016577,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704485436,
+  "lat": 30.4765303,
+  "lon": 47.6014982,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704513713,
+  "lat": 33.2213775,
+  "lon": 44.7671948,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704528646,
+  "lat": 34.8945076,
+  "lon": 43.8064296,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704528647,
+  "lat": 34.8956555,
+  "lon": 43.8051470,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704528648,
+  "lat": 34.8963770,
+  "lon": 43.8058075,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704532416,
+  "lat": 32.4903552,
+  "lon": 45.6620807,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704532417,
+  "lat": 32.4887796,
+  "lon": 45.6621857,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704555963,
+  "lat": 35.7256358,
+  "lon": 44.0411061,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704555964,
+  "lat": 35.7255111,
+  "lon": 44.0413671,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704555965,
+  "lat": 35.7248090,
+  "lon": 44.0409942,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704555966,
+  "lat": 35.7245753,
+  "lon": 44.0408734,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704557020,
+  "lat": 35.6294956,
+  "lon": 44.0086784,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704557021,
+  "lat": 35.6288678,
+  "lon": 44.0092258,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704557022,
+  "lat": 35.6292552,
+  "lon": 44.0105436,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704560148,
+  "lat": 35.6774096,
+  "lon": 44.0669996,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13704572725,
+  "lat": 35.9528215,
+  "lon": 43.7284983,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13731972310,
+  "lat": 30.7520470,
+  "lon": 47.6642361,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13731972311,
+  "lat": 30.7520591,
+  "lon": 47.6647440,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13731972312,
+  "lat": 30.7521013,
+  "lon": 47.6662926,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13731972313,
+  "lat": 30.7523881,
+  "lon": 47.6664156,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13753794544,
+  "lat": 30.5681222,
+  "lon": 47.7674196,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13766694530,
+  "lat": 36.9931269,
+  "lon": 42.7910158,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13849013088,
+  "lat": 35.4872445,
+  "lon": 44.1548907,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13849013089,
+  "lat": 35.4874687,
+  "lon": 44.1550075,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13849013090,
+  "lat": 35.4869113,
+  "lon": 44.1544938,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13852126371,
+  "lat": 31.3567276,
+  "lon": 45.9659565,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13852195175,
+  "lat": 30.4758405,
+  "lon": 47.7425455,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13853615419,
+  "lat": 30.4216511,
+  "lon": 47.6083945,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13875651669,
+  "lat": 32.2282330,
+  "lon": 44.2524713,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13875651670,
+  "lat": 32.2287183,
+  "lon": 44.2524142,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13876620283,
+  "lat": 31.6939061,
+  "lon": 47.2552449,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13876620284,
+  "lat": 31.6932389,
+  "lon": 47.2548383,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13876714818,
+  "lat": 33.4492524,
+  "lon": 44.2886192,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13876756849,
+  "lat": 33.0307858,
+  "lon": 46.0140215,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13895171978,
+  "lat": 30.8770350,
+  "lon": 48.0232449,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13899959345,
+  "lat": 32.4539189,
+  "lon": 47.2972209,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13899959346,
+  "lat": 32.4539239,
+  "lon": 47.2969798,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "way",
+  "id": 1159050181,
+  "bounds": {
+    "minlat": 32.3318981,
+    "minlon": 44.0912550,
+    "maxlat": 32.3325999,
+    "maxlon": 44.0921411
+  },
+  "nodes": [
+    10778640064,
+    10778640063,
+    10778640062,
+    10779407709,
+    10778640061,
+    10778640064
+  ],
+  "geometry": [
+    { "lat": 32.3318981, "lon": 44.0919013 },
+    { "lat": 32.3321374, "lon": 44.0912550 },
+    { "lat": 32.3325999, "lon": 44.0914949 },
+    { "lat": 32.3325704, "lon": 44.0915745 },
+    { "lat": 32.3323606, "lon": 44.0921411 },
+    { "lat": 32.3318981, "lon": 44.0919013 }
+  ],
+  "tags": {
+    "man_made": "flare"
+  }
+}
+
+  ]
+}
