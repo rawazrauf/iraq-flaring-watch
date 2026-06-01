@@ -54,29 +54,10 @@ Why $5 \text{ km}$? Peer-reviewed environmental studies associate community prox
 
 This visualization is only as good as its underlying open data. If you notice a flare stack is missing, you can add it directly to OpenStreetMap using the following tagging standards:
 
-Key
+Key: man_made
 
-Value
+Value: flare
 
-Description
-
-man_made
-
-flare (or flare_stack)
-
-Identifies the physical structure as an active gas flare stack.
-
-operator
-
-e.g., Rumaila Operating Organization
-
-The oil company currently operating the field or facility.
-
-field
-
-e.g., Rumaila
-
-The oil/gas field basin geographical name.
 
 ⚖️ License and Attributions
 
