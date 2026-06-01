@@ -208,10 +208,10 @@
                         </div>
                     </div>
                     <div class="bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex flex-col justify-between">
-                        <span class="text-[10px] text-gray-400 font-medium">Main Basins</span>
+                        <span class="text-[10px] text-gray-400 font-medium">Oil Fields</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-basin-count" class="text-xl font-extrabold text-red-500">0</span>
-                            <span class="text-[9px] text-gray-500 font-mono">basins</span>
+                            <span class="text-[9px] text-gray-500 font-mono">fields</span>
                         </div>
                     </div>
                 </div>
@@ -231,6 +231,11 @@
                         <button onclick="executeMapSearch()" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs px-3.5 py-1.5 rounded-lg transition shrink-0 h-8">Go</button>
                     </div>
                 </div>
+
+                <!-- Inspect Random Flare Button -->
+                <button onclick="zoomToRandomFlare(); closeDrawerOnMobile();" class="w-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 h-10 shadow-sm">
+                    <span>🔥 Inspect Random Flare</span>
+                </button>
 
                 <!-- Data Source toggle -->
                 <div>
@@ -369,9 +374,6 @@
                             <span>flare</span>
                         </div>
                     </div>
-                    <button onclick="zoomToRandomFlare(); closeDrawerOnMobile();" class="w-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs py-2 px-3 rounded-lg font-bold transition h-10 mt-2">
-                        Inspect Random Flare
-                    </button>
                 </div>
 
             </div>
