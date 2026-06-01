@@ -52,9 +52,9 @@ Why $5 \text{ km}$? Peer-reviewed environmental studies associate community prox
 
 ## 🤝 How to Help Map Iraq on OpenStreetMap
 
-If you notice a flare stack is missing, you can add it directly to OpenStreetMap using these standard tags:
+If you notice a flare is missing, you can add it directly to OpenStreetMap using these standard tags:
 
-*   **man_made**: `flare` (or `flare_stack`) — Identifies the structure as an active gas flare.
+*   **man_made**: `flare` — Identifies the structure as an active gas flare.
 *   **operator**: [Company Name] — The oil company currently operating the field or facility.
 *   **field**: [Field Name] — The geographical name of the oil/gas field.
 
