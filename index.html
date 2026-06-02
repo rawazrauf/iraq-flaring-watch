@@ -559,7 +559,7 @@
             // Define Esri Clarity tiles (Keyless, alternative archive for clearer structural views)
             baseLayers.clarity = L.tileLayer('https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Esri, Earthstar Geographics',
-            maxNativeZoom: 18,
+            maxNativeZoom: 16, // Lowered to force digital stretching of available tiles
             maxZoom: 19
             });
 
@@ -992,9 +992,13 @@
 
         // High-Magnification Inspection of Flare Stack Structure
         function inspectSatellite(lat, lon) {
-            changeBaseMap('satellite');
-            map.setView([lat, lon], 19);
-        }
+       // If the user is on a non-satellite map (dark canvas or road map), default to standard satellite
+          if (currentBaseMapType !== 'satellite' && currentBaseMapType !== 'clarity') {
+          changeBaseMap('satellite');
+       }
+       // If they are already on 'satellite' or 'clarity', it leaves their background choice alone!
+          map.setView([lat, lon], 19);
+       }
 
         // Environmental Measurement / Distance Ruler System
         function toggleMeasuringMode() {
