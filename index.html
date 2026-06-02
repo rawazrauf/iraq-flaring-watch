@@ -549,14 +549,31 @@
             // Mount default base imagery layer
             baseLayers.satellite.addTo(map);
 
+
             // Initialize layered map data groups
             markerClusterGroup = L.markerClusterGroup({
                 showCoverageOnHover: false,
                 maxClusterRadius: 40
             });
 
-            heatmapLayer = L.heatLayer([], { radius: 25, blur: 15, maxZoom: 14 });
-            
+            // Upgraded density heatmap for national-level visibility
+            heatmapLayer = L.heatLayer([], { 
+                radius: 35,
+                blur: 25,
+                maxZoom: 10,
+                minOpacity: 0.35,
+                gradient: {
+                    0.1: '#1e3a8a',
+                    0.3: '#06b6d4',
+                    0.5: '#10b981',
+                    0.7: '#f59e0b',
+                    1.0: '#ef4444'
+                }
+            });
+
+            // The safely restored 5km radius layer group!
+            safeRadiusGroup = L.layerGroup();
+
             // Set map click interaction triggers
             map.on('click', onMapClickForDistance);
         }
