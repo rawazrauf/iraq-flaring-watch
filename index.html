@@ -210,7 +210,7 @@
                     <div class="bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex flex-col justify-between">
                         <span class="text-[10px] text-gray-400 font-medium">Oil Fields</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
-                            <span id="stat-basin-count" class="text-xl font-extrabold text-red-500">0</span>
+                            <span id="stat-field-count" class="text-xl font-extrabold text-red-500">0</span>
                             <span class="text-[9px] text-gray-500 font-mono">fields</span>
                         </div>
                     </div>
@@ -273,6 +273,10 @@
                     <div class="flex flex-col space-y-1 bg-gray-950 p-2 rounded-lg border border-gray-800">
                         <button id="map-base-satellite" onclick="changeBaseMap('satellite')" class="text-left text-xs font-bold px-3 py-2 rounded transition bg-amber-600 text-white w-full h-10 flex items-center justify-between">
                             <span>🛰️ Esri Satellite (Tracing)</span>
+                            <span class="text-[9px] bg-black/30 px-1 py-0.5 rounded font-normal uppercase">HD</span>
+                        </button>
+                        <button id="map-base-clarity" onclick="changeBaseMap('clarity')" class="text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center justify-between">
+                            <span>🛰️ Esri Satellite (Clarity Archive)</span>
                             <span class="text-[9px] bg-black/30 px-1 py-0.5 rounded font-normal uppercase">HD</span>
                         </button>
                         <button id="map-base-dark" onclick="changeBaseMap('dark')" class="text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center">
@@ -527,7 +531,7 @@
         }
 
         function initMap() {
-            // Center the map viewport to cover northern, central, and southern Iraq oil basins
+            // Center the map viewport to cover northern, central, and southern Iraq oil fields
             map = L.map('leaflet-map-canvas', {
                 center: [33.0, 45.0],
                 zoom: 6.5,
@@ -551,6 +555,12 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &bull; Esri Tiles',
                 maxNativeZoom: 18,
                 maxZoom: 19
+            });
+            // Define Esri Clarity tiles (Keyless, alternative archive for clearer structural views)
+            baseLayers.clarity = L.tileLayer('https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Esri, Earthstar Geographics',
+            maxNativeZoom: 18,
+            maxZoom: 19
             });
 
             // Define dark background canvas map tiles
@@ -645,10 +655,11 @@
             baseLayers[type].addTo(map);
 
             // Update drawer preset styles
-            const buttons = {
-                satellite: document.getElementById('map-base-satellite'),
-                dark: document.getElementById('map-base-dark'),
-                streets: document.getElementById('map-base-streets')
+           const buttons = {
+                 satellite: document.getElementById('map-base-satellite'),
+                 clarity: document.getElementById('map-base-clarity'),
+                 dark: document.getElementById('map-base-dark'),
+                 streets: document.getElementById('map-base-streets')
             };
 
             Object.keys(buttons).forEach(key => {
@@ -795,7 +806,7 @@
             // Update stats indices
             document.getElementById('stat-flare-count').textContent = filtered.length;
             const regions = new Set(filtered.map(f => f.field));
-            document.getElementById('stat-basin-count').textContent = regions.size;
+            document.getElementById('stat-field-count').textContent = regions.size;
 
             filtered.forEach(flare => {
                 const coord = [flare.lat, flare.lon];
@@ -814,7 +825,7 @@
                         
                         <div class="grid grid-cols-2 gap-2 text-gray-300">
                             <div>
-                                <span class="text-[9px] text-gray-500 uppercase font-bold block">Assigned Basin</span>
+                                <span class="text-[9px] text-gray-500 uppercase font-bold block">Assigned Field</span>
                                 <span class="font-semibold text-gray-200">${flare.field} Field</span>
                             </div>
                             <div>
