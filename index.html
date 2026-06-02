@@ -554,22 +554,8 @@
                 showCoverageOnHover: false,
                 maxClusterRadius: 40
             });
-
-
-            heatmapLayer = L.heatLayer([], { 
-            radius: 35,         // Larger radius forces points to blend into regional hubs
-            blur: 25,           // Higher blur creates a smoother, less pixelated cloud
-            maxZoom: 10,        // Lowering this forces the map to render full intensity much earlier
-            minOpacity: 0.35,   // Prevents the outer edges from turning completely invisible
-            gradient: {         // Custom aggressive thermal scale for a dark background
-            0.1: '#1e3a8a', // Deep Blue
-            0.3: '#06b6d4', // Cyan
-            0.5: '#10b981', // Emerald Green
-            0.7: '#f59e0b', // Amber
-            1.0: '#ef4444'  // Red (Max Density)
-            }
-            });
-            
+            heatmapLayer = L.heatLayer([], { radius: 25, blur: 15, maxZoom: 14 });
+            safeRadiusGroup = L.layerGroup();
 
             // Set map click interaction triggers
             map.on('click', onMapClickForDistance);
