@@ -457,6 +457,7 @@
         let markerClusterGroup;
         let heatmapLayer;
         let safeRadiusGroup;
+        let iraqBoundaryLayer;
 
         // Custom orange pulsing icon for gas flares (Class container remains neutral to not conflict with translate3d positioning)
         const flareIcon = L.divIcon({
@@ -617,6 +618,26 @@
             // The safely restored 5km radius layer group!
             safeRadiusGroup = L.layerGroup();
 
+            // Setup and permanently display Iraq National Boundary Overlay
+            iraqBoundaryLayer = L.geoJSON(null, {
+                style: {
+                    color: '#f59e0b', // Amber-500 to match the UI theme
+                    weight: 2,
+                    opacity: 0.5,     // Slightly more transparent so it doesn't distract
+                    fillOpacity: 0.0,
+                    dashArray: '4, 6' // Clean dotted line
+                },
+                interactive: false    // Ensures the boundary line doesn't block users from clicking underlying flares
+            }).addTo(map);
+
+            // Fetch standard GeoJSON for Iraq
+            fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries/IRQ.geo.json')
+                .then(response => response.json())
+                .then(data => {
+                    iraqBoundaryLayer.addData(data);
+                })
+                .catch(err => console.warn('Could not load Iraq boundary', err));
+            
             // Set map click interaction triggers
             map.on('click', onMapClickForDistance);
         }
