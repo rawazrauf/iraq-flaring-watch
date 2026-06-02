@@ -797,15 +797,51 @@
             }, 1000);
         }
 
-        // Heuristics assigner mapping coordinate boundaries to local fields
+
+// Heuristics assigner mapping coordinate boundaries to local fields
         function detectOilFieldFromPosition(lat, lon) {
-            if (lat > 30.0 && lat < 30.4 && lon > 47.1 && lon < 47.6) return "Rumaila";
-            if (lat > 30.5 && lat < 30.8 && lon > 47.1 && lon < 47.5) return "West Qurna";
-            if (lat > 31.0 && lat < 31.4 && lon > 47.4 && lon < 47.7) return "Majnoon";
-            if (lat > 30.2 && lat < 30.5 && lon > 47.5 && lon < 47.9) return "Zubair";
-            if (lat > 31.6 && lat < 31.9 && lon > 47.3 && lon < 47.6) return "Halfaya";
-            if (lat > 35.1 && lat < 35.6 && lon > 44.0 && lon < 44.5) return "Kirkuk";
-            return "Other Iraqi Field";
+            // Approximate centers for all major Iraqi oil fields based on OSM data
+            const fields = [
+                { name: "North Rumaila", lat: 30.65, lon: 47.30 },
+                { name: "South Rumaila", lat: 30.16, lon: 47.41 },
+                { name: "West Qurna", lat: 30.85, lon: 47.30 },
+                { name: "Majnoon", lat: 31.08, lon: 47.62 },
+                { name: "Zubair", lat: 30.38, lon: 47.71 },
+                { name: "Nasiriyah", lat: 31.35, lon: 45.96 },
+                { name: "Gharaf", lat: 31.76, lon: 46.06 },
+                { name: "Halfaya", lat: 31.70, lon: 47.32 },
+                { name: "Ahdab", lat: 32.51, lon: 45.66 },
+                { name: "Badra", lat: 33.05, lon: 46.07 },
+                { name: "East Baghdad", lat: 33.23, lon: 44.77 },
+                { name: "Akkas", lat: 34.07, lon: 40.99 },
+                { name: "Baba Gurgur", lat: 35.54, lon: 44.31 },
+                { name: "Bai Hasan", lat: 35.63, lon: 44.01 },
+                { name: "Khabbaz", lat: 35.48, lon: 44.15 },
+                { name: "Jambur", lat: 35.23, lon: 44.44 },
+                { name: "Ajeel", lat: 34.89, lon: 43.80 },
+                { name: "Khurmala", lat: 35.97, lon: 43.73 },
+                { name: "Taq Taq", lat: 36.00, lon: 44.51 },
+                { name: "Qayara", lat: 35.83, lon: 43.23 },
+                { name: "Peshkabir", lat: 37.08, lon: 42.53 },
+                { name: "Sarsang", lat: 36.90, lon: 43.38 },
+                { name: "Atrush", lat: 36.86, lon: 43.45 },
+                { name: "Kirkuk", lat: 35.45, lon: 44.25 }
+            ];
+
+            let closestField = "Other Iraqi Field";
+            let minDistance = 0.25; // Roughly 25km capture radius
+
+            for (let i = 0; i < fields.length; i++) {
+                const dLat = lat - fields[i].lat;
+                const dLon = lon - fields[i].lon;
+                const dist = Math.sqrt(dLat * dLat + dLon * dLon);
+                
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    closestField = fields[i].name;
+                }
+            }
+            return closestField;
         }
 
         function loadLayersAndData() {
@@ -817,7 +853,10 @@
             // Filter active arrays
             const filtered = currentFlares.filter(flare => {
                 if (currentFilter === 'all') return true;
-                return flare.field.toLowerCase() === currentFilter.toLowerCase();
+                const filterVal = currentFilter.toLowerCase();
+                const flareField = flare.field.toLowerCase();
+                // Check if either string contains the other (fuzzy match)
+                return flareField.includes(filterVal) || filterVal.includes(flareField);
             });
 
             // Update stats indices
