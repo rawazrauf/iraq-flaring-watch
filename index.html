@@ -261,6 +261,9 @@
                             <span>🛰️ Esri Satellite (Clarity Archive)</span>
                             <span class="text-[9px] bg-black/30 px-1 py-0.5 rounded font-normal uppercase">HD</span>
                         </button>
+                        <button id="map-base-night" onclick="changeBaseMap('night')" class="text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center justify-between">
+                            <span>🌃 NASA Earth at Night (Black Marble)</span>
+                        </button>               
                         <button id="map-base-dark" onclick="changeBaseMap('dark')" class="text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center">
                             <span>🌌 Black Canvas (Night Contrast)</span>
                         </button>
@@ -565,6 +568,13 @@
             maxZoom: 19
             });
 
+            // Define NASA Black Marble (Earth at Night) tiles (Keyless, free global imagery)
+            baseLayers.night = L.tileLayer('https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default//GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg', {
+                attribution: 'Imagery provided by NASA GIBS',
+                maxNativeZoom: 8, // Stops asking for tiles past zoom level 8
+                maxZoom: 19       // Digitally stretches the level 8 image for close-ups
+            });
+
             // Define dark background canvas map tiles
             baseLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -673,12 +683,13 @@
             // Mount requested base layer
             baseLayers[type].addTo(map);
 
-            // Update drawer preset styles
+           // Update drawer preset styles
            const buttons = {
                  satellite: document.getElementById('map-base-satellite'),
                  clarity: document.getElementById('map-base-clarity'),
                  dark: document.getElementById('map-base-dark'),
-                 streets: document.getElementById('map-base-streets')
+                 streets: document.getElementById('map-base-streets'),
+                 night: document.getElementById('map-base-night')
             };
 
             Object.keys(buttons).forEach(key => {
