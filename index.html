@@ -272,15 +272,48 @@
 
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Focal Oilfield Selection</label>
-                    <select id="oilfield-filter" onchange="filterFlares(this.value)" class="w-full bg-gray-900 text-xs text-gray-100 border border-gray-800 rounded-lg p-2.5 h-10 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+
+                   <select id="oilfield-filter" onchange="filterFlares(this.value)" class="w-full bg-gray-900 text-xs text-gray-100 border border-gray-800 rounded-lg p-2.5 h-10 focus:ring-1 focus:ring-amber-500 focus:outline-none">
                         <option value="all">All Fields / Areas (Iraqwide)</option>
-                        <option value="Rumaila">Rumaila Field (Basra)</option>
-                        <option value="West Qurna">West Qurna Field (Basra)</option>
-                        <option value="Majnoon">Majnoon Field (Basra)</option>
-                        <option value="Zubair">Zubair Oil Field (Basra)</option>
-                        <option value="Halfaya">Halfaya Oilfield (Maysan)</option>
-                        <option value="Kirkuk">Kirkuk Field Complex</option>
-                    </select>
+                        <optgroup label="Basra Region">
+                             <option value="north rumaila">North Rumaila Field</option>
+                             <option value="south rumaila">South Rumaila Field</option>
+                             <option value="west qurna">West Qurna Field</option>
+                             <option value="majnoon">Majnoon Field</option>
+                             <option value="zubair">Zubair Oil Field</option>
+                        </optgroup>
+                        <optgroup label="Dhi Qar & Maysan">
+                             <option value="nasiriyah">Nasiriyah Oil Field</option>
+                             <option value="gharaf">Gharaf Oil Field</option>
+                             <option value="halfaya">Halfaya Oilfield</option>
+                        </optgroup>
+                        <optgroup label="Wasit, Baghdad & Anbar">
+                             <option value="ahdab">Ahdab Oil Field</option>
+                             <option value="badra">Badra Oil Field</option>
+                             <option value="east baghdad">East Baghdad Field</option>
+                             <option value="akkas">Akkas Gas Field</option>
+                        </optgroup>
+                        <optgroup label="Kirkuk & Saladin">
+                            <option value="kirkuk">Kirkuk Field Complex</option>
+                            <option value="baba gurgur">Baba Gurgur Field</option>
+                            <option value="bai hasan">Bai Hasan Field</option>
+                            <option value="khabbaz">Khabbaz Field</option>
+                            <option value="jambur">Jambur Field</option>
+                            <option value="ajeel">Ajeel Field</option>
+                        </optgroup>
+                        <optgroup label="Kurdistan Region & Nineveh">
+                           <option value="khurmala">Khurmala Dome</option>
+                           <option value="taq taq">Taq Taq Field</option>
+                           <option value="qayara">Qayara Field</option>
+                           <option value="peshkabir">Peshkabir Field</option>
+                           <option value="sarsang">Sarsang Field</option>
+                        <option value="atrush">Atrush Block</option>
+                        </optgroup>
+                  </select>
+
+                    
+
+                    
                 </div>
 
                 <div>
@@ -911,14 +944,35 @@
                 map.setView([33.0, 45.0], 6.5);
             } else {
                 const fieldCenters = {
-                    rumaila: [30.156, 47.407],
-                    "west qurna": [30.655, 47.305],
-                    majnoon: [31.224, 47.563],
-                    zubair: [30.382, 47.712],
-                    halfaya: [31.677, 47.436],
-                    kirkuk: [35.45, 44.25]
+                      "north rumaila": [30.811, 47.329],
+                      "south rumaila": [30.160, 47.411],
+                      "west qurna": [30.811, 47.329],
+                      "majnoon": [31.079, 47.621],
+                      "zubair": [30.382, 47.712],
+                      "nasiriyah": [31.353, 45.965],
+                      "gharaf": [31.769, 46.059],
+                      "halfaya": [31.706, 47.328],
+                      "ahdab": [32.514, 45.667],
+                      "badra": [33.051, 46.073],
+                      "east baghdad": [33.231, 44.775],
+                      "akkas": [34.071, 40.998],
+                      "kirkuk": [35.450, 44.250],
+                      "baba gurgur": [35.542, 44.311],
+                      "bai hasan": [35.631, 44.012],
+                      "khabbaz": [35.488, 44.151],
+                      "jambur": [35.237, 44.443],
+                      "ajeel": [34.899, 43.807],
+                      "khurmala": [35.973, 43.737],
+                      "taq taq": [36.005, 44.516],
+                      "qayara": [35.831, 43.236],
+                      "peshkabir": [37.081, 42.531],
+                      "sarsang": [36.909, 43.389],
+                      "atrush": [36.864, 43.450]
+
+                    
                 };
                 if (fieldCenters[field.toLowerCase()]) {
+                    // Zoom level set to 10 for better regional view of the selected field
                     map.setView(fieldCenters[field.toLowerCase()], 10);
                 }
             }
