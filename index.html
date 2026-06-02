@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Iraq Flaring Watch</title>
     
-    <!-- Tailwind CSS for responsive framework layout utility classes -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     
-    <!-- Leaflet.js CSS for touch-optimized mapping systems -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <!-- Leaflet Marker Cluster CSS for high-performance mobile point grouping -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     
-    <!-- Google Fonts for premium user interface typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -145,10 +141,8 @@
 </head>
 <body class="bg-gray-950 text-gray-100 flex flex-col h-full overflow-hidden">
 
-    <!-- Header / Navbar -->
     <header class="h-14 bg-gray-900 border-b border-gray-800 flex items-center px-4 justify-between shadow-sm z-30 shrink-0">
         <div class="flex items-center space-x-3">
-            <!-- Mobile Toggle Menu Button -->
             <button onclick="toggleControlDrawer()" class="lg:hidden p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition focus:outline-none" aria-label="Toggle Control Panel">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -169,7 +163,6 @@
         </div>
         
         <div class="flex items-center space-x-2">
-            <!-- Share/Export Button -->
             <button onclick="copyShareLink()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center space-x-1.5 font-semibold h-9">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.006-2.003m0 6.52l-4.006-2.003M18 12a3 3 0 11-6 0 3 3 0 016 0zm-11 5a3 3 0 11-6 0 3 3 0 016 0zm0-10a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -179,20 +172,15 @@
         </div>
     </header>
 
-    <!-- Main Content Layout -->
     <div class="flex min-h-0 relative map-fill-height w-full">
         
-        <!-- Mobile Sidebar Backdrop Overlay -->
         <div id="drawer-backdrop" onclick="toggleControlDrawer()" class="hidden fixed inset-0 bg-black/70 z-20 transition-opacity duration-300 lg:hidden"></div>
 
-        <!-- Left Side Control Drawer Panel (Collapsible slide-over drawer on mobile, relative side-column on desktop) -->
         <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 top-0 z-30 w-80 bg-gray-900 border-r border-gray-800 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 lg:z-10 shrink-0">
             
-            <!-- Quick Insights Tracker -->
             <div class="p-4 border-b border-gray-800 bg-gray-950/40">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">National Stats</h3>
-                    <!-- Mobile Close Button inside Drawer -->
                     <button onclick="toggleControlDrawer()" class="lg:hidden p-1 text-gray-400 hover:text-white hover:bg-gray-800 rounded">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -217,10 +205,8 @@
                 </div>
             </div>
 
-            <!-- Scrollable Settings Container -->
             <div class="flex-1 overflow-y-auto p-4 space-y-4">
                 
-                <!-- Search Component (Cleanly integrated to prevent viewport collision) -->
                 <div class="space-y-1.5">
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block">Search Field or Operator</label>
                     <div class="bg-gray-950 border border-gray-800 p-1.5 rounded-xl shadow-inner flex items-center w-full">
@@ -232,12 +218,10 @@
                     </div>
                 </div>
 
-                <!-- Inspect Random Flare Button -->
                 <button onclick="zoomToRandomFlare(); closeDrawerOnMobile();" class="w-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 h-10 shadow-sm">
                     <span>🔥 Inspect Random Flare</span>
                 </button>
 
-                <!-- Data Source toggle -->
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Data Engine Source</label>
                     <div class="grid grid-cols-2 gap-1.5 p-1 bg-gray-950 rounded-lg border border-gray-800">
@@ -250,7 +234,6 @@
                     </div>
                 </div>
 
-                <!-- Live Query Loader Indicator Box -->
                 <div id="live-loader-box" class="hidden bg-gray-950 p-3 rounded-xl border border-amber-500/20 space-y-2">
                     <div class="flex justify-between items-center">
                         <span class="text-[11px] text-amber-400 font-bold flex items-center space-x-1.5">
@@ -267,7 +250,6 @@
                     </div>
                 </div>
 
-                <!-- Interactive Base Maps Selector -->
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Base Satellite & Canvas</label>
                     <div class="flex flex-col space-y-1 bg-gray-950 p-2 rounded-lg border border-gray-800">
@@ -288,7 +270,6 @@
                     </div>
                 </div>
 
-                <!-- Oil Field Spatial Filters -->
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Focal Oilfield Selection</label>
                     <select id="oilfield-filter" onchange="filterFlares(this.value)" class="w-full bg-gray-900 text-xs text-gray-100 border border-gray-800 rounded-lg p-2.5 h-10 focus:ring-1 focus:ring-amber-500 focus:outline-none">
@@ -302,7 +283,6 @@
                     </select>
                 </div>
 
-                <!-- Display layers -->
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Display layers</label>
                     <div class="space-y-1 bg-gray-950 p-2 rounded-lg border border-gray-800">
@@ -321,14 +301,13 @@
                     </div>
                 </div>
 
-                <!-- Distance Analyzer Card -->
                 <div class="bg-gray-950/40 p-3 rounded-xl border border-gray-800 space-y-2.5">
                     <div class="flex items-center justify-between">
                         <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Distance Analyzer</h4>
                         <span class="text-[9px] text-gray-500 font-semibold bg-gray-900 px-1.5 py-0.5 rounded uppercase border border-gray-700">Ruler</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-normal">
-                        Assess local impact by calculating the exact distance between any flare stack and community settlements.
+                        Assess local impact by calculating the exact distance between any gas flare and community settlements.
                     </p>
                     <button id="btn-measure" onclick="toggleMeasuringMode()" class="w-full bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-700 text-xs py-2 px-3 rounded-lg font-bold transition flex items-center justify-center space-x-2 shadow h-10">
                         <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -339,7 +318,7 @@
                     
                     <div id="measure-output-box" class="hidden p-2.5 bg-amber-500/10 border border-amber-500/20 rounded-lg text-[11px] space-y-1.5">
                         <div class="flex justify-between">
-                            <span class="text-gray-400 font-medium">Selected Stack:</span>
+                            <span class="text-gray-400 font-medium">Selected Flare:</span>
                             <span id="measure-flare-name" class="font-bold text-gray-100 truncate max-w-[120px]">None</span>
                         </div>
                         <div class="flex justify-between">
@@ -352,7 +331,6 @@
                     </div>
                 </div>
 
-                <!-- Zoom Controls Presets -->
                 <div>
                     <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Regional Quick Zoom</label>
                     <div class="grid grid-cols-3 gap-1.5">
@@ -362,11 +340,10 @@
                     </div>
                 </div>
 
-                <!-- OSM Citizen Mapping Guide -->
                 <div class="p-3 bg-gray-950/40 rounded-xl border border-gray-800 space-y-2">
                     <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Citizen Mapping Help</h4>
                     <p class="text-[11px] text-gray-400 leading-relaxed">
-                        If a stack in Iraq is missing, please help update OpenStreetMap using standard tagging conventions.
+                        If a gas flare in Iraq is missing, please help update OpenStreetMap using standard tagging conventions.
                     </p>
                     <div class="bg-gray-950 p-2.5 rounded border border-gray-800 text-[10px] space-y-1 font-mono text-gray-300 mt-2">
                         <div class="flex justify-between">
@@ -382,7 +359,6 @@
 
             </div>
 
-            <!-- Footer -->
             <div class="p-3 border-t border-gray-800 bg-gray-950 text-center shrink-0">
                 <p class="text-[9px] text-gray-500 leading-normal">
                     &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> &bull; Esri Tiles.
@@ -390,20 +366,16 @@
             </div>
         </aside>
 
-        <!-- Main Map Viewport Area -->
         <main class="flex-1 flex flex-col min-h-0 relative bg-gray-950 z-0">
             
-            <!-- Leaflet Map Canvas element -->
             <div id="leaflet-map-canvas" class="w-full h-full bg-gray-950"></div>
 
-            <!-- Floating Info Toggle Button (Default State) -->
             <button id="helper-toggle-btn" onclick="toggleHelperBox()" class="absolute bottom-6 left-4 z-[1000] p-3 bg-gray-900/95 border border-gray-800 text-amber-500 rounded-full shadow-2xl backdrop-blur hover:bg-gray-800 transition focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
             </button>
 
-            <!-- Collapsible bottom-left helper dialog (Expanded State) -->
             <div id="map-helper-box" class="hidden absolute bottom-6 left-4 right-4 sm:right-auto sm:w-80 z-[1000] bg-gray-900/95 border border-gray-800 rounded-xl shadow-2xl p-3.5 flex space-x-3 items-start backdrop-blur">
                 <div class="p-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg shrink-0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -418,12 +390,11 @@
                         </button>
                     </div>
                     <p class="text-[10px] text-gray-400 mt-1 leading-relaxed">
-                        To view physical flare stacks on mobile, select <strong>🛰️ Satellite</strong> and pinch-zoom to level 18.
+                        To view physical gas flares on mobile, select <strong>🛰️ Satellite</strong> and pinch-zoom to level 18.
                     </p>
                 </div>
             </div>
 
-            <!-- Floating Measurement Active Notification -->
             <div id="measure-active-banner" class="hidden absolute bottom-24 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 z-[1000] bg-red-600 text-white px-4 py-3 rounded-xl shadow-2xl text-xs font-bold animate-bounce flex items-center justify-between space-x-3">
                 <span class="flex-1">📍 Measurement Mode Active: Tap any community coordinate to check radius proximity!</span>
                 <button onclick="toggleMeasuringMode()" class="bg-black/30 hover:bg-black/50 px-3 py-1.5 rounded-lg border border-white/20 uppercase text-[10px] font-extrabold shadow shrink-0">Cancel</button>
@@ -432,12 +403,10 @@
         </main>
     </div>
 
-    <!-- Leaflet JS Core and plugins dependencies -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 
-    <!-- Map Application Engine -->
     <script>
         // Global engine configuration parameters
         let map;
@@ -692,8 +661,6 @@
                 (
                   node["man_made"="flare"](area.searchArea);
                   way["man_made"="flare"](area.searchArea);
-                  node["man_made"="flare_stack"](area.searchArea);
-                  way["man_made"="flare_stack"](area.searchArea);
                 );
                 out center;
             `;
@@ -819,7 +786,7 @@
                 const popupContent = `
                     <div class="p-1 space-y-3 max-w-xs text-xs">
                         <div class="flex items-center justify-between border-b border-gray-700 pb-2">
-                            <span class="font-extrabold text-amber-400 text-sm">🔥 Flare Stack</span>
+                            <span class="font-extrabold text-amber-400 text-sm">🔥 Gas Flare</span>
                             <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 py-0.5 rounded font-mono border border-gray-700">ID: ${flare.id}</span>
                         </div>
                         
@@ -1014,9 +981,9 @@
                 
                 // Show measurement display container
                 document.getElementById('measure-output-box').classList.remove('hidden');
-                document.getElementById('measure-flare-name').textContent = "Tap Flare Stack";
+                document.getElementById('measure-flare-name').textContent = "Tap Gas Flare";
                 document.getElementById('measure-distance-val').textContent = "Waiting...";
-                document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active flare stack marker.";
+                document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active gas flare marker.";
                 
                 selectedMeasureFlare = null;
                 closeDrawerOnMobile();
@@ -1045,9 +1012,9 @@
         // Resets the measuring segment dynamically without requiring total cancellation
         function resetMeasurementOrigin() {
             clearMeasurementLines();
-            document.getElementById('measure-flare-name').textContent = "Tap Flare Stack";
+            document.getElementById('measure-flare-name').textContent = "Tap Gas Flare";
             document.getElementById('measure-distance-val').textContent = "Waiting...";
-            document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active flare stack marker.";
+            document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active gas flare marker.";
         }
 
         function onMapClickForDistance(e) {
@@ -1076,7 +1043,7 @@
                     if (tempMeasureMarker) map.removeLayer(tempMeasureMarker);
                     tempMeasureMarker = L.marker([closest.lat, closest.lon]).addTo(map);
                 } else {
-                    document.getElementById('proximity-alert-msg').textContent = "Error: Please click closer to an active glowing orange flare stack icon.";
+                    document.getElementById('proximity-alert-msg').textContent = "Error: Please click closer to an active glowing orange gas flare icon.";
                 }
             } else {
                 const startPoint = L.latLng(selectedMeasureFlare.lat, selectedMeasureFlare.lon);
