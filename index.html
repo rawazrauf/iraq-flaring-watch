@@ -896,7 +896,7 @@
             const regions = new Set(filtered.map(f => f.field));
             document.getElementById('stat-field-count').textContent = regions.size;
 
-            filtered.forEach(flare => {
+filtered.forEach(flare => {
                 const coord = [flare.lat, flare.lon];
                 heatmapPoints.push([flare.lat, flare.lon, 1.0]);
 
@@ -923,6 +923,12 @@
                         </div>
 
                         <div class="bg-gray-950 p-2 rounded border border-gray-800 font-mono text-[10px] space-y-1">
+                            <div class="flex justify-between items-center border-b border-gray-800 pb-1.5 mb-1.5">
+                                <span class="text-gray-500">5km Risk Zone Pop:</span>
+                                <span id="pop-metric-${flare.id}" data-status="pending" class="text-gray-400 font-bold">
+                                    Pending...
+                                </span>
+                            </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-500">Latitude:</span>
                                 <span class="text-gray-300 font-bold">${flare.lat.toFixed(6)}</span>
@@ -964,6 +970,17 @@
                     closeOnClick: false,
                     autoPanPadding: [20, 80]
                 });
+                
+                // Trigger WorldPop API when user opens this specific popup
+                marker.on('popupopen', () => {
+                    const popElement = document.getElementById(`pop-metric-${flare.id}`);
+                    if (popElement && popElement.getAttribute('data-status') === 'pending') {
+                        popElement.setAttribute('data-status', 'loading');
+                        popElement.innerHTML = '<span class="animate-pulse text-amber-500">Querying WorldPop...</span>';
+                        calculateWorldPop(flare.lat, flare.lon, flare.id);
+                    }
+                });
+
                 markerClusterGroup.addLayer(marker);
 
                 // Add 5km health safety buffer overlays
@@ -977,7 +994,8 @@
                 });
                 safeRadiusGroup.addLayer(radiusCircle);
             });
-
+            
+            
             // Enforce explicit layering hierarchy (Heatmap -> Buffer bounds -> Interactive cluster markers)
             heatmapLayer.setLatLngs(heatmapPoints);
             if (document.getElementById('layer-heatmap').checked) {
@@ -1292,6 +1310,87 @@
                 if (btnTextElement) btnTextElement.textContent = originalText;
             }, 2500);
         }
+
+        // Generates a 5km GeoJSON polygon circle around the flare for the WorldPop API
+        function createGeoJSONCircle(center, radiusInKm, points = 32) {
+            const coords = [];
+            const kmPerDegLat = 110.574;
+            const kmPerDegLon = 111.320 * Math.cos(center[0] * Math.PI / 180);
+
+            for (let i = 0; i < points; i++) {
+                const angle = (i * 360) / points;
+                const dx = radiusInKm * Math.cos(angle * Math.PI / 180);
+                const dy = radiusInKm * Math.sin(angle * Math.PI / 180);
+                const lon = center[1] + (dx / kmPerDegLon);
+                const lat = center[0] + (dy / kmPerDegLat);
+                coords.push([lon, lat]);
+            }
+            coords.push(coords[0]); // Close the polygon ring
+
+            return {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [coords]
+                }
+            };
+        }
+
+        // Submits the zone to WorldPop and polls the task queue for the result
+        async function calculateWorldPop(lat, lon, flareId) {
+            const popElement = document.getElementById(`pop-metric-${flareId}`);
+            if (!popElement) return;
+
+            const geojson = createGeoJSONCircle([lat, lon], 5);
+
+            try {
+                // 1. Submit polygon to WorldPop
+                const response = await fetch('https://api.worldpop.org/v1/services/stats', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        dataset: 'wpgppop',
+                        year: '2020',
+                        geojson: JSON.stringify(geojson) // <-- The stringification fix
+                    })
+                });
+
+                if (!response.ok) throw new Error('API Rejection');
+                
+                const taskData = await response.json();
+                const taskId = taskData.taskid;
+
+                // 2. Poll the task queue until completion (Max 15 seconds)
+                let result = null;
+                for (let i = 0; i < 15; i++) { 
+                    await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1 sec between pings
+                    
+                    const pollRes = await fetch(`https://api.worldpop.org/v1/tasks/${taskId}`);
+                    const pollData = await pollRes.json();
+                    
+                    if (pollData.status === 'finished') {
+                        result = pollData.data.total_population;
+                        break;
+                    } else if (pollData.status === 'error') {
+                        throw new Error('WorldPop Task Failed');
+                    }
+                }
+
+                // 3. Display the result
+                if (result !== null) {
+                    popElement.innerHTML = `~${Math.round(result).toLocaleString()} people`;
+                    popElement.className = "text-red-400 font-extrabold";
+                    popElement.setAttribute('data-status', 'done');
+                } else {
+                    popElement.innerHTML = "Timeout";
+                }
+            } catch (error) {
+                console.warn('WorldPop API Error:', error);
+                popElement.innerHTML = "API Unavailable";
+            }
+        }
+        
     </script>
 </body>
 </html>
