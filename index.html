@@ -401,13 +401,13 @@
             
             <div id="leaflet-map-canvas" class="w-full h-full bg-gray-950"></div>
 
-            <button id="helper-toggle-btn" onclick="toggleHelperBox()" class="absolute bottom-6 left-4 z-[2000] p-3 bg-gray-900/95 border border-gray-800 text-amber-500 rounded-full shadow-2xl backdrop-blur hover:bg-gray-800 transition focus:outline-none">
+            <button id="helper-toggle-btn" onclick="toggleHelperBox()" class="fixed bottom-6 left-4 lg:left-[336px] z-[2000] p-3 bg-gray-900/95 border border-gray-800 text-amber-500 rounded-full shadow-2xl backdrop-blur hover:bg-gray-800 transition focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
             </button>
 
-            <div id="map-helper-box" class="hidden absolute bottom-6 left-4 right-4 sm:right-auto sm:w-80 z-[2000] bg-gray-900/95 border border-gray-800 rounded-xl shadow-2xl p-3.5 flex space-x-3 items-start backdrop-blur">
+            <div id="map-helper-box" class="hidden fixed bottom-6 left-4 right-4 sm:right-auto sm:w-80 lg:left-[336px] sm:left-[80px] z-[2000] bg-gray-900/95 border border-gray-800 rounded-xl shadow-2xl p-3.5 flex space-x-3 items-start backdrop-blur">
                 <div class="p-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg shrink-0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
