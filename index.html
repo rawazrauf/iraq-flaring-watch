@@ -458,6 +458,10 @@
         let heatmapLayer;
         let safeRadiusGroup;
         let iraqBoundaryLayer;
+        
+        // WorldPop UX Optimizations
+        let popCache = {};
+        let nextRandomFlareTarget = null;
 
         // Custom orange pulsing icon for gas flares (Class container remains neutral to not conflict with translate3d positioning)
         const flareIcon = L.divIcon({
@@ -914,6 +918,7 @@ filtered.forEach(flare => {
 
                 // Create interactive map point marker
                 const marker = L.marker(coord, { icon: flareIcon });
+                marker.flareId = flare.id; // Attach ID so auto-popup can find it
                 
                 // Construct responsive, high-contrast touch friendly Popup card
                 const popupContent = `
@@ -946,7 +951,7 @@ filtered.forEach(flare => {
                         </div>
 
                         <div class="bg-blue-900/20 p-2 rounded border border-blue-500/30 text-[10px] text-blue-400 leading-tight">
-                            <a href="https://www.google.com/maps?q=${flare.lat},${flare.lon}&z=19&t=k" target="_blank" class="font-bold flex items-center justify-between hover:underline">
+                                <a href="https://www.google.com/maps?q=${flare.lat},${flare.lon}&t=k&z=19" target="_blank" class="font-bold flex items-center justify-between hover:underline">
                                 <span>🗺️ View on Google Maps</span>
                                 <span>→</span>
                             </a>
@@ -998,8 +1003,10 @@ filtered.forEach(flare => {
                 });
                 safeRadiusGroup.addLayer(radiusCircle);
             });
-            
-            
+
+            // Kick off the background preloader 2 seconds after the map finishes drawing
+            setTimeout(preloadNextRandom, 2000);
+
             // Enforce explicit layering hierarchy (Heatmap -> Buffer bounds -> Interactive cluster markers)
             heatmapLayer.setLatLngs(heatmapPoints);
             if (document.getElementById('layer-heatmap').checked) {
@@ -1233,11 +1240,37 @@ filtered.forEach(flare => {
             }
         }
 
-        function zoomToRandomFlare() {
+        // Silently queues up the next random flare so it loads instantly
+        function preloadNextRandom() {
             if (currentFlares.length === 0) return;
             const randomIndex = Math.floor(Math.random() * currentFlares.length);
-            const selected = currentFlares[randomIndex];
+            nextRandomFlareTarget = currentFlares[randomIndex];
+            
+            // Fetch silently in the background (It saves to cache even if popup is closed)
+            if (!popCache[nextRandomFlareTarget.id]) {
+                calculateWorldPop(nextRandomFlareTarget.lat, nextRandomFlareTarget.lon, nextRandomFlareTarget.id);
+            }
+        }
+
+        // Executes the jump and reveals the pre-fetched data
+        function zoomToRandomFlare() {
+            if (currentFlares.length === 0) return;
+            
+            // Use the preloaded target, or fallback if it's the very first click
+            const selected = nextRandomFlareTarget || currentFlares[Math.floor(Math.random() * currentFlares.length)];
+            
             inspectSatellite(selected.lat, selected.lon);
+            
+            // Automatically find the marker and pop it open for a seamless UX
+            markerClusterGroup.eachLayer((layer) => {
+                if (layer.flareId === selected.id) {
+                    // Slight delay allows Leaflet map to finish flying before opening
+                    setTimeout(() => layer.openPopup(), 400); 
+                }
+            });
+            
+            // Queue up the NEXT one while they read this one!
+            preloadNextRandom();
         }
 
         function handleSearchKeyPress(event) {
@@ -1341,36 +1374,42 @@ filtered.forEach(flare => {
             };
         }
 
-        // Submits the zone to WorldPop and polls the task queue for the result
+        // Submits the zone to WorldPop, caches it, and polls the task queue
         async function calculateWorldPop(lat, lon, flareId) {
             const popElement = document.getElementById(`pop-metric-${flareId}`);
-            if (!popElement) return;
+            
+            // 1. Check Cache First (Instant Load!)
+            if (popCache[flareId]) {
+                if (popElement) {
+                    popElement.innerHTML = `~${popCache[flareId].toLocaleString()} people`;
+                    popElement.className = "text-red-400 font-extrabold";
+                    popElement.setAttribute('data-status', 'done');
+                }
+                return;
+            }
 
             const geojson = createGeoJSONCircle([lat, lon], 5);
 
             try {
-                // 1. Submit polygon to WorldPop
+                // Submit polygon to WorldPop
                 const response = await fetch('https://api.worldpop.org/v1/services/stats', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         dataset: 'wpgppop',
                         year: '2020',
-                        geojson: JSON.stringify(geojson) // <-- The stringification fix
+                        geojson: JSON.stringify(geojson)
                     })
                 });
 
                 if (!response.ok) throw new Error('API Rejection');
-                
                 const taskData = await response.json();
-                const taskId = taskData.taskid;
-
-                // 2. Poll the task queue until completion (Max 15 seconds)
+                
+                // Poll the task queue until completion
                 let result = null;
                 for (let i = 0; i < 15; i++) { 
-                    await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1 sec between pings
-                    
-                    const pollRes = await fetch(`https://api.worldpop.org/v1/tasks/${taskId}`);
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    const pollRes = await fetch(`https://api.worldpop.org/v1/tasks/${taskData.taskid}`);
                     const pollData = await pollRes.json();
                     
                     if (pollData.status === 'finished') {
@@ -1381,17 +1420,20 @@ filtered.forEach(flare => {
                     }
                 }
 
-                // 3. Display the result
+                // 2. Save to Cache and Update UI (if popup is open)
                 if (result !== null) {
-                    popElement.innerHTML = `~${Math.round(result).toLocaleString()} people`;
-                    popElement.className = "text-red-400 font-extrabold";
-                    popElement.setAttribute('data-status', 'done');
+                    popCache[flareId] = Math.round(result); // Store permanently in session!
+                    if (popElement) {
+                        popElement.innerHTML = `~${popCache[flareId].toLocaleString()} people`;
+                        popElement.className = "text-red-400 font-extrabold";
+                        popElement.setAttribute('data-status', 'done');
+                    }
                 } else {
-                    popElement.innerHTML = "Timeout";
+                    if (popElement) popElement.innerHTML = "Timeout";
                 }
             } catch (error) {
                 console.warn('WorldPop API Error:', error);
-                popElement.innerHTML = "API Unavailable";
+                if (popElement) popElement.innerHTML = "API Unavailable";
             }
         }
         
