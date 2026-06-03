@@ -1,9 +1,3 @@
-This is a strong, technically grounded Readme. To blend in your recent high-impact improvements (the WorldPop integration and the hybrid caching engine), I have refined the header and added a new "Impact Analytics" section while maintaining your technical rigor.
-
-Here is the blended, updated version for your `README.md`:
-
----
-
 # 🗺️ Iraq Gas Flaring Watch — Powered by OpenStreetMap
 
 An interactive, serverless web application designed to map, track, and measure gas flaring operations across Iraq. Built entirely on client-side technology, this platform empowers citizens, environmental researchers, and public advocates to analyze localized air quality risks using live crowdsourced data from OpenStreetMap (OSM) and high-resolution satellite imagery.
