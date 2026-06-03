@@ -653,6 +653,22 @@
             
             // Set map click interaction triggers
             map.on('click', onMapClickForDistance);
+
+            // Auto-hide heatmap only when zoomed into 19 (the absolute max zoom)
+            map.on('zoomend', () => {
+            const currentZoom = map.getZoom();
+            const heatmapCheckbox = document.getElementById('layer-heatmap');
+                    // The heatmap is now visible at 18, and hidden ONLY at 19
+
+                    if (currentZoom >= 19) {
+                        if (map.hasLayer(heatmapLayer)) map.removeLayer(heatmapLayer);
+                    } else {
+                        // Re-add only if the user has it enabled in the drawer
+                        if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) {
+                            map.addLayer(heatmapLayer);
+                        }
+                    }
+            });            
         }
 
         // Responsive Mobile Control Drawer Toggle Methods
@@ -1269,23 +1285,6 @@ filtered.forEach(flare => {
             }            
         }
 
-        // Auto-hide heatmap only when zoomed into 19 (the absolute max zoom)
-        map.on('zoomend', () => {
-            const currentZoom = map.getZoom();
-            const heatmapCheckbox = document.getElementById('layer-heatmap');
-            
-            // The heatmap is now visible at 18, and hidden ONLY at 19
-            if (currentZoom >= 19) {
-                if (map.hasLayer(heatmapLayer)) {
-                    map.removeLayer(heatmapLayer);
-                }
-            } else {
-                // Re-add only if the user has it enabled in the drawer
-                if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) {
-                    map.addLayer(heatmapLayer);
-                }
-            }
-        });
 
         // Executes the jump and reveals the pre-fetched data
         function zoomToRandomFlare() {
