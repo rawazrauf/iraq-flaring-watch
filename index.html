@@ -911,15 +911,9 @@ filtered.forEach(flare => {
                             <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 py-0.5 rounded font-mono border border-gray-700">ID: ${flare.id}</span>
                         </div>
                         
-                        <div class="grid grid-cols-2 gap-2 text-gray-300">
-                            <div>
-                                <span class="text-[9px] text-gray-500 uppercase font-bold block">Assigned Field</span>
-                                <span class="font-semibold text-gray-200">${flare.field} Field</span>
-                            </div>
-                            <div>
-                                <span class="text-[9px] text-gray-500 uppercase font-bold block">Operator Info</span>
-                                <span class="font-semibold text-gray-200 truncate block" title="${flare.operator}">${flare.operator}</span>
-                            </div>
+                        <div class="text-gray-300">
+                            <span class="text-[9px] text-gray-500 uppercase font-bold block">Assigned Field</span>
+                            <span class="font-semibold text-gray-200">${flare.field} Field</span>
                         </div>
 
                         <div class="bg-gray-950 p-2 rounded border border-gray-800 font-mono text-[10px] space-y-1">
