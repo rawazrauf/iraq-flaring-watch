@@ -945,14 +945,12 @@ filtered.forEach(flare => {
                             </div>
                         </div>
 
-                        ${flare.website ? `
-                        <div class="bg-amber-950/20 p-2 rounded border border-amber-500/20 text-[10px] text-amber-400 leading-tight">
-                            <a href="${flare.website}" target="_blank" class="font-bold flex items-center justify-between hover:underline">
-                                <span>🛰️ Carbon Mapper Sensor Plume</span>
+                        <div class="bg-blue-900/20 p-2 rounded border border-blue-500/30 text-[10px] text-blue-400 leading-tight">
+                            <a href="https://www.google.com/maps?t=k&q=${flare.lat},${flare.lon}" target="_blank" class="font-bold flex items-center justify-between hover:underline">
+                                <span>🗺️ View on Google Maps </span>
                                 <span>&rarr;</span>
                             </a>
                         </div>
-                        ` : ''}
 
                         <div class="flex justify-between items-center text-[10px] text-gray-500 border-t border-gray-800 pt-2">
                             <span>Source: ${flare.source}</span>
