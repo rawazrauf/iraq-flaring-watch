@@ -1043,7 +1043,8 @@ filtered.forEach(flare => {
 
             // Enforce explicit layering hierarchy (Heatmap -> Buffer bounds -> Interactive cluster markers)
             heatmapLayer.setLatLngs(heatmapPoints);
-            if (document.getElementById('layer-heatmap').checked) {
+            // Force heatmap checked by default, or respect user toggle if they changed it
+                if (document.getElementById('layer-heatmap').checked || true) {
                 if (!map.hasLayer(heatmapLayer)) {
                     map.addLayer(heatmapLayer);
                 }
