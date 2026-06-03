@@ -495,7 +495,16 @@
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 
                 progressBar.style.width = "70%";
+
+                
                 const data = await response.json();
+
+                // Extract and format the date from the Overpass header
+                let staticDate = "Unknown Date";
+                if (data.osm3s && data.osm3s.timestamp_osm_base) {
+                    const d = new Date(data.osm3s.timestamp_osm_base);
+                    staticDate = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                }
 
                 preloadFlares = data.elements.map((element) => {
                     const lat = element.lat || (element.center ? element.center.lat : null);
@@ -504,7 +513,6 @@
                     if (!lat || !lon) return null;
 
                     const tags = element.tags || {};
-                    const operator = tags.operator || tags.owner || "Unspecified Operator";
                     const field = tags.oilfield || tags.field || detectOilFieldFromPosition(lat, lon);
 
                     return {
@@ -513,9 +521,8 @@
                         lat: parseFloat(lat),
                         lon: parseFloat(lon),
                         field: field,
-                        operator: operator,
                         status: tags.man_made ? `OSM ${tags.man_made}` : "Active Gas Flare",
-                        source: "Static Overpass Query",
+                        source: `OpenStreetMap on ${staticDate}`,
                         website: tags.website || null
                     };
                 }).filter(f => f !== null);
@@ -793,6 +800,13 @@
             statusText.textContent = "Validating coordinates...";
             progressBar.style.width = "85%";
 
+// Extract the live timestamp from Overpass (Includes time for live queries)
+            let liveDate = "Just now";
+            if (data.osm3s && data.osm3s.timestamp_osm_base) {
+                const d = new Date(data.osm3s.timestamp_osm_base);
+                liveDate = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+            }
+
             // Parse OSM objects into local memory data layers
             const liveParsedFlares = data.elements.map((element, idx) => {
                 const lat = element.lat || (element.center ? element.center.lat : null);
@@ -801,7 +815,6 @@
                 if (!lat || !lon) return null;
 
                 const tags = element.tags || {};
-                const operator = tags.operator || tags.owner || "Unspecified Oil Operator";
                 const field = tags.oilfield || tags.field || detectOilFieldFromPosition(lat, lon);
 
                 return {
@@ -810,9 +823,8 @@
                     lat: parseFloat(lat),
                     lon: parseFloat(lon),
                     field: field,
-                    operator: operator,
                     status: tags.man_made ? `OSM ${tags.man_made}` : "Active Gas Flare",
-                    source: "OpenStreetMap Live Database Contribution",
+                    source: `Live OSM on ${liveDate}`,
                     website: tags.website || null
                 };
             }).filter(f => f !== null);
