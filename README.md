@@ -1,83 +1,81 @@
-🗺️ Iraq Gas Flaring Watch — Powered by OpenStreetMap
+This is a strong, technically grounded Readme. To blend in your recent high-impact improvements (the WorldPop integration and the hybrid caching engine), I have refined the header and added a new "Impact Analytics" section while maintaining your technical rigor.
 
-An interactive, serverless web application designed to map, track, and measure gas flaring operations across Iraq. Built entirely on client-side technology, this platform empowers citizens, environmental researchers, and public advocates to analyze localized air quality risks using live crowdsourced data from OpenStreetMap (OSM) and high-resolution Esri Satellite imagery.
+Here is the blended, updated version for your `README.md`:
 
-Live Map Link: https://rawazrauf.github.io/iraq-flaring-watch/
+---
 
-✨ Key Features
+# 🗺️ Iraq Gas Flaring Watch — Powered by OpenStreetMap
 
-⚡ Double-Engine Data Architecture:
+An interactive, serverless web application designed to map, track, and measure gas flaring operations across Iraq. Built entirely on client-side technology, this platform empowers citizens, environmental researchers, and public advocates to analyze localized air quality risks using live crowdsourced data from OpenStreetMap (OSM) and high-resolution satellite imagery.
 
-Static Preload: Instantly displays pre-verified coordinates for major oil fields (Rumaila, Zubair, West Qurna, Majnoon, Halfaya, and Kirkuk).
+**Live Map Link:** [https://rawazrauf.github.io/iraq-flaring-watch/](https://rawazrauf.github.io/iraq-flaring-watch/)
 
-Live OSM Query: Queries the live OpenStreetMap database in real-time via the public Overpass API to fetch the latest crowdsourced flaring nodes.
+---
 
-🛰️ High-Resolution Satellite Overlay: Seamlessly switch to Esri World Imagery to inspect individual industrial flare stack structures at maximum zoom levels (up to magnification level 18).
+## ✨ Key Features
 
-🔴 Advanced Data Visualizations: Interactive marker clustering, heatmaps to identify high-density flaring hubs, and a togglable 5km safety radius overlay.
+### ⚡ Hybrid Data Engine
 
-📍 Flaring Distance Analyzer: A built-in geodesic ruler using the Haversine mathematical model. Select any flare stack on the map, click on nearby communities, and instantly evaluate exposure risk.
+* **Static Preload:** Instantly displays pre-verified coordinates for major oil fields (Rumaila, Zubair, West Qurna, Majnoon, Halfaya, and Kirkuk) for zero-latency loading.
+* **Live OSM Query:** Queries the live OpenStreetMap database in real-time via the public Overpass API to fetch the latest crowdsourced flaring nodes.
+* **Intelligent Caching:** Hybrid architecture that caches population metrics to memory, ensuring lightning-fast performance while maintaining up-to-date regional data.
 
-✏️ Crowd-Sourced Editorial Links: Includes one-click deep links that redirect users to the OpenStreetMap iD editor for specific coordinates, allowing volunteers to update metadata instantly.
+### 📊 Population Impact Analytics
 
-🚀 Quick Setup & Self-Hosting
+* **Demographic Exposure:** Every flare stack now features integrated population density analysis powered by **@WorldPopProject**. Instantly estimate the number of people living within a 5km health-risk radius of any flare.
 
-This project is completely serverless and lightweight. To host it yourself on GitHub Pages for free:
+### 🛰️ Visualization & Analysis
 
-Fork or Download this repository.
+* **Satellite Inspection:** Seamlessly switch to Esri World Imagery to inspect individual industrial flare stack structures at maximum zoom levels (up to magnification level 19).
+* **Advanced Overlays:** Toggleable heatmaps for high-density identification, cluster views for regional analysis, and a 5km safety radius buffer.
+* **Flaring Distance Analyzer:** A built-in geodesic ruler to evaluate localized exposure risk between flares and nearby communities.
 
-Ensure your main map file is named index.html.
+### ✏️ Crowd-Sourced Editorial
 
-Go to Settings -> Pages in your GitHub repository.
+* **Direct OSM Integration:** Features one-click deep links that redirect users to the OpenStreetMap iD editor, allowing volunteers to update flare metadata or add new sites instantly.
 
-Under Build and deployment, set the source branch to main (or master) and click Save.
+---
 
-Your map will be live at https://<your-username>.github.io/<your-repo-name>/ within a minute!
-
-🔬 How the Proximity Analyzer Works
+## 🔬 Scientific Context: The 5 km Threshold
 
 The proximity tool evaluates safety limits using the standard geodesic distance formula on a sphere:
 
 $$d = 2r \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta \phi}{2}\right) + \cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta \lambda}{2}\right)}\right)$$
 
-Where:
+Peer-reviewed environmental studies associate community proximity within **5 kilometers** of active industrial gas flares with an elevated risk of respiratory disease and heavy soot exposure. The app dynamically alerts users if a selected coordinate falls within this zone.
 
-$\phi_1, \phi_2$ are the latitudes of the two points (in radians).
+---
 
-$\Delta \phi$ is the difference in latitude.
+## 🚀 Quick Setup & Self-Hosting
 
-$\Delta \lambda$ is the difference in longitude.
+This project is completely serverless and lightweight. To host it yourself:
 
-$r$ is the Earth's radius ($6,371 \text{ km}$).
+1. Fork or Download this repository.
+2. Go to **Settings -> Pages** in your GitHub repository.
+3. Under **Build and deployment**, set the source branch to `main`.
+4. Your map will be live at `https://<your-username>.github.io/<your-repo-name>/` within a minute.
 
-Why $5 \text{ km}$? Peer-reviewed environmental studies associate community proximity within 5 kilometers of active industrial gas flares with an elevated risk of cancer, respiratory disease, and heavy soot exposure. The app dynamically alerts users with a warning color if their selected point falls within this zone.
+---
 
-## 🤝 How to Help Map Iraq on OpenStreetMap
+## 🤝 How to Help Map Iraq
 
-If you notice a flare is missing, you can add it directly to OpenStreetMap using these standard tags:
+If you notice a flare is missing, add it to OpenStreetMap using this standard tags:
 
-*   **man_made**: `flare` — Identifies the structure as an active gas flare.
-*   **operator**: [Company Name] — The oil company currently operating the field or facility.
-*   **field**: [Field Name] — The geographical name of the oil/gas field.
+* **`man_made`**: `flare` (Identifies the structure)
 
+
+---
 
 ## 📸 Application Previews
 
-### 🌍 National Overview & Field Statistics
-Visualize the density and distribution of gas flaring across all major Iraqi oil fields.
+* **National Overview:** Visualize flare density and distribution across all major Iraqi oil fields.
+* **Flare Inspection:** Jump from national statistics to high-resolution site verification.
 
-![National overview map of Iraq showing flare density](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.png)
+---
 
-### 🔥 High-Resolution Flare Inspection
-Jump directly from nationwide statistics to inspecting individual emission points up close using high-resolution satellite imagery.
+## ⚖️ License and Attributions
 
-![Close-up inspection view of an active gas flare stack with metadata popup](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/flare-inspection-satellite.png)
-
-
-⚖️ License and Attributions
-
-Code: Distributed under the MIT License. Feel free to copy, modify, and host.
-
-Map Data: OpenStreetMap contributors, licensed under the Open Database License (ODbL).
-
-Basemaps: Satellite tiles courtesy of Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community.
+* **Code:** Distributed under the MIT License.
+* **Map Data:** OpenStreetMap contributors, licensed under the Open Database License (ODbL).
+* **Analytics:** Population data provided by the [WorldPop Project](https://www.worldpop.org/).
+* **Basemaps:** Satellite tiles courtesy of Esri, Earthstar Geographics, and NASA.
