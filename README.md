@@ -60,10 +60,18 @@ If you notice a flare is missing, add it to OpenStreetMap using this standard ta
 
 ---
 
-## 📸 Application Previews
+📸 Application Previews
 
-* **National Overview:** Visualize flare density and distribution across all major Iraqi oil fields.
-* **Flare Inspection:** Jump from national statistics to high-resolution site verification.
+### 🌍 National Overview & Field Statistics
+Visualize the density and distribution of gas flaring across all major Iraqi oil fields.
+
+![National overview map of Iraq showing flare density](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.png)
+
+### 🔥 High-Resolution Flare Inspection
+Jump directly from nationwide statistics to inspecting individual emission points up close using high-resolution satellite imagery.
+
+![Close-up inspection view of an active gas flare stack with metadata popup](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/flare-inspection-satellite.png)
+
 
 ---
 
