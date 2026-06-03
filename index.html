@@ -461,6 +461,7 @@
         
         // WorldPop UX Optimizations
         let popCache = {};
+        let staticPopData = {}; // Stores your query_population.json
         let nextRandomFlareTarget = null;
 
         // Custom orange pulsing icon for gas flares (Class container remains neutral to not conflict with translate3d positioning)
@@ -480,8 +481,21 @@
         // Initialize Map
         window.onload = async function() {
             initMap();
+            await fetchStaticPopData(); // Load the population dictionary first
             await loadStaticQueryFile();
         };
+
+        // Fetches the pre-calculated demographic data
+        async function fetchStaticPopData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query_population.json');
+                if (response.ok) {
+                    staticPopData = await response.json();
+                }
+            } catch (error) {
+                console.warn("Static population dataset missing or failed to load.");
+            }
+        }
 
         async function loadStaticQueryFile() {
             const loaderBox = document.getElementById('live-loader-box');
@@ -915,14 +929,29 @@
 filtered.forEach(flare => {
                 const coord = [flare.lat, flare.lon];
                 heatmapPoints.push([flare.lat, flare.lon, 1.0]);
-
+    
                 // Create interactive map point marker
                 const marker = L.marker(coord, { icon: flareIcon });
                 marker.flareId = flare.id; // Attach ID so auto-popup can find it
                 
+                // Determine Population Display State (Static vs Cache vs Live API)
+                let popDisplay = '';
+                let needsLiveApi = false;
+
+                if (staticPopData[flare.id] !== undefined) {
+                    popDisplay = `<span class="text-red-400 font-extrabold">~${staticPopData[flare.id].toLocaleString()} people</span>`;
+                } else if (popCache[flare.id] !== undefined) {
+                    popDisplay = `<span class="text-red-400 font-extrabold">~${popCache[flare.id].toLocaleString()} people</span>`;
+                } else {
+                    needsLiveApi = true;
+                    popDisplay = `<span id="pop-metric-${flare.id}" data-status="pending" class="text-gray-400 font-bold">Pending...</span>`;
+                }
+
                 // Construct responsive, high-contrast touch friendly Popup card
                 const popupContent = `
-                    <div class="p-1 space-y-3 max-w-xs text-xs">
+
+    
+                 <div class="p-1 space-y-3 max-w-xs text-xs">
                         <div class="flex items-center justify-between border-b border-gray-700 pb-2">
                             <span class="font-extrabold text-amber-400 text-sm">🔥 Gas Flare</span>
                             <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 py-0.5 rounded font-mono border border-gray-700">ID: ${flare.id}</span>
@@ -936,9 +965,7 @@ filtered.forEach(flare => {
                         <div class="bg-gray-950 p-2 rounded border border-gray-800 font-mono text-[10px] space-y-1">
                             <div class="flex justify-between items-center border-b border-gray-800 pb-1.5 mb-1.5">
                                 <span class="text-gray-500">Population within 5km:</span>
-                                <span id="pop-metric-${flare.id}" data-status="pending" class="text-gray-400 font-bold">
-                                    Pending...
-                                </span>
+                                ${popDisplay}
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-500">Latitude:</span>
@@ -980,16 +1007,19 @@ filtered.forEach(flare => {
                     autoPanPadding: [20, 80]
                 });
                 
-                // Trigger WorldPop API when user opens this specific popup
-                marker.on('popupopen', () => {
-                    const popElement = document.getElementById(`pop-metric-${flare.id}`);
-                    if (popElement && popElement.getAttribute('data-status') === 'pending') {
-                        popElement.setAttribute('data-status', 'loading');
-                        popElement.innerHTML = '<span class="animate-pulse text-amber-500">Querying WorldPop...</span>';
-                        calculateWorldPop(flare.lat, flare.lon, flare.id);
-                    }
-                });
+                // Trigger WorldPop API ONLY if the flare isn't in our static file or cache
+                if (needsLiveApi) {
+                    marker.on('popupopen', () => {
+                        const popElement = document.getElementById(`pop-metric-${flare.id}`);
+                        if (popElement && popElement.getAttribute('data-status') === 'pending') {
+                            popElement.setAttribute('data-status', 'loading');
+                            popElement.innerHTML = '<span class="animate-pulse text-amber-500">Querying WorldPop...</span>';
+                            calculateWorldPop(flare.lat, flare.lon, flare.id);
+                        }
+                    });
+                }
 
+    
                 markerClusterGroup.addLayer(marker);
 
                 // Add 5km health safety buffer overlays
@@ -1245,11 +1275,10 @@ filtered.forEach(flare => {
             if (currentFlares.length === 0) return;
             const randomIndex = Math.floor(Math.random() * currentFlares.length);
             nextRandomFlareTarget = currentFlares[randomIndex];
-            
-            // Fetch silently in the background (It saves to cache even if popup is closed)
-            if (!popCache[nextRandomFlareTarget.id]) {
+        // Fetch silently in the background ONLY if it's missing from the static file and cache
+            if (!popCache[nextRandomFlareTarget.id] && staticPopData[nextRandomFlareTarget.id] === undefined) {
                 calculateWorldPop(nextRandomFlareTarget.lat, nextRandomFlareTarget.lon, nextRandomFlareTarget.id);
-            }
+            }            
         }
 
         // Executes the jump and reveals the pre-fetched data
