@@ -111,28 +111,6 @@
         </div>
     </header>
 
-    <!-- About / Info dropdown — anchored to header, fixed position, nothing to do with map -->
-            <div id="map-helper-box" style="display:none" class="fixed top-16 right-4 w-80 z-[9999] bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-3.5 flex space-x-3 items-start">        <div class="p-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg shrink-0">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-        </div>
-        <div class="flex-1">
-            <div class="flex justify-between items-start">
-                <h4 class="text-xs font-bold text-gray-200">What is Gas Flaring?</h4>
-                <button onclick="toggleHelperBox()" class="text-gray-400 hover:text-white p-0.5 focus:outline-none">
-                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                </button>
-            </div>
-            <p class="text-[10px] text-gray-400 mt-1 leading-relaxed">
-                When crude oil is extracted, natural gas comes up with it. Without infrastructure to capture it, operators burn it off — the process visible as a flame on satellite imagery. Communities nearby can be exposed to carbon dioxide, soot, and unburned hydrocarbons.
-            </p>
-            <p class="text-[10px] text-amber-500/80 mt-2 leading-relaxed font-semibold">
-                💡 Use the Distance Analyzer to measure how far any flare is from a settlement.
-            </p>
-        </div>
-    </div>
-
     <!-- Main Layout -->
     <div class="flex min-h-0 relative map-fill-height w-full">
 
@@ -1028,5 +1006,28 @@
             }
         }
     </script>
+
+    <div id="map-helper-box" style="display:none" class="fixed top-16 right-4 w-80 z-[9999] bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-3.5 flex space-x-3 items-start">
+        <div class="p-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+        <div class="flex-1">
+            <div class="flex justify-between items-start">
+                <h4 class="text-xs font-bold text-gray-200">What is Gas Flaring?</h4>
+                <button onclick="toggleHelperBox()" class="text-gray-400 hover:text-white p-0.5 focus:outline-none">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
+            </div>
+            <p class="text-[10px] text-gray-400 mt-1 leading-relaxed">
+                When crude oil is extracted, natural gas comes up with it. Without infrastructure to capture it, operators burn it off — the process visible as a flame on satellite imagery. Communities nearby can be exposed to carbon dioxide, soot, and unburned hydrocarbons.
+            </p>
+            <p class="text-[10px] text-amber-500/80 mt-2 leading-relaxed font-semibold">
+                💡 Use the Distance Analyzer to measure how far any flare is from a settlement.
+            </p>
+        </div>
+    </div>
+
 </body>
 </html>
