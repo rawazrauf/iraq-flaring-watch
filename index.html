@@ -102,7 +102,7 @@
                 </svg>
                 <span class="hidden sm:inline">About</span>
             </button>
-            <button onclick="copyShareLink()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center space-x-1.5 font-semibold h-9">
+            <button onclick="shareMap()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center space-x-1.5 font-semibold h-9">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.006-2.003m0 6.52l-4.006-2.003M18 12a3 3 0 11-6 0 3 3 0 016 0zm-11 5a3 3 0 11-6 0 3 3 0 016 0zm0-10a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
@@ -936,18 +936,26 @@
         function focusMaysan() { map.setView([31.8, 47.3], 9.5); }
         function focusKirkuk() { map.setView([35.5, 44.4], 10); }
 
-        function copyShareLink() {
-            const shareString = 'https://rawazrauf.github.io/iraq-flaring-watch/';
-            const tempInput = document.createElement("textarea");
-            tempInput.value = shareString;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            try { document.execCommand("copy"); } catch(e) {}
-            document.body.removeChild(tempInput);
-            const btnTextElement = document.querySelector('button[onclick="copyShareLink()"] span');
-            const originalText = btnTextElement ? btnTextElement.textContent : "Share Map";
-            if (btnTextElement) btnTextElement.textContent = "Copied!";
-            setTimeout(() => { if (btnTextElement) btnTextElement.textContent = originalText; }, 2500);
+        async function shareMap() {
+            const shareData = {
+                title: 'Iraq Flaring Watch',
+                text: 'Check out the Iraq Flaring Watch map to track gas flaring and community exposure risk.',
+                url: 'https://rawazrauf.github.io/iraq-flaring-watch/'
+            };
+
+            // Check if the browser supports the native Share API
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    console.log('User cancelled share');
+                }
+            } else {
+                // Fallback: Copy to clipboard if the device doesn't support native sharing
+                navigator.clipboard.writeText(shareData.url).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
         }
 
         function createGeoJSONCircle(center, radiusInKm, points = 32) {
