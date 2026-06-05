@@ -493,9 +493,20 @@ async function loadPlumeData() {
                              style="width:100%; border-radius:6px; border:1px solid #374151; display:block;"
                              onerror="this.style.display='none'">
                     </div>` : ''}
+
+                    //Proper credit to Carbon Mapper
+                    ${p.portal_url ? `
+                    <div class="pt-1">
+                        <a href="${p.portal_url}" target="_blank"
+                           class="block w-full text-center text-[10px] font-bold py-1.5 px-2 rounded transition"
+                           style="background:#1a2e1a; color:#4ade80;">
+                            🌍 View on Carbon Mapper →
+                        </a>
+                    </div>` : ''}
                     <div class="text-[9px] text-gray-600 pt-1 border-t border-gray-800">
-                        Source: Carbon Mapper / Tanager
+                        Source: <a href="https://carbonmapper.org" target="_blank" style="color:#4ade80;">Carbon Mapper</a> / Tanager
                     </div>
+
                 </div>
             `;
 
