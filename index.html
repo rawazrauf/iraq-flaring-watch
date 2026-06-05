@@ -329,23 +329,84 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 
-    <script>
-        let map;
-        let preloadFlares = [];
-        let currentFlares = [];
-        let currentBaseMapType = 'satellite';
-        let currentDataSource = 'preload';
-        let currentFilter = 'all';
-        let baseLayers = {};
-        let markerClusterGroup;
-        let heatmapLayer;
-        let safeRadiusGroup;
-        let iraqBoundaryLayer;
-        let popCache = {};
-        let staticPopData = {};
-        let nextRandomFlareTarget = null;
-        let plumeLayerGroup = L.layerGroup();
+<script>
+            let map;
+            let preloadFlares = [];
+            let currentFlares = [];
+            let currentBaseMapType = 'satellite';
+            let currentDataSource = 'preload';
+            let currentFilter = 'all';
+            let baseLayers = {};
+            let markerClusterGroup;
+            let heatmapLayer;
+            let safeRadiusGroup;
+            let iraqBoundaryLayer;
+            let popCache = {};
+            let staticPopData = {};
+            let nextRandomFlareTarget = null;
+            let plumeLayerGroup = L.layerGroup();
+        
+            const flareIcon = L.divIcon({
+                className: 'custom-flare-container',
+                html: '<div class="pulsing-flare"></div>',
+                iconSize: [16, 16],
+                iconAnchor: [8, 8]
+            });
+        
+            // 1. Helper function at the top level
+            function createPlumePopup(p) {
+                const isCO2 = p.gas === 'CO2';
+                return `
+                    <div class="p-2 space-y-2 text-xs w-48">
+                        <div class="flex justify-between items-center border-b border-gray-700 pb-1">
+                            <span class="font-bold text-${isCO2 ? 'blue' : 'orange'}-400">${p.gas} Emission</span>
+                            <span class="text-[9px] text-gray-500">${new Date(p.timestamp).toLocaleDateString()}</span>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Intensity:</span>
+                                <span class="font-bold text-gray-200">${p.emission_kghr ? p.emission_kghr.toFixed(0) + ' kg/hr' : 'N/A'}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Confidence:</span>
+                                <span class="font-bold text-gray-200">${p.plume_quality || 'Standard'}</span>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-gray-800">
+                            <p class="text-[9px] text-gray-500 italic mb-2">
+                                Visual plume footprint detected by Tanager satellite. 
+                            </p>
+                            <a href="${p.plume_png}" target="_blank" 
+                               class="block w-full bg-gray-800 hover:bg-gray-700 text-center py-1.5 rounded font-bold transition">
+                               View Satellite Analysis
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+        
+            // 2. Data loader
+            async function loadPlumeData() {
+                try {
+                    const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_tanager_plumes.json');
+                    const plumes = await response.json();
+        
+                    plumes.forEach(p => {
+                        const bounds = [[p.plume_bounds[1], p.plume_bounds[0]], [p.plume_bounds[3], p.plume_bounds[2]]];
+                        L.imageOverlay(p.plume_png, bounds, { opacity: 0.7, interactive: true })
+                         .bindPopup(createPlumePopup(p))
+                         .addTo(plumeLayerGroup);
+                    });
+                    
+                    map.removeLayer(plumeLayerGroup);
+                } catch (e) {
+                    console.error("Could not load plume data", e);
+                }
+            }
 
+
+
+        
         const flareIcon = L.divIcon({
             className: 'custom-flare-container',
             html: '<div class="pulsing-flare"></div>',
@@ -1060,6 +1121,10 @@
             }
         }
 
+
+
+
+        
         function resetMap() {
             // 1. Reset map view to default
             map.setView([33.0, 45.0], 6.5);
