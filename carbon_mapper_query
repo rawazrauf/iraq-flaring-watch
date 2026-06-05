@@ -63,7 +63,7 @@ for gas in ["CH4", "CO2"]:
                 "plume_quality": p.get("plume_quality"),
                 "instrument": p.get("instrument"),
                 "platform": p.get("platform"),
-                "portal_url": f"https://data.carbonmapper.org/#plume/{p['plume_id']}"
+                "portal_url": f"https://data.carbonmapper.org/?instruments=tan&details={p.get('gas', '')}_{p.get('sector', 'other')}_250m_{p['geometry_json']['coordinates'][0]:.5f}_{p['geometry_json']['coordinates'][1]:.5f}%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id={p['plume_id']}#13/{p['geometry_json']['coordinates'][1]:.4f}/{p['geometry_json']['coordinates'][0]:.4f}"
 
             }
             for p in items
