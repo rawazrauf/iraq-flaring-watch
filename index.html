@@ -255,7 +255,7 @@ to   { opacity: 1; transform: translateY(0); }
 <span>Safe Range Circle (5km radius)</span>
 </label>
 <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-<input type="checkbox" id="layer-plumes" onchange="toggleLayer('plumes')" class="form-checkbox text-blue-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+<input type="checkbox" id="layer-plumes" checked onchange="toggleLayer('plumes')" class="form-checkbox text-blue-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
 <span>Verified Emission Plumes</span>
 </label>
 </div>
@@ -477,10 +477,14 @@ async function loadPlumeData() {
                     </div>
                   ${safePngUrl ? `
                     <div class="pt-1 border-t border-gray-800">
+                        <img src="${safePngUrl}"
+                             alt="Satellite plume"
+                             style="width:100%; border-radius:6px; border:1px solid #374151; margin-bottom:6px; display:block;"
+                             onerror="this.style.display='none'">
                         <a href="${safePngUrl}" target="_blank"
                            class="block w-full text-center text-[10px] font-bold py-1.5 px-2 rounded transition"
                            style="background:#1e3a5f; color:#93c5fd;">
-                            🛰️ View Plume Image →
+                            🛰️ Open Full Resolution →
                         </a>
                     </div>` : ''}
                     <div class="text-[9px] text-gray-600 pt-1 border-t border-gray-800">
