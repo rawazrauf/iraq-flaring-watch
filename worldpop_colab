@@ -1,0 +1,49 @@
+!pip install rasterio pyproj shapely requests
+
+import json
+import rasterio
+import numpy as np
+import pyproj
+import requests
+from rasterio.mask import mask
+from shapely.geometry import Point
+from shapely.ops import transform
+
+# 1. Fetch your live OSM flare coordinates from GitHub
+print("Fetching current map coordinates...")
+url = "https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query"
+flare_data = requests.get(url).json()
+
+# 2. Setup 5km precision projection math (UTM Zone 38N)
+project_to_meters = pyproj.Transformer.from_crs("EPSG:4326", "EPSG:32638", always_xy=True).transform
+project_to_degrees = pyproj.Transformer.from_crs("EPSG:32638", "EPSG:4326", always_xy=True).transform
+
+population_dict = {}
+
+# 3. Analyze the raster for every flare
+print("Calculating 5km Zonal Statistics...")
+# Updated with your exact filename
+with rasterio.open('irq_ppp_2020_UNadj_constrained.tif') as src:
+    for el in flare_data['elements']:
+        lat = el.get('lat') or el.get('center', {}).get('lat')
+        lon = el.get('lon') or el.get('center', {}).get('lon')
+
+        if not lat or not lon: continue
+
+        # Draw a perfect 5000-meter circle
+        point_meters = transform(project_to_meters, Point(lon, lat))
+        circle_meters = point_meters.buffer(5000)
+        circle_degrees = transform(project_to_degrees, circle_meters)
+
+        try:
+            out_image, _ = mask(src, [circle_degrees], crop=True)
+            pop_sum = int(np.nansum(out_image[out_image > 0]))
+            population_dict[str(el['id'])] = pop_sum
+        except ValueError:
+            population_dict[str(el['id'])] = 0 # Flare falls outside raster bounds
+
+# 4. Save the pure dictionary mapping Flare IDs to Population counts
+with open('query_population.json', 'w') as f:
+    json.dump(population_dict, f, indent=4)
+
+print("Complete! Check the files tab to download query_population.json")
