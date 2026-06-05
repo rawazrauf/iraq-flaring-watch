@@ -416,21 +416,24 @@ async function loadPlumeData() {
 
         plumes.forEach(p => {
             const isCH4 = p.gas === 'CH4';
-            const color = isCH4 ? '#f97316' : '#3b82f6'; // orange for CH4, blue for CO2
-
-            // Size circle by emission magnitude (log scale so extreme values don't dominate)
+            const color = isCH4 ? '#f97316' : '#3b82f6';
             const emission = p.emission_kghr || 100;
             const radius = Math.max(6, Math.min(22, Math.log10(emission) * 4));
 
-            const marker = L.circleMarker([p.lat, p.lon], {
-                radius: radius,
-                color: color,
-                fillColor: color,
-                fillOpacity: 0.5,
-                weight: 2,
-                opacity: 0.9
-            });
+            // 1. Image overlay using plume_bounds [minLon, minLat, maxLon, maxLat]
+            if (p.plume_png && p.plume_bounds && p.plume_bounds.length === 4) {
+                const bounds = [
+                    [p.plume_bounds[1], p.plume_bounds[0]], // SW corner [lat, lon]
+                    [p.plume_bounds[3], p.plume_bounds[2]]  // NE corner [lat, lon]
+                ];
+                const imageOverlay = L.imageOverlay(p.plume_png, bounds, {
+                    opacity: 0.8,
+                    interactive: false  // clicks pass through to the circle marker below
+                });
+                plumeLayerGroup.addLayer(imageOverlay);
+            }
 
+            // 2. Circle marker at centre point for click interaction
             const emissionStr = p.emission_kghr
                 ? `${p.emission_kghr.toLocaleString(undefined, {maximumFractionDigits: 0})} kg/hr`
                 : 'Not quantified';
@@ -447,7 +450,14 @@ async function loadPlumeData() {
                 year: 'numeric', month: 'short', day: 'numeric'
             });
 
-            const safePngUrl = p.plume_png ? encodeURI(p.plume_png) : null;  
+            const circleMarker = L.circleMarker([p.lat, p.lon], {
+                radius: radius,
+                color: color,
+                fillColor: color,
+                fillOpacity: 0.7,
+                weight: 2,
+                opacity: 1
+            });
 
             const popupContent = `
                 <div class="p-1 space-y-2 text-xs" style="min-width:200px">
@@ -475,32 +485,20 @@ async function loadPlumeData() {
                             <span class="font-bold text-gray-200">Tanager Satellite</span>
                         </div>
                     </div>
-                  ${safePngUrl ? `
-                    <div class="pt-1 border-t border-gray-800">
-                        <img src="${safePngUrl}"
-                             alt="Satellite plume"
-                             style="width:100%; border-radius:6px; border:1px solid #374151; margin-bottom:6px; display:block;"
-                             onerror="this.style.display='none'">
-                        <a href="${safePngUrl}" target="_blank"
-                           class="block w-full text-center text-[10px] font-bold py-1.5 px-2 rounded transition"
-                           style="background:#1e3a5f; color:#93c5fd;">
-                            🛰️ Open Full Resolution →
-                        </a>
-                    </div>` : ''}
                     <div class="text-[9px] text-gray-600 pt-1 border-t border-gray-800">
                         Source: Carbon Mapper / Tanager
                     </div>
                 </div>
             `;
 
-            marker.bindPopup(popupContent, {
+            circleMarker.bindPopup(popupContent, {
                 maxWidth: 240,
                 minWidth: 200,
                 closeOnClick: false,
                 autoPanPadding: [20, 80]
             });
 
-            plumeLayerGroup.addLayer(marker);
+            plumeLayerGroup.addLayer(circleMarker);
         });
 
         if (document.getElementById('layer-plumes').checked) {
