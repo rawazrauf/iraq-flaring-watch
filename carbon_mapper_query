@@ -62,7 +62,7 @@ for gas in ["CH4", "CO2"]:
                 "plume_bounds": p.get("plume_bounds"),
                 "plume_quality": p.get("plume_quality"),
                 "instrument": p.get("instrument"),
-                "platform": p.get("platform")
+                "platform": p.get("platform"),
                 "portal_url": f"https://data.carbonmapper.org/#plume/{p['plume_id']}"
 
             }
