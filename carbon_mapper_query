@@ -58,7 +58,7 @@ for gas in ["CH4", "CO2"]:
                 "sector": p.get("sector"),
                 "wind_speed_ms": p.get("wind_speed_avg_auto"),
                 "wind_direction_deg": p.get("wind_direction_avg_auto"),
-                "plume_png": p.get("plume_png"),
+                "plume_png": p.get("plume_png", "").split("?")[0].replace("https://catalog.carbonmapper.org/", "https://api.carbonmapper.org/api/v1/catalog/asset/") if p.get("plume_png") else None,
                 "plume_bounds": p.get("plume_bounds"),
                 "plume_quality": p.get("plume_quality"),
                 "instrument": p.get("instrument"),
