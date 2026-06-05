@@ -485,6 +485,14 @@ async function loadPlumeData() {
                             <span class="font-bold text-gray-200">Tanager Satellite</span>
                         </div>
                     </div>
+                    ${p.plume_png ? `
+                    <div class="pt-1 border-t border-gray-800">
+                        <p class="text-[9px] text-gray-500 mb-1">Plume detection image:</p>
+                        <img src="${p.plume_png}"
+                             alt="Satellite plume detection"
+                             style="width:100%; border-radius:6px; border:1px solid #374151; display:block;"
+                             onerror="this.style.display='none'">
+                    </div>` : ''}
                     <div class="text-[9px] text-gray-600 pt-1 border-t border-gray-800">
                         Source: Carbon Mapper / Tanager
                     </div>
