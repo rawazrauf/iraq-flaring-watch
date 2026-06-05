@@ -1,0 +1,105 @@
+import requests
+import json
+import time
+
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN",
+    "Accept": "application/json"
+}
+
+# Iraq bounding box
+IRAQ = {"lon_min": 38.797, "lon_max": 48.569, "lat_min": 29.059, "lat_max": 37.378}
+
+def in_iraq(lon, lat):
+    return (IRAQ["lon_min"] <= lon <= IRAQ["lon_max"] and 
+            IRAQ["lat_min"] <= lat <= IRAQ["lat_max"])
+
+all_iraq_plumes = []
+LIMIT = 500
+
+for gas in ["CH4", "CO2"]:
+    offset = 0
+    pages_checked = 0
+
+    # Get total first
+    r = requests.get(
+        "https://api.carbonmapper.org/api/v1/catalog/plumes/annotated",
+        headers=headers,
+        params={"instrument": "tan", "gas": gas, "limit": 1, "offset": 0}
+    )
+    total = r.json().get("total_count", 0)
+    print(f"\n{gas}: {total} total Tanager plumes globally, scanning for Iraq...")
+
+    while offset < total:
+        r = requests.get(
+            "https://api.carbonmapper.org/api/v1/catalog/plumes/annotated",
+            headers=headers,
+            params={
+                "instrument": "tan",
+                "gas": gas,
+                "limit": LIMIT,
+                "offset": offset,
+                "sort": "desc"
+            }
+        )
+        items = r.json().get("items", [])
+        if not items:
+            break
+
+        iraq_batch = [
+            {
+                "plume_id": p["plume_id"],
+                "gas": p["gas"],
+                "lat": p["geometry_json"]["coordinates"][1],
+                "lon": p["geometry_json"]["coordinates"][0],
+                "timestamp": p["scene_timestamp"],
+                "emission_kghr": p.get("emission_auto"),
+                "emission_uncertainty_kghr": p.get("emission_uncertainty_auto"),
+                "sector": p.get("sector"),
+                "wind_speed_ms": p.get("wind_speed_avg_auto"),
+                "wind_direction_deg": p.get("wind_direction_avg_auto"),
+                "plume_png": p.get("plume_png"),
+                "plume_bounds": p.get("plume_bounds"),
+                "plume_quality": p.get("plume_quality"),
+                "instrument": p.get("instrument"),
+                "platform": p.get("platform")
+            }
+            for p in items
+            if in_iraq(p["geometry_json"]["coordinates"][0], p["geometry_json"]["coordinates"][1])
+        ]
+
+        all_iraq_plumes.extend(iraq_batch)
+        pages_checked += 1
+        offset += LIMIT
+
+        if pages_checked % 10 == 0:
+            print(f"  {gas} | scanned {offset}/{total} | Iraq found so far: {len([p for p in all_iraq_plumes if p['gas']==gas])}")
+
+        time.sleep(0.15)
+
+# Results
+ch4 = [p for p in all_iraq_plumes if p["gas"] == "CH4"]
+co2 = [p for p in all_iraq_plumes if p["gas"] == "CO2"]
+
+print(f"\n=== IRAQ TANAGER RESULTS ===")
+print(f"CH4 plumes: {len(ch4)}")
+print(f"CO2 plumes: {len(co2)}")
+print(f"Total: {len(all_iraq_plumes)}")
+
+from collections import Counter
+print(f"\nSector breakdown:")
+for sector, count in Counter(p["sector"] for p in all_iraq_plumes if p.get("sector")).most_common():
+    print(f"  {sector}: {count}")
+
+emissions = [p["emission_kghr"] for p in all_iraq_plumes if p.get("emission_kghr")]
+if emissions:
+    print(f"\nEmission rates (kg/hr):")
+    print(f"  Count: {len(emissions)}")
+    print(f"  Min:   {min(emissions):.1f}")
+    print(f"  Max:   {max(emissions):.1f}")
+    print(f"  Avg:   {sum(emissions)/len(emissions):.1f}")
+
+with open("iraq_tanager_plumes.json", "w") as f:
+    json.dump(all_iraq_plumes, f, indent=2)
+
+print(f"\nSaved to iraq_tanager_plumes.json")
