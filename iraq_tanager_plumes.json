@@ -19,7 +19,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260505t084904c67s4001-A"
   },
   {
     "plume_id": "tan20260505t084904c67s4001-B",
@@ -41,7 +42,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260505t084904c67s4001-B"
   },
   {
     "plume_id": "tan20260428t085249c94s4001-F",
@@ -63,29 +65,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260428t085159c69s4001-C",
-    "gas": "CH4",
-    "lat": 31.23840921655075,
-    "lon": 47.96630890214479,
-    "timestamp": "2026-04-28T08:51:59.690Z",
-    "emission_kghr": 1493.7646602157026,
-    "emission_uncertainty_kghr": 625.1952557885362,
-    "sector": "1B2",
-    "wind_speed_ms": 5.166666666666667,
-    "wind_direction_deg": 138.61794534067843,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3d/2026/04/28/tan20260428t085159c69s4001-C/tan20260428t085159c69s4001-C_l3a-vis-ch4-mfa-v3d_plume.png",
-    "plume_bounds": [
-      47.94670608506385,
-      31.22797415509786,
-      47.982994519118364,
-      31.258999707256407
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260428t085249c94s4001-F"
   },
   {
     "plume_id": "tan20260407t085555c64s4001-B",
@@ -107,95 +88,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260317t085221c34s4001-A",
-    "gas": "CO2",
-    "lat": 30.481566374374566,
-    "lon": 48.250069683433765,
-    "timestamp": "2026-03-17T08:52:21.340Z",
-    "emission_kghr": 63563.02159403229,
-    "emission_uncertainty_kghr": 40530.18305836169,
-    "sector": "1A1",
-    "wind_speed_ms": 5.527777777777778,
-    "wind_direction_deg": 314.33346500159416,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3c/2026/03/17/tan20260317t085221c34s4001-A/tan20260317t085221c34s4001-A_l3a-vis-co2-mfa-v3c_plume.png",
-    "plume_bounds": [
-      48.23560002527278,
-      30.465256904524797,
-      48.284751027416455,
-      30.50788246789311
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260310t085101c50s4001-A",
-    "gas": "CH4",
-    "lat": 29.160247296350775,
-    "lon": 47.90890601556953,
-    "timestamp": "2026-03-10T08:51:01.500Z",
-    "emission_kghr": 1541.4958341669837,
-    "emission_uncertainty_kghr": 159.6441074857784,
-    "sector": "6A",
-    "wind_speed_ms": 3.7962962962962963,
-    "wind_direction_deg": 358.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/10/tan20260310t085101c50s4001-A/tan20260310t085101c50s4001-A_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.882581493055106,
-      29.112861033576973,
-      47.9511713543043,
-      29.172768001295577
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260310t085101c50s4001-B",
-    "gas": "CH4",
-    "lat": 29.16246153631333,
-    "lon": 47.917602606054544,
-    "timestamp": "2026-03-10T08:51:01.500Z",
-    "emission_kghr": 1036.0070968693692,
-    "emission_uncertainty_kghr": 346.09175183741553,
-    "sector": "6A",
-    "wind_speed_ms": 3.7962962962962963,
-    "wind_direction_deg": 358.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/10/tan20260310t085101c50s4001-B/tan20260310t085101c50s4001-B_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.883506430749776,
-      29.112848513902065,
-      47.95178638538983,
-      29.172754661569602
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260310t084955c89s4001-D",
-    "gas": "CO2",
-    "lat": 30.48124460161293,
-    "lon": 48.24993933400364,
-    "timestamp": "2026-03-10T08:49:55.890Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "1A1",
-    "wind_speed_ms": 5.157407407407407,
-    "wind_direction_deg": 326.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3c/2026/03/10/tan20260310t084955c89s4001-D/tan20260310t084955c89s4001-D_l3a-vis-co2-mfa-v3c_plume.png",
-    "plume_bounds": [
-      48.23189442972652,
-      30.463540333245838,
-      48.26789285768996,
-      30.494564305629655
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260407t085555c64s4001-B"
   },
   {
     "plume_id": "tan20260305t090202c97s4001-A",
@@ -217,7 +111,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260305t090202c97s4001-A"
   },
   {
     "plume_id": "tan20260305t090038c14s4001-A",
@@ -239,95 +134,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260301t083450c18s4001-A",
-    "gas": "CH4",
-    "lat": 29.161512314393093,
-    "lon": 47.90706583024979,
-    "timestamp": "2026-03-01T08:34:50.180Z",
-    "emission_kghr": 2664.229109995399,
-    "emission_uncertainty_kghr": 1138.051524260904,
-    "sector": "6A",
-    "wind_speed_ms": 6.87037037037037,
-    "wind_direction_deg": 357.3332957195608,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/01/tan20260301t083450c18s4001-A/tan20260301t083450c18s4001-A_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.88028247778826,
-      29.107508920801166,
-      47.95412151248291,
-      29.17173271688267
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260301t083450c18s4001-C",
-    "gas": "CH4",
-    "lat": 29.16395668122763,
-    "lon": 47.922362864125176,
-    "timestamp": "2026-03-01T08:34:50.180Z",
-    "emission_kghr": 675.2221434057611,
-    "emission_uncertainty_kghr": 383.72846969134076,
-    "sector": "6A",
-    "wind_speed_ms": 6.87037037037037,
-    "wind_direction_deg": 357.3332957195608,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/01/tan20260301t083450c18s4001-C/tan20260301t083450c18s4001-C_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.87905067601421,
-      29.107535441379714,
-      47.9528897878585,
-      29.17175928797489
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260301t083450c18s4001-D",
-    "gas": "CH4",
-    "lat": 29.159810429640473,
-    "lon": 47.91527156399869,
-    "timestamp": "2026-03-01T08:34:50.180Z",
-    "emission_kghr": 929.7034558134511,
-    "emission_uncertainty_kghr": 474.9811799246649,
-    "sector": "6A",
-    "wind_speed_ms": 6.87037037037037,
-    "wind_direction_deg": 357.3332957195608,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/01/tan20260301t083450c18s4001-D/tan20260301t083450c18s4001-D_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.88028351930361,
-      29.107516305420685,
-      47.95381271916547,
-      29.171739324230984
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260224t084601c66s4001-A",
-    "gas": "CH4",
-    "lat": 29.222136771630517,
-    "lon": 47.58364873056823,
-    "timestamp": "2026-02-24T08:46:01.660Z",
-    "emission_kghr": 484.88112516189227,
-    "emission_uncertainty_kghr": 171.4489930198526,
-    "sector": "1B2",
-    "wind_speed_ms": 7.935185185185184,
-    "wind_direction_deg": 199.32547676567125,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/02/24/tan20260224t084601c66s4001-A/tan20260224t084601c66s4001-A_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.569530151174874,
-      29.21582416195475,
-      47.60540809381137,
-      29.246863323842806
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260305t090038c14s4001-A"
   },
   {
     "plume_id": "tan20260224t084601c66s4001-C",
@@ -349,7 +157,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260224t084601c66s4001-C"
   },
   {
     "plume_id": "tan20260224t084601c66s4001-D",
@@ -371,29 +180,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260222t083300c51s4001-A",
-    "gas": "CH4",
-    "lat": 29.165242341031643,
-    "lon": 47.917498991778416,
-    "timestamp": "2026-02-22T08:33:00.510Z",
-    "emission_kghr": 6247.408262183089,
-    "emission_uncertainty_kghr": 1279.971302825806,
-    "sector": "6A",
-    "wind_speed_ms": 1.8888888888888886,
-    "wind_direction_deg": 278.2355866200472,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/02/22/tan20260222t083300c51s4001-A/tan20260222t083300c51s4001-A_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.89294627401456,
-      29.03699057459025,
-      48.092743411919955,
-      29.211796031088006
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260224t084601c66s4001-D"
   },
   {
     "plume_id": "tan20260221t090941c35s4001-A",
@@ -415,51 +203,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260210t084157c22s4001-B",
-    "gas": "CH4",
-    "lat": 29.175162879410095,
-    "lon": 47.90871267300548,
-    "timestamp": "2026-02-10T08:41:57.220Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "6A",
-    "wind_speed_ms": 5.518518518518519,
-    "wind_direction_deg": 173.66677201732563,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/02/10/tan20260210t084157c22s4001-B/tan20260210t084157c22s4001-B_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.890064366787065,
-      29.161657933426547,
-      47.925605799631654,
-      29.19268973954278
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260210t084157c22s4001-C",
-    "gas": "CH4",
-    "lat": 29.17663223919446,
-    "lon": 47.91548715961687,
-    "timestamp": "2026-02-10T08:41:57.220Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "6A",
-    "wind_speed_ms": 5.518518518518519,
-    "wind_direction_deg": 173.66677201732563,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/02/10/tan20260210t084157c22s4001-C/tan20260210t084157c22s4001-C_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.89919697342433,
-      29.1684953651006,
-      47.934741500221335,
-      29.199797610509407
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260221t090941c35s4001-A"
   },
   {
     "plume_id": "tan20260117t085949c45s4001-B",
@@ -481,7 +226,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260117t085949c45s4001-B"
   },
   {
     "plume_id": "tan20260115t084756c48s4001-A",
@@ -503,7 +249,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260115t084756c48s4001-A"
   },
   {
     "plume_id": "tan20260115t084756c48s4001-B",
@@ -525,7 +272,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260115t084756c48s4001-B"
   },
   {
     "plume_id": "tan20260110t085854c91s4001-A",
@@ -547,7 +295,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260110t085854c91s4001-A"
   },
   {
     "plume_id": "tan20260110t085854c91s4001-C",
@@ -569,7 +318,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260110t085854c91s4001-C"
   },
   {
     "plume_id": "tan20260108t084446c22s4001-A",
@@ -591,7 +341,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260108t084446c22s4001-A"
   },
   {
     "plume_id": "tan20260108t084405c09s4001-A",
@@ -613,51 +364,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260106t083153c48s4001-A",
-    "gas": "CH4",
-    "lat": 29.98691567474603,
-    "lon": 47.48425926549291,
-    "timestamp": "2026-01-06T08:31:53.480Z",
-    "emission_kghr": 615.4522139991356,
-    "emission_uncertainty_kghr": 99.13648002336805,
-    "sector": "1B2",
-    "wind_speed_ms": 4.805555555555555,
-    "wind_direction_deg": 303.6673835118722,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3b/2026/01/06/tan20260106t083153c48s4001-A/tan20260106t083153c48s4001-A_l3a-vis-ch4-mfa-v3b_plume.png",
-    "plume_bounds": [
-      47.466668666447184,
-      29.97361809042569,
-      47.50281699213622,
-      30.0046569807854
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260106t083153c48s4001-B",
-    "gas": "CO2",
-    "lat": 29.991865126379835,
-    "lon": 47.48266867081867,
-    "timestamp": "2026-01-06T08:31:53.480Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "1B2",
-    "wind_speed_ms": 4.805555555555555,
-    "wind_direction_deg": 303.6673835118722,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3b/2026/01/06/tan20260106t083153c48s4001-B/tan20260106t083153c48s4001-B_l3a-vis-co2-mfa-v3b_plume.png",
-    "plume_bounds": [
-      47.46855388405369,
-      29.97413134941844,
-      47.50438898801831,
-      30.005438542714373
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260108t084405c09s4001-A"
   },
   {
     "plume_id": "tan20260106t083112c12s4001-A",
@@ -679,7 +387,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260106t083112c12s4001-A"
   },
   {
     "plume_id": "tan20260106t083112c12s4001-B",
@@ -701,7 +410,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260106t083112c12s4001-B"
   },
   {
     "plume_id": "tan20260105t090909c40s4001-A",
@@ -723,7 +433,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260105t090909c40s4001-A"
   },
   {
     "plume_id": "tan20260103t085452c47s4001-A",
@@ -745,7 +456,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260103t085452c47s4001-A"
   },
   {
     "plume_id": "tan20251230t082843c20s4001-A",
@@ -767,7 +479,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251230t082843c20s4001-A"
   },
   {
     "plume_id": "tan20251225t084020c59s4001-A",
@@ -789,7 +502,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251225t084020c59s4001-A"
   },
   {
     "plume_id": "tan20251225t084020c59s4001-B",
@@ -811,7 +525,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251225t084020c59s4001-B"
   },
   {
     "plume_id": "tan20251225t084020c59s4001-C",
@@ -833,7 +548,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251225t084020c59s4001-C"
   },
   {
     "plume_id": "tan20251225t084020c59s4001-D",
@@ -855,7 +571,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251225t084020c59s4001-D"
   },
   {
     "plume_id": "tan20251222t090420c57s4001-A",
@@ -877,7 +594,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251222t090420c57s4001-A"
   },
   {
     "plume_id": "tan20251220t085235c43s4001-A",
@@ -899,7 +617,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085235c43s4001-A"
   },
   {
     "plume_id": "tan20251220t085235c43s4001-B",
@@ -921,7 +640,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085235c43s4001-B"
   },
   {
     "plume_id": "tan20251220t085124c26s4001-B",
@@ -943,7 +663,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085124c26s4001-B"
   },
   {
     "plume_id": "tan20251220t085124c26s4001-E",
@@ -965,7 +686,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085124c26s4001-E"
   },
   {
     "plume_id": "tan20251220t085124c26s4001-F",
@@ -987,7 +709,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085124c26s4001-F"
   },
   {
     "plume_id": "tan20251204t083601c92s4001-D",
@@ -1009,7 +732,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251204t083601c92s4001-D"
   },
   {
     "plume_id": "tan20251201t090147c16s4001-A",
@@ -1031,7 +755,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251201t090147c16s4001-A"
   },
   {
     "plume_id": "tan20251201t090032c24s4001-A",
@@ -1053,73 +778,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251127t083619c43s4001-F",
-    "gas": "CH4",
-    "lat": 29.16564479416725,
-    "lon": 47.914938000799964,
-    "timestamp": "2025-11-27T08:36:19.430Z",
-    "emission_kghr": 269.9425273804249,
-    "emission_uncertainty_kghr": 82.11696758562915,
-    "sector": "1B2",
-    "wind_speed_ms": 2.324074074074074,
-    "wind_direction_deg": 306.3329905781327,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/27/tan20251127t083619c43s4001-F/tan20251127t083619c43s4001-F_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.873889430611335,
-      29.07467347227488,
-      47.994673070006456,
-      29.179912998573588
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251127t083619c43s4001-G",
-    "gas": "CH4",
-    "lat": 29.162400163301115,
-    "lon": 47.90998910135974,
-    "timestamp": "2025-11-27T08:36:19.430Z",
-    "emission_kghr": 6454.785958424558,
-    "emission_uncertainty_kghr": 925.5393789354806,
-    "sector": "6A",
-    "wind_speed_ms": 2.324074074074074,
-    "wind_direction_deg": 306.3329905781327,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/27/tan20251127t083619c43s4001-G/tan20251127t083619c43s4001-G_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.873889430611335,
-      29.07467347227488,
-      47.994673070006456,
-      29.179912998573588
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251127t083619c43s4001-H",
-    "gas": "CH4",
-    "lat": 29.16192295038867,
-    "lon": 47.92160011208949,
-    "timestamp": "2025-11-27T08:36:19.430Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "6A",
-    "wind_speed_ms": 2.324074074074074,
-    "wind_direction_deg": 306.3329905781327,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/27/tan20251127t083619c43s4001-H/tan20251127t083619c43s4001-H_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.87675799497516,
-      29.078120440047215,
-      47.99260174281751,
-      29.179582932061948
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251201t090032c24s4001-A"
   },
   {
     "plume_id": "tan20251122t084707c42s4001-A",
@@ -1141,7 +801,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251122t084707c42s4001-A"
   },
   {
     "plume_id": "tan20251122t084707c42s4001-B",
@@ -1163,51 +824,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251120t083508c44s4001-X",
-    "gas": "CH4",
-    "lat": 29.13894400250149,
-    "lon": 48.02148649569352,
-    "timestamp": "2025-11-20T08:35:08.440Z",
-    "emission_kghr": 737.4444010817539,
-    "emission_uncertainty_kghr": 116.86828641521234,
-    "sector": "1B2",
-    "wind_speed_ms": 4.240740740740741,
-    "wind_direction_deg": 324.66687370009663,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/20/tan20251120t083508c44s4001-X/tan20251120t083508c44s4001-X_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      48.004123916451974,
-      29.12306004128563,
-      48.03964221714784,
-      29.154353035899486
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251113t083337c76s4001-A",
-    "gas": "CH4",
-    "lat": 29.849425037014086,
-    "lon": 47.86945796484437,
-    "timestamp": "2025-11-13T08:33:37.760Z",
-    "emission_kghr": 651.0607306056573,
-    "emission_uncertainty_kghr": 55.41743018389241,
-    "sector": "1B2",
-    "wind_speed_ms": 2.314814814814815,
-    "wind_direction_deg": 163.6669074498284,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/13/tan20251113t083337c76s4001-A/tan20251113t083337c76s4001-A_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.846811706333234,
-      29.843376433740644,
-      47.88259240686004,
-      29.874407395081754
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251122t084707c42s4001-B"
   },
   {
     "plume_id": "tan20251113t083248c71s4001-A",
@@ -1229,7 +847,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251113t083248c71s4001-A"
   },
   {
     "plume_id": "tan20251108t084545c51s4001-A",
@@ -1251,51 +870,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251106t083331c49s4001-J",
-    "gas": "CH4",
-    "lat": 29.167073503042403,
-    "lon": 48.02441730710112,
-    "timestamp": "2025-11-06T08:33:31.490Z",
-    "emission_kghr": 288.2541335430572,
-    "emission_uncertainty_kghr": 60.253957559447684,
-    "sector": "1B2",
-    "wind_speed_ms": 2.0000000000000004,
-    "wind_direction_deg": 334.6951815041986,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/06/tan20251106t083331c49s4001-J/tan20251106t083331c49s4001-J_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      48.005755038034,
-      29.152047761467227,
-      48.041592223520155,
-      29.183070958397707
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251106t083238c73s4001-A",
-    "gas": "CH4",
-    "lat": 31.022204491941523,
-    "lon": 47.76942672723152,
-    "timestamp": "2025-11-06T08:32:38.730Z",
-    "emission_kghr": 616.3425237965688,
-    "emission_uncertainty_kghr": 57.262189962535786,
-    "sector": "1B2",
-    "wind_speed_ms": 1.2222222222222223,
-    "wind_direction_deg": 260.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/06/tan20251106t083238c73s4001-A/tan20251106t083238c73s4001-A_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.758382355930856,
-      31.008689864706522,
-      47.79459175032717,
-      31.03971949175198
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251108t084545c51s4001-A"
   },
   {
     "plume_id": "tan20251103t085757c58s4001-A",
@@ -1317,7 +893,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251103t085757c58s4001-A"
   },
   {
     "plume_id": "tan20251025t084253c82s4001-A",
@@ -1339,7 +916,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251025t084253c82s4001-A"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-A",
@@ -1361,7 +939,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-A"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-B",
@@ -1383,7 +962,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-B"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-C",
@@ -1405,7 +985,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-C"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-D",
@@ -1427,7 +1008,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-D"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-E",
@@ -1449,7 +1031,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-E"
   },
   {
     "plume_id": "tan20250927t083937c75s4001-C",
@@ -1471,7 +1054,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250927t083937c75s4001-C"
   },
   {
     "plume_id": "tan20250927t083937c75s4001-D",
@@ -1493,7 +1077,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250927t083937c75s4001-D"
   },
   {
     "plume_id": "tan20250927t083937c75s4001-E",
@@ -1515,7 +1100,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250927t083937c75s4001-E"
   },
   {
     "plume_id": "tan20250927t083937c75s4001-F",
@@ -1537,7 +1123,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250927t083937c75s4001-F"
   },
   {
     "plume_id": "tan20250920t083838c76s4001-A",
@@ -1559,7 +1146,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250920t083838c76s4001-A"
   },
   {
     "plume_id": "tan20250920t083838c76s4001-B",
@@ -1581,7 +1169,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250920t083838c76s4001-B"
   },
   {
     "plume_id": "tan20250920t083838c76s4001-C",
@@ -1603,7 +1192,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250920t083838c76s4001-C"
   },
   {
     "plume_id": "tan20250920t083838c76s4001-D",
@@ -1625,29 +1215,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250917t090334c84s4001-A",
-    "gas": "CO2",
-    "lat": 37.33825399057086,
-    "lon": 40.80405424647847,
-    "timestamp": "2025-09-17T09:03:34.840Z",
-    "emission_kghr": 441945.17801988637,
-    "emission_uncertainty_kghr": 135379.9608518818,
-    "sector": "other",
-    "wind_speed_ms": 2.3518518518518516,
-    "wind_direction_deg": 307.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3/2025/09/17/tan20250917t090334c84s4001-A/tan20250917t090334c84s4001-A_l3a-vis-co2-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.78809734796224,
-      37.315959084960056,
-      40.82711541946772,
-      37.34698393313061
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250920t083838c76s4001-D"
   },
   {
     "plume_id": "tan20250915t085115c44s4001-A",
@@ -1669,7 +1238,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250915t085115c44s4001-A"
   },
   {
     "plume_id": "tan20250915t085031c90s4001-A",
@@ -1691,7 +1261,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250915t085031c90s4001-A"
   },
   {
     "plume_id": "tan20250915t085031c90s4001-B",
@@ -1713,7 +1284,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250915t085031c90s4001-B"
   },
   {
     "plume_id": "tan20250913t083719c06s4001-A",
@@ -1735,7 +1307,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250913t083719c06s4001-A"
   },
   {
     "plume_id": "tan20250913t083719c06s4001-B",
@@ -1757,7 +1330,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250913t083719c06s4001-B"
   },
   {
     "plume_id": "tan20250908t085021c62s4001-A",
@@ -1779,29 +1353,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250903t090203c68s4001-A",
-    "gas": "CH4",
-    "lat": 36.13222536735341,
-    "lon": 40.81106119028908,
-    "timestamp": "2025-09-03T09:02:03.680Z",
-    "emission_kghr": 105.61023661659823,
-    "emission_uncertainty_kghr": 55.917361494104675,
-    "sector": "1B2",
-    "wind_speed_ms": 1.7037037037037035,
-    "wind_direction_deg": 158.01514954776536,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/09/03/tan20250903t090203c68s4001-A/tan20250903t090203c68s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.793224648601175,
-      36.11906018729266,
-      40.83164387177765,
-      36.15008886479821
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250908t085021c62s4001-A"
   },
   {
     "plume_id": "tan20250821t082137c60s4001-A",
@@ -1823,7 +1376,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250821t082137c60s4001-A"
   },
   {
     "plume_id": "tan20250821t082137c60s4001-B",
@@ -1845,7 +1399,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250821t082137c60s4001-B"
   },
   {
     "plume_id": "tan20250818t084619c34s4001-A",
@@ -1867,7 +1422,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250818t084619c34s4001-A"
   },
   {
     "plume_id": "tan20250731t081855c58s4001-A",
@@ -1889,7 +1445,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250731t081855c58s4001-A"
   },
   {
     "plume_id": "tan20250731t081855c58s4001-B",
@@ -1911,7 +1468,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250731t081855c58s4001-B"
   },
   {
     "plume_id": "tan20250731t081855c58s4001-C",
@@ -1933,227 +1491,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-A",
-    "gas": "CH4",
-    "lat": 35.08283309928969,
-    "lon": 40.59470429397581,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 1470.8240625145388,
-    "emission_uncertainty_kghr": 131.67624269426136,
-    "sector": "1B2",
-    "wind_speed_ms": 4.759259259259259,
-    "wind_direction_deg": 302.6667720173256,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-A/tan20250723t085612c40s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.57775882959469,
-      35.06621088505249,
-      40.6150227719983,
-      35.09697511202511
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-B",
-    "gas": "CH4",
-    "lat": 35.091169932859714,
-    "lon": 40.61182119845142,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 1129.568533942148,
-    "emission_uncertainty_kghr": 117.9285268923414,
-    "sector": "1B2",
-    "wind_speed_ms": 4.759259259259259,
-    "wind_direction_deg": 302.6667720173256,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-B/tan20250723t085612c40s4001-B_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.59763038145573,
-      35.07298351010166,
-      40.63522613006023,
-      35.1037468496592
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-C",
-    "gas": "CH4",
-    "lat": 35.04546294581084,
-    "lon": 40.692221516165006,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 2296.3535915888274,
-    "emission_uncertainty_kghr": 263.32666375214524,
-    "sector": "1B2",
-    "wind_speed_ms": 4.666666666666667,
-    "wind_direction_deg": 297.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-C/tan20250723t085612c40s4001-C_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.684196653606485,
-      35.026639939546456,
-      40.72177027781729,
-      35.05740263565191
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-D",
-    "gas": "CH4",
-    "lat": 35.040075111045994,
-    "lon": 40.69725180277976,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 1248.9832758903503,
-    "emission_uncertainty_kghr": 204.35628174868077,
-    "sector": "1B2",
-    "wind_speed_ms": 4.666666666666667,
-    "wind_direction_deg": 297.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-D/tan20250723t085612c40s4001-D_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.68195999885631,
-      35.01289315656931,
-      40.74227431707956,
-      35.062277046307756
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-E",
-    "gas": "CH4",
-    "lat": 35.0256067872089,
-    "lon": 40.710772877913115,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 763.769067260954,
-    "emission_uncertainty_kghr": 137.98494577550767,
-    "sector": "1B2",
-    "wind_speed_ms": 5.444444444444444,
-    "wind_direction_deg": 296.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-E/tan20250723t085612c40s4001-E_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.69729451283333,
-      35.008063761429256,
-      40.73453083864697,
-      35.03882708463368
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-G",
-    "gas": "CH4",
-    "lat": 35.11612087557536,
-    "lon": 40.63592202579929,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 627.2134685516356,
-    "emission_uncertainty_kghr": 87.98695083976898,
-    "sector": "1B2",
-    "wind_speed_ms": 4.759259259259259,
-    "wind_direction_deg": 302.6667720173256,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-G/tan20250723t085612c40s4001-G_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.618244457398845,
-      35.10056415528161,
-      40.65618425177501,
-      35.13159846233437
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-H",
-    "gas": "CH4",
-    "lat": 36.11099216381291,
-    "lon": 40.80952397804964,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 2620.9527047961315,
-    "emission_uncertainty_kghr": 214.32575965291107,
-    "sector": "1B2",
-    "wind_speed_ms": 5.916666666666667,
-    "wind_direction_deg": 274.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-H/tan20250723t085612c40s4001-H_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.7974335256118,
-      36.09898452669195,
-      40.83550889673457,
-      36.12974341551593
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-I",
-    "gas": "CH4",
-    "lat": 36.11520719329762,
-    "lon": 40.80876513296451,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 752.5584970414639,
-    "emission_uncertainty_kghr": 140.43103574342499,
-    "sector": "1B2",
-    "wind_speed_ms": 5.916666666666667,
-    "wind_direction_deg": 274.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-I/tan20250723t085612c40s4001-I_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.7974335256118,
-      36.09898452669195,
-      40.83550889673457,
-      36.12974341551593
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-J",
-    "gas": "CH4",
-    "lat": 36.11816841316413,
-    "lon": 40.80887939624418,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 560.9448841776242,
-    "emission_uncertainty_kghr": 154.45502420337922,
-    "sector": "1B2",
-    "wind_speed_ms": 5.916666666666667,
-    "wind_direction_deg": 274.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-J/tan20250723t085612c40s4001-J_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.79710044674323,
-      36.09872030850836,
-      40.83550897755164,
-      36.13001814458977
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-K",
-    "gas": "CH4",
-    "lat": 36.375573209755146,
-    "lon": 40.93162400671855,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 398.00925851771325,
-    "emission_uncertainty_kghr": 116.99392707376731,
-    "sector": "1B2",
-    "wind_speed_ms": 3.6018518518518516,
-    "wind_direction_deg": 273.98986819398806,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-K/tan20250723t085612c40s4001-K_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.913733654786675,
-      36.3592186466264,
-      40.95193352236514,
-      36.38997552972499
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250731t081855c58s4001-C"
   },
   {
     "plume_id": "tan20250714t084212c99s4001-A",
@@ -2175,7 +1514,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250714t084212c99s4001-A"
   },
   {
     "plume_id": "tan20250710t081555c58s4001-A",
@@ -2197,73 +1537,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250703t081535c07s4001-A",
-    "gas": "CH4",
-    "lat": 29.159475931795626,
-    "lon": 47.915079392332814,
-    "timestamp": "2025-07-03T08:15:35.070Z",
-    "emission_kghr": 831.3608538712502,
-    "emission_uncertainty_kghr": 193.90372867713725,
-    "sector": "6A",
-    "wind_speed_ms": 6.462962962962962,
-    "wind_direction_deg": 313.99999999999994,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/03/tan20250703t081535c07s4001-A/tan20250703t081535c07s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      47.894716171859436,
-      29.08206196341923,
-      47.99881722928787,
-      29.172998223516714
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250703t081535c07s4001-B",
-    "gas": "CH4",
-    "lat": 29.15780234366889,
-    "lon": 47.910563249635175,
-    "timestamp": "2025-07-03T08:15:35.070Z",
-    "emission_kghr": 447.61440526776835,
-    "emission_uncertainty_kghr": 113.00909092141563,
-    "sector": "6A",
-    "wind_speed_ms": 6.462962962962962,
-    "wind_direction_deg": 313.99999999999994,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/03/tan20250703t081535c07s4001-B/tan20250703t081535c07s4001-B_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      47.894716171859436,
-      29.08206196341923,
-      47.99881722928787,
-      29.172998223516714
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250703t081535c07s4001-C",
-    "gas": "CH4",
-    "lat": 29.161804823848087,
-    "lon": 47.921932954079494,
-    "timestamp": "2025-07-03T08:15:35.070Z",
-    "emission_kghr": 683.4840957696238,
-    "emission_uncertainty_kghr": 141.86156191630016,
-    "sector": "6A",
-    "wind_speed_ms": 6.462962962962962,
-    "wind_direction_deg": 313.99999999999994,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/03/tan20250703t081535c07s4001-C/tan20250703t081535c07s4001-C_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      47.90708382358086,
-      29.142069640712673,
-      47.942929008098034,
-      29.173372588557335
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250710t081555c58s4001-A"
   },
   {
     "plume_id": "tan20250628t082657c43s4001-A",
@@ -2285,7 +1560,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250628t082657c43s4001-A"
   },
   {
     "plume_id": "tan20250628t082657c43s4001-B",
@@ -2307,7 +1583,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250628t082657c43s4001-B"
   },
   {
     "plume_id": "tan20250621t082610c86s4001-A",
@@ -2329,7 +1606,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250621t082610c86s4001-A"
   },
   {
     "plume_id": "tan20250621t082610c86s4001-B",
@@ -2351,29 +1629,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250619t081253c58s4001-A",
-    "gas": "CO2",
-    "lat": 30.48152263944249,
-    "lon": 48.25001987644288,
-    "timestamp": "2025-06-19T08:12:53.580Z",
-    "emission_kghr": 409909.78877772664,
-    "emission_uncertainty_kghr": 63928.459031074446,
-    "sector": "1A1",
-    "wind_speed_ms": 8.916666666666666,
-    "wind_direction_deg": 307.3333634220596,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3/2025/06/19/tan20250619t081253c58s4001-A/tan20250619t081253c58s4001-A_l3a-vis-co2-mfa-v3_plume.png",
-    "plume_bounds": [
-      48.23503211568714,
-      30.463064956156124,
-      48.27103044506365,
-      30.494088995058828
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250621t082610c86s4001-B"
   },
   {
     "plume_id": "tan20250609t083616c06s4001-A",
@@ -2395,7 +1652,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250609t083616c06s4001-A"
   },
   {
     "plume_id": "tan20250609t083616c06s4001-B",
@@ -2417,7 +1675,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250609t083616c06s4001-B"
   },
   {
     "plume_id": "tan20250531t082337c30s4001-A",
@@ -2439,7 +1698,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250531t082337c30s4001-A"
   },
   {
     "plume_id": "tan20250531t082337c30s4001-B",
@@ -2461,7 +1721,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250531t082337c30s4001-B"
   },
   {
     "plume_id": "tan20250531t082207c30s4001-A",
@@ -2483,7 +1744,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250531t082207c30s4001-A"
   },
   {
     "plume_id": "tan20250526t083602c30s4001-A",
@@ -2505,7 +1767,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083602c30s4001-A"
   },
   {
     "plume_id": "tan20250526t083602c30s4001-B",
@@ -2527,7 +1790,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083602c30s4001-B"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-A",
@@ -2549,7 +1813,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-A"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-B",
@@ -2571,7 +1836,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-B"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-C",
@@ -2593,7 +1859,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-C"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-E",
@@ -2615,7 +1882,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-E"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-F",
@@ -2637,7 +1905,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-F"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-G",
@@ -2659,7 +1928,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-G"
   },
   {
     "plume_id": "tan20250522t080955c46s4001-C",
@@ -2681,7 +1951,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250522t080955c46s4001-C"
   },
   {
     "plume_id": "tan20250522t080955c46s4001-D",
@@ -2703,7 +1974,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250522t080955c46s4001-D"
   },
   {
     "plume_id": "tan20250522t080955c46s4001-F",
@@ -2725,7 +1997,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250522t080955c46s4001-F"
   },
   {
     "plume_id": "tan20250510t081923c00s4001-A",
@@ -2747,7 +2020,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250510t081923c00s4001-A"
   },
   {
     "plume_id": "tan20250510t081923c00s4001-B",
@@ -2769,51 +2043,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250508t080701c00s4001-A",
-    "gas": "CH4",
-    "lat": 31.01629504146213,
-    "lon": 48.04232810401251,
-    "timestamp": "2025-05-08T08:07:01Z",
-    "emission_kghr": 3754.246664704784,
-    "emission_uncertainty_kghr": 270.3512173151233,
-    "sector": "1B2",
-    "wind_speed_ms": 7.787037037037037,
-    "wind_direction_deg": 312.3334650015942,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/05/08/tan20250508t080701c00s4001-A/tan20250508t080701c00s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      48.036678727457186,
-      30.98966927901026,
-      48.0775900401131,
-      31.024734468693634
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250508t080701c00s4001-B",
-    "gas": "CO2",
-    "lat": 31.16493063699859,
-    "lon": 48.0188517015207,
-    "timestamp": "2025-05-08T08:07:01Z",
-    "emission_kghr": 135238.3587266604,
-    "emission_uncertainty_kghr": 28500.697715689046,
-    "sector": "1A1",
-    "wind_speed_ms": 6.7407407407407405,
-    "wind_direction_deg": 307.0001015623428,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3/2025/05/08/tan20250508t080701c00s4001-B/tan20250508t080701c00s4001-B_l3a-vis-co2-mfa-v3_plume.png",
-    "plume_bounds": [
-      48.00515347450577,
-      31.147095966261798,
-      48.041718314057896,
-      31.178384533712027
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250510t081923c00s4001-B"
   },
   {
     "plume_id": "tan20250503t081819c00s4001-A",
@@ -2835,7 +2066,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250503t081819c00s4001-A"
   },
   {
     "plume_id": "tan20250503t081819c00s4001-B",
@@ -2857,7 +2089,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250503t081819c00s4001-B"
   },
   {
     "plume_id": "tan20250419t081749c00s4001-B",
@@ -2879,7 +2112,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250419t081749c00s4001-B"
   },
   {
     "plume_id": "tan20250412t081520c00s4001-A",
@@ -2901,7 +2135,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250412t081520c00s4001-A"
   },
   {
     "plume_id": "tan20250412t081520c00s4001-B",
@@ -2923,7 +2158,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250412t081520c00s4001-B"
   },
   {
     "plume_id": "tan20250324t082617c00s4001-A",
@@ -2945,7 +2181,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250324t082617c00s4001-A"
   },
   {
     "plume_id": "tan20250313t075955c00s4001-D",
@@ -2967,7 +2204,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250313t075955c00s4001-D"
   },
   {
     "plume_id": "tan20250313t075955c00s4001-F",
@@ -2989,7 +2227,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250313t075955c00s4001-F"
   },
   {
     "plume_id": "tan20250312t083827c00s4001-A",
@@ -3011,7 +2250,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250312t083827c00s4001-A"
   },
   {
     "plume_id": "tan20250301t081147c00s4001-A",
@@ -3033,7 +2273,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250301t081147c00s4001-A"
   },
   {
     "plume_id": "tan20250301t081147c00s4001-B",
@@ -3055,7 +2296,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250301t081147c00s4001-B"
   },
   {
     "plume_id": "tan20250301t081147c00s4001-C",
@@ -3077,7 +2319,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250301t081147c00s4001-C"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-A",
@@ -3099,7 +2342,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-A"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-B",
@@ -3121,7 +2365,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-B"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-C",
@@ -3143,7 +2388,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-C"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-D",
@@ -3165,7 +2411,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-D"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-E",
@@ -3187,7 +2434,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-E"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-F",
@@ -3209,7 +2457,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-F"
   },
   {
     "plume_id": "tan20250203t082443c00s4001-A",
@@ -3231,7 +2480,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250203t082443c00s4001-A"
   },
   {
     "plume_id": "tan20250130t080030c00s4001-A",
@@ -3253,7 +2503,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250130t080030c00s4001-A"
   },
   {
     "plume_id": "tan20250130t080030c00s4001-B",
@@ -3275,7 +2526,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250130t080030c00s4001-B"
   },
   {
     "plume_id": "tan20250130t080030c00s4001-C",
@@ -3297,7 +2549,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250130t080030c00s4001-C"
   },
   {
     "plume_id": "tan20250125t081415c00s4001-A",
@@ -3319,7 +2572,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250125t081415c00s4001-A"
   },
   {
     "plume_id": "tan20250104t081034c00s4001-A",
@@ -3341,7 +2595,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250104t081034c00s4001-A"
   },
   {
     "plume_id": "tan20250104t081034c00s4001-B",
@@ -3363,7 +2618,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250104t081034c00s4001-B"
   },
   {
     "plume_id": "tan20250104t081034c00s4001-C",
@@ -3385,7 +2641,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250104t081034c00s4001-C"
   },
   {
     "plume_id": "tan20250104t081034c00s4001-D",
@@ -3407,7 +2664,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250104t081034c00s4001-D"
   },
   {
     "plume_id": "tan20241225t080702c00s4001-A",
@@ -3429,7 +2687,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20241225t080702c00s4001-A"
   },
   {
     "plume_id": "tan20241225t080702c00s4001-B",
@@ -3451,425 +2710,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-A",
-    "gas": "CH4",
-    "lat": 35.36718673085282,
-    "lon": 40.41565101864123,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 446.01844972298466,
-    "emission_uncertainty_kghr": 85.77085922991202,
-    "sector": "1B2",
-    "wind_speed_ms": 2.4537037037037037,
-    "wind_direction_deg": 293.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-A/tan20241004t081910c00s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.401023248631226,
-      35.350227688029506,
-      40.43908124063716,
-      35.381262989370015
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-B",
-    "gas": "CH4",
-    "lat": 35.35263613411226,
-    "lon": 40.374429072479614,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 947.0600485404332,
-    "emission_uncertainty_kghr": 169.6974765345107,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-B/tan20241004t081910c00s4001-B_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.36250602615003,
-      35.33714492270689,
-      40.40055825945619,
-      35.36818055609656
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-C",
-    "gas": "CH4",
-    "lat": 35.349657744379954,
-    "lon": 40.36805280830137,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 173.82907339820156,
-    "emission_uncertainty_kghr": 62.56613448371726,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-C/tan20241004t081910c00s4001-C_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.349246994414194,
-      35.33378149800978,
-      40.38663513264107,
-      35.364546682378325
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-D",
-    "gas": "CH4",
-    "lat": 35.35218300790578,
-    "lon": 40.33764705703558,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 3188.9326914034637,
-    "emission_uncertainty_kghr": 389.65125891777404,
-    "sector": "1B2",
-    "wind_speed_ms": 1.9722222222222223,
-    "wind_direction_deg": 301.99847470611667,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-D/tan20241004t081910c00s4001-D_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.3228395796052,
-      35.333799730599566,
-      40.360890603351606,
-      35.36483566278593
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-E",
-    "gas": "CH4",
-    "lat": 35.34725695746579,
-    "lon": 40.28194248407425,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "1B2",
-    "wind_speed_ms": 1.9722222222222223,
-    "wind_direction_deg": 301.99847470611667,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-E/tan20241004t081910c00s4001-E_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.26956146275425,
-      35.32517937600771,
-      40.30694633042803,
-      35.35594514477329
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-F",
-    "gas": "CH4",
-    "lat": 35.346580635620086,
-    "lon": 40.2798392309557,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 1151.9470433845663,
-    "emission_uncertainty_kghr": 151.14532932352273,
-    "sector": "1B2",
-    "wind_speed_ms": 1.9722222222222223,
-    "wind_direction_deg": 301.99847470611667,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-F/tan20241004t081910c00s4001-F_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.26956146275425,
-      35.32517937600771,
-      40.30694633042803,
-      35.35594514477329
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-G",
-    "gas": "CH4",
-    "lat": 35.3438741493554,
-    "lon": 40.260481985074506,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 594.9185606056735,
-    "emission_uncertainty_kghr": 78.25054881195972,
-    "sector": "1B2",
-    "wind_speed_ms": 1.9722222222222223,
-    "wind_direction_deg": 301.99847470611667,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-G/tan20241004t081910c00s4001-G_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.24778548051667,
-      35.32594688430689,
-      40.28517164657536,
-      35.35671342917532
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-H",
-    "gas": "CH4",
-    "lat": 35.31547695370409,
-    "lon": 40.416478944689175,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 1231.0594314999053,
-    "emission_uncertainty_kghr": 236.8129256787216,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-H/tan20241004t081910c00s4001-H_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.405168440763404,
-      35.26342347825016,
-      40.499077624269546,
-      35.34006462965098
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-I",
-    "gas": "CH4",
-    "lat": 35.30695662855153,
-    "lon": 40.44404180741637,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 1373.7274397004792,
-    "emission_uncertainty_kghr": 262.7348057281137,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-I/tan20241004t081910c00s4001-I_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.40451639302213,
-      35.26369425257653,
-      40.499749867334344,
-      35.341145668991764
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-J",
-    "gas": "CH4",
-    "lat": 35.296975480595876,
-    "lon": 40.43528803344509,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 977.1641884909735,
-    "emission_uncertainty_kghr": 199.5368316504372,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-J/tan20241004t081910c00s4001-J_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.4189768126342,
-      35.281856644180216,
-      40.45700273250136,
-      35.31289203295918
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-K",
-    "gas": "CH4",
-    "lat": 35.29883299508192,
-    "lon": 40.42527274002714,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 366.0067021581862,
-    "emission_uncertainty_kghr": 85.8930474484358,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-K/tan20241004t081910c00s4001-K_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.41600952770905,
-      35.28189612061109,
-      40.453703092329526,
-      35.31266028954244
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-L",
-    "gas": "CH4",
-    "lat": 35.38365798250351,
-    "lon": 40.315729188618775,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 149.55185692117672,
-    "emission_uncertainty_kghr": 38.95052665218042,
-    "sector": "1B2",
-    "wind_speed_ms": 2.435185185185185,
-    "wind_direction_deg": 294.0001015623428,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-L/tan20241004t081910c00s4001-L_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.296981945725484,
-      35.3681615185652,
-      40.33504925382838,
-      35.399197518821616
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-A",
-    "gas": "CH4",
-    "lat": 35.025666531153405,
-    "lon": 40.71040356992924,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 1017.1489502482369,
-    "emission_uncertainty_kghr": 103.67763746561623,
-    "sector": "1B2",
-    "wind_speed_ms": 5.7592592592592595,
-    "wind_direction_deg": 101.00030477988622,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-A/tan20240929t081638c00s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.68717744252646,
-      35.011717287559385,
-      40.72540421186316,
-      35.0427505432283
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-B",
-    "gas": "CH4",
-    "lat": 35.040019845835644,
-    "lon": 40.69652737150082,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 1306.6484369473023,
-    "emission_uncertainty_kghr": 115.98333310239904,
-    "sector": "1B2",
-    "wind_speed_ms": 5.472222222222222,
-    "wind_direction_deg": 104.33346500159422,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-B/tan20240929t081638c00s4001-B_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.628644506364544,
-      35.025813571458464,
-      40.706115217717965,
-      35.089229214290185
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-C",
-    "gas": "CH4",
-    "lat": 35.091581572535205,
-    "lon": 40.61125566894475,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 990.7287259896594,
-    "emission_uncertainty_kghr": 99.10746859312286,
-    "sector": "1B2",
-    "wind_speed_ms": 5.5555555555555545,
-    "wind_direction_deg": 107.66670428043916,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-C/tan20240929t081638c00s4001-C_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.56270762861794,
-      35.06940889648179,
-      40.62768272102419,
-      35.12257086094413
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-D",
-    "gas": "CH4",
-    "lat": 35.09740738779588,
-    "lon": 40.601388027523114,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 802.9625515143075,
-    "emission_uncertainty_kghr": 97.99297239287067,
-    "sector": "1B2",
-    "wind_speed_ms": 5.5555555555555545,
-    "wind_direction_deg": 107.66670428043916,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-D/tan20240929t081638c00s4001-D_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.56270758585773,
-      35.069408242044275,
-      40.62735369354373,
-      35.12257089591807
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-E",
-    "gas": "CH4",
-    "lat": 35.087005616896946,
-    "lon": 40.605602559163145,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 391.7099310640702,
-    "emission_uncertainty_kghr": 198.27281002431417,
-    "sector": "1B2",
-    "wind_speed_ms": 5.5555555555555545,
-    "wind_direction_deg": 107.66670428043916,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-E/tan20240929t081638c00s4001-E_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.58740197320227,
-      35.0714951638538,
-      40.62499715178862,
-      35.10225859834004
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-F",
-    "gas": "CH4",
-    "lat": 35.1170948194941,
-    "lon": 40.682072227943706,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 402.5468838528583,
-    "emission_uncertainty_kghr": 66.58174818856375,
-    "sector": "1B2",
-    "wind_speed_ms": 5.888888888888888,
-    "wind_direction_deg": 104.33346500159422,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-F/tan20240929t081638c00s4001-F_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.66009242443573,
-      35.102972485571264,
-      40.69803286075296,
-      35.13400640040917
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-G",
-    "gas": "CH4",
-    "lat": 35.04593256939512,
-    "lon": 40.69140812369079,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 1381.0558036267757,
-    "emission_uncertainty_kghr": 137.78053732316982,
-    "sector": "1B2",
-    "wind_speed_ms": 5.472222222222222,
-    "wind_direction_deg": 104.33346500159422,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-G/tan20240929t081638c00s4001-G_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.626972918955104,
-      35.0244812180785,
-      40.706422812454,
-      35.089517386847845
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20241225t080702c00s4001-B"
   },
   {
     "plume_id": "tan20260505t084904c67s4001-A",
@@ -3891,7 +2733,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260505t084904c67s4001-A"
   },
   {
     "plume_id": "tan20260505t084904c67s4001-B",
@@ -3913,7 +2756,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260505t084904c67s4001-B"
   },
   {
     "plume_id": "tan20260428t085249c94s4001-F",
@@ -3935,29 +2779,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260428t085159c69s4001-C",
-    "gas": "CH4",
-    "lat": 31.23840921655075,
-    "lon": 47.96630890214479,
-    "timestamp": "2026-04-28T08:51:59.690Z",
-    "emission_kghr": 1493.7646602157026,
-    "emission_uncertainty_kghr": 625.1952557885362,
-    "sector": "1B2",
-    "wind_speed_ms": 5.166666666666667,
-    "wind_direction_deg": 138.61794534067843,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3d/2026/04/28/tan20260428t085159c69s4001-C/tan20260428t085159c69s4001-C_l3a-vis-ch4-mfa-v3d_plume.png",
-    "plume_bounds": [
-      47.94670608506385,
-      31.22797415509786,
-      47.982994519118364,
-      31.258999707256407
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260428t085249c94s4001-F"
   },
   {
     "plume_id": "tan20260407t085555c64s4001-B",
@@ -3979,95 +2802,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260317t085221c34s4001-A",
-    "gas": "CO2",
-    "lat": 30.481566374374566,
-    "lon": 48.250069683433765,
-    "timestamp": "2026-03-17T08:52:21.340Z",
-    "emission_kghr": 63563.02159403229,
-    "emission_uncertainty_kghr": 40530.18305836169,
-    "sector": "1A1",
-    "wind_speed_ms": 5.527777777777778,
-    "wind_direction_deg": 314.33346500159416,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3c/2026/03/17/tan20260317t085221c34s4001-A/tan20260317t085221c34s4001-A_l3a-vis-co2-mfa-v3c_plume.png",
-    "plume_bounds": [
-      48.23560002527278,
-      30.465256904524797,
-      48.284751027416455,
-      30.50788246789311
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260310t085101c50s4001-A",
-    "gas": "CH4",
-    "lat": 29.160247296350775,
-    "lon": 47.90890601556953,
-    "timestamp": "2026-03-10T08:51:01.500Z",
-    "emission_kghr": 1541.4958341669837,
-    "emission_uncertainty_kghr": 159.6441074857784,
-    "sector": "6A",
-    "wind_speed_ms": 3.7962962962962963,
-    "wind_direction_deg": 358.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/10/tan20260310t085101c50s4001-A/tan20260310t085101c50s4001-A_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.882581493055106,
-      29.112861033576973,
-      47.9511713543043,
-      29.172768001295577
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260310t085101c50s4001-B",
-    "gas": "CH4",
-    "lat": 29.16246153631333,
-    "lon": 47.917602606054544,
-    "timestamp": "2026-03-10T08:51:01.500Z",
-    "emission_kghr": 1036.0070968693692,
-    "emission_uncertainty_kghr": 346.09175183741553,
-    "sector": "6A",
-    "wind_speed_ms": 3.7962962962962963,
-    "wind_direction_deg": 358.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/10/tan20260310t085101c50s4001-B/tan20260310t085101c50s4001-B_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.883506430749776,
-      29.112848513902065,
-      47.95178638538983,
-      29.172754661569602
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260310t084955c89s4001-D",
-    "gas": "CO2",
-    "lat": 30.48124460161293,
-    "lon": 48.24993933400364,
-    "timestamp": "2026-03-10T08:49:55.890Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "1A1",
-    "wind_speed_ms": 5.157407407407407,
-    "wind_direction_deg": 326.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3c/2026/03/10/tan20260310t084955c89s4001-D/tan20260310t084955c89s4001-D_l3a-vis-co2-mfa-v3c_plume.png",
-    "plume_bounds": [
-      48.23189442972652,
-      30.463540333245838,
-      48.26789285768996,
-      30.494564305629655
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260407t085555c64s4001-B"
   },
   {
     "plume_id": "tan20260305t090202c97s4001-A",
@@ -4089,7 +2825,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260305t090202c97s4001-A"
   },
   {
     "plume_id": "tan20260305t090038c14s4001-A",
@@ -4111,95 +2848,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260301t083450c18s4001-A",
-    "gas": "CH4",
-    "lat": 29.161512314393093,
-    "lon": 47.90706583024979,
-    "timestamp": "2026-03-01T08:34:50.180Z",
-    "emission_kghr": 2664.229109995399,
-    "emission_uncertainty_kghr": 1138.051524260904,
-    "sector": "6A",
-    "wind_speed_ms": 6.87037037037037,
-    "wind_direction_deg": 357.3332957195608,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/01/tan20260301t083450c18s4001-A/tan20260301t083450c18s4001-A_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.88028247778826,
-      29.107508920801166,
-      47.95412151248291,
-      29.17173271688267
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260301t083450c18s4001-C",
-    "gas": "CH4",
-    "lat": 29.16395668122763,
-    "lon": 47.922362864125176,
-    "timestamp": "2026-03-01T08:34:50.180Z",
-    "emission_kghr": 675.2221434057611,
-    "emission_uncertainty_kghr": 383.72846969134076,
-    "sector": "6A",
-    "wind_speed_ms": 6.87037037037037,
-    "wind_direction_deg": 357.3332957195608,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/01/tan20260301t083450c18s4001-C/tan20260301t083450c18s4001-C_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.87905067601421,
-      29.107535441379714,
-      47.9528897878585,
-      29.17175928797489
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260301t083450c18s4001-D",
-    "gas": "CH4",
-    "lat": 29.159810429640473,
-    "lon": 47.91527156399869,
-    "timestamp": "2026-03-01T08:34:50.180Z",
-    "emission_kghr": 929.7034558134511,
-    "emission_uncertainty_kghr": 474.9811799246649,
-    "sector": "6A",
-    "wind_speed_ms": 6.87037037037037,
-    "wind_direction_deg": 357.3332957195608,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/03/01/tan20260301t083450c18s4001-D/tan20260301t083450c18s4001-D_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.88028351930361,
-      29.107516305420685,
-      47.95381271916547,
-      29.171739324230984
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260224t084601c66s4001-A",
-    "gas": "CH4",
-    "lat": 29.222136771630517,
-    "lon": 47.58364873056823,
-    "timestamp": "2026-02-24T08:46:01.660Z",
-    "emission_kghr": 484.88112516189227,
-    "emission_uncertainty_kghr": 171.4489930198526,
-    "sector": "1B2",
-    "wind_speed_ms": 7.935185185185184,
-    "wind_direction_deg": 199.32547676567125,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/02/24/tan20260224t084601c66s4001-A/tan20260224t084601c66s4001-A_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.569530151174874,
-      29.21582416195475,
-      47.60540809381137,
-      29.246863323842806
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260305t090038c14s4001-A"
   },
   {
     "plume_id": "tan20260224t084601c66s4001-C",
@@ -4221,7 +2871,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260224t084601c66s4001-C"
   },
   {
     "plume_id": "tan20260224t084601c66s4001-D",
@@ -4243,29 +2894,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260222t083300c51s4001-A",
-    "gas": "CH4",
-    "lat": 29.165242341031643,
-    "lon": 47.917498991778416,
-    "timestamp": "2026-02-22T08:33:00.510Z",
-    "emission_kghr": 6247.408262183089,
-    "emission_uncertainty_kghr": 1279.971302825806,
-    "sector": "6A",
-    "wind_speed_ms": 1.8888888888888886,
-    "wind_direction_deg": 278.2355866200472,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/02/22/tan20260222t083300c51s4001-A/tan20260222t083300c51s4001-A_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.89294627401456,
-      29.03699057459025,
-      48.092743411919955,
-      29.211796031088006
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260224t084601c66s4001-D"
   },
   {
     "plume_id": "tan20260221t090941c35s4001-A",
@@ -4287,51 +2917,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260210t084157c22s4001-B",
-    "gas": "CH4",
-    "lat": 29.175162879410095,
-    "lon": 47.90871267300548,
-    "timestamp": "2026-02-10T08:41:57.220Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "6A",
-    "wind_speed_ms": 5.518518518518519,
-    "wind_direction_deg": 173.66677201732563,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/02/10/tan20260210t084157c22s4001-B/tan20260210t084157c22s4001-B_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.890064366787065,
-      29.161657933426547,
-      47.925605799631654,
-      29.19268973954278
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260210t084157c22s4001-C",
-    "gas": "CH4",
-    "lat": 29.17663223919446,
-    "lon": 47.91548715961687,
-    "timestamp": "2026-02-10T08:41:57.220Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "6A",
-    "wind_speed_ms": 5.518518518518519,
-    "wind_direction_deg": 173.66677201732563,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3c/2026/02/10/tan20260210t084157c22s4001-C/tan20260210t084157c22s4001-C_l3a-vis-ch4-mfa-v3c_plume.png",
-    "plume_bounds": [
-      47.89919697342433,
-      29.1684953651006,
-      47.934741500221335,
-      29.199797610509407
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260221t090941c35s4001-A"
   },
   {
     "plume_id": "tan20260117t085949c45s4001-B",
@@ -4353,7 +2940,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260117t085949c45s4001-B"
   },
   {
     "plume_id": "tan20260115t084756c48s4001-A",
@@ -4375,7 +2963,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260115t084756c48s4001-A"
   },
   {
     "plume_id": "tan20260115t084756c48s4001-B",
@@ -4397,7 +2986,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260115t084756c48s4001-B"
   },
   {
     "plume_id": "tan20260110t085854c91s4001-A",
@@ -4419,7 +3009,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260110t085854c91s4001-A"
   },
   {
     "plume_id": "tan20260110t085854c91s4001-C",
@@ -4441,7 +3032,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260110t085854c91s4001-C"
   },
   {
     "plume_id": "tan20260108t084446c22s4001-A",
@@ -4463,7 +3055,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260108t084446c22s4001-A"
   },
   {
     "plume_id": "tan20260108t084405c09s4001-A",
@@ -4485,51 +3078,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260106t083153c48s4001-A",
-    "gas": "CH4",
-    "lat": 29.98691567474603,
-    "lon": 47.48425926549291,
-    "timestamp": "2026-01-06T08:31:53.480Z",
-    "emission_kghr": 615.4522139991356,
-    "emission_uncertainty_kghr": 99.13648002336805,
-    "sector": "1B2",
-    "wind_speed_ms": 4.805555555555555,
-    "wind_direction_deg": 303.6673835118722,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3b/2026/01/06/tan20260106t083153c48s4001-A/tan20260106t083153c48s4001-A_l3a-vis-ch4-mfa-v3b_plume.png",
-    "plume_bounds": [
-      47.466668666447184,
-      29.97361809042569,
-      47.50281699213622,
-      30.0046569807854
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20260106t083153c48s4001-B",
-    "gas": "CO2",
-    "lat": 29.991865126379835,
-    "lon": 47.48266867081867,
-    "timestamp": "2026-01-06T08:31:53.480Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "1B2",
-    "wind_speed_ms": 4.805555555555555,
-    "wind_direction_deg": 303.6673835118722,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3b/2026/01/06/tan20260106t083153c48s4001-B/tan20260106t083153c48s4001-B_l3a-vis-co2-mfa-v3b_plume.png",
-    "plume_bounds": [
-      47.46855388405369,
-      29.97413134941844,
-      47.50438898801831,
-      30.005438542714373
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260108t084405c09s4001-A"
   },
   {
     "plume_id": "tan20260106t083112c12s4001-A",
@@ -4551,7 +3101,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260106t083112c12s4001-A"
   },
   {
     "plume_id": "tan20260106t083112c12s4001-B",
@@ -4573,7 +3124,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260106t083112c12s4001-B"
   },
   {
     "plume_id": "tan20260105t090909c40s4001-A",
@@ -4595,7 +3147,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260105t090909c40s4001-A"
   },
   {
     "plume_id": "tan20260103t085452c47s4001-A",
@@ -4617,7 +3170,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20260103t085452c47s4001-A"
   },
   {
     "plume_id": "tan20251230t082843c20s4001-A",
@@ -4639,7 +3193,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251230t082843c20s4001-A"
   },
   {
     "plume_id": "tan20251225t084020c59s4001-A",
@@ -4661,7 +3216,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251225t084020c59s4001-A"
   },
   {
     "plume_id": "tan20251225t084020c59s4001-B",
@@ -4683,7 +3239,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251225t084020c59s4001-B"
   },
   {
     "plume_id": "tan20251225t084020c59s4001-C",
@@ -4705,7 +3262,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251225t084020c59s4001-C"
   },
   {
     "plume_id": "tan20251225t084020c59s4001-D",
@@ -4727,7 +3285,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251225t084020c59s4001-D"
   },
   {
     "plume_id": "tan20251222t090420c57s4001-A",
@@ -4749,7 +3308,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251222t090420c57s4001-A"
   },
   {
     "plume_id": "tan20251220t085235c43s4001-A",
@@ -4771,7 +3331,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085235c43s4001-A"
   },
   {
     "plume_id": "tan20251220t085235c43s4001-B",
@@ -4793,7 +3354,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085235c43s4001-B"
   },
   {
     "plume_id": "tan20251220t085124c26s4001-B",
@@ -4815,7 +3377,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085124c26s4001-B"
   },
   {
     "plume_id": "tan20251220t085124c26s4001-E",
@@ -4837,7 +3400,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085124c26s4001-E"
   },
   {
     "plume_id": "tan20251220t085124c26s4001-F",
@@ -4859,7 +3423,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251220t085124c26s4001-F"
   },
   {
     "plume_id": "tan20251204t083601c92s4001-D",
@@ -4881,7 +3446,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251204t083601c92s4001-D"
   },
   {
     "plume_id": "tan20251201t090147c16s4001-A",
@@ -4903,7 +3469,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251201t090147c16s4001-A"
   },
   {
     "plume_id": "tan20251201t090032c24s4001-A",
@@ -4925,73 +3492,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251127t083619c43s4001-F",
-    "gas": "CH4",
-    "lat": 29.16564479416725,
-    "lon": 47.914938000799964,
-    "timestamp": "2025-11-27T08:36:19.430Z",
-    "emission_kghr": 269.9425273804249,
-    "emission_uncertainty_kghr": 82.11696758562915,
-    "sector": "1B2",
-    "wind_speed_ms": 2.324074074074074,
-    "wind_direction_deg": 306.3329905781327,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/27/tan20251127t083619c43s4001-F/tan20251127t083619c43s4001-F_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.873889430611335,
-      29.07467347227488,
-      47.994673070006456,
-      29.179912998573588
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251127t083619c43s4001-G",
-    "gas": "CH4",
-    "lat": 29.162400163301115,
-    "lon": 47.90998910135974,
-    "timestamp": "2025-11-27T08:36:19.430Z",
-    "emission_kghr": 6454.785958424558,
-    "emission_uncertainty_kghr": 925.5393789354806,
-    "sector": "6A",
-    "wind_speed_ms": 2.324074074074074,
-    "wind_direction_deg": 306.3329905781327,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/27/tan20251127t083619c43s4001-G/tan20251127t083619c43s4001-G_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.873889430611335,
-      29.07467347227488,
-      47.994673070006456,
-      29.179912998573588
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251127t083619c43s4001-H",
-    "gas": "CH4",
-    "lat": 29.16192295038867,
-    "lon": 47.92160011208949,
-    "timestamp": "2025-11-27T08:36:19.430Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "6A",
-    "wind_speed_ms": 2.324074074074074,
-    "wind_direction_deg": 306.3329905781327,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/27/tan20251127t083619c43s4001-H/tan20251127t083619c43s4001-H_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.87675799497516,
-      29.078120440047215,
-      47.99260174281751,
-      29.179582932061948
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251201t090032c24s4001-A"
   },
   {
     "plume_id": "tan20251122t084707c42s4001-A",
@@ -5013,7 +3515,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251122t084707c42s4001-A"
   },
   {
     "plume_id": "tan20251122t084707c42s4001-B",
@@ -5035,51 +3538,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251120t083508c44s4001-X",
-    "gas": "CH4",
-    "lat": 29.13894400250149,
-    "lon": 48.02148649569352,
-    "timestamp": "2025-11-20T08:35:08.440Z",
-    "emission_kghr": 737.4444010817539,
-    "emission_uncertainty_kghr": 116.86828641521234,
-    "sector": "1B2",
-    "wind_speed_ms": 4.240740740740741,
-    "wind_direction_deg": 324.66687370009663,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/20/tan20251120t083508c44s4001-X/tan20251120t083508c44s4001-X_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      48.004123916451974,
-      29.12306004128563,
-      48.03964221714784,
-      29.154353035899486
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251113t083337c76s4001-A",
-    "gas": "CH4",
-    "lat": 29.849425037014086,
-    "lon": 47.86945796484437,
-    "timestamp": "2025-11-13T08:33:37.760Z",
-    "emission_kghr": 651.0607306056573,
-    "emission_uncertainty_kghr": 55.41743018389241,
-    "sector": "1B2",
-    "wind_speed_ms": 2.314814814814815,
-    "wind_direction_deg": 163.6669074498284,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/13/tan20251113t083337c76s4001-A/tan20251113t083337c76s4001-A_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.846811706333234,
-      29.843376433740644,
-      47.88259240686004,
-      29.874407395081754
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251122t084707c42s4001-B"
   },
   {
     "plume_id": "tan20251113t083248c71s4001-A",
@@ -5101,7 +3561,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251113t083248c71s4001-A"
   },
   {
     "plume_id": "tan20251108t084545c51s4001-A",
@@ -5123,51 +3584,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251106t083331c49s4001-J",
-    "gas": "CH4",
-    "lat": 29.167073503042403,
-    "lon": 48.02441730710112,
-    "timestamp": "2025-11-06T08:33:31.490Z",
-    "emission_kghr": 288.2541335430572,
-    "emission_uncertainty_kghr": 60.253957559447684,
-    "sector": "1B2",
-    "wind_speed_ms": 2.0000000000000004,
-    "wind_direction_deg": 334.6951815041986,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/06/tan20251106t083331c49s4001-J/tan20251106t083331c49s4001-J_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      48.005755038034,
-      29.152047761467227,
-      48.041592223520155,
-      29.183070958397707
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20251106t083238c73s4001-A",
-    "gas": "CH4",
-    "lat": 31.022204491941523,
-    "lon": 47.76942672723152,
-    "timestamp": "2025-11-06T08:32:38.730Z",
-    "emission_kghr": 616.3425237965688,
-    "emission_uncertainty_kghr": 57.262189962535786,
-    "sector": "1B2",
-    "wind_speed_ms": 1.2222222222222223,
-    "wind_direction_deg": 260.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3a/2025/11/06/tan20251106t083238c73s4001-A/tan20251106t083238c73s4001-A_l3a-vis-ch4-mfa-v3a_plume.png",
-    "plume_bounds": [
-      47.758382355930856,
-      31.008689864706522,
-      47.79459175032717,
-      31.03971949175198
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251108t084545c51s4001-A"
   },
   {
     "plume_id": "tan20251103t085757c58s4001-A",
@@ -5189,7 +3607,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251103t085757c58s4001-A"
   },
   {
     "plume_id": "tan20251025t084253c82s4001-A",
@@ -5211,7 +3630,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251025t084253c82s4001-A"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-A",
@@ -5233,7 +3653,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-A"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-B",
@@ -5255,7 +3676,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-B"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-C",
@@ -5277,7 +3699,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-C"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-D",
@@ -5299,7 +3722,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-D"
   },
   {
     "plume_id": "tan20251009t082825c73s4001-E",
@@ -5321,7 +3745,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20251009t082825c73s4001-E"
   },
   {
     "plume_id": "tan20250927t083937c75s4001-C",
@@ -5343,7 +3768,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250927t083937c75s4001-C"
   },
   {
     "plume_id": "tan20250927t083937c75s4001-D",
@@ -5365,7 +3791,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250927t083937c75s4001-D"
   },
   {
     "plume_id": "tan20250927t083937c75s4001-E",
@@ -5387,7 +3814,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250927t083937c75s4001-E"
   },
   {
     "plume_id": "tan20250927t083937c75s4001-F",
@@ -5409,7 +3837,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250927t083937c75s4001-F"
   },
   {
     "plume_id": "tan20250920t083838c76s4001-A",
@@ -5431,7 +3860,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250920t083838c76s4001-A"
   },
   {
     "plume_id": "tan20250920t083838c76s4001-B",
@@ -5453,7 +3883,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250920t083838c76s4001-B"
   },
   {
     "plume_id": "tan20250920t083838c76s4001-C",
@@ -5475,7 +3906,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250920t083838c76s4001-C"
   },
   {
     "plume_id": "tan20250920t083838c76s4001-D",
@@ -5497,29 +3929,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250917t090334c84s4001-A",
-    "gas": "CO2",
-    "lat": 37.33825399057086,
-    "lon": 40.80405424647847,
-    "timestamp": "2025-09-17T09:03:34.840Z",
-    "emission_kghr": 441945.17801988637,
-    "emission_uncertainty_kghr": 135379.9608518818,
-    "sector": "other",
-    "wind_speed_ms": 2.3518518518518516,
-    "wind_direction_deg": 307.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3/2025/09/17/tan20250917t090334c84s4001-A/tan20250917t090334c84s4001-A_l3a-vis-co2-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.78809734796224,
-      37.315959084960056,
-      40.82711541946772,
-      37.34698393313061
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250920t083838c76s4001-D"
   },
   {
     "plume_id": "tan20250915t085115c44s4001-A",
@@ -5541,7 +3952,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250915t085115c44s4001-A"
   },
   {
     "plume_id": "tan20250915t085031c90s4001-A",
@@ -5563,7 +3975,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250915t085031c90s4001-A"
   },
   {
     "plume_id": "tan20250915t085031c90s4001-B",
@@ -5585,7 +3998,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250915t085031c90s4001-B"
   },
   {
     "plume_id": "tan20250913t083719c06s4001-A",
@@ -5607,7 +4021,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250913t083719c06s4001-A"
   },
   {
     "plume_id": "tan20250913t083719c06s4001-B",
@@ -5629,7 +4044,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250913t083719c06s4001-B"
   },
   {
     "plume_id": "tan20250908t085021c62s4001-A",
@@ -5651,29 +4067,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250903t090203c68s4001-A",
-    "gas": "CH4",
-    "lat": 36.13222536735341,
-    "lon": 40.81106119028908,
-    "timestamp": "2025-09-03T09:02:03.680Z",
-    "emission_kghr": 105.61023661659823,
-    "emission_uncertainty_kghr": 55.917361494104675,
-    "sector": "1B2",
-    "wind_speed_ms": 1.7037037037037035,
-    "wind_direction_deg": 158.01514954776536,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/09/03/tan20250903t090203c68s4001-A/tan20250903t090203c68s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.793224648601175,
-      36.11906018729266,
-      40.83164387177765,
-      36.15008886479821
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250908t085021c62s4001-A"
   },
   {
     "plume_id": "tan20250821t082137c60s4001-A",
@@ -5695,7 +4090,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250821t082137c60s4001-A"
   },
   {
     "plume_id": "tan20250821t082137c60s4001-B",
@@ -5717,7 +4113,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250821t082137c60s4001-B"
   },
   {
     "plume_id": "tan20250818t084619c34s4001-A",
@@ -5739,7 +4136,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250818t084619c34s4001-A"
   },
   {
     "plume_id": "tan20250731t081855c58s4001-A",
@@ -5761,7 +4159,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250731t081855c58s4001-A"
   },
   {
     "plume_id": "tan20250731t081855c58s4001-B",
@@ -5783,7 +4182,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250731t081855c58s4001-B"
   },
   {
     "plume_id": "tan20250731t081855c58s4001-C",
@@ -5805,227 +4205,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-A",
-    "gas": "CH4",
-    "lat": 35.08283309928969,
-    "lon": 40.59470429397581,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 1470.8240625145388,
-    "emission_uncertainty_kghr": 131.67624269426136,
-    "sector": "1B2",
-    "wind_speed_ms": 4.759259259259259,
-    "wind_direction_deg": 302.6667720173256,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-A/tan20250723t085612c40s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.57775882959469,
-      35.06621088505249,
-      40.6150227719983,
-      35.09697511202511
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-B",
-    "gas": "CH4",
-    "lat": 35.091169932859714,
-    "lon": 40.61182119845142,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 1129.568533942148,
-    "emission_uncertainty_kghr": 117.9285268923414,
-    "sector": "1B2",
-    "wind_speed_ms": 4.759259259259259,
-    "wind_direction_deg": 302.6667720173256,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-B/tan20250723t085612c40s4001-B_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.59763038145573,
-      35.07298351010166,
-      40.63522613006023,
-      35.1037468496592
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-C",
-    "gas": "CH4",
-    "lat": 35.04546294581084,
-    "lon": 40.692221516165006,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 2296.3535915888274,
-    "emission_uncertainty_kghr": 263.32666375214524,
-    "sector": "1B2",
-    "wind_speed_ms": 4.666666666666667,
-    "wind_direction_deg": 297.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-C/tan20250723t085612c40s4001-C_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.684196653606485,
-      35.026639939546456,
-      40.72177027781729,
-      35.05740263565191
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-D",
-    "gas": "CH4",
-    "lat": 35.040075111045994,
-    "lon": 40.69725180277976,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 1248.9832758903503,
-    "emission_uncertainty_kghr": 204.35628174868077,
-    "sector": "1B2",
-    "wind_speed_ms": 4.666666666666667,
-    "wind_direction_deg": 297.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-D/tan20250723t085612c40s4001-D_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.68195999885631,
-      35.01289315656931,
-      40.74227431707956,
-      35.062277046307756
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-E",
-    "gas": "CH4",
-    "lat": 35.0256067872089,
-    "lon": 40.710772877913115,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 763.769067260954,
-    "emission_uncertainty_kghr": 137.98494577550767,
-    "sector": "1B2",
-    "wind_speed_ms": 5.444444444444444,
-    "wind_direction_deg": 296.332753728081,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-E/tan20250723t085612c40s4001-E_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.69729451283333,
-      35.008063761429256,
-      40.73453083864697,
-      35.03882708463368
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-G",
-    "gas": "CH4",
-    "lat": 35.11612087557536,
-    "lon": 40.63592202579929,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 627.2134685516356,
-    "emission_uncertainty_kghr": 87.98695083976898,
-    "sector": "1B2",
-    "wind_speed_ms": 4.759259259259259,
-    "wind_direction_deg": 302.6667720173256,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-G/tan20250723t085612c40s4001-G_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.618244457398845,
-      35.10056415528161,
-      40.65618425177501,
-      35.13159846233437
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-H",
-    "gas": "CH4",
-    "lat": 36.11099216381291,
-    "lon": 40.80952397804964,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 2620.9527047961315,
-    "emission_uncertainty_kghr": 214.32575965291107,
-    "sector": "1B2",
-    "wind_speed_ms": 5.916666666666667,
-    "wind_direction_deg": 274.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-H/tan20250723t085612c40s4001-H_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.7974335256118,
-      36.09898452669195,
-      40.83550889673457,
-      36.12974341551593
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-I",
-    "gas": "CH4",
-    "lat": 36.11520719329762,
-    "lon": 40.80876513296451,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 752.5584970414639,
-    "emission_uncertainty_kghr": 140.43103574342499,
-    "sector": "1B2",
-    "wind_speed_ms": 5.916666666666667,
-    "wind_direction_deg": 274.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-I/tan20250723t085612c40s4001-I_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.7974335256118,
-      36.09898452669195,
-      40.83550889673457,
-      36.12974341551593
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-J",
-    "gas": "CH4",
-    "lat": 36.11816841316413,
-    "lon": 40.80887939624418,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 560.9448841776242,
-    "emission_uncertainty_kghr": 154.45502420337922,
-    "sector": "1B2",
-    "wind_speed_ms": 5.916666666666667,
-    "wind_direction_deg": 274.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-J/tan20250723t085612c40s4001-J_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.79710044674323,
-      36.09872030850836,
-      40.83550897755164,
-      36.13001814458977
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250723t085612c40s4001-K",
-    "gas": "CH4",
-    "lat": 36.375573209755146,
-    "lon": 40.93162400671855,
-    "timestamp": "2025-07-23T08:56:12.400Z",
-    "emission_kghr": 398.00925851771325,
-    "emission_uncertainty_kghr": 116.99392707376731,
-    "sector": "1B2",
-    "wind_speed_ms": 3.6018518518518516,
-    "wind_direction_deg": 273.98986819398806,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/23/tan20250723t085612c40s4001-K/tan20250723t085612c40s4001-K_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.913733654786675,
-      36.3592186466264,
-      40.95193352236514,
-      36.38997552972499
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250731t081855c58s4001-C"
   },
   {
     "plume_id": "tan20250714t084212c99s4001-A",
@@ -6047,7 +4228,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250714t084212c99s4001-A"
   },
   {
     "plume_id": "tan20250710t081555c58s4001-A",
@@ -6069,73 +4251,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250703t081535c07s4001-A",
-    "gas": "CH4",
-    "lat": 29.159475931795626,
-    "lon": 47.915079392332814,
-    "timestamp": "2025-07-03T08:15:35.070Z",
-    "emission_kghr": 831.3608538712502,
-    "emission_uncertainty_kghr": 193.90372867713725,
-    "sector": "6A",
-    "wind_speed_ms": 6.462962962962962,
-    "wind_direction_deg": 313.99999999999994,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/03/tan20250703t081535c07s4001-A/tan20250703t081535c07s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      47.894716171859436,
-      29.08206196341923,
-      47.99881722928787,
-      29.172998223516714
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250703t081535c07s4001-B",
-    "gas": "CH4",
-    "lat": 29.15780234366889,
-    "lon": 47.910563249635175,
-    "timestamp": "2025-07-03T08:15:35.070Z",
-    "emission_kghr": 447.61440526776835,
-    "emission_uncertainty_kghr": 113.00909092141563,
-    "sector": "6A",
-    "wind_speed_ms": 6.462962962962962,
-    "wind_direction_deg": 313.99999999999994,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/03/tan20250703t081535c07s4001-B/tan20250703t081535c07s4001-B_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      47.894716171859436,
-      29.08206196341923,
-      47.99881722928787,
-      29.172998223516714
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250703t081535c07s4001-C",
-    "gas": "CH4",
-    "lat": 29.161804823848087,
-    "lon": 47.921932954079494,
-    "timestamp": "2025-07-03T08:15:35.070Z",
-    "emission_kghr": 683.4840957696238,
-    "emission_uncertainty_kghr": 141.86156191630016,
-    "sector": "6A",
-    "wind_speed_ms": 6.462962962962962,
-    "wind_direction_deg": 313.99999999999994,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/07/03/tan20250703t081535c07s4001-C/tan20250703t081535c07s4001-C_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      47.90708382358086,
-      29.142069640712673,
-      47.942929008098034,
-      29.173372588557335
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250710t081555c58s4001-A"
   },
   {
     "plume_id": "tan20250628t082657c43s4001-A",
@@ -6157,7 +4274,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250628t082657c43s4001-A"
   },
   {
     "plume_id": "tan20250628t082657c43s4001-B",
@@ -6179,7 +4297,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250628t082657c43s4001-B"
   },
   {
     "plume_id": "tan20250621t082610c86s4001-A",
@@ -6201,7 +4320,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250621t082610c86s4001-A"
   },
   {
     "plume_id": "tan20250621t082610c86s4001-B",
@@ -6223,29 +4343,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250619t081253c58s4001-A",
-    "gas": "CO2",
-    "lat": 30.48152263944249,
-    "lon": 48.25001987644288,
-    "timestamp": "2025-06-19T08:12:53.580Z",
-    "emission_kghr": 409909.78877772664,
-    "emission_uncertainty_kghr": 63928.459031074446,
-    "sector": "1A1",
-    "wind_speed_ms": 8.916666666666666,
-    "wind_direction_deg": 307.3333634220596,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3/2025/06/19/tan20250619t081253c58s4001-A/tan20250619t081253c58s4001-A_l3a-vis-co2-mfa-v3_plume.png",
-    "plume_bounds": [
-      48.23503211568714,
-      30.463064956156124,
-      48.27103044506365,
-      30.494088995058828
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250621t082610c86s4001-B"
   },
   {
     "plume_id": "tan20250609t083616c06s4001-A",
@@ -6267,7 +4366,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250609t083616c06s4001-A"
   },
   {
     "plume_id": "tan20250609t083616c06s4001-B",
@@ -6289,7 +4389,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250609t083616c06s4001-B"
   },
   {
     "plume_id": "tan20250531t082337c30s4001-A",
@@ -6311,7 +4412,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250531t082337c30s4001-A"
   },
   {
     "plume_id": "tan20250531t082337c30s4001-B",
@@ -6333,7 +4435,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250531t082337c30s4001-B"
   },
   {
     "plume_id": "tan20250531t082207c30s4001-A",
@@ -6355,7 +4458,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250531t082207c30s4001-A"
   },
   {
     "plume_id": "tan20250526t083602c30s4001-A",
@@ -6377,7 +4481,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083602c30s4001-A"
   },
   {
     "plume_id": "tan20250526t083602c30s4001-B",
@@ -6399,7 +4504,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083602c30s4001-B"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-A",
@@ -6421,7 +4527,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-A"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-B",
@@ -6443,7 +4550,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-B"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-C",
@@ -6465,7 +4573,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-C"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-E",
@@ -6487,7 +4596,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-E"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-F",
@@ -6509,7 +4619,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-F"
   },
   {
     "plume_id": "tan20250526t083433c76s4001-G",
@@ -6531,7 +4642,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250526t083433c76s4001-G"
   },
   {
     "plume_id": "tan20250522t080955c46s4001-C",
@@ -6553,7 +4665,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250522t080955c46s4001-C"
   },
   {
     "plume_id": "tan20250522t080955c46s4001-D",
@@ -6575,7 +4688,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250522t080955c46s4001-D"
   },
   {
     "plume_id": "tan20250522t080955c46s4001-F",
@@ -6597,7 +4711,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250522t080955c46s4001-F"
   },
   {
     "plume_id": "tan20250510t081923c00s4001-A",
@@ -6619,7 +4734,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250510t081923c00s4001-A"
   },
   {
     "plume_id": "tan20250510t081923c00s4001-B",
@@ -6641,51 +4757,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250508t080701c00s4001-A",
-    "gas": "CH4",
-    "lat": 31.01629504146213,
-    "lon": 48.04232810401251,
-    "timestamp": "2025-05-08T08:07:01Z",
-    "emission_kghr": 3754.246664704784,
-    "emission_uncertainty_kghr": 270.3512173151233,
-    "sector": "1B2",
-    "wind_speed_ms": 7.787037037037037,
-    "wind_direction_deg": 312.3334650015942,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2025/05/08/tan20250508t080701c00s4001-A/tan20250508t080701c00s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      48.036678727457186,
-      30.98966927901026,
-      48.0775900401131,
-      31.024734468693634
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20250508t080701c00s4001-B",
-    "gas": "CO2",
-    "lat": 31.16493063699859,
-    "lon": 48.0188517015207,
-    "timestamp": "2025-05-08T08:07:01Z",
-    "emission_kghr": 135238.3587266604,
-    "emission_uncertainty_kghr": 28500.697715689046,
-    "sector": "1A1",
-    "wind_speed_ms": 6.7407407407407405,
-    "wind_direction_deg": 307.0001015623428,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-co2-mfa-v3/2025/05/08/tan20250508t080701c00s4001-B/tan20250508t080701c00s4001-B_l3a-vis-co2-mfa-v3_plume.png",
-    "plume_bounds": [
-      48.00515347450577,
-      31.147095966261798,
-      48.041718314057896,
-      31.178384533712027
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250510t081923c00s4001-B"
   },
   {
     "plume_id": "tan20250503t081819c00s4001-A",
@@ -6707,7 +4780,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250503t081819c00s4001-A"
   },
   {
     "plume_id": "tan20250503t081819c00s4001-B",
@@ -6729,7 +4803,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250503t081819c00s4001-B"
   },
   {
     "plume_id": "tan20250419t081749c00s4001-B",
@@ -6751,7 +4826,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250419t081749c00s4001-B"
   },
   {
     "plume_id": "tan20250412t081520c00s4001-A",
@@ -6773,7 +4849,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250412t081520c00s4001-A"
   },
   {
     "plume_id": "tan20250412t081520c00s4001-B",
@@ -6795,7 +4872,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250412t081520c00s4001-B"
   },
   {
     "plume_id": "tan20250324t082617c00s4001-A",
@@ -6817,7 +4895,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250324t082617c00s4001-A"
   },
   {
     "plume_id": "tan20250313t075955c00s4001-D",
@@ -6839,7 +4918,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250313t075955c00s4001-D"
   },
   {
     "plume_id": "tan20250313t075955c00s4001-F",
@@ -6861,7 +4941,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250313t075955c00s4001-F"
   },
   {
     "plume_id": "tan20250312t083827c00s4001-A",
@@ -6883,7 +4964,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250312t083827c00s4001-A"
   },
   {
     "plume_id": "tan20250301t081147c00s4001-A",
@@ -6905,7 +4987,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250301t081147c00s4001-A"
   },
   {
     "plume_id": "tan20250301t081147c00s4001-B",
@@ -6927,7 +5010,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250301t081147c00s4001-B"
   },
   {
     "plume_id": "tan20250301t081147c00s4001-C",
@@ -6949,7 +5033,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250301t081147c00s4001-C"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-A",
@@ -6971,7 +5056,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-A"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-B",
@@ -6993,7 +5079,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-B"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-C",
@@ -7015,7 +5102,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-C"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-D",
@@ -7037,7 +5125,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-D"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-E",
@@ -7059,7 +5148,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-E"
   },
   {
     "plume_id": "tan20250215t081009c00s4001-F",
@@ -7081,7 +5171,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250215t081009c00s4001-F"
   },
   {
     "plume_id": "tan20250203t082443c00s4001-A",
@@ -7103,7 +5194,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250203t082443c00s4001-A"
   },
   {
     "plume_id": "tan20250130t080030c00s4001-A",
@@ -7125,7 +5217,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250130t080030c00s4001-A"
   },
   {
     "plume_id": "tan20250130t080030c00s4001-B",
@@ -7147,7 +5240,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250130t080030c00s4001-B"
   },
   {
     "plume_id": "tan20250130t080030c00s4001-C",
@@ -7169,7 +5263,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250130t080030c00s4001-C"
   },
   {
     "plume_id": "tan20250125t081415c00s4001-A",
@@ -7191,7 +5286,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250125t081415c00s4001-A"
   },
   {
     "plume_id": "tan20250104t081034c00s4001-A",
@@ -7213,7 +5309,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250104t081034c00s4001-A"
   },
   {
     "plume_id": "tan20250104t081034c00s4001-B",
@@ -7235,7 +5332,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250104t081034c00s4001-B"
   },
   {
     "plume_id": "tan20250104t081034c00s4001-C",
@@ -7257,7 +5355,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250104t081034c00s4001-C"
   },
   {
     "plume_id": "tan20250104t081034c00s4001-D",
@@ -7279,7 +5378,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20250104t081034c00s4001-D"
   },
   {
     "plume_id": "tan20241225t080702c00s4001-A",
@@ -7301,7 +5401,8 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20241225t080702c00s4001-A"
   },
   {
     "plume_id": "tan20241225t080702c00s4001-B",
@@ -7323,424 +5424,7 @@
     ],
     "plume_quality": null,
     "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-A",
-    "gas": "CH4",
-    "lat": 35.36718673085282,
-    "lon": 40.41565101864123,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 446.01844972298466,
-    "emission_uncertainty_kghr": 85.77085922991202,
-    "sector": "1B2",
-    "wind_speed_ms": 2.4537037037037037,
-    "wind_direction_deg": 293.0,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-A/tan20241004t081910c00s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.401023248631226,
-      35.350227688029506,
-      40.43908124063716,
-      35.381262989370015
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-B",
-    "gas": "CH4",
-    "lat": 35.35263613411226,
-    "lon": 40.374429072479614,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 947.0600485404332,
-    "emission_uncertainty_kghr": 169.6974765345107,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-B/tan20241004t081910c00s4001-B_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.36250602615003,
-      35.33714492270689,
-      40.40055825945619,
-      35.36818055609656
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-C",
-    "gas": "CH4",
-    "lat": 35.349657744379954,
-    "lon": 40.36805280830137,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 173.82907339820156,
-    "emission_uncertainty_kghr": 62.56613448371726,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-C/tan20241004t081910c00s4001-C_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.349246994414194,
-      35.33378149800978,
-      40.38663513264107,
-      35.364546682378325
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-D",
-    "gas": "CH4",
-    "lat": 35.35218300790578,
-    "lon": 40.33764705703558,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 3188.9326914034637,
-    "emission_uncertainty_kghr": 389.65125891777404,
-    "sector": "1B2",
-    "wind_speed_ms": 1.9722222222222223,
-    "wind_direction_deg": 301.99847470611667,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-D/tan20241004t081910c00s4001-D_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.3228395796052,
-      35.333799730599566,
-      40.360890603351606,
-      35.36483566278593
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-E",
-    "gas": "CH4",
-    "lat": 35.34725695746579,
-    "lon": 40.28194248407425,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": null,
-    "emission_uncertainty_kghr": null,
-    "sector": "1B2",
-    "wind_speed_ms": 1.9722222222222223,
-    "wind_direction_deg": 301.99847470611667,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-E/tan20241004t081910c00s4001-E_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.26956146275425,
-      35.32517937600771,
-      40.30694633042803,
-      35.35594514477329
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-F",
-    "gas": "CH4",
-    "lat": 35.346580635620086,
-    "lon": 40.2798392309557,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 1151.9470433845663,
-    "emission_uncertainty_kghr": 151.14532932352273,
-    "sector": "1B2",
-    "wind_speed_ms": 1.9722222222222223,
-    "wind_direction_deg": 301.99847470611667,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-F/tan20241004t081910c00s4001-F_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.26956146275425,
-      35.32517937600771,
-      40.30694633042803,
-      35.35594514477329
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-G",
-    "gas": "CH4",
-    "lat": 35.3438741493554,
-    "lon": 40.260481985074506,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 594.9185606056735,
-    "emission_uncertainty_kghr": 78.25054881195972,
-    "sector": "1B2",
-    "wind_speed_ms": 1.9722222222222223,
-    "wind_direction_deg": 301.99847470611667,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-G/tan20241004t081910c00s4001-G_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.24778548051667,
-      35.32594688430689,
-      40.28517164657536,
-      35.35671342917532
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-H",
-    "gas": "CH4",
-    "lat": 35.31547695370409,
-    "lon": 40.416478944689175,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 1231.0594314999053,
-    "emission_uncertainty_kghr": 236.8129256787216,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-H/tan20241004t081910c00s4001-H_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.405168440763404,
-      35.26342347825016,
-      40.499077624269546,
-      35.34006462965098
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-I",
-    "gas": "CH4",
-    "lat": 35.30695662855153,
-    "lon": 40.44404180741637,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 1373.7274397004792,
-    "emission_uncertainty_kghr": 262.7348057281137,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-I/tan20241004t081910c00s4001-I_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.40451639302213,
-      35.26369425257653,
-      40.499749867334344,
-      35.341145668991764
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-J",
-    "gas": "CH4",
-    "lat": 35.296975480595876,
-    "lon": 40.43528803344509,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 977.1641884909735,
-    "emission_uncertainty_kghr": 199.5368316504372,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-J/tan20241004t081910c00s4001-J_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.4189768126342,
-      35.281856644180216,
-      40.45700273250136,
-      35.31289203295918
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-K",
-    "gas": "CH4",
-    "lat": 35.29883299508192,
-    "lon": 40.42527274002714,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 366.0067021581862,
-    "emission_uncertainty_kghr": 85.8930474484358,
-    "sector": "1B2",
-    "wind_speed_ms": 2.1481481481481484,
-    "wind_direction_deg": 296.99969522011384,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-K/tan20241004t081910c00s4001-K_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.41600952770905,
-      35.28189612061109,
-      40.453703092329526,
-      35.31266028954244
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20241004t081910c00s4001-L",
-    "gas": "CH4",
-    "lat": 35.38365798250351,
-    "lon": 40.315729188618775,
-    "timestamp": "2024-10-04T08:19:10Z",
-    "emission_kghr": 149.55185692117672,
-    "emission_uncertainty_kghr": 38.95052665218042,
-    "sector": "1B2",
-    "wind_speed_ms": 2.435185185185185,
-    "wind_direction_deg": 294.0001015623428,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/10/04/tan20241004t081910c00s4001-L/tan20241004t081910c00s4001-L_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.296981945725484,
-      35.3681615185652,
-      40.33504925382838,
-      35.399197518821616
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-A",
-    "gas": "CH4",
-    "lat": 35.025666531153405,
-    "lon": 40.71040356992924,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 1017.1489502482369,
-    "emission_uncertainty_kghr": 103.67763746561623,
-    "sector": "1B2",
-    "wind_speed_ms": 5.7592592592592595,
-    "wind_direction_deg": 101.00030477988622,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-A/tan20240929t081638c00s4001-A_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.68717744252646,
-      35.011717287559385,
-      40.72540421186316,
-      35.0427505432283
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-B",
-    "gas": "CH4",
-    "lat": 35.040019845835644,
-    "lon": 40.69652737150082,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 1306.6484369473023,
-    "emission_uncertainty_kghr": 115.98333310239904,
-    "sector": "1B2",
-    "wind_speed_ms": 5.472222222222222,
-    "wind_direction_deg": 104.33346500159422,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-B/tan20240929t081638c00s4001-B_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.628644506364544,
-      35.025813571458464,
-      40.706115217717965,
-      35.089229214290185
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-C",
-    "gas": "CH4",
-    "lat": 35.091581572535205,
-    "lon": 40.61125566894475,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 990.7287259896594,
-    "emission_uncertainty_kghr": 99.10746859312286,
-    "sector": "1B2",
-    "wind_speed_ms": 5.5555555555555545,
-    "wind_direction_deg": 107.66670428043916,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-C/tan20240929t081638c00s4001-C_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.56270762861794,
-      35.06940889648179,
-      40.62768272102419,
-      35.12257086094413
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-D",
-    "gas": "CH4",
-    "lat": 35.09740738779588,
-    "lon": 40.601388027523114,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 802.9625515143075,
-    "emission_uncertainty_kghr": 97.99297239287067,
-    "sector": "1B2",
-    "wind_speed_ms": 5.5555555555555545,
-    "wind_direction_deg": 107.66670428043916,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-D/tan20240929t081638c00s4001-D_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.56270758585773,
-      35.069408242044275,
-      40.62735369354373,
-      35.12257089591807
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-E",
-    "gas": "CH4",
-    "lat": 35.087005616896946,
-    "lon": 40.605602559163145,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 391.7099310640702,
-    "emission_uncertainty_kghr": 198.27281002431417,
-    "sector": "1B2",
-    "wind_speed_ms": 5.5555555555555545,
-    "wind_direction_deg": 107.66670428043916,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-E/tan20240929t081638c00s4001-E_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.58740197320227,
-      35.0714951638538,
-      40.62499715178862,
-      35.10225859834004
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-F",
-    "gas": "CH4",
-    "lat": 35.1170948194941,
-    "lon": 40.682072227943706,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 402.5468838528583,
-    "emission_uncertainty_kghr": 66.58174818856375,
-    "sector": "1B2",
-    "wind_speed_ms": 5.888888888888888,
-    "wind_direction_deg": 104.33346500159422,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-F/tan20240929t081638c00s4001-F_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.66009242443573,
-      35.102972485571264,
-      40.69803286075296,
-      35.13400640040917
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
-  },
-  {
-    "plume_id": "tan20240929t081638c00s4001-G",
-    "gas": "CH4",
-    "lat": 35.04593256939512,
-    "lon": 40.69140812369079,
-    "timestamp": "2024-09-29T08:16:38Z",
-    "emission_kghr": 1381.0558036267757,
-    "emission_uncertainty_kghr": 137.78053732316982,
-    "sector": "1B2",
-    "wind_speed_ms": 5.472222222222222,
-    "wind_direction_deg": 104.33346500159422,
-    "plume_png": "https://api.carbonmapper.org/api/v1/catalog/asset/l3a-vis-ch4-mfa-v3/2024/09/29/tan20240929t081638c00s4001-G/tan20240929t081638c00s4001-G_l3a-vis-ch4-mfa-v3_plume.png",
-    "plume_bounds": [
-      40.626972918955104,
-      35.0244812180785,
-      40.706422812454,
-      35.089517386847845
-    ],
-    "plume_quality": null,
-    "instrument": "tan",
-    "platform": "Tanager"
+    "platform": "Tanager",
+    "portal_url": "https://data.carbonmapper.org/#plume/tan20241225t080702c00s4001-B"
   }
 ]
