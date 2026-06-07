@@ -427,11 +427,13 @@
 
             map.on('zoomend', () => {
                 const currentZoom = map.getZoom();
-                const heatmapCheckbox = document.getElementById('layer-heatmap');
-                if (currentZoom >= 19) {
-                    if (map.hasLayer(heatmapLayer)) map.removeLayer(heatmapLayer);
+                const plumeCheckbox = document.getElementById('layer-plumes');
+                
+                // Hide plumes at low zoom levels to prevent visual clutter
+                if (currentZoom < 7) {
+                    if (map.hasLayer(plumeLayerGroup)) map.removeLayer(plumeLayerGroup);
                 } else {
-                    if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
+                    if (plumeCheckbox.checked && !map.hasLayer(plumeLayerGroup)) map.addLayer(plumeLayerGroup);
                 }
             });
             loadPlumeData();            
