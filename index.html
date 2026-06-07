@@ -1102,7 +1102,7 @@
         
                     // Explicit Economic Calculation with parseFloat fix
                     const GAS_PRICE_MMBTU = 3.50;
-                    const valueUSD_millions = parseFloat((f.vol_mm3 * 35.315 * GAS_PRICE_MMBTU / 1000000).toFixed(1));
+                    const valueUSD_millions = parseFloat((f.vol_mm3 * 35315 * GAS_PRICE_MMBTU / 1000000).toFixed(1));
                     const valueStr = valueUSD_millions >= 1000
                         ? `~$${(valueUSD_millions / 1000).toFixed(2)}B`
                         : `~$${valueUSD_millions}M`;
