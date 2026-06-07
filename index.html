@@ -427,15 +427,35 @@
 
             map.on('zoomend', () => {
                 const currentZoom = map.getZoom();
-                const plumeCheckbox = document.getElementById('layer-plumes');
-                
-                // Hide plumes at low zoom levels to prevent visual clutter
-                if (currentZoom < 7) {
+                const heatmapCheckbox = document.getElementById('layer-heatmap');
+                const plumeCheckbox = document.getElementById('layer-plumes'); // Get the checkbox state
+            
+                // Logic for Heatmap
+                if (currentZoom >= 19) {
+                    if (map.hasLayer(heatmapLayer)) map.removeLayer(heatmapLayer);
+                } else {
+                    if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
+                }
+            
+                // Logic for Plumes - Hide if zoom is too far out (e.g., < 8)
+                if (currentZoom < 8) {
                     if (map.hasLayer(plumeLayerGroup)) map.removeLayer(plumeLayerGroup);
                 } else {
                     if (plumeCheckbox.checked && !map.hasLayer(plumeLayerGroup)) map.addLayer(plumeLayerGroup);
                 }
             });
+
+            if (layerType === 'plumes') {
+                    const checked = document.getElementById('layer-plumes').checked;
+                    // Only show if zoom is >= 8, otherwise just let the toggle state update but keep layer hidden
+                    if (checked && currentZoom >= 8) {
+                        map.addLayer(plumeLayerGroup);
+                    } else {
+                        map.removeLayer(plumeLayerGroup);
+                    }
+                }
+            }
+            
             loadPlumeData();            
         }
 
