@@ -734,6 +734,15 @@
                         weight: 2,
                         opacity: 1
                     });
+                    
+                        circleMarker.on('click', function(e) {
+                        // Zoom to level 13 for optimal plume visualization
+                        map.flyTo(e.latlng, 13, {
+                        animate: true,
+                        duration: 0.8 // Slightly slower duration feels more premium/stable
+                        });
+                    });
+                    
 
                     const popupContent = `
                         <div class="p-1 space-y-2 text-xs" style="min-width:200px">
