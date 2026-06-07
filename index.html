@@ -1094,18 +1094,20 @@
                 const flares = wbFlareData['2024'] || [];
         
                 flares.forEach(f => {
-                    if (f.vol_mm3 === 0) return;
+                    // Consolidated economic check and filter
+                    const GAS_PRICE_MMBTU = 3.50;
+                    const valueUSD_millions = parseFloat((f.vol_mm3 * 35315 * GAS_PRICE_MMBTU / 1000000).toFixed(1));
+                    
+                    // This filters out zero-volume and <$1M sites simultaneously
+                    if (valueUSD_millions < 1) return;
+        
+                    const valueStr = valueUSD_millions >= 1000
+                        ? `~$${(valueUSD_millions / 1000).toFixed(2)}B`
+                        : `~$${valueUSD_millions}M`;
         
                     // Radius calculation: using power-scaling
                     const radius = Math.max(6, Math.min(45, Math.pow(f.vol_mm3, 0.4) * 1.5));
                     const levelColor = f.level === 'Large' ? '#f87171' : f.level === 'Medium' ? '#fb923c' : '#fbbf24';
-        
-                    // Explicit Economic Calculation with parseFloat fix
-                    const GAS_PRICE_MMBTU = 3.50;
-                    const valueUSD_millions = parseFloat((f.vol_mm3 * 35315 * GAS_PRICE_MMBTU / 1000000).toFixed(1));
-                    const valueStr = valueUSD_millions >= 1000
-                        ? `~$${(valueUSD_millions / 1000).toFixed(2)}B`
-                        : `~$${valueUSD_millions}M`;
         
                     const circle = L.circleMarker([f.lat, f.lon], {
                         radius: radius,
@@ -1117,7 +1119,7 @@
                     });
         
                     circle.bindPopup(`
-                        <div class="p-1 space-y-2 text-xs" style="min-width:200px">
+                        <div class="p-1 space-y-2 text-xs" style="min-width:220px">
                             <div class="flex items-center justify-between border-b border-gray-700 pb-2">
                                 <span class="font-extrabold text-sm" style="color:#a855f7">🔥 Wasted Gas — 2024</span>
                             </div>
