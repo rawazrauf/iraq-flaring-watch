@@ -1094,20 +1094,26 @@
                 const flares = wbFlareData['2024'] || [];
         
                 flares.forEach(f => {
-                    // Consolidated economic check and filter
+                    // Economic & Filter Calculation
                     const GAS_PRICE_MMBTU = 3.50;
                     const valueUSD_millions = parseFloat((f.vol_mm3 * 35315 * GAS_PRICE_MMBTU / 1000000).toFixed(1));
                     
-                    // This filters out zero-volume and <$1M sites simultaneously
+                    // Filter out < $1M sites
                     if (valueUSD_millions < 1) return;
         
+                    // Revenue Formatter
                     const valueStr = valueUSD_millions >= 1000
                         ? `~$${(valueUSD_millions / 1000).toFixed(2)}B`
                         : `~$${valueUSD_millions}M`;
         
-                    // Radius calculation: using power-scaling
+                    // Electricity Calculation
+                    const homesEquivalent = Math.round((f.vol_mm3 * 4400 * 1000) / 4500);
+                    const homesStr = homesEquivalent >= 1000000
+                        ? `~${(homesEquivalent / 1000000).toFixed(1)}M`
+                        : `~${homesEquivalent.toLocaleString()}`;
+        
+                    // Visual Settings
                     const radius = Math.max(6, Math.min(45, Math.pow(f.vol_mm3, 0.4) * 1.5));
-                    const levelColor = f.level === 'Large' ? '#f87171' : f.level === 'Medium' ? '#fb923c' : '#fbbf24';
         
                     const circle = L.circleMarker([f.lat, f.lon], {
                         radius: radius,
@@ -1124,18 +1130,14 @@
                                 <span class="font-extrabold text-sm" style="color:#a855f7">🔥 Wasted Gas — 2024</span>
                             </div>
                             
-                            <div class="bg-purple-900/20 p-2 rounded border border-purple-500/30 space-y-1">
+                            <div class="bg-purple-900/20 p-2 rounded border border-purple-500/30 space-y-2">
                                 <p class="text-gray-300 leading-relaxed">
                                     <b>${f.operator || 'Unknown'}</b> flared <b>${f.vol_mm3.toLocaleString()} million m³</b> 
                                     of gas at <b>${f.field || 'Unknown'}</b> in 2024. Capturing this could have generated an estimated 
-                                    <span class="text-red-400 font-bold">${valueStr} USD</span> in value.
+                                    <span class="text-red-400 font-bold">${valueStr} USD</span> in value — 
+                                    enough electricity to power <span class="text-amber-400 font-bold">${homesStr} Iraqi homes</span> for a year.
                                 </p>
-                                <p class="text-[9px] text-gray-500 italic">Estimated at $${GAS_PRICE_MMBTU}/MMBtu gas benchmark.</p>
-                            </div>
-        
-                            <div class="space-y-1 font-mono text-[10px] text-gray-400">
-                                <div class="flex justify-between"><span class="text-gray-500">Tier:</span><span class="font-bold" style="color:${levelColor}">${f.level}</span></div>
-                                <div class="flex justify-between"><span class="text-gray-500">Type:</span><span class="font-bold text-gray-200">${f.location} ${f.type || ''}</span></div>
+                                <p class="text-[9px] text-gray-500 italic">Est. at $${GAS_PRICE_MMBTU}/MMBtu. Electricity based on ~35% plant efficiency, 4,500 kWh/household/yr.</p>
                             </div>
                             
                             <div class="pt-1">
