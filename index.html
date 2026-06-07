@@ -735,27 +735,23 @@
                         opacity: 1
                     });
                     
-                       circleMarker.on('click', function(e) {
-                            // 1. Close existing popups to prevent weird anchoring
-                            map.closePopup();
+                    circleMarker.on('click', function(e) {
+                        const marker = this; // Capture the marker
+                        const latlng = e.latlng;
                         
-                            // 2. Fly to the target
-                            map.flyTo(e.latlng, 13, {
-                                animate: true,
-                                duration: 0.8
-                            });
-                        
-                            // 3. Define the popup opening action
-                            const openPopup = () => {
-                                // Open the popup at the exact coordinate
-                                this.openPopup(e.latlng);
-                                // Remove the listener so it doesn't trigger on every map move
-                                map.off('moveend', openPopup);
-                            };
-                        
-                            // 4. Wait for the flight to finish before pinning the popup
-                            map.on('moveend', openPopup);
+                        // 1. Close any existing popup
+                        map.closePopup();
+                    
+                        // 2. Define the flight
+                        map.flyTo(latlng, 13, { animate: true, duration: 0.8 });
+                    
+                        // 3. Wait for zoom/pan to finish
+                        map.once('moveend', () => {
+                            // 4. Open the popup specifically at the destination coordinate
+                            // We ensure it is attached to the map at the final resting state
+                            marker.openPopup(latlng);
                         });
+                    });
                     
 
                     const popupContent = `
