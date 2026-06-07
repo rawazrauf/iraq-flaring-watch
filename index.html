@@ -736,20 +736,11 @@
                     });
                     
                     circleMarker.on('click', function(e) {
-                        const marker = this; // Capture the marker
-                        const latlng = e.latlng;
-                        
-                        // 1. Close any existing popup
+                        L.DomEvent.stopPropagation(e);
                         map.closePopup();
-                    
-                        // 2. Define the flight
-                        map.flyTo(latlng, 13, { animate: true, duration: 0.8 });
-                    
-                        // 3. Wait for zoom/pan to finish
+                        map.flyTo([p.lat, p.lon], 13, { animate: true, duration: 0.8 });
                         map.once('moveend', () => {
-                            // 4. Open the popup specifically at the destination coordinate
-                            // We ensure it is attached to the map at the final resting state
-                            marker.openPopup(latlng);
+                            circleMarker.openPopup();
                         });
                     });
                     
