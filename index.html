@@ -6,18 +6,18 @@
 <title>Iraq Flaring Watch</title>
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-
+    
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-
+    
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+    
 <script defer src="https://cloud.umami.is/script.js" data-website-id="9af917fd-4b66-4919-99e8-98564d21aab7"></script>
-
+    
 <style>
 html, body {
 height: 100%;
@@ -328,9 +328,9 @@ Click anywhere on the map to compute geodesic distance.
 <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 
 <script>
-// =========================================================================
-// ZONE A: GLOBAL STATE REGISTRY
-// =========================================================================
+        // =========================================================================
+        // ZONE A: GLOBAL STATE REGISTRY
+        // =========================================================================
 let map;
 let preloadFlares = [];
 let currentFlares = [];
@@ -345,11 +345,11 @@ let iraqBoundaryLayer;
 let staticPopData = {};
 let nextRandomFlareTarget = null;
 let plumeLayerGroup = L.layerGroup();
-
-let isMeasuringMode = false;
-let selectedMeasureFlare = null;
-let measureLine = null;
-let tempMeasureMarker = null;
+        
+        let isMeasuringMode = false;
+        let selectedMeasureFlare = null;
+        let measureLine = null;
+        let tempMeasureMarker = null;
 
 const flareIcon = L.divIcon({
 className: 'custom-flare-container',
@@ -358,14 +358,190 @@ iconSize: [16, 16],
 iconAnchor: [8, 8]
 });
 
-// =========================================================================
-// ZONE B: APP INITIALIZATION & HOOKS
-// =========================================================================
+        let isMeasuringMode = false;
+        let selectedMeasureFlare = null;
+        let measureLine = null;
+        let tempMeasureMarker = null;
+
+        // =========================================================================
+        // ZONE B: APP INITIALIZATION & HOOKS
+        // =========================================================================
 window.onload = async function() {
 initMap();
 await fetchStaticPopData();
 await loadStaticQueryFile();
 };
+
+        async function fetchStaticPopData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query_population.json');
+                if (response.ok) staticPopData = await response.json();
+            } catch (error) {
+                console.warn("Static population dataset missing or failed to load.");
+            }
+        }
+
+        async function loadPlumeData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_tanager_plumes.json');
+                const plumes = await response.json();
+
+                plumes.forEach(p => {
+                    const isCH4 = p.gas === 'CH4';
+                    const color = isCH4 ? '#f97316' : '#3b82f6';
+                    const emission = p.emission_kghr || 100;
+                    const radius = Math.max(6, Math.min(22, Math.log10(emission) * 4));
+
+                    if (p.plume_png && p.plume_bounds && p.plume_bounds.length === 4) {
+                        const bounds = [
+                            [p.plume_bounds[1], p.plume_bounds[0]], 
+                            [p.plume_bounds[3], p.plume_bounds[2]]  
+                        ];
+                        const imageOverlay = L.imageOverlay(p.plume_png, bounds, {
+                            opacity: 0.8,
+                            interactive: false  
+                        });
+                        plumeLayerGroup.addLayer(imageOverlay);
+                    }
+
+                    const emissionStr = p.emission_kghr
+                        ? `${p.emission_kghr.toLocaleString(undefined, {maximumFractionDigits: 0})} kg/hr`
+                        : 'Not quantified';
+
+                    const sectorLabels = {
+                        '1B2': 'Oil & Gas Fugitive',
+                        '1A1': 'Energy / Power',
+                        '6A':  'Solid Waste',
+                        'other': 'Other'
+                    };
+
+                    const sector = sectorLabels[p.sector] || p.sector || 'Unknown';
+                    const date = new Date(p.timestamp).toLocaleDateString('en-US', {
+                        year: 'numeric', month: 'short', day: 'numeric'
+                    });
+
+                    const circleMarker = L.circleMarker([p.lat, p.lon], {
+                        radius: radius,
+                        color: color,
+                        fillColor: color,
+                        fillOpacity: 0.7,
+                        weight: 2,
+                        opacity: 1
+                    });
+
+                    const popupContent = `
+                        <div class="p-1 space-y-2 text-xs" style="min-width:200px">
+                            <div class="flex items-center justify-between border-b border-gray-700 pb-2">
+                                <span class="font-extrabold text-sm" style="color:${color}">
+                                    ${isCH4 ? '🟠' : '🔵'} ${p.gas} Plume
+                                </span>
+                                <span class="text-[9px] text-gray-500">${date}</span>
+                            </div>
+                            <div class="space-y-1 font-mono text-[10px]">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Emission:</span>
+                                    <span class="font-bold text-gray-200">${emissionStr}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Sector:</span>
+                                    <span class="font-bold text-gray-200">${sector}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Wind:</span>
+                                    <span class="font-bold text-gray-200">${p.wind_speed_ms ? p.wind_speed_ms.toFixed(1) + ' m/s' : 'N/A'}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Platform:</span>
+                                    <span class="font-bold text-gray-200">Tanager Satellite</span>
+                                </div>
+                            </div>
+                            ${p.plume_png ? `
+                            <div class="pt-1 border-t border-gray-800">
+                                <p class="text-[9px] text-gray-500 mb-1">Plume detection image:</p>
+                                <img src="${p.plume_png}"
+                                     alt="Satellite plume detection"
+                                     style="width:100%; border-radius:6px; border:1px solid #374151; display:block;"
+                                     onerror="this.style.display='none'">
+                            </div>` : ''}
+                            ${p.portal_url ? `
+                            <div class="pt-1">
+                                <a href="${p.portal_url}" target="_blank"
+                                   class="block w-full text-center text-[10px] font-bold py-1.5 px-2 rounded transition"
+                                   style="background:#1a2e1a; color:#4ade80;">
+                                    🌍 View on Carbon Mapper →
+                                </a>
+                            </div>` : ''}
+                            <div class="text-[9px] text-gray-600 pt-1 border-t border-gray-800">
+                                Source: <a href="https://carbonmapper.org" target="_blank" style="color:#4ade80;">Carbon Mapper</a> / Tanager
+                            </div>
+                        </div>
+                    `;
+
+                    circleMarker.bindPopup(popupContent, {
+                        maxWidth: 240,
+                        minWidth: 200,
+                        closeOnClick: false,
+                        autoPanPadding: [20, 80]
+                    });
+
+                    plumeLayerGroup.addLayer(circleMarker);
+                });
+
+                if (document.getElementById('layer-plumes').checked) {
+                    if (!map.hasLayer(plumeLayerGroup)) plumeLayerGroup.addTo(map);
+                }
+            } catch (e) {
+                console.error("Could not load plume data", e);
+            }
+        }
+
+        async function loadStaticQueryFile() {
+            const loaderBox = document.getElementById('live-loader-box');
+            const statusText = document.getElementById('loading-status-text');
+            const progressBar = document.getElementById('loader-progress-bar');
+
+            loaderBox.classList.remove('hidden');
+            statusText.textContent = "Loading static flare data...";
+            progressBar.style.width = "30%";
+
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                progressBar.style.width = "70%";
+                const data = await response.json();
+
+                let staticDate = "Unknown Date";
+                if (data.osm3s && data.osm3s.timestamp_osm_base) {
+                    const d = new Date(data.osm3s.timestamp_osm_base);
+                    staticDate = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                }
+
+                preloadFlares = data.elements.map((element) => {
+                    const lat = element.lat || (element.center ? element.center.lat : null);
+                    const lon = element.lon || (element.center ? element.center.lon : null);
+                    if (!lat || !lon) return null;
+                    const tags = element.tags || {};
+                    const field = tags.oilfield || tags.field || detectOilFieldFromPosition(lat, lon);
+                    return {
+                        id: element.id, type: element.type,
+                        lat: parseFloat(lat), lon: parseFloat(lon),
+                        field: field,
+                        status: tags.man_made ? `OSM ${tags.man_made}` : "Active Gas Flare",
+                        source: `OpenStreetMap on ${staticDate}`,
+                        website: tags.website || null
+                    };
+                }).filter(f => f !== null);
+
+                currentFlares = [...preloadFlares];
+                loadLayersAndData();
+                progressBar.style.width = "100%";
+                statusText.textContent = `Loaded ${preloadFlares.length} flares.`;
+                setTimeout(() => loaderBox.classList.add('hidden'), 1000);
+            } catch (error) {
+                statusText.textContent = "Failed to load data. Check connection.";
+                console.error('Error fetching static query data:', error);
+            }
+        }
 
 function initMap() {
 map = L.map('leaflet-map-canvas', {
@@ -427,100 +603,154 @@ map.on('click', onMapClickForDistance);
 
 map.on('zoomend', () => {
 const currentZoom = map.getZoom();
-                const heatmapCheckbox = document.getElementById('layer-heatmap');
-                if (currentZoom >= 19) {
-                    if (map.hasLayer(heatmapLayer)) map.removeLayer(heatmapLayer);
-                const plumeCheckbox = document.getElementById('layer-plumes');
-                
-                // Hide plumes at low zoom levels to prevent visual clutter
-                if (currentZoom < 7) {
-                    if (map.hasLayer(plumeLayerGroup)) map.removeLayer(plumeLayerGroup);
+const heatmapCheckbox = document.getElementById('layer-heatmap');
+if (currentZoom >= 19) {
+if (map.hasLayer(heatmapLayer)) map.removeLayer(heatmapLayer);
 } else {
-                    if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
-                    if (plumeCheckbox.checked && !map.hasLayer(plumeLayerGroup)) map.addLayer(plumeLayerGroup);
+if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
 }
 });
 loadPlumeData();            
 }
 
-// =========================================================================
-// ZONE C: DATA ACQUISITION LAYER
-// =========================================================================
-async function fetchStaticPopData() {
-try {
-const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query_population.json');
-if (response.ok) staticPopData = await response.json();
-} catch (error) {
-console.warn("Static population dataset missing or failed to load.");
+        function toggleControlDrawer() {
+            const drawer = document.getElementById('sidebar-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            if (drawer.classList.contains('-translate-x-full')) {
+                drawer.classList.remove('-translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                drawer.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+            setTimeout(() => { if (map) map.invalidateSize(); }, 310);
+        }
+
+        function closeDrawerOnMobile() {
+            const drawer = document.getElementById('sidebar-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            if (window.innerWidth < 1024) {
+                drawer.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+                setTimeout(() => { if (map) map.invalidateSize(); }, 310);
+            }
+        }
+
+        function toggleHelperBox() {
+            const box = document.getElementById('map-helper-box');
+            if (box.style.display === 'flex') {
+                box.style.display = 'none';
+            } else {
+                box.style.display = 'flex';
+        // =========================================================================
+        // ZONE C: DATA ACQUISITION LAYER
+        // =========================================================================
+        async function fetchStaticPopData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query_population.json');
+                if (response.ok) staticPopData = await response.json();
+            } catch (error) {
+                console.warn("Static population dataset missing or failed to load.");
 }
 }
 
-async function loadStaticQueryFile() {
-const loaderBox = document.getElementById('live-loader-box');
+        function changeBaseMap(type) {
+            currentBaseMapType = type;
+            Object.values(baseLayers).forEach(layer => { if (map.hasLayer(layer)) map.removeLayer(layer); });
+            baseLayers[type].addTo(map);
+            const buttons = {
+                satellite: document.getElementById('map-base-satellite'),
+                clarity: document.getElementById('map-base-clarity'),
+                dark: document.getElementById('map-base-dark'),
+                streets: document.getElementById('map-base-streets'),
+                night: document.getElementById('map-base-night')
+            };
+            Object.keys(buttons).forEach(key => {
+                buttons[key].className = key === type
+                    ? "text-left text-xs font-bold px-3 py-2 rounded transition bg-amber-600 text-white w-full h-10 flex items-center justify-between"
+                    : "text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center";
+            });
+        }
+
+        async function fetchLiveOSMData() {
+        async function loadStaticQueryFile() {
+            const loaderBox = document.getElementById('live-loader-box');
 const statusText = document.getElementById('loading-status-text');
+            const timerText = document.getElementById('loading-timer');
 const progressBar = document.getElementById('loader-progress-bar');
 
-loaderBox.classList.remove('hidden');
-statusText.textContent = "Loading static flare data...";
-progressBar.style.width = "30%";
+            statusText.textContent = "Connecting Overpass...";
+            progressBar.style.width = "20%";
+            loaderBox.classList.remove('hidden');
+            statusText.textContent = "Loading static flare data...";
+            progressBar.style.width = "30%";
 
-try {
-const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query');
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
-progressBar.style.width = "70%";
-const data = await response.json();
+            let seconds = 0;
+            const timerInterval = setInterval(() => {
+                seconds += 0.1;
+                timerText.textContent = seconds.toFixed(1) + "s";
+            }, 100);
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                progressBar.style.width = "70%";
+                const data = await response.json();
 
-let staticDate = "Unknown Date";
-if (data.osm3s && data.osm3s.timestamp_osm_base) {
-const d = new Date(data.osm3s.timestamp_osm_base);
-staticDate = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-}
+            const query = `
+                [out:json][timeout:60];
+                area["ISO3166-1"="IQ"]->.searchArea;
+                (
+                let staticDate = "Unknown Date";
+                if (data.osm3s && data.osm3s.timestamp_osm_base) {
+                    const d = new Date(data.osm3s.timestamp_osm_base);
+                    staticDate = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                }
 
-preloadFlares = data.elements.map((element) => {
-const lat = element.lat || (element.center ? element.center.lat : null);
-const lon = element.lon || (element.center ? element.center.lon : null);
-if (!lat || !lon) return null;
-const tags = element.tags || {};
-const field = tags.oilfield || tags.field || detectOilFieldFromPosition(lat, lon);
-return {
-id: element.id, type: element.type,
-lat: parseFloat(lat), lon: parseFloat(lon),
-field: field,
-status: tags.man_made ? `OSM ${tags.man_made}` : "Active Gas Flare",
-source: `OpenStreetMap on ${staticDate}`,
-website: tags.website || null
-};
-}).filter(f => f !== null);
+                preloadFlares = data.elements.map((element) => {
+                    const lat = element.lat || (element.center ? element.center.lat : null);
+                    const lon = element.lon || (element.center ? element.center.lon : null);
+                    if (!lat || !lon) return null;
+                    const tags = element.tags || {};
+                    const field = tags.oilfield || tags.field || detectOilFieldFromPosition(lat, lon);
+                    return {
+                        id: element.id, type: element.type,
+                        lat: parseFloat(lat), lon: parseFloat(lon),
+                        field: field,
+                        status: tags.man_made ? `OSM ${tags.man_made}` : "Active Gas Flare",
+                        source: `OpenStreetMap on ${staticDate}`,
+                        website: tags.website || null
+                    };
+                }).filter(f => f !== null);
 
-currentFlares = [...preloadFlares];
-loadLayersAndData();
-progressBar.style.width = "100%";
-statusText.textContent = `Loaded ${preloadFlares.length} flares.`;
-setTimeout(() => loaderBox.classList.add('hidden'), 1000);
-} catch (error) {
-statusText.textContent = "Failed to load data. Check connection.";
-console.error('Error fetching static query data:', error);
-}
-}
+                currentFlares = [...preloadFlares];
+                loadLayersAndData();
+                progressBar.style.width = "100%";
+                statusText.textContent = `Loaded ${preloadFlares.length} flares.`;
+                setTimeout(() => loaderBox.classList.add('hidden'), 1000);
+            } catch (error) {
+                statusText.textContent = "Failed to load data. Check connection.";
+                console.error('Error fetching static query data:', error);
+            }
+        }
 
-async function fetchLiveOSMData() {
-const statusText = document.getElementById('loading-status-text');
-const timerText = document.getElementById('loading-timer');
-const progressBar = document.getElementById('loader-progress-bar');
+        async function fetchLiveOSMData() {
+            const statusText = document.getElementById('loading-status-text');
+            const timerText = document.getElementById('loading-timer');
+            const progressBar = document.getElementById('loader-progress-bar');
 
-statusText.textContent = "Connecting Overpass...";
-progressBar.style.width = "20%";
+            statusText.textContent = "Connecting Overpass...";
+            progressBar.style.width = "20%";
 
-let seconds = 0;
-const timerInterval = setInterval(() => {
-seconds += 0.1;
-timerText.textContent = seconds.toFixed(1) + "s";
-}, 100);
+            let seconds = 0;
+            const timerInterval = setInterval(() => {
+                seconds += 0.1;
+                timerText.textContent = seconds.toFixed(1) + "s";
+            }, 100);
 
-const query = `
-               [out:json][timeout:60];
-               area["ISO3166-1"="IQ"]->.searchArea;
-               (
+            const query = `
+                [out:json][timeout:60];
+                area["ISO3166-1"="IQ"]->.searchArea;
+                (
                  node["man_made"="flare"](area.searchArea);
                  way["man_made"="flare"](area.searchArea);
                );
@@ -587,9 +817,47 @@ currentFlares = liveParsedFlares;
 setTimeout(() => { document.getElementById('live-loader-box').classList.add('hidden'); loadLayersAndData(); }, 1000);
 }
 
-// =========================================================================
-// ZONE D: GEOSPATIAL RENDER CONTROLLERS
-// =========================================================================
+        function detectOilFieldFromPosition(lat, lon) {
+            const fields = [
+                { name: "North Rumaila", lat: 30.65, lon: 47.30 },
+                { name: "South Rumaila", lat: 30.16, lon: 47.41 },
+                { name: "West Qurna",    lat: 30.85, lon: 47.30 },
+                { name: "Majnoon",       lat: 31.08, lon: 47.62 },
+                { name: "Zubair",        lat: 30.38, lon: 47.71 },
+                { name: "Nasiriyah",     lat: 31.35, lon: 45.96 },
+                { name: "Gharaf",        lat: 31.76, lon: 46.06 },
+                { name: "Halfaya",       lat: 31.70, lon: 47.32 },
+                { name: "Ahdab",         lat: 32.51, lon: 45.66 },
+                { name: "Badra",         lat: 33.05, lon: 46.07 },
+                { name: "East Baghdad",  lat: 33.23, lon: 44.77 },
+                { name: "Akkas",         lat: 34.07, lon: 40.99 },
+                { name: "Baba Gurgur",   lat: 35.54, lon: 44.31 },
+                { name: "Bai Hasan",     lat: 35.63, lon: 44.01 },
+                { name: "Khabbaz",       lat: 35.48, lon: 44.15 },
+                { name: "Jambur",        lat: 35.23, lon: 44.44 },
+                { name: "Ajeel",         lat: 34.89, lon: 43.80 },
+                { name: "Khurmala",      lat: 35.97, lon: 43.73 },
+                { name: "Taq Taq",       lat: 36.00, lon: 44.51 },
+                { name: "Qayara",        lat: 35.83, lon: 43.23 },
+                { name: "Peshkabir",     lat: 37.08, lon: 42.53 },
+                { name: "Sarsang",       lat: 36.90, lon: 43.38 },
+                { name: "Atrush",        lat: 36.86, lon: 43.45 },
+                { name: "Kirkuk",        lat: 35.45, lon: 44.25 }
+            ];
+            let closestField = "Other Iraqi Field";
+            let minDistance = 0.25;
+            for (let i = 0; i < fields.length; i++) {
+                const dLat = lat - fields[i].lat;
+                const dLon = lon - fields[i].lon;
+                const dist = Math.sqrt(dLat * dLat + dLon * dLon);
+                if (dist < minDistance) { minDistance = dist; closestField = fields[i].name; }
+            }
+            return closestField;
+        }
+
+        // =========================================================================
+        // ZONE D: GEOSPATIAL RENDER CONTROLLERS
+        // =========================================================================
 function loadLayersAndData() {
 markerClusterGroup.clearLayers();
 safeRadiusGroup.clearLayers();
@@ -645,7 +913,8 @@ const popupContent = `
                            </div>
                        </div>
                        <div class="bg-blue-900/20 p-2 rounded border border-blue-500/30 text-[10px] text-blue-400 leading-tight">
-                           <a href="https://www.google.com/maps?q=${flare.lat},${flare.lon}&t=k&z=19" target="_blank" class="font-bold flex items-center justify-between hover:underline">
+                                <a href="https://www.google.com/maps?q=${flare.lat},${flare.lon}&t=k&z=19" target="_blank" class="font-bold flex items-center justify-between hover:underline">
+                            <a href="https://www.google.com/maps?q=${flare.lat},${flare.lon}&t=k&z=19" target="_blank" class="font-bold flex items-center justify-between hover:underline">
                                <span>🗺️ View on Google Maps</span><span>→</span>
                            </a>
                        </div>
@@ -693,207 +962,196 @@ map.removeLayer(markerClusterGroup);
 }
 }
 
-async function loadPlumeData() {
-try {
-const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_tanager_plumes.json');
-const plumes = await response.json();
+        async function loadPlumeData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_tanager_plumes.json');
+                const plumes = await response.json();
 
-plumes.forEach(p => {
-const isCH4 = p.gas === 'CH4';
-const color = isCH4 ? '#f97316' : '#3b82f6';
-const emission = p.emission_kghr || 100;
-const radius = Math.max(6, Math.min(22, Math.log10(emission) * 4));
+                plumes.forEach(p => {
+                    const isCH4 = p.gas === 'CH4';
+                    const color = isCH4 ? '#f97316' : '#3b82f6';
+                    const emission = p.emission_kghr || 100;
+                    const radius = Math.max(6, Math.min(22, Math.log10(emission) * 4));
 
-if (p.plume_png && p.plume_bounds && p.plume_bounds.length === 4) {
-const bounds = [
-[p.plume_bounds[1], p.plume_bounds[0]], 
-[p.plume_bounds[3], p.plume_bounds[2]]  
-];
-const imageOverlay = L.imageOverlay(p.plume_png, bounds, {
-opacity: 0.8,
-interactive: false  
-});
-plumeLayerGroup.addLayer(imageOverlay);
-}
+                    if (p.plume_png && p.plume_bounds && p.plume_bounds.length === 4) {
+                        const bounds = [
+                            [p.plume_bounds[1], p.plume_bounds[0]], 
+                            [p.plume_bounds[3], p.plume_bounds[2]]  
+                        ];
+                        const imageOverlay = L.imageOverlay(p.plume_png, bounds, {
+                            opacity: 0.8,
+                            interactive: false  
+                        });
+                        plumeLayerGroup.addLayer(imageOverlay);
+                    }
 
-const emissionStr = p.emission_kghr
-? `${p.emission_kghr.toLocaleString(undefined, {maximumFractionDigits: 0})} kg/hr`
-: 'Not quantified';
+                    const emissionStr = p.emission_kghr
+                        ? `${p.emission_kghr.toLocaleString(undefined, {maximumFractionDigits: 0})} kg/hr`
+                        : 'Not quantified';
 
-const sectorLabels = {
-'1B2': 'Oil & Gas Fugitive',
-'1A1': 'Energy / Power',
-'6A':  'Solid Waste',
-'other': 'Other'
-};
+                    const sectorLabels = {
+                        '1B2': 'Oil & Gas Fugitive',
+                        '1A1': 'Energy / Power',
+                        '6A':  'Solid Waste',
+                        'other': 'Other'
+                    };
 
-const sector = sectorLabels[p.sector] || p.sector || 'Unknown';
-const date = new Date(p.timestamp).toLocaleDateString('en-US', {
-year: 'numeric', month: 'short', day: 'numeric'
-});
+                    const sector = sectorLabels[p.sector] || p.sector || 'Unknown';
+                    const date = new Date(p.timestamp).toLocaleDateString('en-US', {
+                        year: 'numeric', month: 'short', day: 'numeric'
+                    });
 
-const circleMarker = L.circleMarker([p.lat, p.lon], {
-radius: radius,
-color: color,
-fillColor: color,
-fillOpacity: 0.7,
-weight: 2,
-opacity: 1
-});
+                    const circleMarker = L.circleMarker([p.lat, p.lon], {
+                        radius: radius,
+                        color: color,
+                        fillColor: color,
+                        fillOpacity: 0.7,
+                        weight: 2,
+                        opacity: 1
+                    });
 
-circleMarker.on('click', function(e) {
-L.DomEvent.stopPropagation(e);
-map.closePopup();
-map.flyTo([p.lat, p.lon], 13, { animate: true, duration: 0.8 });
-map.once('moveend', () => {
-circleMarker.openPopup();
-});
-});
+                    const popupContent = `
+                        <div class="p-1 space-y-2 text-xs" style="min-width:200px">
+                            <div class="flex items-center justify-between border-b border-gray-700 pb-2">
+                                <span class="font-extrabold text-sm" style="color:${color}">
+                                    ${isCH4 ? '🟠' : '🔵'} ${p.gas} Plume
+                                </span>
+                                <span class="text-[9px] text-gray-500">${date}</span>
+                            </div>
+                            <div class="space-y-1 font-mono text-[10px]">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Emission:</span>
+                                    <span class="font-bold text-gray-200">${emissionStr}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Sector:</span>
+                                    <span class="font-bold text-gray-200">${sector}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Wind:</span>
+                                    <span class="font-bold text-gray-200">${p.wind_speed_ms ? p.wind_speed_ms.toFixed(1) + ' m/s' : 'N/A'}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Platform:</span>
+                                    <span class="font-bold text-gray-200">Tanager Satellite</span>
+                                </div>
+                            </div>
+                            ${p.plume_png ? `
+                            <div class="pt-1 border-t border-gray-800">
+                                <p class="text-[9px] text-gray-500 mb-1">Plume detection image:</p>
+                                <img src="${p.plume_png}"
+                                     alt="Satellite plume detection"
+                                     style="width:100%; border-radius:6px; border:1px solid #374151; display:block;"
+                                     onerror="this.style.display='none'">
+                            </div>` : ''}
+                            ${p.portal_url ? `
+                            <div class="pt-1">
+                                <a href="${p.portal_url}" target="_blank"
+                                   class="block w-full text-center text-[10px] font-bold py-1.5 px-2 rounded transition"
+                                   style="background:#1a2e1a; color:#4ade80;">
+                                    🌍 View on Carbon Mapper →
+                                </a>
+                            </div>` : ''}
+                            <div class="text-[9px] text-gray-600 pt-1 border-t border-gray-800">
+                                Source: <a href="https://carbonmapper.org" target="_blank" style="color:#4ade80;">Carbon Mapper</a> / Tanager
+                            </div>
+                        </div>
+                    `;
 
+                    circleMarker.bindPopup(popupContent, {
+                        maxWidth: 240,
+                        minWidth: 200,
+                        closeOnClick: false,
+                        autoPanPadding: [20, 80]
+                    });
 
-const popupContent = `
-                       <div class="p-1 space-y-2 text-xs" style="min-width:200px">
-                           <div class="flex items-center justify-between border-b border-gray-700 pb-2">
-                               <span class="font-extrabold text-sm" style="color:${color}">
-                                   ${isCH4 ? '🟠' : '🔵'} ${p.gas} Plume
-                               </span>
-                               <span class="text-[9px] text-gray-500">${date}</span>
-                           </div>
-                           <div class="space-y-1 font-mono text-[10px]">
-                               <div class="flex justify-between">
-                                   <span class="text-gray-500">Emission:</span>
-                                   <span class="font-bold text-gray-200">${emissionStr}</span>
-                               </div>
-                               <div class="flex justify-between">
-                                   <span class="text-gray-400">Sector:</span>
-                                   <span class="font-bold text-gray-200">${sector}</span>
-                               </div>
-                               <div class="flex justify-between">
-                                   <span class="text-gray-400">Wind:</span>
-                                   <span class="font-bold text-gray-200">${p.wind_speed_ms ? p.wind_speed_ms.toFixed(1) + ' m/s' : 'N/A'}</span>
-                               </div>
-                               <div class="flex justify-between">
-                                   <span class="text-gray-400">Platform:</span>
-                                   <span class="font-bold text-gray-200">Tanager Satellite</span>
-                               </div>
-                           </div>
-                           ${p.plume_png ? `
-                           <div class="pt-1 border-t border-gray-800">
-                               <p class="text-[9px] text-gray-500 mb-1">Plume detection image:</p>
-                               <img src="${p.plume_png}"
-                                    alt="Satellite plume detection"
-                                    style="width:100%; border-radius:6px; border:1px solid #374151; display:block;"
-                                    onerror="this.style.display='none'">
-                           </div>` : ''}
-                           ${p.portal_url ? `
-                           <div class="pt-1">
-                               <a href="${p.portal_url}" target="_blank"
-                                  class="block w-full text-center text-[10px] font-bold py-1.5 px-2 rounded transition"
-                                  style="background:#1a2e1a; color:#4ade80;">
-                                   🌍 View on Carbon Mapper →
-                               </a>
-                           </div>` : ''}
-                           <div class="text-[9px] text-gray-600 pt-1 border-t border-gray-800">
-                               Source: <a href="https://carbonmapper.org" target="_blank" style="color:#4ade80;">Carbon Mapper</a> / Tanager
-                           </div>
-                       </div>
-                   `;
+                    plumeLayerGroup.addLayer(circleMarker);
+                });
 
-circleMarker.bindPopup(popupContent, {
-maxWidth: 240,
-minWidth: 200,
-closeOnClick: false,
-autoPan: false,
-autoPanPadding: [20, 80]
-});
+                if (document.getElementById('layer-plumes').checked) {
+                    if (!map.hasLayer(plumeLayerGroup)) map.addLayer(plumeLayerGroup);
+                }
+            } catch (e) {
+                console.error("Could not load plume data", e);
+            }
+        }
 
-plumeLayerGroup.addLayer(circleMarker);
-});
+        function toggleLayer(layerType) {
+            if (layerType === 'cluster') {
+                const checked = document.getElementById('layer-cluster').checked;
+                checked ? (!map.hasLayer(markerClusterGroup) && map.addLayer(markerClusterGroup)) : map.removeLayer(markerClusterGroup);
+            } else if (layerType === 'heatmap') {
+                const checked = document.getElementById('layer-heatmap').checked;
+                checked ? (!map.hasLayer(heatmapLayer) && map.addLayer(heatmapLayer)) : map.removeLayer(heatmapLayer);
+            } else if (layerType === 'radius') {
+                const checked = document.getElementById('layer-radius').checked;
+                checked ? (!map.hasLayer(safeRadiusGroup) && map.addLayer(safeRadiusGroup)) : map.removeLayer(safeRadiusGroup);
+            }
+            if (layerType === 'plumes') {
+                const checked = document.getElementById('layer-plumes').checked;
+                checked ? map.addLayer(plumeLayerGroup) : map.removeLayer(plumeLayerGroup);
+            }
+        }
 
-if (document.getElementById('layer-plumes').checked) {
-if (!map.hasLayer(plumeLayerGroup)) map.addLayer(plumeLayerGroup);
-}
-} catch (e) {
-console.error("Could not load plume data", e);
-}
-}
+        function changeBaseMap(type) {
+            currentBaseMapType = type;
+            Object.values(baseLayers).forEach(layer => { if (map.hasLayer(layer)) map.removeLayer(layer); });
+            baseLayers[type].addTo(map);
+            const buttons = {
+                satellite: document.getElementById('map-base-satellite'),
+                clarity: document.getElementById('map-base-clarity'),
+                dark: document.getElementById('map-base-dark'),
+                streets: document.getElementById('map-base-streets'),
+                night: document.getElementById('map-base-night')
+            };
+            Object.keys(buttons).forEach(key => {
+                buttons[key].className = key === type
+                    ? "text-left text-xs font-bold px-3 py-2 rounded transition bg-amber-600 text-white w-full h-10 flex items-center justify-between"
+                    : "text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center";
+            });
+        }
 
-function toggleLayer(layerType) {
-if (layerType === 'cluster') {
-const checked = document.getElementById('layer-cluster').checked;
-checked ? (!map.hasLayer(markerClusterGroup) && map.addLayer(markerClusterGroup)) : map.removeLayer(markerClusterGroup);
-} else if (layerType === 'heatmap') {
-const checked = document.getElementById('layer-heatmap').checked;
-checked ? (!map.hasLayer(heatmapLayer) && map.addLayer(heatmapLayer)) : map.removeLayer(heatmapLayer);
-} else if (layerType === 'radius') {
-const checked = document.getElementById('layer-radius').checked;
-checked ? (!map.hasLayer(safeRadiusGroup) && map.addLayer(safeRadiusGroup)) : map.removeLayer(safeRadiusGroup);
-}
-if (layerType === 'plumes') {
-const checked = document.getElementById('layer-plumes').checked;
-checked ? map.addLayer(plumeLayerGroup) : map.removeLayer(plumeLayerGroup);
-}
-}
+        function detectOilFieldFromPosition(lat, lon) {
+            const fields = [
+                { name: "North Rumaila", lat: 30.65, lon: 47.30 },
+                { name: "South Rumaila", lat: 30.16, lon: 47.41 },
+                { name: "West Qurna",    lat: 30.85, lon: 47.30 },
+                { name: "Majnoon",       lat: 31.08, lon: 47.62 },
+                { name: "Zubair",        lat: 30.38, lon: 47.71 },
+                { name: "Nasiriyah",     lat: 31.35, lon: 45.96 },
+                { name: "Gharaf",        lat: 31.76, lon: 46.06 },
+                { name: "Halfaya",       lat: 31.70, lon: 47.32 },
+                { name: "Ahdab",         lat: 32.51, lon: 45.66 },
+                { name: "Badra",         lat: 33.05, lon: 46.07 },
+                { name: "East Baghdad",  lat: 33.23, lon: 44.77 },
+                { name: "Akkas",         lat: 34.07, lon: 40.99 },
+                { name: "Baba Gurgur",   lat: 35.54, lon: 44.31 },
+                { name: "Bai Hasan",     lat: 35.63, lon: 44.01 },
+                { name: "Khabbaz",       lat: 35.48, lon: 44.15 },
+                { name: "Jambur",        lat: 35.23, lon: 44.44 },
+                { name: "Ajeel",         lat: 34.89, lon: 43.80 },
+                { name: "Khurmala",      lat: 35.97, lon: 43.73 },
+                { name: "Taq Taq",       lat: 36.00, lon: 44.51 },
+                { name: "Qayara",        lat: 35.83, lon: 43.23 },
+                { name: "Peshkabir",     lat: 37.08, lon: 42.53 },
+                { name: "Sarsang",       lat: 36.90, lon: 43.38 },
+                { name: "Atrush",        lat: 36.86, lon: 43.45 },
+                { name: "Kirkuk",        lat: 35.45, lon: 44.25 }
+            ];
+            let closestField = "Other Iraqi Field";
+            let minDistance = 0.25;
+            for (let i = 0; i < fields.length; i++) {
+                const dLat = lat - fields[i].lat;
+                const dLon = lon - fields[i].lon;
+                const dist = Math.sqrt(dLat * dLat + dLon * dLon);
+                if (dist < minDistance) { minDistance = dist; closestField = fields[i].name; }
+            }
+            return closestField;
+        }
 
-function changeBaseMap(type) {
-currentBaseMapType = type;
-Object.values(baseLayers).forEach(layer => { if (map.hasLayer(layer)) map.removeLayer(layer); });
-baseLayers[type].addTo(map);
-const buttons = {
-satellite: document.getElementById('map-base-satellite'),
-clarity: document.getElementById('map-base-clarity'),
-dark: document.getElementById('map-base-dark'),
-streets: document.getElementById('map-base-streets'),
-night: document.getElementById('map-base-night')
-};
-Object.keys(buttons).forEach(key => {
-buttons[key].className = key === type
-? "text-left text-xs font-bold px-3 py-2 rounded transition bg-amber-600 text-white w-full h-10 flex items-center justify-between"
-: "text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center";
-});
-}
-
-function detectOilFieldFromPosition(lat, lon) {
-const fields = [
-{ name: "North Rumaila", lat: 30.65, lon: 47.30 },
-{ name: "South Rumaila", lat: 30.16, lon: 47.41 },
-{ name: "West Qurna",    lat: 30.85, lon: 47.30 },
-{ name: "Majnoon",       lat: 31.08, lon: 47.62 },
-{ name: "Zubair",        lat: 30.38, lon: 47.71 },
-{ name: "Nasiriyah",     lat: 31.35, lon: 45.96 },
-{ name: "Gharaf",        lat: 31.76, lon: 46.06 },
-{ name: "Halfaya",       lat: 31.70, lon: 47.32 },
-{ name: "Ahdab",         lat: 32.51, lon: 45.66 },
-{ name: "Badra",         lat: 33.05, lon: 46.07 },
-{ name: "East Baghdad",  lat: 33.23, lon: 44.77 },
-{ name: "Akkas",         lat: 34.07, lon: 40.99 },
-{ name: "Baba Gurgur",   lat: 35.54, lon: 44.31 },
-{ name: "Bai Hasan",     lat: 35.63, lon: 44.01 },
-{ name: "Khabbaz",       lat: 35.48, lon: 44.15 },
-{ name: "Jambur",        lat: 35.23, lon: 44.44 },
-{ name: "Ajeel",         lat: 34.89, lon: 43.80 },
-{ name: "Khurmala",      lat: 35.97, lon: 43.73 },
-{ name: "Taq Taq",       lat: 36.00, lon: 44.51 },
-{ name: "Qayara",        lat: 35.83, lon: 43.23 },
-{ name: "Peshkabir",     lat: 37.08, lon: 42.53 },
-{ name: "Sarsang",       lat: 36.90, lon: 43.38 },
-{ name: "Atrush",        lat: 36.86, lon: 43.45 },
-{ name: "Kirkuk",        lat: 35.45, lon: 44.25 }
-];
-let closestField = "Other Iraqi Field";
-let minDistance = 0.25;
-for (let i = 0; i < fields.length; i++) {
-const dLat = lat - fields[i].lat;
-const dLon = lon - fields[i].lon;
-const dist = Math.sqrt(dLat * dLat + dLon * dLon);
-if (dist < minDistance) { minDistance = dist; closestField = fields[i].name; }
-}
-return closestField;
-}
-
-// =========================================================================
-// ZONE E: INTERACTION & ANALYSIS MODALS
-// =========================================================================
+        // =========================================================================
+        // ZONE E: INTERACTION & ANALYSIS MODALS
+        // =========================================================================
 function filterFlares(field) {
 currentFilter = field;
 loadLayersAndData();
@@ -919,6 +1177,23 @@ if (fieldCenters[field.toLowerCase()]) map.setView(fieldCenters[field.toLowerCas
 closeDrawerOnMobile();
 }
 
+        function toggleLayer(layerType) {
+            if (layerType === 'cluster') {
+                const checked = document.getElementById('layer-cluster').checked;
+                checked ? (!map.hasLayer(markerClusterGroup) && map.addLayer(markerClusterGroup)) : map.removeLayer(markerClusterGroup);
+            } else if (layerType === 'heatmap') {
+                const checked = document.getElementById('layer-heatmap').checked;
+                checked ? (!map.hasLayer(heatmapLayer) && map.addLayer(heatmapLayer)) : map.removeLayer(heatmapLayer);
+            } else if (layerType === 'radius') {
+                const checked = document.getElementById('layer-radius').checked;
+                checked ? (!map.hasLayer(safeRadiusGroup) && map.addLayer(safeRadiusGroup)) : map.removeLayer(safeRadiusGroup);
+            }
+            if (layerType === 'plumes') {
+                const checked = document.getElementById('layer-plumes').checked;
+                checked ? map.addLayer(plumeLayerGroup) : map.removeLayer(plumeLayerGroup);
+            }
+        }
+
 function toggleDataSource(source) {
 currentDataSource = source;
 const btnPreload = document.getElementById('btn-preload');
@@ -936,6 +1211,11 @@ document.getElementById('live-loader-box').classList.remove('hidden');
 fetchLiveOSMData();
 }
 }
+
+        function inspectSatellite(lat, lon) {
+            if (currentBaseMapType !== 'satellite' && currentBaseMapType !== 'clarity') changeBaseMap('satellite');
+            map.setView([lat, lon], 19);
+        }
 
 function toggleMeasuringMode() {
 isMeasuringMode = !isMeasuringMode;
@@ -961,6 +1241,19 @@ document.getElementById('measure-output-box').classList.add('hidden');
 clearMeasurementLines();
 }
 }
+
+        function clearMeasurementLines() {
+            if (measureLine) { map.removeLayer(measureLine); measureLine = null; }
+            if (tempMeasureMarker) { map.removeLayer(tempMeasureMarker); tempMeasureMarker = null; }
+            selectedMeasureFlare = null;
+        }
+
+        function resetMeasurementOrigin() {
+            clearMeasurementLines();
+            document.getElementById('measure-flare-name').textContent = "Tap Gas Flare";
+            document.getElementById('measure-distance-val').textContent = "Waiting...";
+            document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active gas flare marker.";
+        }
 
 function onMapClickForDistance(e) {
 if (!isMeasuringMode) return;
@@ -999,23 +1292,27 @@ document.getElementById('proximity-alert-msg').innerHTML = `<span class="text-gr
 }
 }
 
-function clearMeasurementLines() {
-if (measureLine) { map.removeLayer(measureLine); measureLine = null; }
-if (tempMeasureMarker) { map.removeLayer(tempMeasureMarker); tempMeasureMarker = null; }
-selectedMeasureFlare = null;
-}
+        function clearMeasurementLines() {
+            if (measureLine) { map.removeLayer(measureLine); measureLine = null; }
+            if (tempMeasureMarker) { map.removeLayer(tempMeasureMarker); tempMeasureMarker = null; }
+            selectedMeasureFlare = null;
+        }
 
-function resetMeasurementOrigin() {
-clearMeasurementLines();
-document.getElementById('measure-flare-name').textContent = "Tap Gas Flare";
-document.getElementById('measure-distance-val').textContent = "Waiting...";
-document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active gas flare marker.";
-}
+        function resetMeasurementOrigin() {
+            clearMeasurementLines();
+            document.getElementById('measure-flare-name').textContent = "Tap Gas Flare";
+            document.getElementById('measure-distance-val').textContent = "Waiting...";
+            document.getElementById('proximity-alert-msg').textContent = "Step 1: Click on any glowing active gas flare marker.";
+        }
 
 function preloadNextRandom() {
 if (currentFlares.length === 0) return;
 nextRandomFlareTarget = currentFlares[Math.floor(Math.random() * currentFlares.length)];
 }
+
+        function focusBasra()  { map.setView([30.3, 47.5], 9); }
+        function focusMaysan() { map.setView([31.8, 47.3], 9.5); }
+        function focusKirkuk() { map.setView([35.5, 44.4], 10); }
 
 function zoomToRandomFlare() {
 if (currentFlares.length === 0) return;
@@ -1027,43 +1324,43 @@ if (layer.flareId === selected.id) setTimeout(() => layer.openPopup(), 400);
 preloadNextRandom();
 }
 
-function inspectSatellite(lat, lon) {
-if (currentBaseMapType !== 'satellite' && currentBaseMapType !== 'clarity') changeBaseMap('satellite');
-map.setView([lat, lon], 19);
-}
+        function inspectSatellite(lat, lon) {
+            if (currentBaseMapType !== 'satellite' && currentBaseMapType !== 'clarity') changeBaseMap('satellite');
+            map.setView([lat, lon], 19);
+        }
 
-function toggleControlDrawer() {
-const drawer = document.getElementById('sidebar-drawer');
-const backdrop = document.getElementById('drawer-backdrop');
-if (drawer.classList.contains('-translate-x-full')) {
-drawer.classList.remove('-translate-x-full');
-backdrop.classList.remove('hidden');
-} else {
-drawer.classList.add('-translate-x-full');
-backdrop.classList.add('hidden');
-}
-setTimeout(() => { if (map) map.invalidateSize(); }, 310);
-}
+        function toggleControlDrawer() {
+            const drawer = document.getElementById('sidebar-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            if (drawer.classList.contains('-translate-x-full')) {
+                drawer.classList.remove('-translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                drawer.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+            setTimeout(() => { if (map) map.invalidateSize(); }, 310);
+        }
 
-function closeDrawerOnMobile() {
-const drawer = document.getElementById('sidebar-drawer');
-const backdrop = document.getElementById('drawer-backdrop');
-if (window.innerWidth < 1024) {
-drawer.classList.add('-translate-x-full');
-backdrop.classList.add('hidden');
-setTimeout(() => { if (map) map.invalidateSize(); }, 310);
-}
-}
+        function closeDrawerOnMobile() {
+            const drawer = document.getElementById('sidebar-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            if (window.innerWidth < 1024) {
+                drawer.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+                setTimeout(() => { if (map) map.invalidateSize(); }, 310);
+            }
+        }
 
-// Sidebar utility boxes
-function toggleHelperBox() {
-const box = document.getElementById('map-helper-box');
-if (box.style.display === 'flex') { box.style.display = 'none'; } else { box.style.display = 'flex'; }
-}
+        // Sidebar utility boxes
+        function toggleHelperBox() {
+            const box = document.getElementById('map-helper-box');
+            if (box.style.display === 'flex') { box.style.display = 'none'; } else { box.style.display = 'flex'; }
+        }
 
-function focusBasra()  { map.setView([30.3, 47.5], 9); }
-function focusMaysan() { map.setView([31.8, 47.3], 9.5); }
-function focusKirkuk() { map.setView([35.5, 44.4], 10); }
+        function focusBasra()  { map.setView([30.3, 47.5], 9); }
+        function focusMaysan() { map.setView([31.8, 47.3], 9.5); }
+        function focusKirkuk() { map.setView([35.5, 44.4], 10); }
 
 async function shareMap() {
 const shareData = {
