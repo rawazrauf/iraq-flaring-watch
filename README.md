@@ -1,83 +1,88 @@
-# 🗺️ Iraq Gas Flaring Watch — Powered by OpenStreetMap
+# 🔥 Iraq Flaring Watch
 
-An interactive, serverless web application designed to map, track, and measure gas flaring operations across Iraq. Built entirely on client-side technology, this platform empowers citizens, environmental researchers, and public advocates to analyze localized air quality risks using live crowdsourced data from OpenStreetMap (OSM) and high-resolution satellite imagery.
+An open-source, serverless web map tracking gas flaring across Iraq — combining satellite detections, economic analysis, and community exposure data in a single interface.
 
-**Live Map Link:** [https://rawazrauf.github.io/iraq-flaring-watch/](https://rawazrauf.github.io/iraq-flaring-watch/)
-
----
-
-## ✨ Key Features
-
-### ⚡ Hybrid Data Engine
-
-* **Static Preload:** Instantly displays pre-verified coordinates for major oil fields (Rumaila, Zubair, West Qurna, Majnoon, Halfaya, and Kirkuk) for zero-latency loading.
-* **Live OSM Query:** Queries the live OpenStreetMap database in real-time via the public Overpass API to fetch the latest crowdsourced flaring nodes.
-* **Intelligent Caching:** Hybrid architecture that caches population metrics to memory, ensuring lightning-fast performance while maintaining up-to-date regional data.
-
-### 📊 Population Impact Analytics
-
-* **Demographic Exposure:** Every flare stack now features integrated population density analysis powered by **@WorldPopProject**. Instantly estimate the number of people living within a 5km health-risk radius of any flare.
-
-### 🛰️ Visualization & Analysis
-
-* **Satellite Inspection:** Seamlessly switch to Esri World Imagery to inspect individual industrial flare stack structures at maximum zoom levels (up to magnification level 19).
-* **Advanced Overlays:** Toggleable heatmaps for high-density identification, cluster views for regional analysis, and a 5km safety radius buffer.
-* **Flaring Distance Analyzer:** A built-in geodesic ruler to evaluate localized exposure risk between flares and nearby communities.
-
-### ✏️ Crowd-Sourced Editorial
-
-* **Direct OSM Integration:** Features one-click deep links that redirect users to the OpenStreetMap iD editor, allowing volunteers to update flare metadata or add new sites instantly.
+**Live:** [iraqflaringwatch.com](https://iraqflaringwatch.com)
 
 ---
 
-## 🔬 Scientific Context: The 5 km Threshold
+## What it shows
 
-The proximity tool evaluates safety limits using the standard geodesic distance formula on a sphere:
+Gas flaring burns off associated natural gas during oil extraction rather than capturing it. Iraq is one of the world's largest gas flaring nations. This tool makes that visible.
 
-$$d = 2r \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta \phi}{2}\right) + \cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta \lambda}{2}\right)}\right)$$
+**Three data layers:**
 
-Peer-reviewed environmental studies associate community proximity within **5 kilometers** of active industrial gas flares with an elevated risk of respiratory disease and heavy soot exposure. The app dynamically alerts users if a selected coordinate falls within this zone.
-
----
-
-## 🚀 Quick Setup & Self-Hosting
-
-This project is completely serverless and lightweight. To host it yourself:
-
-1. Fork or Download this repository.
-2. Go to **Settings -> Pages** in your GitHub repository.
-3. Under **Build and deployment**, set the source branch to `main`.
-4. Your map will be live at `https://<your-username>.github.io/<your-repo-name>/` within a minute.
+- 🟠 **Active flare sites** — crowdsourced from OpenStreetMap, with population estimates for people living within 5km
+- 🟣 **Economic waste** — World Bank GGFR 2024 volume estimates, sized by annual gas burned, with USD value lost and Iraqi homes that could have been powered
+- 🔵 **Emission plumes** — verified CH₄ and CO₂ detections from Carbon Mapper's Tanager satellite, with emission rates in kg/hr
 
 ---
 
-## 🤝 How to Help Map Iraq
+## Features
 
-If you notice a flare is missing, add it to OpenStreetMap using this standard tags:
-
-* **`man_made`**: `flare` (Identifies the structure)
-
-
----
-
-📸 Application Previews
-
-### 🌍 National Overview & Field Statistics
-Visualize the density and distribution of gas flaring across all major Iraqi oil fields.
-
-![National overview map of Iraq showing flare density](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.png)
-
-### 🔥 High-Resolution Flare Inspection
-Jump directly from nationwide statistics to inspecting individual emission points up close using high-resolution satellite imagery.
-
-![Close-up inspection view of an active gas flare stack with metadata popup](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/flare-inspection-satellite.png)
-
+- **Satellite imagery** — Esri World Imagery, Esri Clarity Archive, NASA Black Marble night lights, dark canvas, and OpenStreetMap
+- **Flare density heatmap** — visualise concentration across Iraq's oil fields
+- **5km impact zone** — toggle safety radius buffers around each flare
+- **Distance Analyzer** — geodesic ruler to measure proximity between any flare and a community
+- **Share links** — every zoom, layer state, and background is encoded in the URL for instant sharing
+- **Location finder** — jump to your current location to assess nearby flaring
+- **Inspect Random Flare** — explore the dataset at random
+- **Live OSM mode** — query the OpenStreetMap Overpass API in real time for latest data
+- **One-click OSM editing** — direct link to iD editor to add or update flare data
 
 ---
 
-## ⚖️ License and Attributions
+## Data sources
 
-* **Code:** Distributed under the MIT License.
-* **Map Data:** OpenStreetMap contributors, licensed under the Open Database License (ODbL).
-* **Analytics:** Population data provided by the [WorldPop Project](https://www.worldpop.org/).
-* **Basemaps:** Satellite tiles courtesy of Esri, Earthstar Geographics, and NASA.
+| Layer | Source | Coverage |
+|---|---|---|
+| Flare locations | [OpenStreetMap](https://www.openstreetmap.org) | Live / preloaded |
+| Population (5km) | [WorldPop Project](https://www.worldpop.org) | 2020 UN-adjusted |
+| Emission plumes | [Carbon Mapper / Tanager](https://carbonmapper.org) | 2024–2025 |
+| Gas volumes & economics | [World Bank GGFR](https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data) | 2012–2024 |
+| Satellite imagery | Esri, NASA GIBS | Various |
+
+---
+
+## Economic methodology
+
+Wasted gas value is estimated at **$3.50/MMBtu** (conservative global benchmark).
+
+```
+Value (USD) = vol_mm3 × 35,315 MMBtu/M m³ × $3.50 / 1,000,000
+```
+
+Electricity equivalent assumes **35% plant efficiency** and **4,500 kWh/household/year** (Iraqi average).
+
+---
+
+## Self-hosting
+
+Fully serverless — no backend required.
+
+1. Fork this repository
+2. Go to Settings → Pages → set source to `main`
+3. Your instance will be live at `https://<username>.github.io/<repo>/`
+
+For a custom domain, add a `CNAME` file to the repo root containing your domain name, then point your DNS A records to GitHub's IPs.
+
+---
+
+## Contributing
+
+If a flare is missing from the map, add it to OpenStreetMap:
+
+| Tag | Value |
+|---|---|
+| `man_made` | `flare` |
+
+---
+
+## License & attributions
+
+- Code: MIT License
+- Map data: © OpenStreetMap contributors (ODbL)
+- Population: WorldPop Project
+- Basemaps: Esri, Earthstar Geographics, NASA GIBS
+- Plumes: Carbon Mapper / Tanager
+- Gas volumes: World Bank GGFR
