@@ -18,6 +18,30 @@ Gas flaring burns off associated natural gas during oil extraction rather than c
 
 ---
 
+## Screenshots
+
+### National Overview
+All layers active — flare clusters, emission plumes, economic waste bubbles, and density heatmap across Iraq's oil fields.
+
+![Iraq Flaring Watch national overview](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.png)
+
+### Economic Waste — Wasted Gas Popup
+Click any purple bubble to see annual gas volume, estimated USD value lost, and Iraqi homes that could have been powered.
+
+![Wasted gas economic popup showing Basra Energy Company data](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/emission-inspection-satellite.png)
+
+### Active Flare Inspection
+Zoom into any flare on satellite imagery to see population within 5km, coordinates, and direct links to Google Maps and OSM editor.
+
+![Gas flare inspection popup on satellite imagery](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/flare-inspection-satellite.png)
+
+### Emission Plume — OpenStreetMap Background
+CO₂ and CH₄ plumes detected by Carbon Mapper's Tanager satellite, shown with emission rate in kg/hr and satellite detection image.
+
+![CO2 emission plume popup on OpenStreetMap background](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/plume-inspection-OSM.png)
+
+---
+
 ## Features
 
 - **Satellite imagery** — Esri World Imagery, Esri Clarity Archive, NASA Black Marble night lights, dark canvas, and OpenStreetMap
