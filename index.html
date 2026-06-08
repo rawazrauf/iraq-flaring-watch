@@ -486,7 +486,11 @@
                 center: startCenter, zoom: startZoom,
                 zoomControl: true, maxZoom: 19, minZoom: 5
             });
-        
+
+            map.createPane('radiusPane');
+            map.getPane('radiusPane').style.zIndex = 300;
+            map.getPane('radiusPane').style.pointerEvents = 'none';
+
             const drawerElement = document.getElementById('sidebar-drawer');
             if (drawerElement) {
                 L.DomEvent.disableClickPropagation(drawerElement);
@@ -915,7 +919,7 @@
 
                 safeRadiusGroup.addLayer(L.circle(coord, {
                     radius: 5000, color: '#ef4444', fillColor: '#ef4444',
-                    fillOpacity: 0.04, weight: 1, dashArray: '3, 6'
+                    fillOpacity: 0.04, weight: 1, dashArray: '3, 6',pane: 'radiusPane'
                 }));
             });
 
