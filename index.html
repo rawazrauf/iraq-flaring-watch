@@ -680,6 +680,55 @@
                 return div;
             };
             layerControl.addTo(map);
+
+            const baseMapControl = L.control({ position: 'topleft' });
+            baseMapControl.onAdd = function() {
+                const div = L.DomUtil.create('div');
+                div.innerHTML = `
+                    <div id="basemap-control-box" style="display:none; background:rgba(17,24,39,0.92); border:1px solid #374151; border-radius:10px; padding:14px 16px; margin-bottom:8px; min-width:190px;">
+                        <div style="font-size:10px; font-weight:600; color:#f9fafb; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Base Map</div>
+                        <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;">
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="basemap" value="satellite" checked onchange="changeBaseMap('satellite');" style="accent-color:#d97706; width:14px; height:14px;">
+                                <span>🛰️ High Resolution Satellite</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="basemap" value="clarity" onchange="changeBaseMap('clarity');" style="accent-color:#d97706; width:14px; height:14px;">
+                                <span>📂 Satellite Archive</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="basemap" value="night" onchange="changeBaseMap('night');" style="accent-color:#d97706; width:14px; height:14px;">
+                                <span>🌃 Night Lights</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="basemap" value="dark" onchange="changeBaseMap('dark');" style="accent-color:#d97706; width:14px; height:14px;">
+                                <span>🌑 Dark Canvas</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="basemap" value="streets" onchange="changeBaseMap('streets');" style="accent-color:#d97706; width:14px; height:14px;">
+                                <span>🗺️ OpenStreetMap</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button onclick="const b=document.getElementById('basemap-control-box'); b.style.display=b.style.display==='none'?'block':'none';"
+                            style="background:rgba(17,24,39,0.92); border:1px solid #374151; color:#d1d5db; font-size:10px; font-weight:600; padding:6px 12px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+                        <svg width="14" height="14" fill="none" stroke="#d1d5db" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        Base Map
+                    </button>
+                `;
+                L.DomEvent.disableClickPropagation(div);
+                return div;
+            };
+            baseMapControl.addTo(map);
+            
+            setTimeout(() => updateBaseMapControl(currentBaseMapType), 100);
+            setTimeout(() => {
+                const radio = document.querySelector(`input[name="basemap"][value="${currentBaseMapType}"]`);
+                if (radio) radio.checked = true;
+            }, 100);
+
+
+            
         }
 
         function toggleControlDrawer() {
@@ -718,22 +767,10 @@
             currentBaseMapType = type;
             Object.values(baseLayers).forEach(layer => { if (map.hasLayer(layer)) map.removeLayer(layer); });
             baseLayers[type].addTo(map);
-            const buttons = {
-                satellite: document.getElementById('map-base-satellite'),
-                clarity: document.getElementById('map-base-clarity'),
-                dark: document.getElementById('map-base-dark'),
-                streets: document.getElementById('map-base-streets'),
-                night: document.getElementById('map-base-night')
-            };
-            Object.keys(buttons).forEach(key => {
-                buttons[key].className = key === type
-                    ? "text-left text-xs font-bold px-3 py-2 rounded transition bg-amber-600 text-white w-full h-10 flex items-center justify-between"
-                    : "text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center";
-            });
             map.fire('moveend');
-
+            updateBaseMapControl(type);
         }
-
+        
         async function fetchLiveOSMData() {
             const statusText = document.getElementById('loading-status-text');
             const timerText = document.getElementById('loading-timer');
@@ -1174,7 +1211,12 @@
             });
         }
 
+        function updateBaseMapControl(type) {
+            const radio = document.querySelector(`input[name="basemap"][value="${type}"]`);
+            if (radio) radio.checked = true;
+        }
 
+        
         function applyLayersFromHash(layers) {
 
             const cluster = document.getElementById('map-layer-cluster');
