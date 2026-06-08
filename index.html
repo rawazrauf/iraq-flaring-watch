@@ -1133,8 +1133,9 @@
             const threshold = 0.01;
             let found = false;
         
-            markerClusterGroup.eachLayer(function(layer) {
-                if (found) return;
+            // WB first
+            wbFlareLayerGroup.eachLayer(function(layer) {
+                if (found || !layer.getLatLng) return;
                 const latlng = layer.getLatLng();
                 if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
                     map.setView(latlng, zoom);
@@ -1144,6 +1145,7 @@
             });
             if (found) return;
         
+            // Plumes second
             plumeLayerGroup.eachLayer(function(layer) {
                 if (found || !layer.getLatLng) return;
                 const latlng = layer.getLatLng();
@@ -1155,8 +1157,9 @@
             });
             if (found) return;
         
-            wbFlareLayerGroup.eachLayer(function(layer) {
-                if (found || !layer.getLatLng) return;
+            // Flares last
+            markerClusterGroup.eachLayer(function(layer) {
+                if (found) return;
                 const latlng = layer.getLatLng();
                 if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
                     map.setView(latlng, zoom);
