@@ -556,7 +556,6 @@
                 }
             });
             loadPlumeData();            
-        }
 
         const legendControl = L.control({ position: 'bottomleft' });
 
@@ -598,7 +597,8 @@
                 return div;
             };
 
-legendControl.addTo(map);
+            legendControl.addTo(map);
+        }
 
         function toggleControlDrawer() {
             const drawer = document.getElementById('sidebar-drawer');
