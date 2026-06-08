@@ -1329,42 +1329,41 @@
         }
 
     </script>
-
-    <div id="map-helper-box" style="display:none" class="fixed top-16 right-4 w-64 z-[9999] bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-3 flex space-x-3 items-start">
-        <div class="p-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg shrink-0">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    
+    <div id="map-helper-box" style="display:none" class="fixed top-16 right-4 w-56 z-[9999] bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-3 flex space-x-2 items-start">
+        <div class="p-1 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg shrink-0">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
         </div>
         <div class="flex-1">
             <div class="flex justify-between items-start">
-                <h4 class="text-xs font-bold text-gray-200">About Iraq Flaring Watch</h4>
+                <h4 class="text-xs font-bold text-gray-200">Iraq Flaring Watch</h4>
                 <button onclick="toggleHelperBox()" class="text-gray-400 hover:text-white p-0.5 focus:outline-none">
                     <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
                 </button>
             </div>
-           
-            <p class="text-[10px] text-gray-400 mt-1 leading-relaxed">
-                When crude oil is extracted, associated natural gas comes up with it. Rather than capturing it, operators burn it off — a practice known as gas flaring. Communities nearby are exposed to harmful emissions, while billions of dollars in energy value are wasted annually.
-            </p>
-            <p class="text-[10px] text-gray-400 mt-2 leading-relaxed">
-                <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#f59e0b; border:1.5px solid #ef4444; margin-right:4px; vertical-align:middle;"></span>
-                <span class="text-amber-400 font-semibold">Orange dots</span> mark active flare sites mapped by the OpenStreetMap community. Each popup includes a population estimate of people living within 5km of the flare.
-            </p>   
-            <p class="text-[10px] text-gray-400 mt-2 leading-relaxed">
-                <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#06b6d4; border:1.5px solid #ffffff; margin-right:4px; vertical-align:middle;"></span>
-                <span class="text-cyan-400 font-semibold">Cyan dots</span> are verified emission plumes detected by Carbon Mapper's Tanager satellite.
-            </p>
-            <p class="text-[10px] text-gray-400 mt-2 leading-relaxed">
-                <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#a855f7; border:1.5px solid #ffffff; margin-right:4px; vertical-align:middle;"></span>
-                <span class="text-purple-400 font-semibold">Purple bubbles</span> show annual gas volumes from World Bank GGFR data — sized by volume, with popups showing estimated economic value lost.
-            </p>
+            <p class="text-[10px] text-gray-400 mt-1 leading-relaxed">Gas flaring burns off associated gas from oil extraction, harming nearby communities and wasting billions in energy value annually.</p>
+            <div class="mt-2 space-y-1.5">
+                <div class="flex items-center gap-1.5">
+                    <span style="width:7px; height:7px; border-radius:50%; background:#f59e0b; border:1.5px solid #ef4444; flex-shrink:0; display:inline-block;"></span>
+                    <span class="text-[10px] text-gray-400">Flare sites — includes 5km population estimate</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span style="width:7px; height:7px; border-radius:50%; background:#a855f7; border:1.5px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
+                    <span class="text-[10px] text-gray-400">Economic waste — USD value lost & Iraqi homes that could have been powered</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span style="width:7px; height:7px; border-radius:50%; background:#06b6d4; border:1.5px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
+                    <span class="text-[10px] text-gray-400">Emission plumes — methane & CO₂ in kg/hr</span>
+                </div>
+            </div>
             <p class="text-[10px] text-gray-500 mt-2 pt-2 border-t border-gray-800">
-                Open-source project. View the code on 
-                <a href="https://github.com/rawazrauf/iraq-flaring-watch" target="_blank" class="text-blue-400 hover:underline">GitHub</a>.
-            </p>            
-
+                Open-source · <a href="https://github.com/rawazrauf/iraq-flaring-watch" target="_blank" class="text-blue-400 hover:underline">GitHub</a>
+            </p>
         </div>
     </div>
+    
+
 </body>
 </html>
