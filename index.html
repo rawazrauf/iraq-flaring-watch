@@ -527,7 +527,12 @@
                 flyTo: true,
                 flyToBoundsOptions: { maxZoom: 8 },
                 strings: { title: 'Find my location' },
-                locateOptions: { maxZoom: 8 }
+                locateOptions: { 
+                    maxZoom: 8,
+                    enableHighAccuracy: false,
+                    watch: false
+                },
+                showCompass: false
             }).addTo(map);
         
             baseLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
