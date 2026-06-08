@@ -113,7 +113,7 @@
     <div class="flex min-h-0 relative map-fill-height w-full">
         <div id="drawer-backdrop" onclick="toggleControlDrawer()" class="hidden fixed inset-0 bg-black/70 z-20 transition-opacity duration-300 lg:hidden"></div>
 
-        <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 top-0 z-30 w-80 bg-gray-900 border-r border-gray-800 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 lg:z-10 shrink-0">
+        <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 top-0 z-30 w-72 bg-gray-900 border-r border-gray-800 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 lg:z-10 shrink-0">
             <div class="p-4 border-b border-gray-800 bg-gray-950/40">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">National Stats</h3>
@@ -490,7 +490,7 @@
 
         function initMap() {
             map = L.map('leaflet-map-canvas', {
-                center: [33.0, 45.0], zoom: 6.5,
+                center: [32.0, 44.5], zoom: 6.5,
                 zoomControl: true, maxZoom: 19, minZoom: 5
             });
 
@@ -528,7 +528,7 @@
             markerClusterGroup = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 40 });
 
             heatmapLayer = L.heatLayer([], {
-                radius: 35, blur: 25, maxZoom: 10, minOpacity: 0.35,
+                radius: 35, blur: 25, maxZoom: 10, minOpacity: 0.2,
                 gradient: { 0.1: '#1e3a8a', 0.3: '#06b6d4', 0.5: '#10b981', 0.7: '#f59e0b', 1.0: '#ef4444' }
             });
 
@@ -879,7 +879,7 @@
             currentFilter = field;
             loadLayersAndData();
             if (field === 'all') {
-                map.setView([33.0, 45.0], 6.5);
+                map.setView([32.0, 44.5], 6.5);
             } else {
                 const fieldCenters = {
                     "north rumaila": [30.811, 47.329], "south rumaila": [30.160, 47.411],
