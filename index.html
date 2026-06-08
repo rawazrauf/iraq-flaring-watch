@@ -457,7 +457,7 @@
                 currentFlares = [...preloadFlares];
                 loadLayersAndData();
                 applyLayersFromHash(startLayers);
-                tryOpenNearestPopup();
+                setTimeout(() => tryOpenNearestPopup(), 500);
                 progressBar.style.width = "100%";
                 statusText.textContent = `Loaded ${preloadFlares.length} flares.`;
                 setTimeout(() => loaderBox.classList.add('hidden'), 1000);
