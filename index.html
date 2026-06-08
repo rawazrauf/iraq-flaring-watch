@@ -409,7 +409,7 @@
                     plumeLayerGroup.addLayer(circleMarker);
                 });
         
-                if (document.getElementById('layer-plumes').checked && !map.hasLayer(plumeLayerGroup)) {
+                if (document.getElementById('map-layer-plumes').checked && !map.hasLayer(plumeLayerGroup)) {
                     plumeLayerGroup.addTo(map);
                 }
                 if (map.getZoom() >= 13) tryOpenNearestPopup();
@@ -456,7 +456,12 @@
 
                 currentFlares = [...preloadFlares];
                 loadLayersAndData();
-                applyLayersFromHash(startLayers);
+                if (window.location.hash) {
+                    applyLayersFromHash(startLayers);
+                } else {
+                    toggleLayer('plumes');
+                    toggleLayer('wb-flares');
+                }
                 setTimeout(() => tryOpenNearestPopup(), 500);
                 progressBar.style.width = "100%";
                 statusText.textContent = `Loaded ${preloadFlares.length} flares.`;
