@@ -427,10 +427,7 @@
                         L.DomEvent.stopPropagation(e);
                         map.closePopup();
                         map.flyTo([p.lat, p.lon], Math.max(map.getZoom(), 13), { animate: true, duration: 0.8 });
-                        map.once('moveend', () => { 
-                            if (map.hasLayer(heatmapLayer)) heatmapLayer.redraw();
-                            circleMarker.openPopup(); 
-                        });                        
+                        map.once('moveend', () => { circleMarker.openPopup(); });
                     });
         
                     plumeLayerGroup.addLayer(circleMarker);
@@ -1151,10 +1148,7 @@
                         L.DomEvent.stopPropagation(e);
                         map.closePopup();
                         map.flyTo([f.lat, f.lon], Math.max(map.getZoom(), 13), { animate: true, duration: 0.8 });
-                        map.once('moveend', () => { 
-                            if (map.hasLayer(heatmapLayer)) heatmapLayer.redraw();
-                            circle.openPopup(); 
-                        });                        
+                        map.once('moveend', () => { circle.openPopup(); });                     
                     });
         
                     wbFlareLayerGroup.addLayer(circle);
