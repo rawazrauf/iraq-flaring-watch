@@ -322,7 +322,7 @@
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
         let wbFlareData = null;
-        let startLayers = ['F', 'H'];
+        let startLayers = ['F', 'H', 'P', 'W'];
 
         const flareIcon = L.divIcon({
             className: 'custom-flare-container',
@@ -599,7 +599,7 @@
             legendControl.onAdd = function() {
                 const div = L.DomUtil.create('div');
                 div.innerHTML = `
-                    <div id="legend-box" style="display:none; background:rgba(17,24,39,0.92); border:1px solid #374151; border-radius:10px; padding:14px 16px; margin-bottom:8px; min-width:180px;">
+                    <div id="legend-box" style="display:block; background:rgba(17,24,39,0.92); border:1px solid #374151; border-radius:10px; padding:14px 16px; margin-bottom:8px; min-width:180px;">
                         <div style="font-size:10px; font-weight:600; color:#f9fafb; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Map Legend</div>
                         <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;">
                             <div style="display:flex; align-items:center; gap:8px;">
@@ -656,11 +656,11 @@
                                 <span>5km Impact Zone</span>
                             </label>
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <input type="checkbox" id="map-layer-plumes" onchange="toggleLayer('plumes');" style="accent-color:#06b6d4; width:14px; height:14px;">
+                                <input type="checkbox" id="map-layer-plumes" checked onchange="toggleLayer('plumes');" style="accent-color:#06b6d4; width:14px; height:14px;">
                                 <span>Detected Emission Plumes</span>
                             </label>
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <input type="checkbox" id="map-layer-wb-flares" onchange="toggleLayer('wb-flares');" style="accent-color:#a855f7; width:14px; height:14px;">
+                                <input type="checkbox" id="map-layer-wb-flares" checked onchange="toggleLayer('wb-flares');" style="accent-color:#a855f7; width:14px; height:14px;">
                                 <span>Wasted Gas (2024 Est.)</span>
                             </label>
                         </div>
