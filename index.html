@@ -347,6 +347,7 @@
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
         let wbFlareData = null;
+        let startLayers = ['F', 'H'];
 
         const flareIcon = L.divIcon({
             className: 'custom-flare-container',
@@ -479,6 +480,7 @@
 
                 currentFlares = [...preloadFlares];
                 loadLayersAndData();
+                applyLayersFromHash(startLayers);
                 progressBar.style.width = "100%";
                 statusText.textContent = `Loaded ${preloadFlares.length} flares.`;
                 setTimeout(() => loaderBox.classList.add('hidden'), 1000);
@@ -489,19 +491,35 @@
         }
 
         function initMap() {
+            let startCenter = [33.0, 45.0];
+            let startZoom = 6.5;
+            if (window.location.hash) {
+                const parts = window.location.hash.replace('#', '').split('/');
+                if (parts.length >= 3) {
+                    const z = parseFloat(parts[0]);
+                    const lat = parseFloat(parts[1]);
+                    const lng = parseFloat(parts[2]);
+                    if (!isNaN(z) && !isNaN(lat) && !isNaN(lng)) {
+                        startZoom = z;
+                        startCenter = [lat, lng];
+                    }
+                    if (parts[3]) startLayers = parts[3].split(',');
+                }
+            }
+        
             map = L.map('leaflet-map-canvas', {
-                center: [33.0, 45.0], zoom: 6.5,
+                center: startCenter, zoom: startZoom,
                 zoomControl: true, maxZoom: 19, minZoom: 5
             });
-
+        
             const drawerElement = document.getElementById('sidebar-drawer');
             if (drawerElement) {
                 L.DomEvent.disableClickPropagation(drawerElement);
                 L.DomEvent.disableScrollPropagation(drawerElement);
             }
-
+        
             map.zoomControl.setPosition('bottomright');
-
+        
             baseLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors • Esri Tiles',
                 maxNativeZoom: 18, maxZoom: 19
@@ -522,30 +540,30 @@
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxNativeZoom: 19, maxZoom: 19
             });
-
+        
             baseLayers.satellite.addTo(map);
-
+        
             markerClusterGroup = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 40 });
-
+        
             heatmapLayer = L.heatLayer([], {
                 radius: 35, blur: 25, maxZoom: 10, minOpacity: 0.2,
                 gradient: { 0.1: '#1e3a8a', 0.3: '#06b6d4', 0.5: '#10b981', 0.7: '#f59e0b', 1.0: '#ef4444' }
             });
-
+        
             safeRadiusGroup = L.layerGroup();
-
+        
             iraqBoundaryLayer = L.geoJSON(null, {
                 style: { color: '#f59e0b', weight: 2, opacity: 0.5, fillOpacity: 0.0, dashArray: '4, 6' },
                 interactive: false
             }).addTo(map);
-
+        
             fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries/IRQ.geo.json')
                 .then(r => r.json())
                 .then(data => iraqBoundaryLayer.addData(data))
                 .catch(err => console.warn('Could not load Iraq boundary', err));
-
+        
             map.on('click', onMapClickForDistance);
-
+        
             map.on('zoomend', () => {
                 const currentZoom = map.getZoom();
                 const heatmapCheckbox = document.getElementById('layer-heatmap');
@@ -555,15 +573,28 @@
                     if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
                 }
             });
-
+        
             map.on('move', function() {
                 if (map.hasLayer(heatmapLayer)) heatmapLayer.redraw();
             });
-
-            loadPlumeData();            
-
-        const legendControl = L.control({ position: 'bottomleft' });
-
+        
+            map.on('moveend', function() {
+                const center = map.getCenter();
+                const zoom = map.getZoom();
+                const layers = [];
+                if (document.getElementById('layer-cluster').checked) layers.push('F');
+                if (document.getElementById('layer-heatmap').checked) layers.push('H');
+                if (document.getElementById('layer-radius').checked) layers.push('S');
+                if (document.getElementById('layer-plumes').checked) layers.push('P');
+                if (document.getElementById('layer-wb-flares').checked) layers.push('W');
+                const hash = `#${zoom.toFixed(2)}/${center.lat.toFixed(5)}/${center.lng.toFixed(5)}/${layers.join(',')}`;
+                history.replaceState(null, '', hash);
+            });
+        
+            loadPlumeData();
+        
+            const legendControl = L.control({ position: 'bottomleft' });
+        
             legendControl.onAdd = function() {
                 const div = L.DomUtil.create('div');
                 div.innerHTML = `
@@ -601,7 +632,7 @@
                 L.DomEvent.disableClickPropagation(div);
                 return div;
             };
-
+        
             legendControl.addTo(map);
         }
 
@@ -1051,27 +1082,42 @@
             preloadNextRandom();
         }
 
+        function applyLayersFromHash(layers) {
+            const cluster = document.getElementById('layer-cluster');
+            const heatmap = document.getElementById('layer-heatmap');
+            const radius = document.getElementById('layer-radius');
+            const plumes = document.getElementById('layer-plumes');
+            const wb = document.getElementById('layer-wb-flares');
+        
+            cluster.checked = layers.includes('F');
+            heatmap.checked = layers.includes('H');
+            radius.checked = layers.includes('S');
+            plumes.checked = layers.includes('P');
+            wb.checked = layers.includes('W');
+        
+            toggleLayer('cluster');
+            toggleLayer('heatmap');
+            toggleLayer('radius');
+            if (layers.includes('P')) toggleLayer('plumes');
+            if (layers.includes('W')) toggleLayer('wb-flares');
+        }
 
         async function shareMap() {
             const shareData = {
                 title: 'Iraq Flaring Watch',
-                text: 'Check out the Iraq Flaring Watch map to track gas flaring and community exposure risk.',
-                url: 'https://rawazrauf.github.io/iraq-flaring-watch/'
+                text: 'Check out this location on Iraq Flaring Watch.',
+                url: window.location.href
             };
-
             if (navigator.share) {
-                try {
-                    await navigator.share(shareData);
-                } catch (err) {
-                    console.log('User cancelled share');
-                }
+                try { await navigator.share(shareData); }
+                catch (err) { console.log('User cancelled share'); }
             } else {
                 navigator.clipboard.writeText(shareData.url).then(() => {
                     alert('Link copied to clipboard!');
                 });
             }
         }
-
+        
         function resetMap() {
             map.setView([33.0, 45.0], 6.5);
             document.getElementById('oilfield-filter').value = 'all';
