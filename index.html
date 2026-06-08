@@ -490,7 +490,7 @@
 
         function initMap() {
             map = L.map('leaflet-map-canvas', {
-                center: [32.0, 44.5], zoom: 6.5,
+                center: [33.0, 45.0], zoom: 6.5,
                 zoomControl: true, maxZoom: 19, minZoom: 5
             });
 
@@ -879,7 +879,7 @@
             currentFilter = field;
             loadLayersAndData();
             if (field === 'all') {
-                map.setView([32.0, 44.5], 6.5);
+                map.setView([33.0, 45.0], 6.5);
             } else {
                 const fieldCenters = {
                     "north rumaila": [30.811, 47.329], "south rumaila": [30.160, 47.411],
