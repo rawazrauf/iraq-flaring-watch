@@ -90,8 +90,114 @@ The script fetches the latest `query` file from GitHub automatically, so re-runn
 ## 3. Emission Plumes (`iraq_tanager_plumes.json`)
 
 **Source:** Carbon Mapper — Tanager satellite  
-**Coverage:** Iraq, 2024–2025  
+**API:** https://api.carbonmapper.org/api/v1/catalog/plumes/annotated  
+**Coverage:** Iraq, all available Tanager detections  
 **Gas types:** CH₄ (methane) and CO₂  
+
+### How it was generated
+
+Requires a Carbon Mapper API token. Run in Python:
+
+```python
+import requests, json, time
+from collections import Counter
+
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN",
+    "Accept": "application/json"
+}
+
+# Iraq bounding box
+IRAQ = {"lon_min": 38.797, "lon_max": 48.569, "lat_min": 29.059, "lat_max": 37.378}
+
+def in_iraq(lon, lat):
+    return (IRAQ["lon_min"] <= lon <= IRAQ["lon_max"] and
+            IRAQ["lat_min"] <= lat <= IRAQ["lat_max"])
+
+all_iraq_plumes = []
+LIMIT = 500
+
+for gas in ["CH4", "CO2"]:
+    offset = 0
+    pages_checked = 0
+
+    # Get total count first
+    r = requests.get(
+        "https://api.carbonmapper.org/api/v1/catalog/plumes/annotated",
+        headers=headers,
+        params={"instrument": "tan", "gas": gas, "limit": 1, "offset": 0}
+    )
+    total = r.json().get("total_count", 0)
+    print(f"\n{gas}: {total} total Tanager plumes globally, scanning for Iraq...")
+
+    while offset < total:
+        r = requests.get(
+            "https://api.carbonmapper.org/api/v1/catalog/plumes/annotated",
+            headers=headers,
+            params={"instrument": "tan", "gas": gas, "limit": LIMIT, "offset": offset, "sort": "desc"}
+        )
+        items = r.json().get("items", [])
+        if not items:
+            break
+
+        iraq_batch = [
+            {
+                "plume_id":                    p["plume_id"],
+                "gas":                         p["gas"],
+                "lat":                         p["geometry_json"]["coordinates"][1],
+                "lon":                         p["geometry_json"]["coordinates"][0],
+                "timestamp":                   p["scene_timestamp"],
+                "emission_kghr":               p.get("emission_auto"),
+                "emission_uncertainty_kghr":   p.get("emission_uncertainty_auto"),
+                "sector":                      p.get("sector"),
+                "wind_speed_ms":               p.get("wind_speed_avg_auto"),
+                "wind_direction_deg":          p.get("wind_direction_avg_auto"),
+                "plume_png":                   p.get("plume_png", "").split("?")[0].replace(
+                                                   "https://catalog.carbonmapper.org/",
+                                                   "https://api.carbonmapper.org/api/v1/catalog/asset/"
+                                               ) if p.get("plume_png") else None,
+                "plume_bounds":                p.get("plume_bounds"),
+                "plume_quality":               p.get("plume_quality"),
+                "instrument":                  p.get("instrument"),
+                "platform":                    p.get("platform"),
+                "portal_url":                  f"https://data.carbonmapper.org/?instruments=tan&details={p.get('gas', '')}_{p.get('sector', 'other')}_250m_{p['geometry_json']['coordinates'][0]:.5f}_{p['geometry_json']['coordinates'][1]:.5f}%3Finstruments%3Dtan%26status%3Dnot_deleted&plume_id={p['plume_id']}#13/{p['geometry_json']['coordinates'][1]:.4f}/{p['geometry_json']['coordinates'][0]:.4f}"
+            }
+            for p in items
+            if in_iraq(p["geometry_json"]["coordinates"][0], p["geometry_json"]["coordinates"][1])
+        ]
+
+        all_iraq_plumes.extend(iraq_batch)
+        pages_checked += 1
+        offset += LIMIT
+
+        if pages_checked % 10 == 0:
+            iraq_count = len([p for p in all_iraq_plumes if p['gas'] == gas])
+            print(f"  {gas} | scanned {offset}/{total} | Iraq found so far: {iraq_count}")
+
+        time.sleep(0.15)
+
+# Summary
+ch4 = [p for p in all_iraq_plumes if p["gas"] == "CH4"]
+co2 = [p for p in all_iraq_plumes if p["gas"] == "CO2"]
+print(f"\n=== IRAQ TANAGER RESULTS ===")
+print(f"CH4 plumes: {len(ch4)}")
+print(f"CO2 plumes: {len(co2)}")
+print(f"Total: {len(all_iraq_plumes)}")
+
+emissions = [p["emission_kghr"] for p in all_iraq_plumes if p.get("emission_kghr")]
+if emissions:
+    print(f"\nEmission rates (kg/hr):")
+    print(f"  Count: {len(emissions)}")
+    print(f"  Min:   {min(emissions):.1f}")
+    print(f"  Max:   {max(emissions):.1f}")
+    print(f"  Avg:   {sum(emissions)/len(emissions):.1f}")
+
+with open("iraq_tanager_plumes.json", "w") as f:
+    json.dump(all_iraq_plumes, f, indent=2)
+print(f"\nSaved to iraq_tanager_plumes.json")
+```
+
+The script paginates through the full global Tanager catalogue in batches of 500, filtering to Iraq's bounding box (38.797°E–48.569°E, 29.059°N–37.378°N). A 0.15s delay between requests respects the API rate limit. Both CH4 and CO2 are fetched in separate passes.
 
 ### Fields per record
 
@@ -99,17 +205,22 @@ The script fetches the latest `query` file from GitHub automatically, so re-runn
 |---|---|
 | `lat`, `lon` | Plume centroid coordinates |
 | `gas` | Gas type: `CH4` or `CO2` |
-| `emission_kghr` | Emission rate in kg/hr |
+| `emission_kghr` | Emission rate in kg/hr (auto-quantified) |
+| `emission_uncertainty_kghr` | Uncertainty range in kg/hr |
 | `sector` | IPCC sector code (e.g. `1B2` = Oil & Gas Fugitive) |
 | `wind_speed_ms` | Wind speed at detection time (m/s) |
+| `wind_direction_deg` | Wind direction at detection time (degrees) |
 | `timestamp` | Detection datetime (ISO 8601) |
 | `plume_png` | URL to satellite detection image |
 | `plume_bounds` | Bounding box `[west, south, east, north]` |
-| `portal_url` | Link to Carbon Mapper portal entry |
+| `plume_quality` | Carbon Mapper quality flag |
+| `instrument` | Always `tan` (Tanager) |
+| `platform` | Satellite platform identifier |
+| `portal_url` | Link to Carbon Mapper data portal entry |
 
 ### Visualisation
 
-Circle radius is scaled logarithmically by emission rate: `Math.max(6, Math.min(22, Math.log10(emission) * 4))`. All plumes are rendered in cyan (`#06b6d4`) with white border regardless of gas type — the popup card shows the gas type detail.
+Circle radius is scaled logarithmically by emission rate: `Math.max(6, Math.min(22, Math.log10(emission) * 4))`. All plumes are rendered in cyan (`#06b6d4`) with white border regardless of gas type — the popup card shows the gas type and full metadata.
 
 ---
 
