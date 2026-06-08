@@ -590,6 +590,48 @@
             loadPlumeData();            
         }
 
+        const legendControl = L.control({ position: 'bottomleft' });
+
+            legendControl.onAdd = function() {
+                const div = L.DomUtil.create('div');
+                div.innerHTML = `
+                    <div id="legend-box" style="display:none; background:rgba(17,24,39,0.92); border:1px solid #374151; border-radius:10px; padding:14px 16px; margin-bottom:8px; min-width:180px;">
+                        <div style="font-size:10px; font-weight:600; color:#f9fafb; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Map Legend</div>
+                        <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:12px; height:12px; border-radius:50%; background:#f59e0b; border:2px solid #ef4444; flex-shrink:0; display:inline-block;"></span>
+                                <span>Active Flare (OSM)</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:12px; height:12px; border-radius:50%; background:#06b6d4; border:2px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
+                                <span>Verified Emission Plume</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:12px; height:12px; border-radius:50%; background:#a855f7; opacity:0.8; flex-shrink:0; display:inline-block;"></span>
+                                <span>Wasted Gas (2024 Est.)</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:4px;">
+                                <span>Flare Density Heatmap</span>
+                                <div style="display:flex; align-items:center; gap:6px;">
+                                    <span style="font-size:9px; color:#6b7280;">Low</span>
+                                    <span style="flex:1; height:6px; border-radius:3px; background:linear-gradient(to right, #1e3a8a, #06b6d4, #10b981, #f59e0b, #ef4444); display:inline-block;"></span>
+                                    <span style="font-size:9px; color:#6b7280;">High</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="const b=document.getElementById('legend-box'); b.style.display=b.style.display==='none'?'block':'none';"
+                            style="background:rgba(17,24,39,0.92); border:1px solid #374151; color:#d1d5db; font-size:10px; font-weight:600; padding:6px 12px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                        Legend
+                    </button>
+                `;
+                L.DomEvent.disableClickPropagation(div);
+                return div;
+            };
+
+legendControl.addTo(map);
+
         function toggleControlDrawer() {
             const drawer = document.getElementById('sidebar-drawer');
             const backdrop = document.getElementById('drawer-backdrop');
