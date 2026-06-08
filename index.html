@@ -632,7 +632,7 @@
                         <div style="font-size:10px; font-weight:600; color:#f9fafb; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Display Layers</div>
                         <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;">
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <input type="checkbox" id="map-layer-cluster" checked onchange=""toggleLayer('cluster');" style="accent-color:#f59e0b; width:14px; height:14px;">
+                                <input type="checkbox" id="map-layer-cluster" checked onchange="toggleLayer('cluster');" style="accent-color:#f59e0b; width:14px; height:14px;">
                                 <span>Active Flare Locations</span>
                             </label>
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
@@ -922,18 +922,18 @@
             setTimeout(preloadNextRandom, 2000);
 
             heatmapLayer.setLatLngs(heatmapPoints);
-            if (document.getElementById('layer-heatmap').checked) {
+            if (document.getElementById('map-layer-heatmap').checked) {
                 if (!map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
                 heatmapLayer.redraw();
             } else {
                 map.removeLayer(heatmapLayer);
             }
-            if (document.getElementById('layer-radius').checked) {
+            if (document.getElementById('map-layer-radius').checked) {
                 if (!map.hasLayer(safeRadiusGroup)) map.addLayer(safeRadiusGroup);
             } else {
                 map.removeLayer(safeRadiusGroup);
             }
-            if (document.getElementById('layer-cluster').checked) {
+            if (document.getElementById('map-layer-cluster').checked) {
                 if (!map.hasLayer(markerClusterGroup)) map.addLayer(markerClusterGroup);
             } else {
                 map.removeLayer(markerClusterGroup);
@@ -1153,9 +1153,9 @@
             document.getElementById('oilfield-filter').value = 'all';
             currentFilter = 'all';
             toggleDataSource('preload');
-            document.getElementById('layer-cluster').checked = true;
-            document.getElementById('layer-heatmap').checked = true;
-            document.getElementById('layer-radius').checked = false;
+            document.getElementById('map-layer-cluster').checked = true;
+            document.getElementById('map-layer-heatmap').checked = true;
+            document.getElementById('map-layer-radius').checked = false;
             loadLayersAndData();
             closeDrawerOnMobile();
         }
