@@ -835,10 +835,10 @@
                             <span>Source: ${flare.source}</span>
                         </div>
                         <div class="grid grid-cols-2 gap-1.5 pt-1.5">
-                            <button onclick="inspectSatellite(${flare.lat}, ${flare.lon})" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-1.5 px-2 rounded text-center transition flex items-center justify-center h-9">
-                                <span>🛰️ Zoom Flare</span>
+                            <button onclick="inspectSatellite(${flare.lat}, ${flare.lon})" class="bg-amber-500 hover:bg-amber-400 text-white font-bold py-1.5 px-2 rounded text-center transition flex items-center justify-center h-9 ring-1 ring-amber-300">
+                                <span>🛰️ Zoom In →</span>
                             </button>
-                            <a href="https://www.openstreetmap.org/edit?editor=id#map=19/${flare.lat}/${flare.lon}&${flare.type || 'node'}=${flare.id}" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold py-1.5 px-2 rounded text-center border border-gray-700 transition flex items-center justify-center h-9">
+                            <a href="https://www.openstreetmap.org/edit?editor=id#map=19/${flare.lat}/${flare.lon}&${flare.type || 'node'}=${flare.id}" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold py-1.5 px-2 rounded text-center border border-gray-700 transition flex items-center justify-center h-9 ring-1 ring-gray-600">
                                 <span>✏️ Edit OSM</span>
                             </a>
                         </div>
