@@ -479,6 +479,7 @@
                         startCenter = [lat, lng];
                     }
                     if (parts[3]) startLayers = parts[3].split(',');
+                    if (parts[4]) currentBaseMapType = parts[4];
                 }
             }
         
@@ -534,6 +535,11 @@
             });
         
             baseLayers.satellite.addTo(map);
+
+            if (currentBaseMapType !== 'satellite') {
+                baseLayers.satellite.remove();
+                baseLayers[currentBaseMapType].addTo(map);
+            }
         
             markerClusterGroup = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 40 });
         
@@ -580,7 +586,7 @@
                 if (document.getElementById('map-layer-radius').checked) layers.push('S');
                 if (document.getElementById('map-layer-plumes').checked) layers.push('P');
                 if (document.getElementById('map-layer-wb-flares').checked) layers.push('W');
-                const hash = `#${zoom.toFixed(2)}/${center.lat.toFixed(5)}/${center.lng.toFixed(5)}/${layers.join(',')}`;
+                const hash = `#${zoom.toFixed(2)}/${center.lat.toFixed(5)}/${center.lng.toFixed(5)}/${layers.join(',')}/${currentBaseMapType}`;
                 history.replaceState(null, '', hash);
             });
         
@@ -717,6 +723,8 @@
                     ? "text-left text-xs font-bold px-3 py-2 rounded transition bg-amber-600 text-white w-full h-10 flex items-center justify-between"
                     : "text-left text-xs font-bold px-3 py-2 rounded transition text-gray-400 hover:text-white w-full h-10 flex items-center";
             });
+            map.fire('moveend');
+
         }
 
         async function fetchLiveOSMData() {
