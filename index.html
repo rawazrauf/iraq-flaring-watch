@@ -619,6 +619,31 @@
             };
         
             legendControl.addTo(map);
+
+            const coordsControl = L.control({ position: 'bottomright' });
+            coordsControl.onAdd = function() {
+                const div = L.DomUtil.create('div');
+                div.id = 'coords-display';
+                div.style.cssText = 'display:none; background:rgba(17,24,39,0.92); border:1px solid #374151; color:#9ca3af; font-size:10px; font-family:monospace; padding:4px 10px; border-radius:8px; margin-bottom:6px;';
+                div.innerHTML = '';
+                L.DomEvent.disableClickPropagation(div);
+                return div;
+            };
+            coordsControl.addTo(map);
+            
+            map.on('moveend zoomend', function() {
+                const div = document.getElementById('coords-display');
+                if (!div) return;
+                const zoom = map.getZoom();
+                if (zoom >= 13) {
+                    const center = map.getCenter();
+                    div.style.display = 'block';
+                    div.innerHTML = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
+                } else {
+                    div.style.display = 'none';
+                }
+            });
+
             
             const layerControl = L.control({ position: 'topright' });
             layerControl.onAdd = function() {
