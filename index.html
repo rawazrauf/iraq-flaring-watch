@@ -412,6 +412,7 @@
                 if (document.getElementById('layer-plumes').checked && !map.hasLayer(plumeLayerGroup)) {
                     plumeLayerGroup.addTo(map);
                 }
+                if (map.getZoom() >= 13) tryOpenNearestPopup();
             } catch (e) { console.error("Could not load plume data", e); }
         }
 
@@ -456,6 +457,7 @@
                 currentFlares = [...preloadFlares];
                 loadLayersAndData();
                 applyLayersFromHash(startLayers);
+                tryOpenNearestPopup();
                 progressBar.style.width = "100%";
                 statusText.textContent = `Loaded ${preloadFlares.length} flares.`;
                 setTimeout(() => loaderBox.classList.add('hidden'), 1000);
@@ -1123,6 +1125,48 @@
             preloadNextRandom();
         }
 
+        function tryOpenNearestPopup() {
+            const zoom = map.getZoom();
+            if (zoom < 13) return;
+        
+            const center = map.getCenter();
+            const threshold = 0.01;
+            let found = false;
+        
+            markerClusterGroup.eachLayer(function(layer) {
+                if (found) return;
+                const latlng = layer.getLatLng();
+                if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
+                    map.setView(latlng, zoom);
+                    setTimeout(() => layer.openPopup(), 300);
+                    found = true;
+                }
+            });
+            if (found) return;
+        
+            plumeLayerGroup.eachLayer(function(layer) {
+                if (found || !layer.getLatLng) return;
+                const latlng = layer.getLatLng();
+                if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
+                    map.setView(latlng, zoom);
+                    setTimeout(() => layer.openPopup(), 300);
+                    found = true;
+                }
+            });
+            if (found) return;
+        
+            wbFlareLayerGroup.eachLayer(function(layer) {
+                if (found || !layer.getLatLng) return;
+                const latlng = layer.getLatLng();
+                if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
+                    map.setView(latlng, zoom);
+                    setTimeout(() => layer.openPopup(), 300);
+                    found = true;
+                }
+            });
+        }
+
+
         function applyLayersFromHash(layers) {
 
             const cluster = document.getElementById('map-layer-cluster');
@@ -1249,6 +1293,7 @@
         
                 wbFlareDataLoaded = true;
                 map.addLayer(wbFlareLayerGroup);
+                if (map.getZoom() >= 13) tryOpenNearestPopup();
             } catch (e) {
                 console.error("Could not load World Bank flare data", e);
             }
