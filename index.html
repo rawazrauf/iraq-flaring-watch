@@ -239,23 +239,23 @@
 
                     <div class="space-y-1 bg-gray-950 p-2 rounded-lg border border-gray-800">
                         <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-                            <input type="checkbox" id="layer-cluster" checked onchange="toggleLayer('cluster')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                            <input type="checkbox" id="layer-cluster" checked onchange="toggleLayer('cluster'); syncLayerCheckbox('cluster', this.checked)" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
                             <span>Active Flare Locations</span>
                         </label>
                         <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-                            <input type="checkbox" id="layer-heatmap" checked onchange="toggleLayer('heatmap')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                            <input type="checkbox" id="layer-heatmap" checked onchange="toggleLayer('heatmap'); syncLayerCheckbox('heatmap', this.checked)" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
                             <span>Flare Density Map</span>
                         </label>
                         <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-                            <input type="checkbox" id="layer-radius" onchange="toggleLayer('radius')" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                            <input type="checkbox" id="layer-radius" onchange="toggleLayer('radius'); syncLayerCheckbox('radius', this.checked)" class="form-checkbox text-amber-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
                             <span>5km Impact Zone</span>
                         </label>
                         <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-                            <input type="checkbox" id="layer-plumes" onchange="toggleLayer('plumes')" class="form-checkbox text-blue-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                            <input type="checkbox" id="layer-plumes" onchange="toggleLayer('plumes'); syncLayerCheckbox('plumes', this.checked)" class="form-checkbox text-blue-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
                             <span>Detected Emission Plumes</span>
                         </label>
                         <label class="flex items-center space-x-3 text-xs text-gray-300 cursor-pointer p-2 hover:bg-gray-900 rounded-md transition-colors">
-                            <input type="checkbox" id="layer-wb-flares" onchange="toggleLayer('wb-flares')" class="form-checkbox text-purple-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
+                            <input type="checkbox" id="layer-wb-flares" onchange="toggleLayer('wb-flares'); syncLayerCheckbox('wb-flares', this.checked)" class="form-checkbox text-purple-500 bg-gray-900 border-gray-700 rounded focus:ring-0 w-5 h-5">
                             <span>Wasted Gas (2024 Estimates)</span>
                         </label>
                     </div>
@@ -649,6 +649,46 @@
             };
         
             legendControl.addTo(map);
+            
+            const layerControl = L.control({ position: 'topright' });
+            layerControl.onAdd = function() {
+                const div = L.DomUtil.create('div');
+                div.innerHTML = `
+                    <div id="layer-control-box" style="display:none; background:rgba(17,24,39,0.92); border:1px solid #374151; border-radius:10px; padding:14px 16px; margin-bottom:8px; min-width:200px;">
+                        <div style="font-size:10px; font-weight:600; color:#f9fafb; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Display Layers</div>
+                        <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;">
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="map-layer-cluster" checked onchange="toggleLayer('cluster'); syncLayerCheckbox('cluster', this.checked);" style="accent-color:#f59e0b; width:14px; height:14px;">
+                                <span>Active Flare Locations</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="map-layer-heatmap" checked onchange="toggleLayer('heatmap'); syncLayerCheckbox('heatmap', this.checked);" style="accent-color:#f59e0b; width:14px; height:14px;">
+                                <span>Flare Density Map</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="map-layer-radius" onchange="toggleLayer('radius'); syncLayerCheckbox('radius', this.checked);" style="accent-color:#f59e0b; width:14px; height:14px;">
+                                <span>5km Impact Zone</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="map-layer-plumes" onchange="toggleLayer('plumes'); syncLayerCheckbox('plumes', this.checked);" style="accent-color:#06b6d4; width:14px; height:14px;">
+                                <span>Detected Emission Plumes</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="checkbox" id="map-layer-wb-flares" onchange="toggleLayer('wb-flares'); syncLayerCheckbox('wb-flares', this.checked);" style="accent-color:#a855f7; width:14px; height:14px;">
+                                <span>Wasted Gas (2024 Est.)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button onclick="const b=document.getElementById('layer-control-box'); b.style.display=b.style.display==='none'?'block':'none';"
+                            style="background:rgba(17,24,39,0.92); border:1px solid #374151; color:#d1d5db; font-size:10px; font-weight:600; padding:6px 12px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px; float:right;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"></path></svg>
+                        Layers
+                    </button>
+                `;
+                L.DomEvent.disableClickPropagation(div);
+                return div;
+            };
+            layerControl.addTo(map);
         }
 
         function toggleControlDrawer() {
@@ -1116,7 +1156,28 @@
             if (layers.includes('P')) toggleLayer('plumes');
             if (layers.includes('W')) toggleLayer('wb-flares');
         }
-
+        
+        function syncLayerCheckbox(layerType, checked) {
+            const sidebarIds = {
+                'cluster': 'layer-cluster',
+                'heatmap': 'layer-heatmap',
+                'radius': 'layer-radius',
+                'plumes': 'layer-plumes',
+                'wb-flares': 'layer-wb-flares'
+            };
+            const mapIds = {
+                'cluster': 'map-layer-cluster',
+                'heatmap': 'map-layer-heatmap',
+                'radius': 'map-layer-radius',
+                'plumes': 'map-layer-plumes',
+                'wb-flares': 'map-layer-wb-flares'
+            };
+            const sidebar = document.getElementById(sidebarIds[layerType]);
+            const mapControl = document.getElementById(mapIds[layerType]);
+            if (sidebar) sidebar.checked = checked;
+            if (mapControl) mapControl.checked = checked;
+        }
+        
         async function shareMap() {
             const shareData = {
                 title: 'Iraq Flaring Watch',
