@@ -555,6 +555,11 @@
                     if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
                 }
             });
+
+            map.on('move', function() {
+                if (map.hasLayer(heatmapLayer)) heatmapLayer.redraw();
+            });
+
             loadPlumeData();            
 
         const legendControl = L.control({ position: 'bottomleft' });
