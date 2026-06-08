@@ -658,23 +658,23 @@
                         <div style="font-size:10px; font-weight:600; color:#f9fafb; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Display Layers</div>
                         <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;">
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <input type="checkbox" id="map-layer-cluster" checked onchange="toggleLayer('cluster'); syncLayerCheckbox('cluster', this.checked);" style="accent-color:#f59e0b; width:14px; height:14px;">
+                                <input type="checkbox" id="map-layer-cluster" checked onchange="syncLayerCheckbox('cluster', this.checked); toggleLayer('cluster');" style="accent-color:#f59e0b; width:14px; height:14px;">
                                 <span>Active Flare Locations</span>
                             </label>
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <input type="checkbox" id="map-layer-heatmap" checked onchange="toggleLayer('heatmap'); syncLayerCheckbox('heatmap', this.checked);" style="accent-color:#f59e0b; width:14px; height:14px;">
+                                <input type="checkbox" id="map-layer-heatmap" checked onchange="syncLayerCheckbox('heatmap', this.checked); toggleLayer('heatmap');" style="accent-color:#f59e0b; width:14px; height:14px;">
                                 <span>Flare Density Map</span>
                             </label>
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <input type="checkbox" id="map-layer-radius" onchange="toggleLayer('radius'); syncLayerCheckbox('radius', this.checked);" style="accent-color:#ef4444; width:14px; height:14px;">
+                                <input type="checkbox" id="map-layer-radius" onchange="syncLayerCheckbox('radius', this.checked); toggleLayer('radius');" style="accent-color:#ef4444; width:14px; height:14px;">
                                 <span>5km Impact Zone</span>
                             </label>
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <input type="checkbox" id="map-layer-plumes" onchange="toggleLayer('plumes'); syncLayerCheckbox('plumes', this.checked);" style="accent-color:#06b6d4; width:14px; height:14px;">
+                                <input type="checkbox" id="map-layer-plumes" onchange="syncLayerCheckbox('plumes', this.checked); toggleLayer('plumes');" style="accent-color:#06b6d4; width:14px; height:14px;">
                                 <span>Detected Emission Plumes</span>
                             </label>
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <input type="checkbox" id="map-layer-wb-flares" onchange="toggleLayer('wb-flares'); syncLayerCheckbox('wb-flares', this.checked);" style="accent-color:#a855f7; width:14px; height:14px;">
+                                <input type="checkbox" id="map-layer-wb-flares" onchange="syncLayerCheckbox('wb-flares', this.checked); toggleLayer('wb-flares');" style="accent-color:#a855f7; width:14px; height:14px;">
                                 <span>Wasted Gas (2024 Est.)</span>
                             </label>
                         </div>
