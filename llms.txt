@@ -1,0 +1,33 @@
+# Iraq Flaring Watch
+> An open-source interactive map tracking gas flaring across Iraq, combining satellite detections, economic waste analysis, and community exposure data.
+
+## What this site does
+This tool maps active gas flare sites across Iraq using OpenStreetMap data, verified emission plumes from Carbon Mapper's Tanager satellite, and annual gas volume estimates from the World Bank GGFR 2024 dataset. Each facility shows estimated USD value of wasted gas and Iraqi homes that could have been powered.
+
+## Data sources
+- Flare locations: OpenStreetMap contributors (ODbL license)
+- Emission plumes: Carbon Mapper / Tanager satellite (CH4 and CO2, kg/hr)
+- Gas volumes: World Bank Global Gas Flaring Reduction Partnership (GGFR) 2024
+- Population exposure: WorldPop Project 2020 UN-adjusted raster
+- Satellite imagery: Esri, NASA GIBS
+
+## Economic methodology
+Wasted gas value estimated at $3.50/MMBtu. Conversion: vol_mm3 × 35,315 × $3.50 / 1,000,000 = USD millions. Electricity equivalent assumes 35% plant efficiency and 4,500 kWh/household/year (Iraqi average).
+
+## Key facts (2024)
+- Iraq national flaring total: ~18,182 million m³/year
+- Largest single site: West Qurna 2 (LUKOIL), 1,642 M m³/yr, ~$202M/yr
+- Total mapped flare sites: 399+
+- Verified emission plumes: 352 (Carbon Mapper Tanager)
+
+## Live URL
+https://iraqflaringwatch.com
+
+## GitHub
+https://github.com/rawazrauf/iraq-flaring-watch
+
+## License
+Code: MIT. Map data: ODbL. 
+
+## Contact
+@rawaz on X/Twitter
