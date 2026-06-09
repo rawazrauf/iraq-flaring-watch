@@ -575,7 +575,9 @@
                 }
             };
             heatmapLayer = new HeatmapOverlay(heatmapConfig);
-
+            if (document.getElementById('map-layer-heatmap').checked) {
+                heatmapLayer.addTo(map);
+            }
             safeRadiusGroup = L.layerGroup();
         
             iraqBoundaryLayer = L.geoJSON(null, {
