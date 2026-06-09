@@ -328,6 +328,7 @@
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
         let startLayers = ['F', 'H', 'P', 'W'];
+        let currentDataSource = 'preload'; // Add this back
 
         const flareIcon = L.divIcon({
             className: 'custom-flare-container',
@@ -955,12 +956,14 @@
                 const marker = L.marker(coord, { icon: flareIcon });
                 marker.flareId = flare.id;
 
-                let popDisplay = '';
-                if (staticPopData[flare.id] !== undefined) {
-                    popDisplay = `<span class="text-red-400 font-extrabold">~${staticPopData[flare.id].toLocaleString()} people</span>`;
-                } else {
-                    popDisplay = `<span class="text-gray-500 italic">No static raster match</span>`;
-                }
+            let popDisplay = '';
+            if (staticPopData[flare.id] !== undefined) {
+                popDisplay = `<span class="text-red-400 font-extrabold">~${staticPopData[flare.id].toLocaleString()} people</span>`;
+            } else if (currentDataSource === 'live') {
+                popDisplay = `<span id="pop-metric-${flare.id}" class="text-gray-400 font-bold">Querying...</span>`;
+            } else {
+                popDisplay = `<span class="text-gray-500 italic">No static raster match</span>`;
+            }
 
                 const popupContent = `
                     <div class="p-1 space-y-3 max-w-xs text-xs">
@@ -1006,6 +1009,64 @@
                 `;
 
                 marker.bindPopup(popupContent, { maxWidth: 260, minWidth: 220, closeOnClick: false, autoPanPadding: [20, 80] });
+
+
+                if (staticPopData[flare.id] === undefined && currentDataSource === 'live') {
+                    marker.on('popupopen', function() {
+                        const el = document.getElementById(`pop-metric-${flare.id}`);
+                        if (!el || el.dataset.loaded) return;
+                        el.dataset.loaded = 'true';
+                
+                        // Calculate a 5km radius polygon for the API
+                        const kmPerDegLat = 110.574;
+                        const kmPerDegLon = 111.320 * Math.cos(flare.lat * Math.PI / 180);
+                        const coords = [];
+                        for (let i = 0; i < 32; i++) {
+                            const angle = (i * 360) / 32;
+                            const dx = 5 * Math.cos(angle * Math.PI / 180);
+                            const dy = 5 * Math.sin(angle * Math.PI / 180);
+                            coords.push([flare.lon + dx / kmPerDegLon, flare.lat + dy / kmPerDegLat]);
+                        }
+                        coords.push(coords[0]);
+                
+                        // Query the WorldPop API
+                        fetch('https://api.worldpop.org/v1/services/stats', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                dataset: 'wpgppop', year: '2020',
+                                geojson: JSON.stringify({ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [coords] } })
+                            })
+                        })
+                        .then(r => r.json())
+                        .then(data => {
+                            const taskId = data.taskid;
+                            const poll = setInterval(() => {
+                                fetch(`https://api.worldpop.org/v1/tasks/${taskId}`)
+                                .then(r => r.json())
+                                .then(result => {
+                                    if (result.status === 'finished') {
+                                        clearInterval(poll);
+                                        const pop = Math.round(result.data.total_population);
+                                        staticPopData[flare.id] = pop; // Cache for performance
+                                        const el2 = document.getElementById(`pop-metric-${flare.id}`);
+                                        if (el2) el2.outerHTML = `<span class="text-red-400 font-extrabold">~${pop.toLocaleString()} people</span>`;
+                                    } else if (result.status === 'error') {
+                                        clearInterval(poll);
+                                        const el2 = document.getElementById(`pop-metric-${flare.id}`);
+                                        if (el2) el2.outerHTML = `<span class="text-gray-500 italic">API error</span>`;
+                                    }
+                                });
+                            }, 2000);
+                        })
+                        .catch(() => {
+                            const el2 = document.getElementById(`pop-metric-${flare.id}`);
+                            if (el2) el2.outerHTML = `<span class="text-gray-500 italic">Query failed</span>`;
+                        });
+                    });
+                }
+
+
                 markerClusterGroup.addLayer(marker);
 
                 safeRadiusGroup.addLayer(L.circle(coord, {
