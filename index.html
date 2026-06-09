@@ -328,7 +328,7 @@
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
         let startLayers = ['F', 'H', 'P', 'W'];
-        let currentDataSource = 'preload'; // Add this back
+        let currentDataSource = 'preload';
 
         const flareIcon = L.divIcon({
             className: 'custom-flare-container',
@@ -817,64 +817,70 @@
             const statusText = document.getElementById('loading-status-text');
             const timerText = document.getElementById('loading-timer');
             const progressBar = document.getElementById('loader-progress-bar');
-
+        
             statusText.textContent = "Connecting Overpass...";
             progressBar.style.width = "20%";
-
+        
             let seconds = 0;
             const timerInterval = setInterval(() => {
                 seconds += 0.1;
                 timerText.textContent = seconds.toFixed(1) + "s";
             }, 100);
-
-            const query = `
-                [out:json][timeout:60];
-                area["ISO3166-1"="IQ"]->.searchArea;
-                (
-                  node["man_made"="flare"](area.searchArea);
-                  way["man_made"="flare"](area.searchArea);
-                );
-                out center;
-            `;
-
+        
+            // Using the more efficient nwr (nodes, ways, relations) selector
+            const query = `[out:json][timeout:25];area["ISO3166-1"="IQ"]->.search;(nwr["man_made"="flare"](area.search););out center;`;
+        
             const endpoints = [
                 'https://overpass-api.de/api/interpreter',
                 'https://overpass.kumi.systems/api/interpreter',
                 'https://overpass.private.coffee/api/interpreter'
             ];
-
+        
+            const controller = new AbortController();
+            
+            // Launch all requests simultaneously
+            const requests = endpoints.map(url =>
+                fetch(url, {
+                    method: 'POST',
+                    body: `data=${encodeURIComponent(query)}`,
+                    signal: controller.signal,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .then(res => res.ok ? res.json() : Promise.reject())
+            );
+        
             let data = null;
-            let success = false;
-
-            for (let url of endpoints) {
-                try {
-                    statusText.textContent = `Querying OSM Node DB...`;
-                    progressBar.style.width = "50%";
-                    const response = await fetch(url, { method: 'POST', body: query, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
-                    if (response.ok) { data = await response.json(); success = true; break; }
-                } catch (e) {
-                    console.warn("Overpass endpoint failed. Attempting backup...");
-                }
+        
+            try {
+                // The "Race": whichever responds first wins
+                data = await Promise.any(requests);
+                controller.abort(); // Cancel the other pending requests
+            } catch (e) {
+                clearInterval(timerInterval);
+                statusText.textContent = "All endpoints failed. Check connection.";
+                progressBar.style.width = "100%";
+                setTimeout(() => toggleDataSource('preload'), 3000);
+                return;
             }
-
+        
             clearInterval(timerInterval);
-
-            if (!success || !data || !data.elements) {
+        
+            if (!data || !data.elements) {
                 statusText.textContent = "Overpass busy. Retrying preload...";
                 progressBar.style.width = "100%";
                 setTimeout(() => toggleDataSource('preload'), 3000);
                 return;
             }
-
+        
             statusText.textContent = "Validating coordinates...";
             progressBar.style.width = "85%";
-
+        
             let liveDate = "Just now";
             if (data.osm3s && data.osm3s.timestamp_osm_base) {
                 const d = new Date(data.osm3s.timestamp_osm_base);
                 liveDate = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
             }
-
+        
             const liveParsedFlares = data.elements.map((element) => {
                 const lat = element.lat || (element.center ? element.center.lat : null);
                 const lon = element.lon || (element.center ? element.center.lon : null);
@@ -890,11 +896,16 @@
                     website: tags.website || null
                 };
             }).filter(f => f !== null);
-
+        
             progressBar.style.width = "100%";
             statusText.textContent = `Parsed ${liveParsedFlares.length} active flares.`;
             currentFlares = liveParsedFlares;
-            setTimeout(() => { document.getElementById('live-loader-box').classList.add('hidden'); loadLayersAndData(); }, 1000);
+            
+            // Complete the UI update
+            setTimeout(() => { 
+                document.getElementById('live-loader-box').classList.add('hidden'); 
+                loadLayersAndData(); 
+            }, 1000);
         }
 
         function detectOilFieldFromPosition(lat, lon) {
