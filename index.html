@@ -307,7 +307,8 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heatmap.js@2.0.5/build/heatmap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-heatmap@1.0.0/leaflet-heatmap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"></script>
 
     <script>
@@ -556,12 +557,25 @@
         
             markerClusterGroup = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 40 });
         
-            heatmapLayer = L.heatLayer([], {
-                radius: 35, blur: 25, maxZoom: 10, minOpacity: 0.2,
-                zoomAnimation: false,
-                gradient: { 0.1: '#1e3a8a', 0.3: '#06b6d4', 0.5: '#10b981', 0.7: '#f59e0b', 1.0: '#ef4444' }
-            });
-        
+            const heatmapConfig = {
+                radius: 35,
+                maxOpacity: 0.8,
+                minOpacity: 0.2,
+                scaleRadius: false,
+                useLocalExtrema: false,
+                latField: 'lat',
+                lngField: 'lon',
+                valueField: 'value',
+                gradient: {
+                    0.1: '#1e3a8a',
+                    0.3: '#06b6d4',
+                    0.5: '#10b981',
+                    0.7: '#f59e0b',
+                    1.0: '#ef4444'
+                }
+            };
+            heatmapLayer = new HeatmapOverlay(heatmapConfig);
+
             safeRadiusGroup = L.layerGroup();
         
             iraqBoundaryLayer = L.geoJSON(null, {
@@ -1006,13 +1020,21 @@
 
             setTimeout(preloadNextRandom, 2000);
 
-            heatmapLayer.setLatLngs(heatmapPoints);
+            const heatmapData = filtered.map(f => ({
+                lat: f.lat,
+                lon: f.lon,
+                value: 1.0 
+            }));
+            heatmapLayer.setData({ max: 1.0, data: heatmapData });
+
+            
             if (document.getElementById('map-layer-heatmap').checked) {
                 if (!map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
                 heatmapLayer.redraw();
             } else {
                 map.removeLayer(heatmapLayer);
             }
+            
             if (document.getElementById('map-layer-radius').checked) {
                 if (!map.hasLayer(safeRadiusGroup)) map.addLayer(safeRadiusGroup);
             } else {
