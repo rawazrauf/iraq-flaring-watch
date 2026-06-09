@@ -939,7 +939,6 @@
         function loadLayersAndData() {
             markerClusterGroup.clearLayers();
             safeRadiusGroup.clearLayers();
-            const heatmapPoints = [];
 
             const filtered = currentFlares.filter(flare => {
                 if (currentFilter === 'all') return true;
@@ -954,7 +953,6 @@
 
             filtered.forEach(flare => {
                 const coord = [flare.lat, flare.lon];
-                heatmapPoints.push([flare.lat, flare.lon, 1.0]);
 
                 const marker = L.marker(coord, { icon: flareIcon });
                 marker.flareId = flare.id;
@@ -1030,7 +1028,6 @@
             
             if (document.getElementById('map-layer-heatmap').checked) {
                 if (!map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
-                heatmapLayer.redraw();
             } else {
                 map.removeLayer(heatmapLayer);
             }
