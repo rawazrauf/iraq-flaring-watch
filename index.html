@@ -558,6 +558,7 @@
         
             heatmapLayer = L.heatLayer([], {
                 radius: 35, blur: 25, maxZoom: 10, minOpacity: 0.2,
+                zoomAnimation: false,
                 gradient: { 0.1: '#1e3a8a', 0.3: '#06b6d4', 0.5: '#10b981', 0.7: '#f59e0b', 1.0: '#ef4444' }
             });
         
@@ -585,9 +586,6 @@
                 }
             });
         
-            map.on('move', function() {
-                if (map.hasLayer(heatmapLayer)) heatmapLayer.redraw();
-            });
         
             map.on('moveend', function() {
                 const center = map.getCenter();
