@@ -316,7 +316,6 @@
         let preloadFlares = [];
         let currentFlares = [];
         let currentBaseMapType = 'satellite';
-        let currentDataSource = 'preload';
         let currentFilter = 'all';
         let baseLayers = {};
         let markerClusterGroup;
@@ -328,7 +327,6 @@
         let plumeLayerGroup = L.layerGroup();
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
-        let wbFlareData = null;
         let startLayers = ['F', 'H', 'P', 'W'];
 
         const flareIcon = L.divIcon({
@@ -598,22 +596,36 @@
                     if (heatmapCheckbox.checked && !map.hasLayer(heatmapLayer)) map.addLayer(heatmapLayer);
                 }
             });
-        
-        
-            map.on('moveend', function() {
+
+            map.on('moveend zoomend', function() {
+                // 1. Update Coordinates
+                const div = document.getElementById('coords-display');
+                if (div) {
+                    const zoom = map.getZoom();
+                    if (zoom >= 13) {
+                        const center = map.getCenter();
+                        div.style.display = 'block';
+                        div.innerHTML = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
+                    } else {
+                        div.style.display = 'none';
+                    }
+                }
+            
+                // 2. Update URL Hash
                 const center = map.getCenter();
                 const zoom = map.getZoom();
                 const layers = [];
-
                 if (document.getElementById('map-layer-cluster').checked) layers.push('F');
                 if (document.getElementById('map-layer-heatmap').checked) layers.push('H');
                 if (document.getElementById('map-layer-radius').checked) layers.push('S');
                 if (document.getElementById('map-layer-plumes').checked) layers.push('P');
                 if (document.getElementById('map-layer-wb-flares').checked) layers.push('W');
+                
                 const hash = `#${zoom.toFixed(2)}/${center.lat.toFixed(5)}/${center.lng.toFixed(5)}/${layers.join(',')}/${currentBaseMapType}`;
                 history.replaceState(null, '', hash);
-            });
+            });            
         
+                
             loadPlumeData();
         
             const legendControl = L.control({ position: 'bottomleft' });
@@ -668,19 +680,6 @@
                 return div;
             };
             coordsControl.addTo(map);
-            
-            map.on('moveend zoomend', function() {
-                const div = document.getElementById('coords-display');
-                if (!div) return;
-                const zoom = map.getZoom();
-                if (zoom >= 13) {
-                    const center = map.getCenter();
-                    div.style.display = 'block';
-                    div.innerHTML = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
-                } else {
-                    div.style.display = 'none';
-                }
-            });
 
             
             const layerControl = L.control({ position: 'topright' });
