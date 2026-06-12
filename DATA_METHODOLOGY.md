@@ -318,3 +318,39 @@ Power scaling (`^0.4`) provides readable differentiation across the full range f
 | Estimated value — West Qurna 2 | ~$202M/yr |
 | Iraqi homes — West Qurna 2 equivalent | ~1.6 million |
 | Total WB records displayed (≥$1M) | ~170 sites |
+---
+
+## 5. Population Impact (`iraq_flaring_impact.json`)
+
+**Source:** WorldPop Project — Iraq 2020 UN-adjusted constrained population raster  
+**Script:** `population_impact.py` (repo root)  
+**Output:** `iraq_flaring_impact.json` (repo root)  
+
+### How it was generated
+
+Run `population_impact.py` in Google Colab with `irq_ppp_2020_UNadj_constrained.tif` uploaded to the session. The script fetches the latest flare locations from GitHub automatically, so re-running after adding new flares to OSM will produce an updated figure.
+
+### Methodology
+
+Each flare is buffered by 5km in UTM Zone 38N (EPSG:32638) for accurate metric distance calculation. All 5km circles are unioned into a single polygon using `shapely.ops.unary_union` before the population query — this eliminates all double-counting of people who live near multiple flares. The WorldPop raster is then masked with the union polygon and all population pixels within the area are summed.
+
+### Updating
+
+1. Add new flares to OpenStreetMap with tag `man_made=flare`
+2. Open `population_impact.py` in Google Colab
+3. Upload `irq_ppp_2020_UNadj_constrained.tif` to the Colab session
+4. Run the script
+5. Download the output `iraq_flaring_impact.json`
+6. Commit it to the repo root
+7. The website reads this file on load and updates the stat automatically
+
+### Key result (June 2026)
+
+| Metric | Value |
+|---|---|
+| Flares analysed | 417 |
+| Impacted population | 5,148,508 |
+| As % of Iraq population | 11.2% |
+| Buffer radius | 5km |
+| Raster resolution | ~100m per pixel |
+| Iraq population reference | 2024 Census (46,118,793) |
