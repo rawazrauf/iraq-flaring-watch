@@ -181,6 +181,14 @@
                             <span class="text-[9px] text-gray-500 font-mono">MW if captured</span>
                         </div>
                     </div>
+                    <div class="col-span-2 bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex flex-col justify-between">
+                        <span class="text-[10px] text-gray-400 font-medium">People Within 5km of a Flare</span>
+                        <div class="flex items-baseline space-x-1 mt-0.5">
+                            <span id="stat-impacted" class="text-xl font-extrabold text-red-400">—</span>
+                            <span class="text-[9px] text-gray-500 font-mono">Iraqis impacted</span>
+                        </div>
+                    </div>
+        
                 </div>
 
                 
@@ -362,6 +370,7 @@
         window.onload = async function() {
             initMap();
             await fetchStaticPopData();
+            await fetchImpactData();
             await loadStaticQueryFile();
             loadWBFlareData();
         };
@@ -375,6 +384,18 @@
             }
         }
 
+        async function fetchImpactData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_flaring_impact.json');
+                const data = await response.json();
+                const el = document.getElementById('stat-impacted');
+                if (el) el.textContent = `~${(data.impacted_population / 1000000).toFixed(1)}M`;
+            } catch (e) {
+                console.warn('Could not load impact data', e);
+            }
+        }
+
+        
         async function loadPlumeData() {
             try {
                 const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_tanager_plumes.json');
