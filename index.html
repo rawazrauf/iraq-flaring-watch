@@ -151,6 +151,7 @@
                         </svg>
                     </button>
                 </div>
+
                 <div class="grid grid-cols-2 gap-2">
                     <div class="bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex flex-col justify-between">
                         <span class="text-[10px] text-gray-400 font-medium">Mapped Flares</span>
@@ -166,18 +167,18 @@
                             <span class="text-[9px] text-gray-500 font-mono">fields</span>
                         </div>
                     </div>
-                    <div class="col-span-2 bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex items-center justify-between">
+                    <div class="col-span-2 bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex flex-col justify-between">
                         <span class="text-[10px] text-gray-400 font-medium">Gas Value Wasted</span>
-                        <div class="flex items-baseline space-x-1">
+                        <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-value-wasted" class="text-xl font-extrabold text-purple-400">—</span>
                             <span class="text-[9px] text-gray-500 font-mono">est. 2024</span>
                         </div>
                     </div>
-                    <div class="col-span-2 bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex items-center justify-between">
-                        <span class="text-[10px] text-gray-400 font-medium">If Captured, Powers</span>
-                        <div class="flex items-baseline space-x-1">
+                    <div class="col-span-2 bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex flex-col justify-between">
+                        <span class="text-[10px] text-gray-400 font-medium">Electricity Generation Potential</span>
+                        <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-homes" class="text-xl font-extrabold text-amber-400">—</span>
-                            <span class="text-[9px] text-gray-500 font-mono">Iraqi homes</span>
+                            <span class="text-[9px] text-gray-500 font-mono">MW if captured</span>
                         </div>
                     </div>
                 </div>
@@ -1353,13 +1354,10 @@
                 if (f.vol_mm3 > 0) totalVol += f.vol_mm3;
             });
             const valueUSD_billions = (totalVol * 35315 * GAS_PRICE_MMBTU / 1000000000).toFixed(2);
-            const homes = Math.round((totalVol * 4400 * 1000) / 5000);
-            const homesStr = homes >= 1000000
-                ? `~${(homes / 1000000).toFixed(1)}M`
-                : `~${homes.toLocaleString()}`;
+            const mwPotential = Math.round((totalVol * 4400 * 0.35) / 8760);
         
             document.getElementById('stat-value-wasted').textContent = `~$${valueUSD_billions}B`;
-            document.getElementById('stat-homes').textContent = homesStr;
+            document.getElementById('stat-homes').textContent = `~${mwPotential.toLocaleString()}`;
         }
 
         function updateBaseMapControl(type) {
