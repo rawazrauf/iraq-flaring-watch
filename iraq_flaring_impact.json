@@ -1,0 +1,16 @@
+{
+  "generated": "2026-06-12",
+  "osm_snapshot": "2026-06-12",
+  "flare_count": 417,
+  "iraq_population": 46118793,
+  "iraq_households": 8054385,
+  "impacted_population": 5148508,
+  "impacted_pct": 11.2,
+  "buffer_radius_km": 5,
+  "methodology": "WorldPop 2020 UN-adjusted constrained raster (irq_ppp_2020_UNadj_constrained.tif). Each flare buffered by 5km in UTM Zone 38N (EPSG:32638). All buffers unioned to eliminate double-counting. Population summed from pixels within union area.",
+  "data_sources": {
+    "flares": "OpenStreetMap via rawazrauf/iraq-flaring-watch",
+    "population_raster": "WorldPop Project, Iraq 2020 UNadj constrained (100m resolution)",
+    "iraq_census": "Iraq Ministry of Planning, 2024 Census final results"
+  }
+}
