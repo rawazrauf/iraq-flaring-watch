@@ -185,7 +185,7 @@
                         <span class="text-[10px] text-gray-400 font-medium">People Within 5km of a Flare</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-impacted" class="text-xl font-extrabold text-red-400">—</span>
-                            <span class="text-[9px] text-gray-500 font-mono">Iraqis impacted</span>
+                            <span class="text-[9px] text-gray-500 font-mono">Iraqis </span>
                         </div>
                     </div>
         
@@ -389,7 +389,7 @@
                 const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_flaring_impact.json');
                 const data = await response.json();
                 const el = document.getElementById('stat-impacted');
-                if (el) el.textContent = `~${(data.impacted_population / 1000000).toFixed(1)}M`;
+                if (el) el.textContent = `~${(data.impacted_population / 1000000).toFixed(1)} Million`;
             } catch (e) {
                 console.warn('Could not load impact data', e);
             }
