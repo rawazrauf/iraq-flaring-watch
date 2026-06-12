@@ -282,12 +282,18 @@ valueUSD_millions = vol_mm3 × 35,315 × GAS_PRICE_MMBTU / 1,000,000
 ### Electricity equivalent calculation
 
 ```
-homesEquivalent = (vol_mm3 × 4,400 × 1,000) / 4,500
+homesEquivalent = (vol_mm3 × 4,400 × 1,000) / 5,000
 ```
 
 **Assumptions:**
 - Gas-to-electricity conversion: ~4,400 kWh per thousand m³ at 35% plant efficiency
-- Iraqi household annual consumption: 4,500 kWh/year
+- Iraqi household annual consumption: 5,000 kWh/year
+- Derived from IEA Iraq electricity data (1.377 MWh/capita) × 2024 census 
+  (46.12M population ÷ 8.05M households = 5.73 persons/household), 
+  assuming 60-65% residential share of total consumption
+- Methodology reviewed by Ahmed Gailani, Senior Energy Modeller at NESO 
+  (National Energy System Operator, Great Britain)
+  https://scholar.google.com/citations?user=IpmavsIAAAAJ&hl=en
 
 ### Display filter
 
