@@ -269,10 +269,21 @@ with open('iraq_wb_flares_all_years.json', 'w') as f:
 ### Economic value calculation
 
 ```
-GAS_PRICE_MMBTU = 3.50   # USD per MMBtu (conservative global benchmark)
+GAS_PRICE_MMBTU = 3.50   # USD per MMBtu
 
 valueUSD_millions = vol_mm3 × 35,315 × GAS_PRICE_MMBTU / 1,000,000
 ```
+
+**Unit explanation:**
+- `vol_mm3` is in millions of cubic metres per year
+- 1 million m³ = 35,315 MMBtu
+- Dividing by 1,000,000 converts USD to USD millions
+
+**Price basis:**
+$3.50/MMBtu is the minimum domestic gas price officially adopted by the Iraqi Council of Ministers in Cabinet Session 49 (2025), as published by the Prime Minister's Office:
+https://pmo.iq/?article=3907
+
+This rate is also consistent with the World Bank GGFR methodology for associated gas valuation in producing countries without LNG export infrastructure. S&P Global Commodity Insights (July 2025) separately estimates Iraq's flared gas capture cost at ~$2/MMBtu against import prices of ~$8/MMBtu, placing the $3.50/MMBtu figure within a well-supported range.
 
 **Unit explanation:**
 - `vol_mm3` is in millions of cubic metres per year
