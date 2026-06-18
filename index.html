@@ -340,7 +340,7 @@
         let map;
         let preloadFlares = [];
         let currentFlares = [];
-        let currentBaseMapType = 'satellite';
+        let currentBaseMapType = 'streets';
         let currentFilter = 'all';
         let baseLayers = {};
         let markerClusterGroup;
@@ -352,7 +352,7 @@
         let plumeLayerGroup = L.layerGroup();
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
-        let startLayers = ['F', 'H', 'P', 'W'];
+        let startLayers = ['F', 'P', 'W'];
         let currentDataSource = 'preload';
 
         const flareIcon = L.divIcon({
@@ -518,8 +518,8 @@
         }
 
         function initMap() {
-            let startCenter = [33.0, 45.0];
-            let startZoom = 6.5;
+            let startCenter = [32.96544, 43.69629];
+            let startZoom = 6.0;
             if (window.location.hash) {
                 const parts = window.location.hash.replace('#', '').split('/');
                 if (parts.length >= 3) {
@@ -1157,7 +1157,7 @@
             currentFilter = field;
             loadLayersAndData();
             if (field === 'all') {
-                map.setView([33.0, 45.0], 6.5);
+                map.setView([32.96544, 43.69629], 6.0);
             } else {
                 const fieldCenters = {
                     "north rumaila": [30.811, 47.329], "south rumaila": [30.160, 47.411],
