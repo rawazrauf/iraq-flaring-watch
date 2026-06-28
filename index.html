@@ -1488,7 +1488,7 @@
                             
                             <div class="bg-purple-900/20 p-2 rounded border border-purple-500/30 space-y-2">
                                 <p class="text-gray-300 leading-relaxed">
-                                    <b>${f.operator || 'Unknown'}</b> flared <b>${f.vol_mm3.toLocaleString()} million m³</b> 
+                                    <b>${f.operator || 'Unknown'}</b> flared <b>${Math.round(f.vol_mm3).toLocaleString()} million m³</b>
                                     of gas at <b>${f.field || 'Unknown'}</b> in 2025. Capturing this could have generated an estimated 
                                     <span class="text-red-400 font-bold">${valueStr} USD</span> in value — 
                                     enough electricity to power <span class="text-amber-400 font-bold">${homesStr} Iraqi homes</span> for a year.
