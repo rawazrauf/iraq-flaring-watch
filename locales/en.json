@@ -1,0 +1,87 @@
+{
+  "_meta": {
+    "language": "English",
+    "status": "complete"
+  },
+  "nav": {
+    "about": "About",
+    "share": "Share Map",
+    "follow": "Follow"
+  },
+  "sidebar": {
+    "national_stats": "National Stats",
+    "mapped_flares": "Mapped Flares",
+    "active": "active",
+    "oil_fields": "Oil Fields",
+    "fields": "fields",
+    "gas_value_wasted": "Gas Value Wasted",
+    "est_2025": "est. 2025",
+    "annual_flaring_volume": "Annual Flaring Volume",
+    "bcm_yr": "BCM/yr est. 2025",
+    "electricity_potential": "Electricity Generation Potential",
+    "mw_if_captured": "MW if captured",
+    "people_within_5km": "People Within 5km of a Flare",
+    "iraqis": "Iraqis",
+    "focal_oilfield": "Focal Oilfield Selection",
+    "all_fields": "All Fields / Areas (Iraqwide)",
+    "inspect_random": "Inspect Random Flare",
+    "data_engine": "Data Engine Source",
+    "preloaded": "Preloaded",
+    "live_osm": "Live OSM",
+    "distance_analyzer": "Distance Analyzer",
+    "ruler": "Ruler",
+    "distance_desc": "Assess local impact by calculating the exact distance between any gas flare and community settlements.",
+    "measure_btn": "Measure Flare Proximity",
+    "regional_zoom": "Regional Quick Zoom",
+    "basra": "Basra",
+    "maysan": "Maysan",
+    "kirkuk": "Kirkuk",
+    "citizen_mapping": "Citizen Mapping Help",
+    "citizen_desc": "If a gas flare in Iraq is missing, please help update OpenStreetMap using standard tagging conventions."
+  },
+  "legend": {
+    "title": "Map Legend",
+    "active_flare": "Active Flare (OSM)",
+    "emission_plume": "Verified Emission Plume",
+    "wasted_gas": "Wasted Gas (2025 Est.)",
+    "heatmap": "Flare Density Heatmap",
+    "low": "Low",
+    "high": "High"
+  },
+  "layers": {
+    "title": "Display Layers",
+    "flare_locations": "Active Flare Locations",
+    "density_map": "Flare Density Map",
+    "impact_zone": "5km Impact Zone",
+    "emission_plumes": "Detected Emission Plumes",
+    "wasted_gas": "Wasted Gas (2025 Est.)"
+  },
+  "background": {
+    "title": "Background",
+    "satellite": "High Resolution Satellite",
+    "archive": "Satellite Archive",
+    "night": "Night Lights",
+    "dark": "Dark Canvas",
+    "streets": "OpenStreetMap"
+  },
+  "about": {
+    "title": "Iraq Flaring Watch",
+    "desc": "Gas flaring burns off associated gas from oil extraction, harming nearby communities and wasting billions in energy value annually.",
+    "flare_sites": "Flare sites — includes 5km population estimate",
+    "economic_waste": "Economic waste — USD value lost & Iraqi homes that could have been powered",
+    "emission_plumes": "Emission plumes — methane & CO2 in kg/hr",
+    "open_source": "Open-source"
+  },
+  "popup": {
+    "gas_flare": "Gas Flare",
+    "assigned_field": "Assigned Field",
+    "population_5km": "Population within 5km:",
+    "latitude": "Latitude:",
+    "longitude": "Longitude:",
+    "view_google_maps": "View on Google Maps",
+    "zoom_in": "Zoom In",
+    "edit_osm": "Edit OSM",
+    "wasted_gas_title": "Wasted Gas — 2025",
+    "wb_data": "World Bank GGFR Data"
+  }
+}
