@@ -13,7 +13,7 @@ Gas flaring burns off associated natural gas during oil extraction rather than c
 **Three data layers:**
 
 - 🟠 **Active flare sites** — crowdsourced from OpenStreetMap, with population estimates for people living within 5km
-- 🟣 **Economic waste** — World Bank GGFR 2024 volume estimates, sized by annual gas burned, with USD value lost and Iraqi homes that could have been powered
+- 🟣 **Economic waste** — World Bank GGFR 2025 volume estimates, sized by annual gas burned, with USD value lost and Iraqi homes that could have been powered
 - 🔵 **Emission plumes** — verified CH₄ and CO₂ detections from Carbon Mapper's Tanager satellite, with emission rates in kg/hr
 
 ---
@@ -53,6 +53,12 @@ CO₂ and CH₄ plumes detected by Carbon Mapper's Tanager satellite, shown with
 - **Inspect Random Flare** — explore the dataset at random
 - **Live OSM mode** — query the OpenStreetMap Overpass API in real time for latest data
 - **One-click OSM editing** — direct link to iD editor to add or update flare data
+- **National stats sidebar** — live economic and health impact statistics
+- **Population impact layer** — 5.1 million Iraqis within 5km of a flare, calculated using WorldPop raster with non-overlapping union methodology
+- **Shareable URLs** — every zoom, layer state, and background encoded in URL
+- **Base map switcher** — accessible directly on map canvas for mobile users
+- **Coordinate display** — shows lat/lon at zoom ≥ 13
+- **Follow:** [@IraqFlaring](https://twitter.com/IraqFlaring) on X/Twitter
 
 ---
 
@@ -63,7 +69,7 @@ CO₂ and CH₄ plumes detected by Carbon Mapper's Tanager satellite, shown with
 | Flare locations | [OpenStreetMap](https://www.openstreetmap.org) | Live / preloaded |
 | Population (5km) | [WorldPop Project](https://www.worldpop.org) | 2020 UN-adjusted |
 | Emission plumes | [Carbon Mapper / Tanager](https://carbonmapper.org) | 2024–2025 |
-| Gas volumes & economics | [World Bank GGFR](https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data) | 2012–2024 |
+| Gas volumes & economics | [World Bank GGFR](https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data) | 2012–2025 |
 | Satellite imagery | Esri, NASA GIBS | Various |
 
 ---
@@ -76,7 +82,7 @@ Wasted gas value is estimated at **$3.50/MMBtu** (conservative global benchmark)
 Value (USD) = vol_mm3 × 35,315 MMBtu/M m³ × $3.50 / 1,000,000
 ```
 
-Electricity equivalent assumes **35% plant efficiency** and **4,500 kWh/household/year** (Iraqi average).
+Electricity equivalent assumes **35% plant efficiency** and **5,000 kWh/household/year** (IEA 2024 × Iraq 2024 census, reviewed by Ahmed Gailani, Senior Energy Modeller at NESO).
 
 ---
 
