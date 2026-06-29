@@ -2,7 +2,7 @@
   "version": 0.6,
   "generator": "Overpass API 0.7.62.11 87bfad18",
   "osm3s": {
-    "timestamp_osm_base": "2026-06-12T09:43:49Z",
+    "timestamp_osm_base": "2026-06-29T13:22:16Z",
     "timestamp_areas_base": "2026-05-12T07:36:16Z",
     "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
   },
@@ -2093,7 +2093,7 @@
   "type": "node",
   "id": 13753794544,
   "lat": 30.5681222,
-  "lon": 47.7674196,
+  "lon": 47.7674843,
   "tags": {
     "man_made": "flare"
   }
@@ -3010,8 +3010,8 @@
 {
   "type": "node",
   "id": 13913932129,
-  "lat": 36.7759206,
-  "lon": 43.3244232,
+  "lat": 36.7760866,
+  "lon": 43.3247200,
   "tags": {
     "man_made": "flare"
   }
@@ -3084,6 +3084,24 @@
   "id": 13914027433,
   "lat": 30.4021627,
   "lon": 47.3357670,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13914028621,
+  "lat": 30.4023735,
+  "lon": 47.3362448,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13914028626,
+  "lat": 30.4026703,
+  "lon": 47.3365490,
   "tags": {
     "man_made": "flare"
   }
@@ -3217,8 +3235,8 @@
 {
   "type": "node",
   "id": 13915212011,
-  "lat": 36.7312464,
-  "lon": 43.2811810,
+  "lat": 36.7313881,
+  "lon": 43.2811379,
   "tags": {
     "man_made": "flare"
   }
@@ -3786,6 +3804,114 @@
   "id": 13930749133,
   "lat": 30.1659427,
   "lon": 47.4165245,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974350238,
+  "lat": 31.0221322,
+  "lon": 47.3280014,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974372045,
+  "lat": 35.8345902,
+  "lon": 43.2214153,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974375465,
+  "lat": 31.7646583,
+  "lon": 46.0449897,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974390259,
+  "lat": 36.6901069,
+  "lon": 44.0715686,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974390260,
+  "lat": 36.6920030,
+  "lon": 44.0697847,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974394115,
+  "lat": 36.8672003,
+  "lon": 43.5200592,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974439447,
+  "lat": 34.0681674,
+  "lon": 40.9865082,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974445483,
+  "lat": 35.7195267,
+  "lon": 44.0339549,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974451339,
+  "lat": 35.7191487,
+  "lon": 44.0331586,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974456483,
+  "lat": 30.4825193,
+  "lon": 47.6085494,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974468526,
+  "lat": 32.0588868,
+  "lon": 47.4435920,
+  "tags": {
+    "man_made": "flare"
+  }
+},
+{
+  "type": "node",
+  "id": 13974643340,
+  "lat": 31.0761857,
+  "lon": 47.2598671,
   "tags": {
     "man_made": "flare"
   }
