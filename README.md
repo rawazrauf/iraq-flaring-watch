@@ -6,7 +6,7 @@ An open-source, serverless web map tracking gas flaring across Iraq — combinin
 
 ---
 
-## What it shows
+## What it shows 
 
 Gas flaring burns off associated natural gas during oil extraction rather than capturing it. Iraq is one of the world's largest gas flaring nations. This tool makes that visible.
 
