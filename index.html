@@ -384,7 +384,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.2</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.3</p>
             </div>
         
         </aside>
@@ -406,10 +406,15 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"></script>
 
     <script>
+        /* ============================================================
+           Iraq Flaring Watch — iraqflaringwatch.com
+           Build: 2026.08.04.3
+           Last updated: 4 August 2026
+           ============================================================ */
         let map;
         let preloadFlares = [];
         let currentFlares = [];
-        let currentBaseMapType = 'streets';
+        let currentBaseMapType = 'satellite';
         let currentFilter = 'all';
         let baseLayers = {};
         let markerClusterGroup;
