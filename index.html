@@ -367,6 +367,7 @@
         let wbFlareDataLoaded = false;
         let startLayers = ['F', 'P', 'W'];
         let currentDataSource = 'preload';
+        let satelliteLabels, satelliteRoads;
 
         const flareIcon = L.divIcon({
             className: 'custom-flare-container',
@@ -598,12 +599,25 @@
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxNativeZoom: 19, maxZoom: 19
             });
-        
+            
+            // Reference overlays (labels, roads, boundaries) for satellite views
+            satelliteLabels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Esri',
+                maxNativeZoom: 18, maxZoom: 19,
+                pane: 'overlayPane'
+            });
+            
+            satelliteRoads = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Esri',
+                maxNativeZoom: 18, maxZoom: 19,
+                pane: 'overlayPane'
+            });
+            
             baseLayers.satellite.addTo(map);
 
-            if (currentBaseMapType !== 'satellite') {
-                baseLayers.satellite.remove();
-                baseLayers[currentBaseMapType].addTo(map);
+            if (currentBaseMapType === 'satellite' || currentBaseMapType === 'clarity' || currentBaseMapType === 'night') {
+                satelliteLabels.addTo(map);
+                satelliteRoads.addTo(map);
             }
         
             markerClusterGroup = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 40 });
@@ -861,6 +875,16 @@
             currentBaseMapType = type;
             Object.values(baseLayers).forEach(layer => { if (map.hasLayer(layer)) map.removeLayer(layer); });
             baseLayers[type].addTo(map);
+        
+            // Show reference overlays only on satellite imagery
+            if (type === 'satellite' || type === 'clarity' || type === 'night') {
+                if (!map.hasLayer(satelliteLabels)) satelliteLabels.addTo(map);
+                if (!map.hasLayer(satelliteRoads)) satelliteRoads.addTo(map);
+            } else {
+                map.removeLayer(satelliteLabels);
+                map.removeLayer(satelliteRoads);
+            }
+        
             map.fire('moveend');
             updateBaseMapControl(type);
         }
