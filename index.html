@@ -101,6 +101,61 @@
             to   { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in { animation: fadeIn 0.25s ease-out; }
+
+        #tour-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            display: none;
+        }
+        #tour-tooltip {
+            position: fixed;
+            z-index: 10001;
+            background: #1f2937;
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 320px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            display: none;
+        }
+        #tour-tooltip h3 {
+            color: #f59e0b;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        #tour-tooltip p {
+            color: #d1d5db;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .tour-highlight {
+            position: relative;
+            z-index: 10001 !important;
+            box-shadow: 0 0 0 4px #f59e0b, 0 0 0 9999px rgba(0,0,0,0.7);
+            border-radius: 8px;
+        }
+        .tour-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+        .tour-btns button {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+        }
+        .tour-next { background: #f59e0b; color: #111827; }
+        .tour-skip { background: transparent; color: #9ca3af; }
+        .tour-progress { font-size: 11px; color: #6b7280; }
+        
     </style>
 </head>
 <body class="bg-gray-950 text-gray-100 flex flex-col h-full overflow-hidden">
@@ -387,6 +442,12 @@
             await fetchImpactData();
             await loadStaticQueryFile();
             loadWBFlareData();
+        try {
+            if (!localStorage.getItem('ifw_tour_seen')) {
+                setTimeout(() => startTour(), 1500);
+            }
+        } catch(e) {}
+            
         };
 
         async function fetchStaticPopData() {
@@ -1405,6 +1466,99 @@
             });
         }
 
+        const tourSteps = [
+            {
+                title: "Welcome to Iraq Flaring Watch 🔥",
+                text: "This map tracks gas flaring across Iraq — where natural gas is burned off during oil extraction, wasting billions and harming nearby communities. Let's take a quick tour.",
+                target: null
+            },
+            {
+                title: "National Statistics",
+                text: "These live figures show the scale of the problem: gas value wasted, electricity that could be generated, and how many Iraqis live near a flare.",
+                target: "#stat-value-wasted"
+            },
+            {
+                title: "The Data Layers",
+                text: "Orange dots are active flares. Purple bubbles show wasted gas value. Cyan dots are satellite-detected emission plumes. The heatmap shows flare density.",
+                target: "#legend-box"
+            },
+            {
+                title: "Switch Layers & Background",
+                text: "Use these controls to toggle data layers on and off, and switch between satellite, street, and night-time views.",
+                target: "#layer-control-box"
+            },
+            {
+                title: "Explore & Share",
+                text: "Click any flare to see details. Every view has a shareable link that captures exactly what you're looking at — perfect for highlighting a specific site.",
+                target: null
+            }
+        ];
+        
+        let currentTourStep = 0;
+        
+        function startTour() {
+            currentTourStep = 0;
+            document.getElementById('tour-overlay').style.display = 'block';
+            document.getElementById('tour-tooltip').style.display = 'block';
+            showTourStep();
+        }
+        
+        function showTourStep() {
+            const step = tourSteps[currentTourStep];
+            document.getElementById('tour-title').textContent = step.title;
+            document.getElementById('tour-text').textContent = step.text;
+            document.getElementById('tour-progress').textContent = `${currentTourStep + 1} / ${tourSteps.length}`;
+            document.querySelector('.tour-next').textContent = currentTourStep === tourSteps.length - 1 ? 'Finish' : 'Next';
+        
+            document.querySelectorAll('.tour-highlight').forEach(el => el.classList.remove('tour-highlight'));
+        
+            if (step.target === '#layer-control-box') {
+                const box = document.getElementById('layer-control-box');
+                if (box) box.style.display = 'block';
+            }
+            if (step.target === '#legend-box') {
+                const box = document.getElementById('legend-box');
+                if (box) box.style.display = 'block';
+            }
+        
+            const tooltip = document.getElementById('tour-tooltip');
+            const target = step.target ? document.querySelector(step.target) : null;
+        
+            if (target) {
+                target.classList.add('tour-highlight');
+                const rect = target.getBoundingClientRect();
+                let top = rect.bottom + 12;
+                let left = rect.left;
+                if (top + 200 > window.innerHeight) top = rect.top - 200;
+                if (left + 320 > window.innerWidth) left = window.innerWidth - 340;
+                if (left < 20) left = 20;
+                tooltip.style.top = top + 'px';
+                tooltip.style.left = left + 'px';
+                tooltip.style.transform = 'none';
+            } else {
+                tooltip.style.top = '50%';
+                tooltip.style.left = '50%';
+                tooltip.style.transform = 'translate(-50%, -50%)';
+            }
+        }
+        
+        function nextTourStep() {
+            currentTourStep++;
+            if (currentTourStep >= tourSteps.length) {
+                endTour();
+            } else {
+                showTourStep();
+            }
+        }
+        
+        function endTour() {
+            document.getElementById('tour-overlay').style.display = 'none';
+            document.getElementById('tour-tooltip').style.display = 'none';
+            document.querySelectorAll('.tour-highlight').forEach(el => el.classList.remove('tour-highlight'));
+            try { localStorage.setItem('ifw_tour_seen', 'true'); } catch(e) {}
+        }
+
+        
         function updateWBStats(flares) {
             const GAS_PRICE_MMBTU = 3.50;
             let totalVol = 0;
@@ -1592,5 +1746,20 @@
             </p>
         </div>
     </div>
+
+    <div id="tour-overlay"></div>
+    <div id="tour-tooltip">
+        <h3 id="tour-title"></h3>
+        <p id="tour-text"></p>
+        <div class="tour-btns">
+            <button class="tour-skip" onclick="endTour()">Skip</button>
+            <span class="tour-progress" id="tour-progress"></span>
+            <button class="tour-next" onclick="nextTourStep()">Next</button>
+        </div>
+    </div>
+    
+    <button id="tour-help-btn" onclick="startTour()" title="Take a tour" class="fixed z-[9998] bg-amber-500 hover:bg-amber-400 text-gray-900 rounded-full shadow-lg flex items-center justify-center font-bold transition" style="width:40px; height:40px; bottom:150px; right:10px; font-size:20px;">
+        ?
+    </button>
 </body>
 </html>
