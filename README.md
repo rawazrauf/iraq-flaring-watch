@@ -23,7 +23,7 @@ Gas flaring burns off associated natural gas during oil extraction rather than c
 ### National Overview
 All layers active — flare clusters, emission plumes, economic waste bubbles, and density heatmap across Iraq's oil fields.
 
-![Iraq Flaring Watch national overview](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.png)
+![Iraq Flaring Watch national overview](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.jpg)
 
 ### Economic Waste — Wasted Gas Popup
 Click any purple bubble to see annual gas volume, estimated USD value lost, and Iraqi homes that could have been powered.
