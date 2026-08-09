@@ -384,7 +384,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.8</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.9</p>
             </div>
         
         </aside>
@@ -408,7 +408,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.04.8
+           Build: 2026.08.04.9
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -712,13 +712,16 @@
 
             // NASA GIBS VIIRS SNPP thermal anomalies / active fires (no API key required)
             // URL is set with the correct date when toggled on (see toggleLayer)
-            viirsFireLayer = L.tileLayer(
-                'https://gibs.earthdata.nasa.gov/wmts/epsg3857/all/VIIRS_SNPP_Thermal_Anomalies_375m_All_v1_NRT/default/2026-08-03/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png',
+            // NASA FIRMS WMS - VIIRS SNPP active fires, last 7 days (MAP_KEY required)
+            viirsFireLayer = L.tileLayer.wms(
+                'https://firms.modaps.eosdis.nasa.gov/mapserver/wms/fires/5c166ca2e6e3fcb8fd749c6e0b1ba8ab/',
                 {
-                    attribution: 'NASA EOSDIS GIBS / VIIRS SNPP',
-                    maxNativeZoom: 8,
-                    maxZoom: 19,
-                    opacity: 1
+                    layers: 'fires_viirs_snpp_7',
+                    format: 'image/png',
+                    transparent: true,
+                    version: '1.1.1',
+                    attribution: 'NASA FIRMS / VIIRS SNPP',
+                    opacity: 0.9
                 }
             );
         
@@ -1346,17 +1349,7 @@
                 }
                 if (layerType === 'viirs') {
                     const checked = document.getElementById('map-layer-viirs').checked;
-                    if (checked) {
-                        // GIBS thermal anomalies are per-day; use yesterday UTC to ensure availability
-                        const d = new Date();
-                        d.setUTCDate(d.getUTCDate() - 1);
-                        const dateStr = d.toISOString().slice(0, 10);
-                        viirsFireLayer.options.time = dateStr;
-                        viirsFireLayer.setUrl('https://gibs.earthdata.nasa.gov/wmts/epsg3857/all/VIIRS_SNPP_Thermal_Anomalies_375m_All_v1_NRT/default/' + dateStr + '/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png');
-                        if (!map.hasLayer(viirsFireLayer)) map.addLayer(viirsFireLayer);
-                    } else {
-                        map.removeLayer(viirsFireLayer);
-                    }
+                    checked ? (!map.hasLayer(viirsFireLayer) && map.addLayer(viirsFireLayer)) : map.removeLayer(viirsFireLayer);
                 }
             }
 
