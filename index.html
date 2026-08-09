@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.12</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.13</p>
             </div>
         
         </aside>
@@ -409,7 +409,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.04.12
+           Build: 2026.08.04.13
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -1335,7 +1335,12 @@
                 }
                 if (layerType === 'plumes') {
                     const checked = document.getElementById('map-layer-plumes').checked;
-                    checked ? map.addLayer(plumeLayerGroup) : map.removeLayer(plumeLayerGroup);
+                    if (checked) {
+                        map.addLayer(plumeLayerGroup);
+                    } else {
+                        map.closePopup();
+                        map.removeLayer(plumeLayerGroup);
+                    }
                 }
                 if (layerType === 'wb-flares') {
                     const checked = document.getElementById('map-layer-wb-flares').checked;
@@ -1486,27 +1491,31 @@
             let found = false;
         
             // WB first
-            wbFlareLayerGroup.eachLayer(function(layer) {
-                if (found || !layer.getLatLng) return;
-                const latlng = layer.getLatLng();
-                if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
-                    map.setView(latlng, zoom);
-                    setTimeout(() => layer.openPopup(), 300);
-                    found = true;
-                }
-            });
+            if (map.hasLayer(wbFlareLayerGroup)) {
+                wbFlareLayerGroup.eachLayer(function(layer) {
+                    if (found || !layer.getLatLng) return;
+                    const latlng = layer.getLatLng();
+                    if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
+                        map.setView(latlng, zoom);
+                        setTimeout(() => layer.openPopup(), 300);
+                        found = true;
+                    }
+                });
+            }
             if (found) return;
-        
+
             // Plumes second
-            plumeLayerGroup.eachLayer(function(layer) {
-                if (found || !layer.getLatLng) return;
-                const latlng = layer.getLatLng();
-                if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
-                    map.setView(latlng, zoom);
-                    setTimeout(() => layer.openPopup(), 300);
-                    found = true;
-                }
-            });
+            if (map.hasLayer(plumeLayerGroup)) {
+                plumeLayerGroup.eachLayer(function(layer) {
+                    if (found || !layer.getLatLng) return;
+                    const latlng = layer.getLatLng();
+                    if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
+                        map.setView(latlng, zoom);
+                        setTimeout(() => layer.openPopup(), 300);
+                        found = true;
+                    }
+                });
+            }
             if (found) return;
         
             // Flares last
