@@ -384,7 +384,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.7</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.8</p>
             </div>
         
         </aside>
@@ -408,7 +408,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.04.7
+           Build: 2026.08.04.8
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -713,12 +713,12 @@
             // NASA GIBS VIIRS SNPP thermal anomalies / active fires (no API key required)
             // URL is set with the correct date when toggled on (see toggleLayer)
             viirsFireLayer = L.tileLayer(
-                'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_Thermal_Anomalies_375m_All/default/2026-08-03/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png',
+                'https://gibs.earthdata.nasa.gov/wmts/epsg3857/all/VIIRS_SNPP_Thermal_Anomalies_375m_All_v1_NRT/default/2026-08-03/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png',
                 {
                     attribution: 'NASA EOSDIS GIBS / VIIRS SNPP',
                     maxNativeZoom: 8,
                     maxZoom: 19,
-                    opacity: 0.9
+                    opacity: 1
                 }
             );
         
@@ -1352,7 +1352,7 @@
                         d.setUTCDate(d.getUTCDate() - 1);
                         const dateStr = d.toISOString().slice(0, 10);
                         viirsFireLayer.options.time = dateStr;
-                        viirsFireLayer.setUrl('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_Thermal_Anomalies_375m_All/default/' + dateStr + '/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png');
+                        viirsFireLayer.setUrl('https://gibs.earthdata.nasa.gov/wmts/epsg3857/all/VIIRS_SNPP_Thermal_Anomalies_375m_All_v1_NRT/default/' + dateStr + '/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png');
                         if (!map.hasLayer(viirsFireLayer)) map.addLayer(viirsFireLayer);
                     } else {
                         map.removeLayer(viirsFireLayer);
