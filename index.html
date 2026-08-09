@@ -156,6 +156,7 @@
         .tour-skip { background: transparent; color: #9ca3af; }
         .tour-progress { font-size: 11px; color: #6b7280; }
         
+        .viirs-fire-marker { background: transparent; border: none; }
     </style>
 </head>
 <body class="bg-gray-950 text-gray-100 flex flex-col h-full overflow-hidden">
@@ -384,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.11</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.12</p>
             </div>
         
         </aside>
@@ -408,7 +409,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.04.11
+           Build: 2026.08.04.12
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -788,6 +789,10 @@
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span style="width:12px; height:12px; border-radius:50%; background:#a855f7; border:2px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
                                 <span>Wasted Gas (2025 Est.)</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:10px; height:10px; background:#ff0000; border:1px solid #990000; flex-shrink:0; display:inline-block;"></span>
+                                <span>Live Fire Detection (NASA)</span>
                             </div>
                             <div style="display:flex; flex-direction:column; gap:4px;">
                                 <span>Flare Density Heatmap</span>
@@ -1717,12 +1722,13 @@
                     const acqDate = dateIdx > -1 ? cols[dateIdx] : '';
                     const acqTime = timeIdx > -1 ? cols[timeIdx] : '';
 
-                    const marker = L.circleMarker([lat, lon], {
-                        radius: 5,
-                        color: '#fb923c',
-                        fillColor: '#f97316',
-                        fillOpacity: 0.8,
-                        weight: 1
+                    const marker = L.marker([lat, lon], {
+                        icon: L.divIcon({
+                            className: 'viirs-fire-marker',
+                            html: '<div style="width:9px;height:9px;background:#ff0000;border:1px solid #990000;"></div>',
+                            iconSize: [9, 9],
+                            iconAnchor: [4, 4]
+                        })
                     });
 
                     const confLabel = conf === 'h' ? 'High' : conf === 'n' ? 'Nominal' : conf === 'l' ? 'Low' : conf;
