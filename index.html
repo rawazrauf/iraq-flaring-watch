@@ -384,7 +384,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.9</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.10</p>
             </div>
         
         </aside>
@@ -408,7 +408,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.04.9
+           Build: 2026.08.04.10
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -990,6 +990,13 @@
                 map.removeLayer(satelliteRoads);
             }
         
+            // Keep the NASA fire overlay on top when the basemap changes
+            const viirsCheckbox = document.getElementById('map-layer-viirs');
+            if (viirsCheckbox && viirsCheckbox.checked) {
+                if (!map.hasLayer(viirsFireLayer)) map.addLayer(viirsFireLayer);
+                if (viirsFireLayer.bringToFront) viirsFireLayer.bringToFront();
+            }
+
             map.fire('moveend');
             updateBaseMapControl(type);
         }
