@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.14</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.15</p>
             </div>
         
         </aside>
@@ -409,7 +409,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.04.14
+           Build: 2026.08.04.15
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -762,6 +762,7 @@
                 if (document.getElementById('map-layer-radius').checked) layers.push('S');
                 if (document.getElementById('map-layer-plumes').checked) layers.push('P');
                 if (document.getElementById('map-layer-wb-flares').checked) layers.push('W');
+                if (document.getElementById('map-layer-viirs').checked) layers.push('V');
                 
                 const hash = `#${zoom.toFixed(2)}/${center.lat.toFixed(5)}/${center.lng.toFixed(5)}/${layers.join(',')}/${currentBaseMapType}`;
                 history.replaceState(null, '', hash);
@@ -1649,18 +1650,22 @@
             const radius = document.getElementById('map-layer-radius');
             const plumes = document.getElementById('map-layer-plumes');
             const wb = document.getElementById('map-layer-wb-flares');
-        
+            const viirs = document.getElementById('map-layer-viirs');
+
             cluster.checked = layers.includes('F');
             heatmap.checked = layers.includes('H');
             radius.checked = layers.includes('S');
             plumes.checked = layers.includes('P');
             wb.checked = layers.includes('W');
-        
+            viirs.checked = layers.includes('V');
+
+            // Sync every layer to its checkbox state (always, so unchecked layers are removed too)
             toggleLayer('cluster');
             toggleLayer('heatmap');
             toggleLayer('radius');
-            if (layers.includes('P')) toggleLayer('plumes');
-            if (layers.includes('W')) toggleLayer('wb-flares');
+            toggleLayer('plumes');
+            toggleLayer('wb-flares');
+            toggleLayer('viirs');
         }
         
         async function shareMap() {
@@ -1835,9 +1840,15 @@
                 });
         
                 wbFlareDataLoaded = true;
-                map.addLayer(wbFlareLayerGroup);
                 updateWBStats(flares);
-                if (map.getZoom() >= 13) tryOpenNearestPopup();
+                // Only display bubbles if the layer is actually enabled (respects shared-link hash)
+                const wbCheckbox = document.getElementById('map-layer-wb-flares');
+                if (wbCheckbox && wbCheckbox.checked) {
+                    map.addLayer(wbFlareLayerGroup);
+                    if (map.getZoom() >= 13) tryOpenNearestPopup();
+                } else {
+                    map.removeLayer(wbFlareLayerGroup);
+                }
             } catch (e) {
                 console.error("Could not load World Bank flare data", e);
             }
