@@ -44,6 +44,7 @@
     "active_flare": "Active Flare (OSM)",
     "emission_plume": "Verified Emission Plume",
     "wasted_gas": "Wasted Gas (2025 Est.)",
+    "fire_detection": "Live Fire Detection (NASA)",
     "heatmap": "Flare Density Heatmap",
     "low": "Low",
     "high": "High"
@@ -51,10 +52,17 @@
   "layers": {
     "title": "Display Layers",
     "flare_locations": "Active Flare Locations",
+    "flare_locations_desc": "Individual flare sites mapped from OpenStreetMap",
     "density_map": "Flare Density Map",
+    "density_map_desc": "Heatmap showing where flaring is most concentrated",
     "impact_zone": "5km Impact Zone",
+    "impact_zone_desc": "Circles showing who lives within 5km of a flare",
     "emission_plumes": "Detected Emission Plumes",
-    "wasted_gas": "Wasted Gas (2025 Est.)"
+    "emission_plumes_desc": "Satellite-verified methane & CO2 leaks (kg/hr)",
+    "wasted_gas": "Wasted Gas (2025 Est.)",
+    "wasted_gas_desc": "$ value burned per facility (World Bank data)",
+    "fire_detections": "Live Fire Detections (NASA)",
+    "fire_detections_desc": "VIIRS thermal hotspots, last 3 days (near real-time)"
   },
   "background": {
     "title": "Background",
@@ -70,18 +78,55 @@
     "flare_sites": "Flare sites — includes 5km population estimate",
     "economic_waste": "Economic waste — USD value lost & Iraqi homes that could have been powered",
     "emission_plumes": "Emission plumes — methane & CO2 in kg/hr",
-    "open_source": "Open-source"
+    "open_source": "Open-source",
+    "take_tour": "Take a tour"
+  },
+  "tour": {
+    "next": "Next",
+    "skip": "Skip",
+    "finish": "Finish",
+    "welcome_title": "Welcome to Iraq Flaring Watch",
+    "welcome_text": "This map tracks gas flaring across Iraq — where natural gas is burned off during oil extraction, wasting billions and harming nearby communities. Let's take a quick tour.",
+    "stats_title": "National Statistics",
+    "stats_text": "These live figures show the scale of the problem: gas value wasted, electricity that could be generated, and how many Iraqis live near a flare.",
+    "layers_data_title": "The Data Layers",
+    "layers_data_text": "Orange dots are active flares. Purple bubbles show wasted gas value. Cyan dots are satellite-detected emission plumes. The heatmap shows flare density.",
+    "controls_title": "Switch Layers & Background",
+    "controls_text": "Use these controls to toggle data layers on and off, and switch between satellite, street, and night-time views.",
+    "explore_title": "Explore & Share",
+    "explore_text": "Click any flare to see details. Every view has a shareable link that captures exactly what you're looking at — perfect for highlighting a specific site."
+  },
+  "guide": {
+    "button": "Guide"
   },
   "popup": {
     "gas_flare": "Gas Flare",
     "assigned_field": "Assigned Field",
     "population_5km": "Population within 5km:",
+    "people": "people",
     "latitude": "Latitude:",
     "longitude": "Longitude:",
     "view_google_maps": "View on Google Maps",
     "zoom_in": "Zoom In",
     "edit_osm": "Edit OSM",
+    "source_osm": "Source: OpenStreetMap",
     "wasted_gas_title": "Wasted Gas — 2025",
-    "wb_data": "World Bank GGFR Data"
+    "wb_data": "World Bank GGFR Data",
+    "co2_plume": "CO2 Emission Plume",
+    "ch4_plume": "CH4 Emission Plume",
+    "emission": "Emission:",
+    "sector": "Sector:",
+    "wind": "Wind:",
+    "satellite_detection": "Satellite detection:",
+    "view_carbon_mapper": "View on Carbon Mapper",
+    "source_carbon_mapper": "Source: Carbon Mapper / Tanager",
+    "viirs_title": "VIIRS Fire Detection",
+    "viirs_detected": "Detected:",
+    "viirs_confidence": "Confidence:",
+    "viirs_frp": "Fire radiative power:",
+    "viirs_source": "Source: NASA FIRMS / VIIRS SNPP",
+    "confidence_high": "High",
+    "confidence_nominal": "Nominal",
+    "confidence_low": "Low"
   }
 }
