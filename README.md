@@ -115,7 +115,7 @@ Iraq Flaring Watch is being translated into Arabic and Sorani Kurdish by the com
 You can contribute translations — no coding required — at our Weblate project:
 **[hosted.weblate.org/projects/iraq-flaring-watch](https://hosted.weblate.org/projects/iraq-flaring-watch/)**
 
-Translation files live in the `locales/` directory (`en.json` is the source of truth). See [TRANSLATING.md](TRANSLATING.md) for contributor guidelines.
+Translation files live in the `locales/` directory (`en.json` is the source of truth).
 
 [![Translation status](https://hosted.weblate.org/widget/iraq-flaring-watch/svg-badge.svg)](https://hosted.weblate.org/engage/iraq-flaring-watch/)
 
