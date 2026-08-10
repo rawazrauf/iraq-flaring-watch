@@ -108,6 +108,19 @@ If a flare is missing from the map, add it to OpenStreetMap:
 
 ---
 
+## Translations
+
+Iraq Flaring Watch is being translated into Arabic and Sorani Kurdish by the community using [Weblate](https://weblate.org/), a libre web-based translation platform.
+
+You can contribute translations — no coding required — at our Weblate project:
+**[hosted.weblate.org/projects/iraq-flaring-watch](https://hosted.weblate.org/projects/iraq-flaring-watch/)**
+
+Translation files live in the `locales/` directory (`en.json` is the source of truth). See [TRANSLATING.md](TRANSLATING.md) for contributor guidelines.
+
+[![Translation status](https://hosted.weblate.org/widget/iraq-flaring-watch/svg-badge.svg)](https://hosted.weblate.org/engage/iraq-flaring-watch/)
+
+
+
 ## License & attributions
 
 - Code: MIT License
@@ -116,3 +129,5 @@ If a flare is missing from the map, add it to OpenStreetMap:
 - Basemaps: Esri, Earthstar Geographics, NASA GIBS
 - Plumes: Carbon Mapper / Tanager
 - Gas volumes: World Bank GGFR
+- Translations: powered by [Weblate](https://weblate.org/) (libre hosting)
+
