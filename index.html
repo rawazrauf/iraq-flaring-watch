@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.15</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.16</p>
             </div>
         
         </aside>
@@ -409,7 +409,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.04.15
+           Build: 2026.08.04.16
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -447,16 +447,21 @@
 
         window.onload = async function() {
             initMap();
-            await fetchStaticPopData();
-            await fetchImpactData();
+
+            // Kick off all independent fetches in parallel (don't block one on another).
+            const popDataPromise = fetchStaticPopData();   // needed before flares render
+            fetchImpactData();                             // independent — updates a stat
+            loadWBFlareData();                             // independent — own data + stats
+
+            // Flares need the population data ready for their popups, so wait for just that.
+            await popDataPromise;
             await loadStaticQueryFile();
-            loadWBFlareData();
-        try {
-            if (!localStorage.getItem('ifw_tour_seen')) {
-                setTimeout(() => startTour(), 1500);
-            }
-        } catch(e) {}
-            
+
+            try {
+                if (!localStorage.getItem('ifw_tour_seen')) {
+                    setTimeout(() => startTour(), 1500);
+                }
+            } catch(e) {}
         };
 
         async function fetchStaticPopData() {
