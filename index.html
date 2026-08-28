@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.17</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.04.18</p>
             </div>
         
         </aside>
@@ -409,7 +409,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.04.17
+           Build: 2026.08.04.18
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -426,6 +426,7 @@
         let nextRandomFlareTarget = null;
         let plumeLayerGroup = L.layerGroup();
         let viirsFireLayer;
+        let viirsCanvasRenderer;
         let viirsDataLoaded = false;
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
@@ -720,8 +721,9 @@
 
             // NASA GIBS VIIRS SNPP thermal anomalies / active fires (no API key required)
             // URL is set with the correct date when toggled on (see toggleLayer)
-            // NASA FIRMS active fires — fetched once via API, drawn as markers (see loadViirsData)
+            // NASA FIRMS active fires — fetched once via API, drawn on a dedicated canvas (see loadViirsData)
             viirsFireLayer = L.layerGroup();
+            viirsCanvasRenderer = L.canvas({ padding: 0.5 });
         
             iraqBoundaryLayer = L.geoJSON(null, {
                 style: { color: '#f59e0b', weight: 2, opacity: 0.5, fillOpacity: 0.0, dashArray: '4, 6' },
@@ -798,7 +800,7 @@
                                 <span>Wasted Gas (2025 Est.)</span>
                             </div>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span style="width:10px; height:10px; background:#ff0000; border:1px solid #990000; flex-shrink:0; display:inline-block;"></span>
+                                <span style="width:10px; height:10px; border-radius:50%; background:#ff0000; border:1px solid #990000; flex-shrink:0; display:inline-block;"></span>
                                 <span>Live Fire Detection (NASA)</span>
                             </div>
                             <div style="display:flex; flex-direction:column; gap:4px;">
@@ -1527,8 +1529,9 @@
         
             // Flares last
             markerClusterGroup.eachLayer(function(layer) {
-                if (found) return;
+                if (found || !layer.getLatLng) return;
                 const latlng = layer.getLatLng();
+                if (!latlng || isNaN(latlng.lat) || isNaN(latlng.lng)) return;
                 if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
                     map.setView(latlng, zoom);
                     setTimeout(() => layer.openPopup(), 300);
@@ -1742,13 +1745,13 @@
                     const acqDate = dateIdx > -1 ? cols[dateIdx] : '';
                     const acqTime = timeIdx > -1 ? cols[timeIdx] : '';
 
-                    const marker = L.marker([lat, lon], {
-                        icon: L.divIcon({
-                            className: 'viirs-fire-marker',
-                            html: '<div style="width:9px;height:9px;background:#ff0000;border:1px solid #990000;"></div>',
-                            iconSize: [9, 9],
-                            iconAnchor: [4, 4]
-                        })
+                    const marker = L.circleMarker([lat, lon], {
+                        renderer: viirsCanvasRenderer,
+                        radius: 5,
+                        color: '#990000',
+                        fillColor: '#ff0000',
+                        fillOpacity: 1,
+                        weight: 1
                     });
 
                     const confLabel = conf === 'h' ? 'High' : conf === 'n' ? 'Nominal' : conf === 'l' ? 'Low' : conf;
