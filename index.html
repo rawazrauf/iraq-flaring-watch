@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.b</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.c</p>
             </div>
         
         </aside>
@@ -409,7 +409,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.29.b
+           Build: 2026.08.29.c
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -1875,6 +1875,9 @@
                 const wbCheckbox = document.getElementById('map-layer-wb-flares');
                 if (wbCheckbox && wbCheckbox.checked) {
                     map.addLayer(wbFlareLayerGroup);
+                    // Canvas hit-detection for late-added markers isn't built until the next
+                    // repaint — nudge the map so the very first tap registers without a refresh.
+                    setTimeout(() => { map.invalidateSize(); }, 50);
                     if (map.getZoom() >= 13) tryOpenNearestPopup();
                 } else {
                     map.removeLayer(wbFlareLayerGroup);
