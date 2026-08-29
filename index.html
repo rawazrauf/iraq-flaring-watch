@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.a</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.b</p>
             </div>
         
         </aside>
@@ -409,7 +409,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.29.a
+           Build: 2026.08.29.b
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -536,14 +536,14 @@
                     `;
         
                     circleMarker.bindPopup(popupContent, { maxWidth: 240, minWidth: 200, closeOnClick: false, autoPanPadding: [20, 80] });
-        
+
                     circleMarker.on('click', function(e) {
                         L.DomEvent.stopPropagation(e);
-                        map.closePopup();
-                        map.flyTo([p.lat, p.lon], Math.max(map.getZoom(), 13), { animate: true, duration: 0.8 });
-                        map.once('moveend', () => { circleMarker.openPopup(); });
+                        // Open the popup directly at the marker — no flyTo/moveend dependency
+                        // (that combination could miss when already centered, or loop and crash on mobile).
+                        circleMarker.openPopup();
                     });
-        
+
                     plumeLayerGroup.addLayer(circleMarker);
                 });
         
@@ -1863,9 +1863,7 @@
         
                     circle.on('click', function(e) {
                         L.DomEvent.stopPropagation(e);
-                        map.closePopup();
-                        map.flyTo([f.lat, f.lon], Math.max(map.getZoom(), 13), { animate: true, duration: 0.8 });
-                        map.once('moveend', () => { circle.openPopup(); });                     
+                        circle.openPopup();
                     });
         
                     wbFlareLayerGroup.addLayer(circle);
