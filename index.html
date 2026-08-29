@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.c</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.d</p>
             </div>
         
         </aside>
@@ -409,7 +409,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.08.29.c
+           Build: 2026.08.29.d
            Last updated: 4 August 2026
            ============================================================ */
         let map;
@@ -427,8 +427,6 @@
         let plumeLayerGroup = L.layerGroup();
         let viirsFireLayer;
         let viirsCanvasRenderer;
-        let wbCanvasRenderer;
-        let plumeCanvasRenderer;
         let viirsDataLoaded = false;
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
@@ -510,7 +508,6 @@
                     const date = new Date(p.timestamp).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         
                     const circleMarker = L.circleMarker([p.lat, p.lon], {
-                        renderer: plumeCanvasRenderer,
                         radius: radius,
                         color: '#ffffff',
                         weight: 2,
@@ -639,17 +636,9 @@
             map.getPane('radiusPane').style.zIndex = 300;
             map.getPane('radiusPane').style.pointerEvents = 'none';
 
-            // Dedicated interactive panes for clickable data layers, stacked ABOVE the radius pane
-            // so the impact zone never blocks taps on plumes / WB dots / fire detections.
-            map.createPane('wbPane');
-            map.getPane('wbPane').style.zIndex = 410;
-            map.createPane('plumePane');
-            map.getPane('plumePane').style.zIndex = 420;
-            map.createPane('viirsPane');
-            map.getPane('viirsPane').style.zIndex = 430;
-            // Separate canvas renderers bound to each interactive pane
-            wbCanvasRenderer = L.canvas({ pane: 'wbPane' });
-            plumeCanvasRenderer = L.canvas({ pane: 'plumePane' });
+            // Interactive circle layers (WB, plumes) use the DEFAULT canvas renderer so
+            // Leaflet's per-layer hit-testing works correctly. Separate stacked panes would
+            // create full-map canvases that block clicks to layers beneath them.
 
             const drawerElement = document.getElementById('sidebar-drawer');
             if (drawerElement) {
@@ -739,7 +728,7 @@
             // URL is set with the correct date when toggled on (see toggleLayer)
             // NASA FIRMS active fires — fetched once via API, drawn on a dedicated canvas (see loadViirsData)
             viirsFireLayer = L.layerGroup();
-            viirsCanvasRenderer = L.canvas({ padding: 0.5, pane: 'viirsPane' });
+            viirsCanvasRenderer = L.canvas({ padding: 0.5 });
         
             iraqBoundaryLayer = L.geoJSON(null, {
                 style: { color: '#f59e0b', weight: 2, opacity: 0.5, fillOpacity: 0.0, dashArray: '4, 6' },
@@ -1825,7 +1814,6 @@
                     const radius = Math.max(6, Math.min(45, Math.pow(f.vol_mm3, 0.4) * 1.5));
         
                     const circle = L.circleMarker([f.lat, f.lon], {
-                        renderer: wbCanvasRenderer,
                         radius: radius,
                         color: '#ffffff',
                         fillColor: '#a855f7',
