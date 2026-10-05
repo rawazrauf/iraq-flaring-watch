@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.d</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.e</p>
             </div>
         
         </aside>
@@ -1926,5 +1926,64 @@
         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         Guide
     </button>
+
+<script>
+// ===== i18n: Kurdish (ckb) via ?lang=ckb — public default stays English =====
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var lang = params.get('lang');
+  if (lang !== 'ckb') return;  // English stays untouched for everyone else
+
+  var MAP = {"About": "دەربارەی پڕۆژە", "Follow": "فۆڵۆمان بکە", "National Stats": "ئامارەکانی عێراق", "Mapped Flares": "مەشخەڵە نەخشەکراوەکان", "active": "چالاک", "Oil Fields": "کێڵگە نەوتییەکان", "fields": "کێڵگەکان", "Gas Value Wasted": "بەهای گازی بەفیڕۆچوو", "est. 2025": "مەزەندەی ٢٠٢٥", "Annual Flaring Volume": "قەبارەی ساڵانەی گازی سووتێندراو", "BCM/yr est. 2025": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "Electricity Generation Potential": "توانای بەرهەمهێنانی کارەبا", "MW if captured": "مێگاوات ئەگەر بەکاربێت", "People Within 5km of a Flare": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "Iraqis": "عێراقی", "Focal Oilfield Selection": "هەڵبژاردنی کێڵگەی نەوتی", "All Fields / Areas (Iraqwide)": "هەموو کێلگەکانی عێراق", "Inspect Random Flare": "پشکنینی مەشخەڵی هەڕەمەکی", "Data Engine Source": "سەرچاوەی بزوێنەری داتا", "Preloaded": "زانیاری پێشوەختە", "Live OSM": "ڕاستەوخۆ لە OSM", "Distance Analyzer": "شیکارکەری مەودا", "Measure Flare Proximity": "نزیکیی مەشخەڵ بپێوە", "Regional Quick Zoom": "تەماشاکردن بە پێی ناوچە", "Basra": "بەسرە", "Maysan": "میسان", "Kirkuk": "کەرکوک", "Citizen Mapping Help": "هاوکاری نەخشەسازی ببە", "Display Layers": "چینەکان پیشان بدە", "Active Flare Locations": "شوێنی مەشخەڵە چالاکەکان", "Individual flare sites mapped from OpenStreetMap": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "Flare Density Map": "نەخشەی چڕی مەشخەڵەکان", "Heatmap showing where flaring is most concentrated": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "5km Impact Zone": "ناوچەی کاریگەری (٥ کم)", "Circles showing who lives within 5km of a flare": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "Detected Emission Plumes": "پەڵەی دەردانی دۆزراوە", "Wasted Gas (2025 Est.)": "گازی بەفێڕۆدراو (٢٠٢٥)", "Live Fire Detections (NASA)": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "Map Legend": "ڕێبەری نەخشە", "Active Flare (OSM)": "مەشخەڵی چالاک لە (OSM)", "Verified Emission Plume": "پەڵەی دەردانی پشتڕاستکراوە", "Live Fire Detection (NASA)": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "Flare Density Heatmap": "نەخشەی چڕی مەشخەڵ", "Low": "کەم", "High": "زۆر", "Background": "پاشخانەکان", "Layers": "چینەکان پیشان بدە", "Guide": "ڕابەری بەکارهێنان", "Next": "دواتر", "Skip": "تێپەڕاندن", "Finish": "تەواو"};
+
+  // RTL layout + language
+  document.documentElement.setAttribute('dir','rtl');
+  document.documentElement.setAttribute('lang','ckb');
+
+  function translate(root){
+    try {
+      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+      var nodes = [], n;
+      while ((n = walker.nextNode())) nodes.push(n);
+      nodes.forEach(function(node){
+        var raw = node.textContent;
+        var key = raw.trim();
+        if (key && MAP[key]) node.textContent = raw.replace(key, MAP[key]);
+      });
+    } catch(e){}
+  }
+
+  function run(){ translate(document.body); }
+
+  window.addEventListener('load', function(){ setTimeout(run, 600); });
+  // Re-translate dynamically added panels/popups/tour
+  setTimeout(function(){
+    try {
+      var obs = new MutationObserver(function(muts){
+        for (var i=0;i<muts.length;i++){
+          for (var j=0;j<muts[i].addedNodes.length;j++){
+            var el = muts[i].addedNodes[j];
+            if (el.nodeType === 1) translate(el);
+          }
+        }
+      });
+      obs.observe(document.body, { childList:true, subtree:true });
+    } catch(e){}
+  }, 800);
+})();
+</script>
+<style>
+/* RTL styling, only applies when html[dir=rtl] (i.e. Kurdish mode) */
+html[dir="rtl"] body { direction: rtl; }
+html[dir="rtl"] .leaflet-container,
+html[dir="rtl"] .leaflet-control-container { direction: ltr; }
+html[dir="rtl"] #sidebar-drawer {
+  left: auto !important; right: 0 !important;
+  border-right: none !important; border-left: 1px solid #1f2937 !important;
+}
+html[dir="rtl"] #sidebar-drawer, html[dir="rtl"] #sidebar-drawer * { text-align: right; }
+html[dir="rtl"] input[type="checkbox"], html[dir="rtl"] input[type="radio"] { margin-left: 8px; margin-right: 0; }
+</style>
+
 </body>
 </html>
