@@ -385,7 +385,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.e</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.f</p>
             </div>
         
         </aside>
@@ -1973,16 +1973,46 @@
 })();
 </script>
 <style>
-/* RTL styling, only applies when html[dir=rtl] (i.e. Kurdish mode) */
+/* ===== Full RTL mirror — only active in Kurdish mode (html[dir=rtl]) ===== */
 html[dir="rtl"] body { direction: rtl; }
-html[dir="rtl"] .leaflet-container,
-html[dir="rtl"] .leaflet-control-container { direction: ltr; }
+
+/* Keep the Leaflet map internals LTR (tiles, zoom math) but mirror control corners below */
+html[dir="rtl"] .leaflet-container { direction: ltr; }
+
+/* --- Tailwind space-x-* adds margin-left on children; flip to margin-right in RTL --- */
+html[dir="rtl"] .space-x-1 > * + * { margin-left: 0 !important; margin-right: 0.25rem !important; }
+html[dir="rtl"] .space-x-1\.5 > * + * { margin-left: 0 !important; margin-right: 0.375rem !important; }
+html[dir="rtl"] .space-x-2 > * + * { margin-left: 0 !important; margin-right: 0.5rem !important; }
+html[dir="rtl"] .space-x-3 > * + * { margin-left: 0 !important; margin-right: 0.75rem !important; }
+
+/* --- Sidebar: dock to the right, text right-aligned --- */
 html[dir="rtl"] #sidebar-drawer {
   left: auto !important; right: 0 !important;
   border-right: none !important; border-left: 1px solid #1f2937 !important;
 }
-html[dir="rtl"] #sidebar-drawer, html[dir="rtl"] #sidebar-drawer * { text-align: right; }
+html[dir="rtl"] #sidebar-drawer { text-align: right; }
+
+/* --- Mobile drawer slides in from the RIGHT --- */
+html[dir="rtl"] #sidebar-drawer.-translate-x-full { transform: translateX(100%) !important; }
+html[dir="rtl"] #sidebar-drawer.lg\:translate-x-0 { }
+@media (min-width:1024px){ html[dir="rtl"] #sidebar-drawer { transform: none !important; } }
+
+/* --- Stat cards: label right, number+unit kept LTR but pinned to the right edge --- */
+html[dir="rtl"] #sidebar-drawer .flex.items-baseline { direction: ltr; justify-content: flex-end; }
+
+/* --- Checkbox/radio spacing flip --- */
 html[dir="rtl"] input[type="checkbox"], html[dir="rtl"] input[type="radio"] { margin-left: 8px; margin-right: 0; }
+
+/* --- Dropdown + buttons align right --- */
+html[dir="rtl"] select, html[dir="rtl"] #sidebar-drawer button { text-align: right; }
+
+/* Map controls stay in their native corners (map is LTR); only the control's
+   internal text direction is set RTL so Kurdish labels read correctly. */
+html[dir="rtl"] .leaflet-control { direction: rtl; }
+html[dir="rtl"] #tour-help-btn { direction: rtl; }
+
+/* --- Popups: text right, but keep lat/long & numeric lines readable --- */
+html[dir="rtl"] .leaflet-popup-content { direction: rtl; text-align: right; }
 </style>
 
 </body>
