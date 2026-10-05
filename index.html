@@ -185,20 +185,20 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <span class="hidden sm:inline">About</span>
+                <span class="hidden sm:inline" data-i18n="nav.about">About</span>
             </button>
             <button onclick="shareMap()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center space-x-1.5 font-semibold h-9">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.006-2.003m0 6.52l-4.006-2.003M18 12a3 3 0 11-6 0 3 3 0 016 0zm-11 5a3 3 0 11-6 0 3 3 0 016 0zm0-10a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
-                <span class="hidden md:inline">Share Map</span>
+                <span class="hidden md:inline" data-i18n="nav.share">Share Map</span>
             </button>
 
             <a href="https://twitter.com/IraqFlaring" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center space-x-1.5 font-semibold h-9">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
-                <span class="hidden sm:inline">Follow</span>
+                <span class="hidden sm:inline" data-i18n="nav.follow">Follow</span>
             </a>
         </div>
     </header>
@@ -210,7 +210,7 @@
             
             <div class="p-4 border-b border-gray-800 bg-gray-950/40 shrink-0">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">National Stats</h3>
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-i18n="sidebar.national_stats">National Stats</h3>
                     <button onclick="toggleControlDrawer()" class="lg:hidden p-1 text-gray-400 hover:text-white hover:bg-gray-800 rounded">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -223,51 +223,51 @@
         
                 <div class="grid grid-cols-2 gap-1.5">
                     <div class="bg-gray-950 p-2 rounded-lg border border-gray-800 flex flex-col justify-between">
-                        <span class="text-[9px] text-gray-400 font-medium">Mapped Flares</span>
+                        <span class="text-[9px] text-gray-400 font-medium" data-i18n="sidebar.mapped_flares">Mapped Flares</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-flare-count" class="text-lg font-extrabold text-amber-500">0</span>
-                            <span class="text-[9px] text-gray-500 font-mono">active</span>
+                            <span class="text-[9px] text-gray-500 font-mono" data-i18n="sidebar.active">active</span>
                         </div>
                     </div>
                     <div class="bg-gray-950 p-2 rounded-lg border border-gray-800 flex flex-col justify-between">
-                        <span class="text-[9px] text-gray-400 font-medium">Oil Fields</span>
+                        <span class="text-[9px] text-gray-400 font-medium" data-i18n="sidebar.oil_fields">Oil Fields</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-field-count" class="text-lg font-extrabold text-red-500">0</span>
-                            <span class="text-[9px] text-gray-500 font-mono">fields</span>
+                            <span class="text-[9px] text-gray-500 font-mono" data-i18n="sidebar.fields">fields</span>
                         </div>
                     </div>
                     <div class="col-span-2 bg-gray-950 p-2 rounded-lg border border-gray-800 flex flex-col justify-between">
-                        <span class="text-[9px] text-gray-400 font-medium">Gas Value Wasted</span>
+                        <span class="text-[9px] text-gray-400 font-medium" data-i18n="sidebar.gas_value_wasted">Gas Value Wasted</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-value-wasted" class="text-lg font-extrabold text-purple-400">—</span>
-                            <span class="text-[9px] text-gray-500 font-mono">est. 2025</span>
+                            <span class="text-[9px] text-gray-500 font-mono" data-i18n="sidebar.est_2025">est. 2025</span>
                         </div>
                     </div>
                     <div class="col-span-2 bg-gray-950 p-2 rounded-lg border border-gray-800 flex flex-col justify-between">
-                        <span class="text-[9px] text-gray-400 font-medium">Annual Flaring Volume</span>
+                        <span class="text-[9px] text-gray-400 font-medium" data-i18n="sidebar.annual_flaring_volume">Annual Flaring Volume</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
                             <span class="text-lg font-extrabold text-blue-400">~24</span>
-                            <span class="text-[9px] text-gray-500 font-mono">BCM/yr est. 2025</span>
+                            <span class="text-[9px] text-gray-500 font-mono" data-i18n="sidebar.bcm_yr">BCM/yr est. 2025</span>
                         </div>
                     </div>
                     <div class="col-span-2 bg-gray-950 p-2 rounded-lg border border-gray-800 flex flex-col justify-between">
-                        <span class="text-[9px] text-gray-400 font-medium">Electricity Generation Potential</span>
+                        <span class="text-[9px] text-gray-400 font-medium" data-i18n="sidebar.electricity_potential">Electricity Generation Potential</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-homes" class="text-lg font-extrabold text-amber-400">—</span>
-                            <span class="text-[9px] text-gray-500 font-mono">MW if captured</span>
+                            <span class="text-[9px] text-gray-500 font-mono" data-i18n="sidebar.mw_if_captured">MW if captured</span>
                         </div>
                     </div>
                     <div class="col-span-2 bg-gray-950 p-2 rounded-lg border border-gray-800 flex flex-col justify-between">
-                        <span class="text-[9px] text-gray-400 font-medium">People Within 5km of a Flare</span>
+                        <span class="text-[9px] text-gray-400 font-medium" data-i18n="sidebar.people_within_5km">People Within 5km of a Flare</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
                             <span id="stat-impacted" class="text-lg font-extrabold text-red-400">—</span>
-                            <span class="text-[9px] text-gray-500 font-mono">Iraqis</span>
+                            <span class="text-[9px] text-gray-500 font-mono" data-i18n="sidebar.iraqis">Iraqis</span>
                         </div>
                     </div>
                 </div>
         
                 <div>
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Focal Oilfield Selection</label>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2" data-i18n="sidebar.focal_oilfield">Focal Oilfield Selection</label>
                     <select id="oilfield-filter" onchange="filterFlares(this.value)" class="w-full bg-gray-900 text-xs text-gray-100 border border-gray-800 rounded-lg p-2.5 h-10 focus:ring-1 focus:ring-amber-500 focus:outline-none">
                         <option value="all">All Fields / Areas (Iraqwide)</option>
                         <optgroup label="Basra Region">
@@ -312,10 +312,10 @@
                 </button>
         
                 <div>
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Data Engine Source</label>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2" data-i18n="sidebar.data_engine">Data Engine Source</label>
                     <div class="grid grid-cols-2 gap-1.5 p-1 bg-gray-950 rounded-lg border border-gray-800">
-                        <button id="btn-preload" onclick="toggleDataSource('preload')" class="text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 bg-amber-600 text-white h-9">Preloaded</button>
-                        <button id="btn-live" onclick="toggleDataSource('live')" class="text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 text-gray-400 hover:text-white h-9">Live OSM</button>
+                        <button id="btn-preload" onclick="toggleDataSource('preload')" class="text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 bg-amber-600 text-white h-9" data-i18n="sidebar.preloaded">Preloaded</button>
+                        <button id="btn-live" onclick="toggleDataSource('live')" class="text-xs font-semibold py-1.5 px-2 rounded-md transition duration-200 text-gray-400 hover:text-white h-9" data-i18n="sidebar.live_osm">Live OSM</button>
                     </div>
                 </div>
         
@@ -337,7 +337,7 @@
         
                 <div class="bg-gray-950/40 p-3 rounded-xl border border-gray-800 space-y-2.5">
                     <div class="flex items-center justify-between">
-                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Distance Analyzer</h4>
+                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider" data-i18n="sidebar.distance_analyzer">Distance Analyzer</h4>
                         <span class="text-[9px] text-gray-500 font-semibold bg-gray-900 px-1.5 py-0.5 rounded uppercase border border-gray-700">Ruler</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-normal">Assess local impact by calculating the exact distance between any gas flare and community settlements.</p>
@@ -345,7 +345,7 @@
                         <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
                         </svg>
-                        <span id="measure-btn-text">Measure Flare Proximity</span>
+                        <span id="measure-btn-text" data-i18n="sidebar.measure_btn">Measure Flare Proximity</span>
                     </button>
                     <div id="measure-output-box" class="hidden p-2.5 bg-amber-500/10 border border-amber-500/20 rounded-lg text-[11px] space-y-1.5">
                         <div class="flex justify-between">
@@ -363,16 +363,16 @@
                 </div>
         
                 <div>
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Regional Quick Zoom</label>
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2" data-i18n="sidebar.regional_zoom">Regional Quick Zoom</label>
                     <div class="grid grid-cols-3 gap-1.5">
-                        <button onclick="focusBasra(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Basra</button>
-                        <button onclick="focusMaysan(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Maysan</button>
-                        <button onclick="focusKirkuk(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9">Kirkuk</button>
+                        <button onclick="focusBasra(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9" data-i18n="sidebar.basra">Basra</button>
+                        <button onclick="focusMaysan(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9" data-i18n="sidebar.maysan">Maysan</button>
+                        <button onclick="focusKirkuk(); closeDrawerOnMobile();" class="bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 text-[10px] font-bold py-2 rounded transition h-9" data-i18n="sidebar.kirkuk">Kirkuk</button>
                     </div>
                 </div>
         
                 <div class="p-3 bg-gray-950/40 rounded-xl border border-gray-800 space-y-2">
-                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Citizen Mapping Help</h4>
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-i18n="sidebar.citizen_mapping">Citizen Mapping Help</h4>
                     <p class="text-[11px] text-gray-400 leading-relaxed">If a gas flare in Iraq is missing, please help update OpenStreetMap using standard tagging conventions.</p>
                     <div class="bg-gray-950 p-2.5 rounded border border-gray-800 text-[10px] space-y-1 font-mono text-gray-300 mt-2">
                         <div class="flex justify-between"><span class="text-amber-500">Key:</span><span>man_made</span></div>
@@ -387,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.h</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.i</p>
             </div>
         
         </aside>
@@ -1902,19 +1902,19 @@
                     <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
                 </button>
             </div>
-            <p class="text-[10px] text-gray-400 mt-1 leading-relaxed">Gas flaring burns off associated gas from oil extraction, harming nearby communities and wasting billions in energy value annually.</p>
+            <p class="text-[10px] text-gray-400 mt-1 leading-relaxed" data-i18n="about.desc">Gas flaring burns off associated gas from oil extraction, harming nearby communities and wasting billions in energy value annually.</p>
             <div class="mt-2 space-y-1.5">
                 <div class="flex items-center gap-1.5">
                     <span style="width:10px; height:10px; border-radius:50%; background:#f59e0b; border:1.5px solid #ef4444; flex-shrink:0; display:inline-block;"></span>
-                    <span class="text-[10px] text-gray-400">Flare sites — includes 5km population estimate</span>
+                    <span class="text-[10px] text-gray-400" data-i18n="about.flare_sites">Flare sites — includes 5km population estimate</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                     <span style="width:10px; height:10px; border-radius:50%; background:#a855f7; border:1.5px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
-                    <span class="text-[10px] text-gray-400">Economic waste — USD value lost & Iraqi homes that could have been powered</span>
+                    <span class="text-[10px] text-gray-400" data-i18n="about.economic_waste">Economic waste — USD value lost & Iraqi homes that could have been powered</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                     <span style="width:10px; height:10px; border-radius:50%; background:#06b6d4; border:1.5px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
-                    <span class="text-[10px] text-gray-400">Emission plumes — methane & CO₂ in kg/hr</span>
+                    <span class="text-[10px] text-gray-400" data-i18n="about.emission_plumes">Emission plumes — methane & CO₂ in kg/hr</span>
                 </div>
             </div>
             <p class="text-[10px] text-gray-500 mt-2 pt-2 border-t border-gray-800">
@@ -1952,6 +1952,17 @@
   document.documentElement.setAttribute('dir','rtl');
   document.documentElement.setAttribute('lang','ckb');
 
+  var CKB_FLAT = {"nav.about": "دەربارەی پڕۆژە", "nav.share": "Share Map", "nav.follow": "فۆڵۆمان بکە", "sidebar.oil_fields": "کێڵگە نەوتییەکان", "sidebar.fields": "کێڵگەکان", "sidebar.gas_value_wasted": "بەهای گازی بەفیڕۆچوو", "sidebar.est_2025": "مەزەندەی ٢٠٢٥", "sidebar.annual_flaring_volume": "قەبارەی ساڵانەی گازی سووتێندراو", "sidebar.bcm_yr": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "sidebar.electricity_potential": "توانای بەرهەمهێنانی کارەبا", "sidebar.mw_if_captured": "مێگاوات ئەگەر بەکاربێت", "sidebar.people_within_5km": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "sidebar.iraqis": "عێراقی", "sidebar.focal_oilfield": "هەڵبژاردنی کێڵگەی نەوتی", "sidebar.all_fields": "هەموو کێلگەکانی عێراق", "sidebar.inspect_random": "پشکنینی مەشخەڵی هەڕەمەکی", "sidebar.data_engine": "سەرچاوەی بزوێنەری داتا", "sidebar.preloaded": "زانیاری پێشوەختە", "sidebar.live_osm": "ڕاستەوخۆ لە OSM", "sidebar.distance_analyzer": "شیکارکەری مەودا", "sidebar.ruler": "ڕاستە", "sidebar.distance_desc": "هەڵسەنگاندنی کاریگەرییەکان بە هەژمارکردنی مەودای دووری نێوان هەر جۆرە مەشخەڵێک و دانیشتووان.", "sidebar.measure_btn": "نزیکیی مەشخەڵ بپێوە", "sidebar.regional_zoom": "تەماشاکردن بە پێی ناوچە", "sidebar.basra": "بەسرە", "sidebar.maysan": "میسان", "sidebar.kirkuk": "کەرکوک", "sidebar.citizen_mapping": "هاوکاری نەخشەسازی ببە", "sidebar.citizen_desc": "ئەگەر مەشخەڵێکی گاز نابینی، تکایە هاوکارمان ببە بە دانانی لە OpenStreetMap بە بەکارهێنانی ئەم تاگە ستاندەردە.", "sidebar.national_stats": "ئامارەکانی عێراق", "sidebar.mapped_flares": "مەشخەڵە نەخشەکراوەکان", "sidebar.active": "چالاک", "legend.title": "ڕێبەری نەخشە", "legend.active_flare": "مەشخەڵی چالاک لە (OSM)", "legend.emission_plume": "پەڵەی دەردانی پشتڕاستکراوە", "legend.wasted_gas": "قەبارەی گازی بەفیڕۆ دراو", "legend.heatmap": "نەخشەی چڕی مەشخەڵ", "legend.low": "کەم", "legend.high": "زۆر", "legend.fire_detection": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "layers.title": "چینەکان پیشان بدە", "layers.flare_locations": "شوێنی مەشخەڵە چالاکەکان", "layers.density_map": "نەخشەی چڕی مەشخەڵەکان", "layers.impact_zone": "ناوچەی کاریگەری (٥ کم)", "layers.emission_plumes": "پەڵەی دەردانی دۆزراوە", "layers.wasted_gas": "گازی بەفێڕۆدراو (٢٠٢٥)", "layers.flare_locations_desc": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "layers.density_map_desc": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "layers.impact_zone_desc": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "layers.emission_plumes_desc": "کنینی مانگی دەستکرد بۆ لێچوونی میثان و CO2 (کگم/کاتژمێر)", "layers.wasted_gas_desc": "بەهای دۆلاری سووتێنراو بۆ هەر دامەزراوەیەک (زانیاری بانکی جیهانی", "layers.fire_detections": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "layers.fire_detections_desc": "خاڵە گەرمەکانی VIIRS، ٣ ڕۆژی ڕابردوو", "background.title": "پاشخانەکان", "background.satellite": "پاشخانی سەتەلایت", "background.archive": "پاشخانی سەتەلایتی ئەرشیف", "background.night": "پاشخانی ڕووناکی شەوان", "background.dark": "پاشخانی تاریک", "background.streets": "پاشخانی OpenStreetMap", "about.title": "چاودێری مەشخەڵەکانی عێراق", "about.desc": "سووتانی گاز لە ڕێی مەشخەڵەکانی گازەوە ئەو گازە پرۆسەی سووتانی گازە کە لە ئەنجامی پرۆسەی دەرهێنانی نەوتەوە دەردەهێنرێت؛ ئەم سووتانی گازە زیان بە دانیشتوانی ناوچەکە دەگەیەنێت و زیانی ئابووری چەندین ملیار دۆلار دەدات ساڵانە لە سوود وەرنەگرتن لە بەکارهێنانی ئەو گازە.", "about.flare_sites": "شوێنی مەشخەڵی گازەکان و خەمڵاندنی ژمارەی دانیشتوانی نزیکی ٥ کم", "about.economic_waste": "بەفیڕۆدانی ئابووری - بەهای بەفیڕۆدراو بە دۆلار و ژمارەی ئەو ماڵانەی دەکرا بەم سەرچاوەیە کارەبای بۆ دابین بکرایە", "about.emission_plumes": "دەردانی گازەکانی میتان و CO₂ بە کیلۆگرام لە کاتژمێرەکەدا", "about.open_source": "سەرچاوەی زانیاری کراوە", "about.take_tour": "ڕابەری بەکارهێنان", "popup.gas_flare": "مەشخەڵی گاز", "popup.assigned_field": "کێلگەی نەوت", "popup.population_5km": "ژمارەی دانیشتووان لە دووری ٥ کم:", "popup.latitude": "Latitude:", "popup.longitude": "Longitude:", "popup.view_google_maps": "لەسەر Google Maps بیبینە", "popup.zoom_in": "زووم بکە", "popup.edit_osm": "لە OSM چاکی بکە", "popup.wasted_gas_title": "گازی بەفیڕۆدراوی ساڵی ٢٠٢٥", "popup.wb_data": "زانیاری World Bank GGFR", "popup.people": "کەس", "popup.source_osm": "سەرچاوە: OpenStreetMap", "popup.co2_plume": "ستوونی دەردانی CO2", "popup.ch4_plume": "ستوونی دەردانی CH4", "popup.emission": "دەردان:", "popup.sector": "کەرت:", "popup.wind": "خێرایی با:", "popup.satellite_detection": "دۆزینەوەی مانگی دەستکرد:", "popup.view_carbon_mapper": "لەسەر Carbon Mapper بیبینە", "popup.source_carbon_mapper": "سەرچاوە: Carbon Mapper", "popup.viirs_title": "دۆزینەوەی ئاگری VIIRS", "popup.viirs_detected": "کات:", "popup.viirs_confidence": "ڕێژەی متمانە:", "popup.viirs_frp": "هێزی تیشکدانی ئاگر:", "popup.viirs_source": "سەرچاوە: NASA FIRMS / VIIRS SNPP", "popup.confidence_high": "بەرز", "popup.confidence_nominal": "ئاسایی", "popup.confidence_low": "نزم", "tour.next": "دواتر", "tour.skip": "تێپەڕاندن", "tour.finish": "تەواو", "tour.welcome_title": "بەخێربێیت بۆ چاودێری مەشخەڵەکانی عێراق", "tour.welcome_text": "ئەم نەخشەیە شوێنی مەشخەڵە گازییەکانی عێراقی تێدایە کە گازی سروشتی لە کاتی دەرهێنانی نەوتدا دەسووتێنرێن و دەبنە هۆکاری زیانی ملیارەها دۆلاری بەفیڕۆ چوو سەڕەڕای زیان گەیاندن بە تەندروستی دانیشتوانی ناوچەکە. با گەشتێکی خێرا بکەین.", "tour.stats_title": "ئامارە نیشتیمانیەکان", "tour.stats_text": "ئەم ژمارە ڕاستەوخۆیانە قەبارەی کێشەکە نیشان دەدەن: بەهای گازی بەفیڕۆچوو، ئەو کارەبایەی کە دەکرا بەرهەم بهێنرایە، و ژمارەی ئەو کەسانەی کە لە نزیکی مەشخەڵێکدا دەژین.", "tour.layers_data_title": "چینەکانی زانیاری", "tour.layers_data_text": "خاڵە پرتەقاڵییەکان مەشخەڵە چالاکەکانن. خاڵە مۆرەکان بەهای گازی بەفیڕۆچوو نیشان دەدەن. خاڵە شینەکان ستوونی دەردانی گازن کە بە مانگی دەستکرد دۆزراونەتەوە.", "tour.controls_title": "گۆڕینی چین و پاشخانەکان", "tour.controls_text": "ئەم کۆنترۆڵانە بەکاربهێنە بۆ کردنەوە و داخستنی چینەکانی زانیاری، و گۆڕین لە نێوان دیمەنی مانگی دەستکرد، شەقام، شەو.", "tour.explore_title": "بگەڕێ و هاوبەشی بکە", "tour.explore_text": "ک لەسەر هەر مەشخەڵێک بکە بۆ بینینی وردەکارییەکان. هەر دیمەنێک بەستەرێکی هاوبەشکردنی هەیە کە بە تەواوی ئەوە دەگرێت کە تۆ تەماشای دەکەیت — گونجاوە بۆ ڕوونکردنەوەی شوێنێکی دیاریکراو.", "guide.button": "ڕابەری بەکارهێنان"};
+  function translateByKey(){
+    try {
+      var els = document.querySelectorAll('[data-i18n]');
+      els.forEach(function(el){
+        var k = el.getAttribute('data-i18n');
+        if (CKB_FLAT[k]) el.textContent = CKB_FLAT[k];
+      });
+    } catch(e){}
+  }
+
   function translate(root){
     try {
       var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
@@ -1965,7 +1976,7 @@
     } catch(e){}
   }
 
-  function run(){ translate(document.body); }
+  function run(){ translate(document.body); translateByKey(); }
 
   window.addEventListener('load', function(){ setTimeout(run, 600); });
   // Re-translate dynamically added panels/popups/tour
@@ -2003,6 +2014,11 @@ html[dir="rtl"] #tour-tooltip * {
 html[dir="rtl"] .font-mono { font-family: 'Noto Kufi Arabic', 'Plus Jakarta Sans', sans-serif !important; }
 /* Tour tooltip reads RTL in Kurdish mode */
 html[dir="rtl"] #tour-tooltip { direction: rtl; text-align: right; }
+
+/* About / helper box RTL */
+html[dir="rtl"] #map-helper-box { direction: rtl; text-align: right; }
+html[dir="rtl"] #map-helper-box .flex.items-center { flex-direction: row-reverse; }
+html[dir="rtl"] #map-helper-box p, html[dir="rtl"] #map-helper-box span { text-align: right; }
 
 /* Keep the Leaflet map internals LTR (tiles, zoom math) but mirror control corners below */
 html[dir="rtl"] .leaflet-container { direction: ltr; }
