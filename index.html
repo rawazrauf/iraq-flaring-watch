@@ -42,6 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script defer src="https://cloud.umami.is/script.js" data-website-id="9af917fd-4b66-4919-99e8-98564d21aab7"></script>
     <style>
         html, body {
@@ -386,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.g</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.h</p>
             </div>
         
         </aside>
@@ -1588,12 +1589,22 @@
             showTourStep();
         }
         
+        var CKB_MODE = new URLSearchParams(location.search).get('lang') === 'ckb';
+        var CKB_TOUR = {"steps": [["بەخێربێیت بۆ چاودێری مەشخەڵەکانی عێراق", "ئەم نەخشەیە شوێنی مەشخەڵە گازییەکانی عێراقی تێدایە کە گازی سروشتی لە کاتی دەرهێنانی نەوتدا دەسووتێنرێن و دەبنە هۆکاری زیانی ملیارەها دۆلاری بەفیڕۆ چوو سەڕەڕای زیان گەیاندن بە تەندروستی دانیشتوانی ناوچەکە. با گەشتێکی خێرا بکەین."], ["ئامارە نیشتیمانیەکان", "ئەم ژمارە ڕاستەوخۆیانە قەبارەی کێشەکە نیشان دەدەن: بەهای گازی بەفیڕۆچوو، ئەو کارەبایەی کە دەکرا بەرهەم بهێنرایە، و ژمارەی ئەو کەسانەی کە لە نزیکی مەشخەڵێکدا دەژین."], ["چینەکانی زانیاری", "خاڵە پرتەقاڵییەکان مەشخەڵە چالاکەکانن. خاڵە مۆرەکان بەهای گازی بەفیڕۆچوو نیشان دەدەن. خاڵە شینەکان ستوونی دەردانی گازن کە بە مانگی دەستکرد دۆزراونەتەوە."], ["گۆڕینی چین و پاشخانەکان", "ئەم کۆنترۆڵانە بەکاربهێنە بۆ کردنەوە و داخستنی چینەکانی زانیاری، و گۆڕین لە نێوان دیمەنی مانگی دەستکرد، شەقام، شەو."], ["بگەڕێ و هاوبەشی بکە", "ک لەسەر هەر مەشخەڵێک بکە بۆ بینینی وردەکارییەکان. هەر دیمەنێک بەستەرێکی هاوبەشکردنی هەیە کە بە تەواوی ئەوە دەگرێت کە تۆ تەماشای دەکەیت — گونجاوە بۆ ڕوونکردنەوەی شوێنێکی دیاریکراو."]], "next": "دواتر", "skip": "تێپەڕاندن", "finish": "تەواو"};
+
         function showTourStep() {
             const step = tourSteps[currentTourStep];
-            document.getElementById('tour-title').textContent = step.title;
-            document.getElementById('tour-text').textContent = step.text;
+            let title = step.title, text = step.text;
+            let nextLbl = currentTourStep === tourSteps.length - 1 ? 'Finish' : 'Next';
+            if (CKB_MODE && CKB_TOUR.steps[currentTourStep]) {
+                title = CKB_TOUR.steps[currentTourStep][0];
+                text  = CKB_TOUR.steps[currentTourStep][1];
+                nextLbl = currentTourStep === tourSteps.length - 1 ? CKB_TOUR.finish : CKB_TOUR.next;
+            }
+            document.getElementById('tour-title').textContent = title;
+            document.getElementById('tour-text').textContent = text;
             document.getElementById('tour-progress').textContent = `${currentTourStep + 1} / ${tourSteps.length}`;
-            document.querySelector('.tour-next').textContent = currentTourStep === tourSteps.length - 1 ? 'Finish' : 'Next';
+            document.querySelector('.tour-next').textContent = nextLbl;
         
             document.querySelectorAll('.tour-highlight').forEach(el => el.classList.remove('tour-highlight'));
         
@@ -1935,7 +1946,7 @@
   var lang = params.get('lang');
   if (lang !== 'ckb') return;  // English stays untouched for everyone else
 
-  var MAP = {"About": "دەربارەی پڕۆژە", "Follow": "فۆڵۆمان بکە", "National Stats": "ئامارەکانی عێراق", "Mapped Flares": "مەشخەڵە نەخشەکراوەکان", "active": "چالاک", "Oil Fields": "کێڵگە نەوتییەکان", "fields": "کێڵگەکان", "Gas Value Wasted": "بەهای گازی بەفیڕۆچوو", "est. 2025": "مەزەندەی ٢٠٢٥", "Annual Flaring Volume": "قەبارەی ساڵانەی گازی سووتێندراو", "BCM/yr est. 2025": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "Electricity Generation Potential": "توانای بەرهەمهێنانی کارەبا", "MW if captured": "مێگاوات ئەگەر بەکاربێت", "People Within 5km of a Flare": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "Iraqis": "عێراقی", "Focal Oilfield Selection": "هەڵبژاردنی کێڵگەی نەوتی", "All Fields / Areas (Iraqwide)": "هەموو کێلگەکانی عێراق", "Inspect Random Flare": "پشکنینی مەشخەڵی هەڕەمەکی", "Data Engine Source": "سەرچاوەی بزوێنەری داتا", "Preloaded": "زانیاری پێشوەختە", "Live OSM": "ڕاستەوخۆ لە OSM", "Distance Analyzer": "شیکارکەری مەودا", "Measure Flare Proximity": "نزیکیی مەشخەڵ بپێوە", "Regional Quick Zoom": "تەماشاکردن بە پێی ناوچە", "Basra": "بەسرە", "Maysan": "میسان", "Kirkuk": "کەرکوک", "Citizen Mapping Help": "هاوکاری نەخشەسازی ببە", "Display Layers": "چینەکان پیشان بدە", "Active Flare Locations": "شوێنی مەشخەڵە چالاکەکان", "Individual flare sites mapped from OpenStreetMap": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "Flare Density Map": "نەخشەی چڕی مەشخەڵەکان", "Heatmap showing where flaring is most concentrated": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "5km Impact Zone": "ناوچەی کاریگەری (٥ کم)", "Circles showing who lives within 5km of a flare": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "Detected Emission Plumes": "پەڵەی دەردانی دۆزراوە", "Wasted Gas (2025 Est.)": "گازی بەفێڕۆدراو (٢٠٢٥)", "Live Fire Detections (NASA)": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "Map Legend": "ڕێبەری نەخشە", "Active Flare (OSM)": "مەشخەڵی چالاک لە (OSM)", "Verified Emission Plume": "پەڵەی دەردانی پشتڕاستکراوە", "Live Fire Detection (NASA)": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "Flare Density Heatmap": "نەخشەی چڕی مەشخەڵ", "Low": "کەم", "High": "زۆر", "Background": "پاشخانەکان", "Layers": "چینەکان پیشان بدە", "Guide": "ڕابەری بەکارهێنان", "Next": "دواتر", "Skip": "تێپەڕاندن", "Finish": "تەواو"};
+  var MAP = {"About": "دەربارەی پڕۆژە", "Follow": "فۆڵۆمان بکە", "National Stats": "ئامارەکانی عێراق", "Mapped Flares": "مەشخەڵە نەخشەکراوەکان", "active": "چالاک", "Oil Fields": "کێڵگە نەوتییەکان", "fields": "کێڵگەکان", "Gas Value Wasted": "بەهای گازی بەفیڕۆچوو", "est. 2025": "مەزەندەی ٢٠٢٥", "Annual Flaring Volume": "قەبارەی ساڵانەی گازی سووتێندراو", "BCM/yr est. 2025": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "Electricity Generation Potential": "توانای بەرهەمهێنانی کارەبا", "MW if captured": "مێگاوات ئەگەر بەکاربێت", "People Within 5km of a Flare": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "Iraqis": "عێراقی", "Focal Oilfield Selection": "هەڵبژاردنی کێڵگەی نەوتی", "All Fields / Areas (Iraqwide)": "هەموو کێلگەکانی عێراق", "Inspect Random Flare": "پشکنینی مەشخەڵی هەڕەمەکی", "Data Engine Source": "سەرچاوەی بزوێنەری داتا", "Preloaded": "زانیاری پێشوەختە", "Live OSM": "ڕاستەوخۆ لە OSM", "Distance Analyzer": "شیکارکەری مەودا", "Measure Flare Proximity": "نزیکیی مەشخەڵ بپێوە", "Regional Quick Zoom": "تەماشاکردن بە پێی ناوچە", "Basra": "بەسرە", "Maysan": "میسان", "Kirkuk": "کەرکوک", "Citizen Mapping Help": "هاوکاری نەخشەسازی ببە", "Display Layers": "چینەکان پیشان بدە", "Active Flare Locations": "شوێنی مەشخەڵە چالاکەکان", "Individual flare sites mapped from OpenStreetMap": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "Flare Density Map": "نەخشەی چڕی مەشخەڵەکان", "Heatmap showing where flaring is most concentrated": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "5km Impact Zone": "ناوچەی کاریگەری (٥ کم)", "Circles showing who lives within 5km of a flare": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "Detected Emission Plumes": "پەڵەی دەردانی دۆزراوە", "Wasted Gas (2025 Est.)": "گازی بەفێڕۆدراو (٢٠٢٥)", "Live Fire Detections (NASA)": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "Map Legend": "ڕێبەری نەخشە", "Active Flare (OSM)": "مەشخەڵی چالاک لە (OSM)", "Verified Emission Plume": "پەڵەی دەردانی پشتڕاستکراوە", "Live Fire Detection (NASA)": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "Flare Density Heatmap": "نەخشەی چڕی مەشخەڵ", "Low": "کەم", "High": "زۆر", "Background": "پاشخانەکان", "Layers": "چینەکان پیشان بدە", "Guide": "ڕابەری بەکارهێنان", "Next": "دواتر", "Skip": "تێپەڕاندن", "Finish": "تەواو", "Welcome to Iraq Flaring Watch 🔥": "بەخێربێیت بۆ چاودێری مەشخەڵەکانی عێراق", "This map tracks gas flaring across Iraq — where natural gas is burned off during oil extraction, wasting billions and harming nearby communities. Let's take a quick tour.": "ئەم نەخشەیە شوێنی مەشخەڵە گازییەکانی عێراقی تێدایە کە گازی سروشتی لە کاتی دەرهێنانی نەوتدا دەسووتێنرێن و دەبنە هۆکاری زیانی ملیارەها دۆلاری بەفیڕۆ چوو سەڕەڕای زیان گەیاندن بە تەندروستی دانیشتوانی ناوچەکە. با گەشتێکی خێرا بکەین.", "National Statistics": "ئامارە نیشتیمانیەکان", "These live figures show the scale of the problem: gas value wasted, electricity that could be generated, and how many Iraqis live near a flare.": "ئەم ژمارە ڕاستەوخۆیانە قەبارەی کێشەکە نیشان دەدەن: بەهای گازی بەفیڕۆچوو، ئەو کارەبایەی کە دەکرا بەرهەم بهێنرایە، و ژمارەی ئەو کەسانەی کە لە نزیکی مەشخەڵێکدا دەژین.", "The Data Layers": "چینەکانی زانیاری", "Orange dots are active flares. Purple bubbles show wasted gas value. Cyan dots are satellite-detected emission plumes. The heatmap shows flare density.": "خاڵە پرتەقاڵییەکان مەشخەڵە چالاکەکانن. خاڵە مۆرەکان بەهای گازی بەفیڕۆچوو نیشان دەدەن. خاڵە شینەکان ستوونی دەردانی گازن کە بە مانگی دەستکرد دۆزراونەتەوە.", "Switch Layers & Background": "گۆڕینی چین و پاشخانەکان", "Use these controls to toggle data layers on and off, and switch between satellite, street, and night-time views.": "ئەم کۆنترۆڵانە بەکاربهێنە بۆ کردنەوە و داخستنی چینەکانی زانیاری، و گۆڕین لە نێوان دیمەنی مانگی دەستکرد، شەقام، شەو.", "Explore & Share": "بگەڕێ و هاوبەشی بکە", "Click any flare to see details. Every view has a shareable link that captures exactly what you're looking at — perfect for highlighting a specific site.": "ک لەسەر هەر مەشخەڵێک بکە بۆ بینینی وردەکارییەکان. هەر دیمەنێک بەستەرێکی هاوبەشکردنی هەیە کە بە تەواوی ئەوە دەگرێت کە تۆ تەماشای دەکەیت — گونجاوە بۆ ڕوونکردنەوەی شوێنێکی دیاریکراو.", "Legend": "ڕێبەری نەخشە"};
 
   // RTL layout + language
   document.documentElement.setAttribute('dir','rtl');
@@ -1977,16 +1988,21 @@
 /* ===== Full RTL mirror — only active in Kurdish mode (html[dir=rtl]) ===== */
 html[dir="rtl"] body { direction: rtl; }
 
-/* Kurdish-appropriate typeface (Noto Kufi Arabic) — full Sorani glyph coverage.
-   Falls back to Plus Jakarta for Latin runs via the second family. */
+/* Kurdish typeface: Noto Kufi Arabic — full Sorani glyph coverage, legible on mobile. */
 html[dir="rtl"] body,
 html[dir="rtl"] button,
 html[dir="rtl"] select,
 html[dir="rtl"] input,
 html[dir="rtl"] .leaflet-container,
-html[dir="rtl"] .leaflet-popup-content {
-  font-family: 'Noto Kufi Arabic', 'Plus Jakarta Sans', sans-serif;
+html[dir="rtl"] .leaflet-popup-content,
+html[dir="rtl"] #tour-tooltip,
+html[dir="rtl"] #tour-tooltip * {
+  font-family: 'Noto Kufi Arabic', 'Plus Jakarta Sans', sans-serif !important;
 }
+/* font-mono (monospace) breaks Arabic letter-joining — force the Kurdish font on those spans */
+html[dir="rtl"] .font-mono { font-family: 'Noto Kufi Arabic', 'Plus Jakarta Sans', sans-serif !important; }
+/* Tour tooltip reads RTL in Kurdish mode */
+html[dir="rtl"] #tour-tooltip { direction: rtl; text-align: right; }
 
 /* Keep the Leaflet map internals LTR (tiles, zoom math) but mirror control corners below */
 html[dir="rtl"] .leaflet-container { direction: ltr; }
