@@ -373,7 +373,7 @@
         
                 <div class="p-3 bg-gray-950/40 rounded-xl border border-gray-800 space-y-2">
                     <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-i18n="sidebar.citizen_mapping">Citizen Mapping Help</h4>
-                    <p class="text-[11px] text-gray-400 leading-relaxed">If a gas flare in Iraq is missing, please help update OpenStreetMap using standard tagging conventions.</p>
+                    <p class="text-[11px] text-gray-400 leading-relaxed" data-i18n="sidebar.citizen_desc">If a gas flare in Iraq is missing, please help update OpenStreetMap using standard tagging conventions.</p>
                     <div class="bg-gray-950 p-2.5 rounded border border-gray-800 text-[10px] space-y-1 font-mono text-gray-300 mt-2">
                         <div class="flex justify-between"><span class="text-amber-500">Key:</span><span>man_made</span></div>
                         <div class="flex justify-between"><span class="text-amber-500">Value:</span><span>flare</span></div>
@@ -387,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.j</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.k</p>
             </div>
         
         </aside>
@@ -881,21 +881,21 @@
                                 <input type="checkbox" id="map-layer-plumes" checked onchange="toggleLayer('plumes');" style="accent-color:#06b6d4; width:14px; height:14px; margin-top:1px;">
                                 <span style="display:flex; flex-direction:column;">
                                     <span>Detected Emission Plumes</span>
-                                    <span style="font-size:9px; color:#6b7280; line-height:1.3;">Satellite-verified methane &amp; CO₂ leaks (kg/hr)</span>
+                                    <span style="font-size:9px; color:#6b7280; line-height:1.3;" data-i18n="layers.emission_plumes_desc">Satellite-verified methane &amp; CO₂ leaks (kg/hr)</span>
                                 </span>
                             </label>
                             <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
                                 <input type="checkbox" id="map-layer-wb-flares" checked onchange="toggleLayer('wb-flares');" style="accent-color:#a855f7; width:14px; height:14px; margin-top:1px;">
                                 <span style="display:flex; flex-direction:column;">
                                     <span>Wasted Gas (2025 Est.)</span>
-                                    <span style="font-size:9px; color:#6b7280; line-height:1.3;">$ value burned per facility (World Bank data)</span>
+                                    <span style="font-size:9px; color:#6b7280; line-height:1.3;" data-i18n="layers.wasted_gas_desc">$ value burned per facility (World Bank data)</span>
                                 </span>
                             </label>
                             <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
                                 <input type="checkbox" id="map-layer-viirs" onchange="toggleLayer('viirs');" style="accent-color:#ff0000; width:14px; height:14px; margin-top:1px;">
                                 <span style="display:flex; flex-direction:column;">
                                     <span>Live Fire Detections (NASA)</span>
-                                    <span style="font-size:9px; color:#6b7280; line-height:1.3;">VIIRS thermal hotspots, last 3 days (near real-time)</span>
+                                    <span style="font-size:9px; color:#6b7280; line-height:1.3;" data-i18n="layers.fire_detections_desc">VIIRS thermal hotspots, last 3 days (near real-time)</span>
                                 </span>
                             </label>
                         </div>
@@ -1949,7 +1949,7 @@
   var lang = params.get('lang');
   if (lang !== 'ckb') return;  // English stays untouched for everyone else
 
-  var MAP = {"About": "دەربارەی پڕۆژە", "Follow": "فۆڵۆمان بکە", "National Stats": "ئامارەکانی عێراق", "Mapped Flares": "مەشخەڵە نەخشەکراوەکان", "active": "چالاک", "Oil Fields": "کێڵگە نەوتییەکان", "fields": "کێڵگەکان", "Gas Value Wasted": "بەهای گازی بەفیڕۆچوو", "est. 2025": "مەزەندەی ٢٠٢٥", "Annual Flaring Volume": "قەبارەی ساڵانەی گازی سووتێندراو", "BCM/yr est. 2025": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "Electricity Generation Potential": "توانای بەرهەمهێنانی کارەبا", "MW if captured": "مێگاوات ئەگەر بەکاربێت", "People Within 5km of a Flare": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "Iraqis": "عێراقی", "Focal Oilfield Selection": "هەڵبژاردنی کێڵگەی نەوتی", "All Fields / Areas (Iraqwide)": "هەموو کێلگەکانی عێراق", "Inspect Random Flare": "پشکنینی مەشخەڵی هەڕەمەکی", "Data Engine Source": "سەرچاوەی بزوێنەری داتا", "Preloaded": "زانیاری پێشوەختە", "Live OSM": "ڕاستەوخۆ لە OSM", "Distance Analyzer": "شیکارکەری مەودا", "Measure Flare Proximity": "نزیکیی مەشخەڵ بپێوە", "Regional Quick Zoom": "تەماشاکردن بە پێی ناوچە", "Basra": "بەسرە", "Maysan": "میسان", "Kirkuk": "کەرکوک", "Citizen Mapping Help": "هاوکاری نەخشەسازی ببە", "Display Layers": "چینەکان پیشان بدە", "Active Flare Locations": "شوێنی مەشخەڵە چالاکەکان", "Individual flare sites mapped from OpenStreetMap": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "Flare Density Map": "نەخشەی چڕی مەشخەڵەکان", "Heatmap showing where flaring is most concentrated": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "5km Impact Zone": "ناوچەی کاریگەری (٥ کم)", "Circles showing who lives within 5km of a flare": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "Detected Emission Plumes": "پەڵەی دەردانی دۆزراوە", "Wasted Gas (2025 Est.)": "گازی بەفێڕۆدراو (٢٠٢٥)", "Live Fire Detections (NASA)": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "Map Legend": "ڕێبەری نەخشە", "Active Flare (OSM)": "مەشخەڵی چالاک لە (OSM)", "Verified Emission Plume": "پەڵەی دەردانی پشتڕاستکراوە", "Live Fire Detection (NASA)": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "Flare Density Heatmap": "نەخشەی چڕی مەشخەڵ", "Low": "کەم", "High": "زۆر", "Background": "پاشخانەکان", "Layers": "چینەکان پیشان بدە", "Guide": "ڕابەری بەکارهێنان", "Next": "دواتر", "Skip": "تێپەڕاندن", "Finish": "تەواو", "Welcome to Iraq Flaring Watch 🔥": "بەخێربێیت بۆ چاودێری مەشخەڵەکانی عێراق", "This map tracks gas flaring across Iraq — where natural gas is burned off during oil extraction, wasting billions and harming nearby communities. Let's take a quick tour.": "ئەم نەخشەیە شوێنی مەشخەڵە گازییەکانی عێراقی تێدایە کە گازی سروشتی لە کاتی دەرهێنانی نەوتدا دەسووتێنرێن و دەبنە هۆکاری زیانی ملیارەها دۆلاری بەفیڕۆ چوو سەڕەڕای زیان گەیاندن بە تەندروستی دانیشتوانی ناوچەکە. با گەشتێکی خێرا بکەین.", "National Statistics": "ئامارە نیشتیمانیەکان", "These live figures show the scale of the problem: gas value wasted, electricity that could be generated, and how many Iraqis live near a flare.": "ئەم ژمارە ڕاستەوخۆیانە قەبارەی کێشەکە نیشان دەدەن: بەهای گازی بەفیڕۆچوو، ئەو کارەبایەی کە دەکرا بەرهەم بهێنرایە، و ژمارەی ئەو کەسانەی کە لە نزیکی مەشخەڵێکدا دەژین.", "The Data Layers": "چینەکانی زانیاری", "Orange dots are active flares. Purple bubbles show wasted gas value. Cyan dots are satellite-detected emission plumes. The heatmap shows flare density.": "خاڵە پرتەقاڵییەکان مەشخەڵە چالاکەکانن. خاڵە مۆرەکان بەهای گازی بەفیڕۆچوو نیشان دەدەن. خاڵە شینەکان ستوونی دەردانی گازن کە بە مانگی دەستکرد دۆزراونەتەوە.", "Switch Layers & Background": "گۆڕینی چین و پاشخانەکان", "Use these controls to toggle data layers on and off, and switch between satellite, street, and night-time views.": "ئەم کۆنترۆڵانە بەکاربهێنە بۆ کردنەوە و داخستنی چینەکانی زانیاری، و گۆڕین لە نێوان دیمەنی مانگی دەستکرد، شەقام، شەو.", "Explore & Share": "بگەڕێ و هاوبەشی بکە", "Click any flare to see details. Every view has a shareable link that captures exactly what you're looking at — perfect for highlighting a specific site.": "ک لەسەر هەر مەشخەڵێک بکە بۆ بینینی وردەکارییەکان. هەر دیمەنێک بەستەرێکی هاوبەشکردنی هەیە کە بە تەواوی ئەوە دەگرێت کە تۆ تەماشای دەکەیت — گونجاوە بۆ ڕوونکردنەوەی شوێنێکی دیاریکراو.", "Legend": "ڕێبەری نەخشە"};
+  var MAP = {"About": "دەربارەی پڕۆژە", "Follow": "فۆڵۆمان بکە", "National Stats": "ئامارەکانی عێراق", "Mapped Flares": "مەشخەڵە نەخشەکراوەکان", "active": "چالاک", "Oil Fields": "کێڵگە نەوتییەکان", "fields": "کێڵگەکان", "Gas Value Wasted": "بەهای گازی بەفیڕۆچوو", "est. 2025": "مەزەندەی ٢٠٢٥", "Annual Flaring Volume": "قەبارەی ساڵانەی گازی سووتێندراو", "BCM/yr est. 2025": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "Electricity Generation Potential": "توانای بەرهەمهێنانی کارەبا", "MW if captured": "مێگاوات ئەگەر بەکاربێت", "People Within 5km of a Flare": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "Iraqis": "عێراقی", "Focal Oilfield Selection": "هەڵبژاردنی کێڵگەی نەوتی", "All Fields / Areas (Iraqwide)": "هەموو کێلگەکانی عێراق", "Inspect Random Flare": "پشکنینی مەشخەڵی هەڕەمەکی", "🔥 Inspect Random Flare": "🔥 پشکنینی مەشخەڵی هەڕەمەکی", "Data Engine Source": "سەرچاوەی بزوێنەری داتا", "Preloaded": "زانیاری پێشوەختە", "Live OSM": "ڕاستەوخۆ لە OSM", "Distance Analyzer": "شیکارکەری مەودا", "Measure Flare Proximity": "نزیکیی مەشخەڵ بپێوە", "Regional Quick Zoom": "تەماشاکردن بە پێی ناوچە", "Basra": "بەسرە", "Maysan": "میسان", "Kirkuk": "کەرکوک", "Citizen Mapping Help": "هاوکاری نەخشەسازی ببە", "Display Layers": "چینەکان پیشان بدە", "Active Flare Locations": "شوێنی مەشخەڵە چالاکەکان", "Individual flare sites mapped from OpenStreetMap": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "Flare Density Map": "نەخشەی چڕی مەشخەڵەکان", "Heatmap showing where flaring is most concentrated": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "5km Impact Zone": "ناوچەی کاریگەری (٥ کم)", "Circles showing who lives within 5km of a flare": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "Detected Emission Plumes": "پەڵەی دەردانی دۆزراوە", "Wasted Gas (2025 Est.)": "گازی بەفێڕۆدراو (٢٠٢٥)", "Live Fire Detections (NASA)": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "Map Legend": "ڕێبەری نەخشە", "Active Flare (OSM)": "مەشخەڵی چالاک لە (OSM)", "Verified Emission Plume": "پەڵەی دەردانی پشتڕاستکراوە", "Live Fire Detection (NASA)": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "Flare Density Heatmap": "نەخشەی چڕی مەشخەڵ", "Low": "کەم", "High": "زۆر", "Background": "پاشخانەکان", "Layers": "چینەکان پیشان بدە", "Guide": "ڕابەری بەکارهێنان", "Next": "دواتر", "Skip": "تێپەڕاندن", "Finish": "تەواو", "Welcome to Iraq Flaring Watch 🔥": "بەخێربێیت بۆ چاودێری مەشخەڵەکانی عێراق", "This map tracks gas flaring across Iraq — where natural gas is burned off during oil extraction, wasting billions and harming nearby communities. Let's take a quick tour.": "ئەم نەخشەیە شوێنی مەشخەڵە گازییەکانی عێراقی تێدایە کە گازی سروشتی لە کاتی دەرهێنانی نەوتدا دەسووتێنرێن و دەبنە هۆکاری زیانی ملیارەها دۆلاری بەفیڕۆ چوو سەڕەڕای زیان گەیاندن بە تەندروستی دانیشتوانی ناوچەکە. با گەشتێکی خێرا بکەین.", "National Statistics": "ئامارە نیشتیمانیەکان", "These live figures show the scale of the problem: gas value wasted, electricity that could be generated, and how many Iraqis live near a flare.": "ئەم ژمارە ڕاستەوخۆیانە قەبارەی کێشەکە نیشان دەدەن: بەهای گازی بەفیڕۆچوو، ئەو کارەبایەی کە دەکرا بەرهەم بهێنرایە، و ژمارەی ئەو کەسانەی کە لە نزیکی مەشخەڵێکدا دەژین.", "The Data Layers": "چینەکانی زانیاری", "Orange dots are active flares. Purple bubbles show wasted gas value. Cyan dots are satellite-detected emission plumes. The heatmap shows flare density.": "خاڵە پرتەقاڵییەکان مەشخەڵە چالاکەکانن. خاڵە مۆرەکان بەهای گازی بەفیڕۆچوو نیشان دەدەن. خاڵە شینەکان ستوونی دەردانی گازن کە بە مانگی دەستکرد دۆزراونەتەوە.", "Switch Layers & Background": "گۆڕینی چین و پاشخانەکان", "Use these controls to toggle data layers on and off, and switch between satellite, street, and night-time views.": "ئەم کۆنترۆڵانە بەکاربهێنە بۆ کردنەوە و داخستنی چینەکانی زانیاری، و گۆڕین لە نێوان دیمەنی مانگی دەستکرد، شەقام، شەو.", "Explore & Share": "بگەڕێ و هاوبەشی بکە", "Click any flare to see details. Every view has a shareable link that captures exactly what you're looking at — perfect for highlighting a specific site.": "ک لەسەر هەر مەشخەڵێک بکە بۆ بینینی وردەکارییەکان. هەر دیمەنێک بەستەرێکی هاوبەشکردنی هەیە کە بە تەواوی ئەوە دەگرێت کە تۆ تەماشای دەکەیت — گونجاوە بۆ ڕوونکردنەوەی شوێنێکی دیاریکراو.", "Legend": "ڕێبەری نەخشە"};
 
   // RTL layout + language
   document.documentElement.setAttribute('dir','rtl');
@@ -2033,6 +2033,12 @@ html[dir="rtl"] #map-helper-box p, html[dir="rtl"] #map-helper-box span { text-a
 /* In RTL the About (info) button is top-left, so open the box on the left */
 html[dir="rtl"] #map-helper-box { right: auto !important; left: 1rem !important; }
 
+/* Keep About text compact in Kurdish (Noto Kufi renders larger) — heading small-bold,
+   body smaller, so the whole box fits on a phone screen. */
+html[dir="rtl"] #map-helper-box h4 { font-size: 12px !important; line-height: 1.4; }
+html[dir="rtl"] #map-helper-box p,
+html[dir="rtl"] #map-helper-box span { font-size: 10px !important; line-height: 1.5 !important; }
+
 /* Keep the Leaflet map internals LTR (tiles, zoom math) but mirror control corners below */
 html[dir="rtl"] .leaflet-container { direction: ltr; }
 
@@ -2073,9 +2079,11 @@ html[dir="rtl"] #tour-help-btn { direction: rtl; }
 html[dir="rtl"] #layer-control-box,
 html[dir="rtl"] #basemap-control-box,
 html[dir="rtl"] #legend-box { direction: rtl; text-align: right; }
+/* Keep the checkbox/radio+label order natural but reading right: the input sits
+   at the start (right side in RTL), text flows left from it. */
 html[dir="rtl"] #layer-control-box label,
-html[dir="rtl"] #basemap-control-box label { flex-direction: row-reverse; justify-content: flex-end; }
-html[dir="rtl"] #legend-box > div > div { flex-direction: row-reverse; justify-content: flex-end; }
+html[dir="rtl"] #basemap-control-box label { flex-direction: row-reverse; justify-content: flex-start; text-align: right; }
+html[dir="rtl"] #legend-box > div > div { flex-direction: row-reverse; justify-content: flex-start; }
 /* The Layers button box floats right in LTR; in RTL float it the other way */
 html[dir="rtl"] #layer-control-box { float: right; }
 
