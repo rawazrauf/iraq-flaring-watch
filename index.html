@@ -387,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.i</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.08.29.j</p>
             </div>
         
         </aside>
@@ -981,10 +981,13 @@
 
         function toggleHelperBox() {
             const box = document.getElementById('map-helper-box');
+            const guide = document.getElementById('tour-help-btn');
             if (box.style.display === 'flex') {
                 box.style.display = 'none';
+                if (guide) guide.style.display = '';
             } else {
                 box.style.display = 'flex';
+                if (guide) guide.style.display = 'none';  // avoid overlap while About is open
             }
         }
 
@@ -2020,6 +2023,16 @@ html[dir="rtl"] #map-helper-box { direction: rtl; text-align: right; }
 html[dir="rtl"] #map-helper-box .flex.items-center { flex-direction: row-reverse; }
 html[dir="rtl"] #map-helper-box p, html[dir="rtl"] #map-helper-box span { text-align: right; }
 
+/* About box must fit on mobile (Kurdish text is longer) — cap height, scroll inside,
+   and sit above the Guide button. Applies in both languages. */
+#map-helper-box {
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  z-index: 10000 !important;
+}
+/* In RTL the About (info) button is top-left, so open the box on the left */
+html[dir="rtl"] #map-helper-box { right: auto !important; left: 1rem !important; }
+
 /* Keep the Leaflet map internals LTR (tiles, zoom math) but mirror control corners below */
 html[dir="rtl"] .leaflet-container { direction: ltr; }
 
@@ -2054,6 +2067,17 @@ html[dir="rtl"] select, html[dir="rtl"] #sidebar-drawer button { text-align: rig
    internal text direction is set RTL so Kurdish labels read correctly. */
 html[dir="rtl"] .leaflet-control { direction: rtl; }
 html[dir="rtl"] #tour-help-btn { direction: rtl; }
+
+/* Panel boxes (Layers / Background / Legend): proper RTL — labels right,
+   checkbox/radio on the right of the text, rows reversed. */
+html[dir="rtl"] #layer-control-box,
+html[dir="rtl"] #basemap-control-box,
+html[dir="rtl"] #legend-box { direction: rtl; text-align: right; }
+html[dir="rtl"] #layer-control-box label,
+html[dir="rtl"] #basemap-control-box label { flex-direction: row-reverse; justify-content: flex-end; }
+html[dir="rtl"] #legend-box > div > div { flex-direction: row-reverse; justify-content: flex-end; }
+/* The Layers button box floats right in LTR; in RTL float it the other way */
+html[dir="rtl"] #layer-control-box { float: right; }
 
 /* --- Popups: text right, but keep lat/long & numeric lines readable --- */
 html[dir="rtl"] .leaflet-popup-content { direction: rtl; text-align: right; }
