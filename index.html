@@ -47,13 +47,19 @@
     <style>
         html, body {
             height: 100%;
-            height: -webkit-fill-available;
+            height: 100dvh; /* dynamic viewport: avoids desktop-Chrome -webkit-fill-available collapse */
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow: hidden;
         }
+        /* Belt-and-braces: give the sidebar its dark bg + desktop dock in inline CSS so
+           it's correct at first paint regardless of external-stylesheet timing. */
+        #sidebar-drawer { background-color: #111827; border-color: #1f2937; }
+        @media (min-width: 1024px) {
+            #sidebar-drawer { position: relative; transform: none; }
+        }
         .map-fill-height {
             height: calc(100vh - 56px);
-            height: calc(-webkit-fill-available - 56px);
+            height: calc(100dvh - 56px); /* dynamic viewport: correct on desktop Chrome AND mobile URL-bar */
             overflow: hidden;
         }
         ::-webkit-scrollbar { width: 5px; }
@@ -389,7 +395,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.i</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.k</p>
             </div>
         
         </aside>
@@ -413,7 +419,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.i
+           Build: 2026.10.07.k
            Last updated: 7 October 2026
            ============================================================ */
         let map;
