@@ -405,7 +405,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.n</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.o</p>
             </div>
         
         </aside>
@@ -429,7 +429,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.n
+           Build: 2026.10.07.o
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -2166,6 +2166,12 @@ html[dir="rtl"] #sidebar-drawer.lg\:translate-x-0 { }
 
 /* --- Stat cards: label right, number+unit kept LTR but pinned to the right edge --- */
 html[dir="rtl"] #sidebar-drawer .flex.items-baseline { direction: ltr; justify-content: flex-end; }
+/* These rows are forced back to LTR, so their space-x gap must use margin-left (normal
+   LTR), not the margin-right the global RTL space-x flip applied — otherwise the number
+   and its unit label touch with no gap. Restore the gap on the LEFT of the 2nd child. */
+html[dir="rtl"] #sidebar-drawer .flex.items-baseline.space-x-1 > * + * {
+  margin-right: 0 !important; margin-left: 0.25rem !important;
+}
 
 /* --- Checkbox/radio spacing flip --- */
 html[dir="rtl"] input[type="checkbox"], html[dir="rtl"] input[type="radio"] { margin-left: 8px; margin-right: 0; }
