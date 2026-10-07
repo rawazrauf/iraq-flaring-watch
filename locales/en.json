@@ -127,6 +127,9 @@
     "viirs_source": "Source: NASA FIRMS / VIIRS SNPP",
     "confidence_high": "High",
     "confidence_nominal": "Nominal",
-    "confidence_low": "Low"
+    "confidence_low": "Low",
+    "popup.wasted_narrative": "{operator} flared {volume} million m³ of gas at {field} in 2025. Capturing this could have generated an estimated {value} USD in value — enough electricity to power {homes} Iraqi homes for a year.",
+    "popup.wasted_footnote": "Est. at ${price}/MMBtu. Electricity based on ~35% plant efficiency, 5,000 kWh/household/yr. (IEA 2024 × Iraq census)."
+
   }
 }
