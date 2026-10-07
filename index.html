@@ -2,6 +2,27 @@
 <html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
+    <!-- Language resolver — MUST run before anything renders. Precedence:
+         1) explicit ?lang= in the URL always wins (shared links);
+         2) else a remembered choice in localStorage;
+         3) else default English.
+         A remembered Kurdish user on a bare URL is redirected once to ?lang=ckb so the
+         whole existing Kurdish load path (fonts, RTL, ckb.json fetch) runs unchanged. -->
+    <script>
+    (function(){
+      try {
+        var p = new URLSearchParams(location.search);
+        if (!p.has('lang')) {
+          var saved = null;
+          try { saved = localStorage.getItem('ifw_lang'); } catch(e){}
+          if (saved === 'ckb') {
+            p.set('lang','ckb');
+            location.replace(location.pathname + '?' + p.toString() + location.hash);
+          }
+        }
+      } catch(e){}
+    })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Iraq Flaring Watch</title>
 
@@ -203,6 +224,28 @@
         </div>
 
         <div class="flex items-center space-x-2">
+            <!-- Language switcher: globe button + dropdown (EN / Kurdish) -->
+            <div id="lang-switcher" style="position:relative;">
+                <button onclick="toggleLangMenu(event)" aria-label="Change language" aria-haspopup="true" aria-expanded="false" id="lang-button"
+                        class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center font-semibold h-9">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18"></path>
+                    </svg>
+                </button>
+                <div id="lang-menu" role="menu" style="display:none; position:absolute; top:calc(100% + 6px); min-width:150px; background:rgba(17,24,39,0.98); border:1px solid #374151; border-radius:10px; padding:6px; box-shadow:0 10px 15px -3px rgba(0,0,0,0.5); z-index:10001;">
+                    <button role="menuitem" onclick="setLanguage('en')" id="lang-opt-en"
+                            style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:10px; background:none; border:none; color:#e5e7eb; font-size:13px; font-weight:600; text-align:left; padding:8px 10px; border-radius:7px; cursor:pointer;"
+                            onmouseover="this.style.background='#374151'" onmouseout="this.style.background='none'">
+                        <span>English</span><span id="lang-check-en" style="color:#f59e0b; visibility:hidden;">✓</span>
+                    </button>
+                    <button role="menuitem" onclick="setLanguage('ckb')" id="lang-opt-ckb"
+                            style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:10px; background:none; border:none; color:#e5e7eb; font-size:14px; font-weight:600; text-align:left; padding:8px 10px; border-radius:7px; cursor:pointer; font-family:'Noto Kufi Arabic','Plus Jakarta Sans',sans-serif;"
+                            onmouseover="this.style.background='#374151'" onmouseout="this.style.background='none'">
+                        <span>کوردی</span><span id="lang-check-ckb" style="color:#f59e0b; visibility:hidden;">✓</span>
+                    </button>
+                </div>
+            </div>
             <button onclick="toggleHelperBox()" aria-label="About this project" class="bg-gray-800 hover:bg-gray-700 text-amber-500 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center space-x-1.5 font-semibold h-9">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -409,7 +452,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.s</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.t</p>
             </div>
         
         </aside>
@@ -433,7 +476,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.s
+           Build: 2026.10.07.t
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -469,6 +512,14 @@
         let selectedMeasureFlare = null;
         let measureLine = null;
         let tempMeasureMarker = null;
+
+        // Language switcher init runs independently of the map, so a map error can't
+        // leave the switcher inert.
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLangSwitcher);
+        } else {
+            initLangSwitcher();
+        }
 
         window.onload = async function() {
             initMap();
@@ -1022,6 +1073,46 @@
                 backdrop.classList.add('hidden');
                 setTimeout(() => { if (map) map.invalidateSize(); }, 310);
             }
+        }
+
+        // ===== Language switcher =====
+        function toggleLangMenu(e) {
+            if (e) e.stopPropagation();
+            const menu = document.getElementById('lang-menu');
+            const btn = document.getElementById('lang-button');
+            const open = menu.style.display === 'block';
+            menu.style.display = open ? 'none' : 'block';
+            btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+            // RTL: open the menu toward the left edge; LTR: toward the right
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                menu.style.left = '0'; menu.style.right = 'auto';
+            } else {
+                menu.style.right = '0'; menu.style.left = 'auto';
+            }
+        }
+        function setLanguage(lang) {
+            try { localStorage.setItem('ifw_lang', lang); } catch (e) {}
+            const params = new URLSearchParams(location.search);
+            if (lang === 'ckb') params.set('lang', 'ckb');
+            else params.delete('lang');
+            const qs = params.toString();
+            // Preserve the map-position hash so the view is kept across the reload
+            location.href = location.pathname + (qs ? '?' + qs : '') + location.hash;
+        }
+        function initLangSwitcher() {
+            // Read the language directly from the URL so this never depends on CKB_MODE timing.
+            const current = new URLSearchParams(location.search).get('lang') === 'ckb' ? 'ckb' : 'en';
+            const check = document.getElementById('lang-check-' + current);
+            if (check) check.style.visibility = 'visible';
+            // Close the menu when clicking anywhere outside it
+            document.addEventListener('click', function (e) {
+                const sw = document.getElementById('lang-switcher');
+                const menu = document.getElementById('lang-menu');
+                if (sw && menu && !sw.contains(e.target) && menu.style.display === 'block') {
+                    menu.style.display = 'none';
+                    document.getElementById('lang-button').setAttribute('aria-expanded', 'false');
+                }
+            });
         }
 
         function toggleHelperBox() {
