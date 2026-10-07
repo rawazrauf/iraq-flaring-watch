@@ -387,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.c</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.d</p>
             </div>
         
         </aside>
@@ -411,7 +411,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.c
+           Build: 2026.10.07.d
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -2105,6 +2105,26 @@ html[dir="rtl"] #layer-control-box { float: right; }
 
 /* --- Popups: text right, but keep lat/long & numeric lines readable --- */
 html[dir="rtl"] .leaflet-popup-content { direction: rtl; text-align: right; }
+
+/* ===== Popup bidi fixes (Kurdish mode) =====
+   Each label/value span lays out by its OWN first strong character, so a
+   Kurdish label keeps its colon on the right, an English-kept label
+   (Latitude:) keeps its colon on the right too, and numeric/Latin values
+   (33.0296, m/s 5.3, Not quantified) read left-to-right without flipping. */
+html[dir="rtl"] .leaflet-popup-content .flex.justify-between > span,
+html[dir="rtl"] .leaflet-popup-content .flex.items-center > span {
+  unicode-bidi: plaintext;
+}
+/* The value side of each row sits at the left edge, read LTR. */
+html[dir="rtl"] .leaflet-popup-content .flex.justify-between > span:last-child {
+  direction: ltr; text-align: left; unicode-bidi: isolate;
+}
+/* English prose blocks (Wasted Gas narrative + methodology footnote) have no
+   Kurdish key yet, so render them LTR/left so sentence periods sit correctly. */
+html[dir="rtl"] .leaflet-popup-content p.leading-relaxed,
+html[dir="rtl"] .leaflet-popup-content p.italic {
+  direction: ltr; text-align: left; unicode-bidi: isolate;
+}
 </style>
 
 </body>
