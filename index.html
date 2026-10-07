@@ -56,7 +56,9 @@
            CDN parse leaves the lg: rules unapplied at desktop width → the page shows the
            mobile layout (sidebar translated off-screen = white gap, hamburger visible)
            until a reflow (e.g. opening DevTools) forces a style recalc. These !important
-           rules replicate lg:relative / lg:translate-x-0 / lg:hidden so that never happens. */
+           rules replicate lg:relative / lg:translate-x-0 / lg:hidden so that never happens.
+           NB: RTL-specific right-edge docking is in the RTL style block near the end of the
+           file (search "Desktop RTL: dock the drawer"). */
         #sidebar-drawer { background-color: #111827; border-color: #1f2937; width: 18rem; flex-shrink: 0; }
         @media (min-width: 1024px) {
             #sidebar-drawer {
@@ -405,7 +407,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.o</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.p</p>
             </div>
         
         </aside>
@@ -429,7 +431,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.o
+           Build: 2026.10.07.p
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -2151,10 +2153,11 @@ html[dir="rtl"] #sidebar-drawer { text-align: right; }
 
 /* --- Mobile drawer slides in from the RIGHT --- */
 html[dir="rtl"] #sidebar-drawer.-translate-x-full { transform: translateX(100%) !important; }
-html[dir="rtl"] #sidebar-drawer.lg\:translate-x-0 { }
 /* Desktop RTL: dock the drawer in-flow. Must match the SAME .-translate-x-full class with
    !important so it beats the mobile-hide rule above (equal specificity → later rule wins);
-   a plain #id rule loses to that class rule and leaves the drawer shoved off-screen right. */
+   a plain #id rule loses to that class rule and leaves the drawer shoved off-screen right.
+   NB: the language-neutral first-paint dock lives inline in <head> (search
+   "CRITICAL desktop layout"); this block adds the RTL-specific right-edge docking. */
 @media (min-width:1024px){
   html[dir="rtl"] #sidebar-drawer.-translate-x-full,
   html[dir="rtl"] #sidebar-drawer {
