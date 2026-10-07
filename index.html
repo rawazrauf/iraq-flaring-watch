@@ -409,7 +409,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.r</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.s</p>
             </div>
         
         </aside>
@@ -433,7 +433,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.r
+           Build: 2026.10.07.s
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -2195,8 +2195,14 @@ html[dir="rtl"] #basemap-control-box,
 html[dir="rtl"] #legend-box { direction: rtl; text-align: right; }
 /* Keep the checkbox/radio+label order natural but reading right: the input sits
    at the start (right side in RTL), text flows left from it. */
+/* In an RTL flex container, the DEFAULT flex-direction:row already puts the first child
+   (the checkbox) on the right. A row-reverse here would double-negate and shove the
+   checkbox back to the LEFT — which was the bug. So force plain row + right alignment. */
 html[dir="rtl"] #layer-control-box label,
-html[dir="rtl"] #basemap-control-box label { flex-direction: row-reverse; justify-content: flex-start; text-align: right; }
+html[dir="rtl"] #basemap-control-box label { flex-direction: row !important; justify-content: flex-start !important; text-align: right; }
+/* The checkbox/radio must not shrink when it sits at the right edge */
+html[dir="rtl"] #layer-control-box label > input,
+html[dir="rtl"] #basemap-control-box label > input { flex-shrink: 0; }
 html[dir="rtl"] #legend-box > div > div { flex-direction: row-reverse; justify-content: flex-start; }
 /* The Layers button box floats right in LTR; in RTL float it the other way */
 html[dir="rtl"] #layer-control-box { float: right; }
