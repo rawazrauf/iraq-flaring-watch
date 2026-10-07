@@ -226,20 +226,20 @@
         <div class="flex items-center space-x-2">
             <!-- Language switcher: globe button + dropdown (EN / Kurdish) -->
             <div id="lang-switcher" style="position:relative;">
-                <button onclick="toggleLangMenu(event)" aria-label="Change language" aria-haspopup="true" aria-expanded="false" id="lang-button"
+                <button onclick="toggleLangMenu(event)" aria-label="Change language" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-menu" id="lang-button"
                         class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs px-2.5 py-2 rounded-lg border border-gray-700 transition flex items-center font-semibold h-9">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18"></path>
                     </svg>
                 </button>
-                <div id="lang-menu" role="menu" style="display:none; position:absolute; top:calc(100% + 6px); min-width:150px; background:rgba(17,24,39,0.98); border:1px solid #374151; border-radius:10px; padding:6px; box-shadow:0 10px 15px -3px rgba(0,0,0,0.5); z-index:10001;">
-                    <button role="menuitem" onclick="setLanguage('en')" id="lang-opt-en"
+                <div id="lang-menu" style="display:none; position:absolute; top:calc(100% + 6px); min-width:150px; background:rgba(17,24,39,0.98); border:1px solid #374151; border-radius:10px; padding:6px; box-shadow:0 10px 15px -3px rgba(0,0,0,0.5); z-index:10001;">
+                    <button onclick="setLanguage('en')" id="lang-opt-en"
                             style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:10px; background:none; border:none; color:#e5e7eb; font-size:13px; font-weight:600; text-align:left; padding:8px 10px; border-radius:7px; cursor:pointer;"
                             onmouseover="this.style.background='#374151'" onmouseout="this.style.background='none'">
                         <span>English</span><span id="lang-check-en" style="color:#f59e0b; visibility:hidden;">✓</span>
                     </button>
-                    <button role="menuitem" onclick="setLanguage('ckb')" id="lang-opt-ckb"
+                    <button onclick="setLanguage('ckb')" id="lang-opt-ckb"
                             style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:10px; background:none; border:none; color:#e5e7eb; font-size:14px; font-weight:600; text-align:left; padding:8px 10px; border-radius:7px; cursor:pointer; font-family:'Noto Kufi Arabic','Plus Jakarta Sans',sans-serif;"
                             onmouseover="this.style.background='#374151'" onmouseout="this.style.background='none'">
                         <span>کوردی</span><span id="lang-check-ckb" style="color:#f59e0b; visibility:hidden;">✓</span>
@@ -452,7 +452,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.u</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.v</p>
             </div>
         
         </aside>
@@ -476,7 +476,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.u
+           Build: 2026.10.07.v
            Last updated: 7 October 2026
            ============================================================ */
         let map;
