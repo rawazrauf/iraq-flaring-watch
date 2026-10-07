@@ -97,6 +97,8 @@
         .leaflet-bar { border: none !important; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3) !important; }
         .leaflet-bar a { background-color: #1f2937 !important; color: #f3f4f6 !important; border-bottom: 1px solid #374151 !important; }
         .leaflet-bar a:hover { background-color: #374151 !important; color: #fff !important; }
+        /* Guide (?) control: a plain bold question mark sized like the zoom/locate buttons. */
+        .guide-control-btn { font-weight: 700; font-size: 18px; line-height: 30px; text-align: center; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(2px); }
@@ -387,7 +389,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.h</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.i</p>
             </div>
         
         </aside>
@@ -411,7 +413,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.h
+           Build: 2026.10.07.i
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -652,6 +654,26 @@
             }
         
             map.zoomControl.setPosition('bottomright');
+
+            // Guide button as a Leaflet control so it stacks directly above the locate
+            // arrow and inherits the same square .leaflet-bar sizing. Icon-only (?).
+            var GuideControl = L.Control.extend({
+                options: { position: 'bottomright' },
+                onAdd: function(){
+                    var c = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+                    c.id = 'guide-control';
+                    var a = L.DomUtil.create('a', 'guide-control-btn', c);
+                    a.href = '#';
+                    a.title = 'Take a tour';
+                    a.setAttribute('role', 'button');
+                    a.setAttribute('aria-label', 'Guide');
+                    a.innerHTML = '?';
+                    L.DomEvent.on(a, 'click', function(e){ L.DomEvent.stop(e); startTour(); });
+                    L.DomEvent.disableClickPropagation(c);
+                    return c;
+                }
+            });
+            new GuideControl().addTo(map);
 
             L.control.locate({
                 position: 'bottomright',
@@ -984,7 +1006,7 @@
 
         function toggleHelperBox() {
             const box = document.getElementById('map-helper-box');
-            const guide = document.getElementById('tour-help-btn');
+            const guide = document.getElementById('guide-control');
             if (box.style.display === 'flex') {
                 box.style.display = 'none';
                 if (guide) guide.style.display = '';
@@ -1967,10 +1989,6 @@
         </div>
     </div>
     
-    <button id="tour-help-btn" onclick="startTour()" title="Take a tour" class="fixed z-[9998] flex items-center gap-1.5 transition hover:brightness-125" style="background:rgba(17,24,39,0.92); border:1px solid #374151; color:#d1d5db; font-size:10px; font-weight:600; padding:6px 12px; border-radius:8px; cursor:pointer; bottom:200px; right:10px;">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        Guide
-    </button>
 
 <script>
 // ===== i18n: Kurdish (ckb) via ?lang=ckb — public default stays English =====
@@ -2092,8 +2110,8 @@ html[dir="rtl"] #map-helper-box { direction: rtl; text-align: right; }
 html[dir="rtl"] #map-helper-box .flex.items-center { flex-direction: row-reverse; }
 html[dir="rtl"] #map-helper-box p, html[dir="rtl"] #map-helper-box span { text-align: right; }
 
-/* About box must fit on mobile (Kurdish text is longer) — cap height, scroll inside,
-   and sit above the Guide button. Applies in both languages. */
+/* About box must fit on mobile (Kurdish text is longer) — cap height, scroll inside.
+   Applies in both languages. */
 #map-helper-box {
   max-height: calc(100vh - 90px);
   overflow-y: auto;
@@ -2141,7 +2159,6 @@ html[dir="rtl"] select, html[dir="rtl"] #sidebar-drawer button { text-align: rig
 /* Map controls stay in their native corners (map is LTR); only the control's
    internal text direction is set RTL so Kurdish labels read correctly. */
 html[dir="rtl"] .leaflet-control { direction: rtl; }
-html[dir="rtl"] #tour-help-btn { direction: rtl; }
 
 /* Panel boxes (Layers / Background / Legend): proper RTL — labels right,
    checkbox/radio on the right of the text, rows reversed. */
