@@ -387,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.e</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.f</p>
             </div>
         
         </aside>
@@ -411,7 +411,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.e
+           Build: 2026.10.07.f
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -2003,7 +2003,42 @@
 
   function run(){ translate(document.body); translateByKey(); }
 
-  window.addEventListener('load', function(){ setTimeout(run, 600); });
+  // Flatten a nested locale object ({popup:{gas_flare:"x"}}) to dotted keys
+  // ({"popup.gas_flare":"x"}), skipping the _meta block.
+  function flattenLocale(obj, prefix, out){
+    out = out || {}; prefix = prefix || '';
+    for (var k in obj){
+      if (!Object.prototype.hasOwnProperty.call(obj, k)) continue;
+      if (k === '_meta') continue;
+      var val = obj[k];
+      var key = prefix ? prefix + '.' + k : k;
+      if (val && typeof val === 'object' && !Array.isArray(val)) flattenLocale(val, key, out);
+      else out[key] = val;
+    }
+    return out;
+  }
+
+  // Fetch the live Kurdish locale (maintained in Weblate → locales/ckb.json) and
+  // merge it over the embedded fallback, so translations update without rebuilding
+  // the embedded table. If the fetch fails, the embedded CKB_FLAT still covers us.
+  function loadLiveCKB(){
+    try {
+      fetch('locales/ckb.json', { cache: 'no-cache' })
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(j){
+          if (!j) return;
+          var live = flattenLocale(j);
+          for (var k in live){ if (live[k]) CKB_FLAT[k] = live[k]; }
+          window.CKB_FLAT = CKB_FLAT;
+          run();                                   // re-translate the DOM
+          // Re-translate any popup already open so its labels refresh
+          document.querySelectorAll('.leaflet-popup-content').forEach(function(el){ translate(el); });
+        })
+        .catch(function(){ /* keep embedded fallback */ });
+    } catch(e){ /* keep embedded fallback */ }
+  }
+
+  window.addEventListener('load', function(){ setTimeout(run, 600); setTimeout(loadLiveCKB, 700); });
   // Re-translate dynamically added panels/popups/tour
   setTimeout(function(){
     try {
