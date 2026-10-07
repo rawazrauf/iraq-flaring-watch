@@ -1,34 +1,45 @@
 # Iraq Flaring Watch
-> An open-source interactive map tracking gas flaring across Iraq, combining satellite detections, economic waste analysis, and community exposure data.
+
+> An open-source, interactive map tracking gas flaring across Iraq — showing active flare sites, satellite-verified emission plumes, and the economic value wasted, based on World Bank GGFR 2025 data.
 
 ## What this site does
-This tool maps active gas flare sites across Iraq using OpenStreetMap data, verified emission plumes from Carbon Mapper's Tanager satellite, and annual gas volume estimates from the World Bank GGFR 2024 dataset. Each facility shows estimated USD value of wasted gas and Iraqi homes that could have been powered.
+
+Iraq Flaring Watch visualizes where natural gas is burned off ("flared") during oil extraction in Iraq. For each site it shows the estimated dollar value of the wasted gas and how much electricity that gas could have generated — making the scale of the waste tangible for the public, journalists, and policymakers. The map is available in English and Sorani Kurdish (RTL).
 
 ## Data sources
-- Flare locations: OpenStreetMap contributors (ODbL license)
-- Emission plumes: Carbon Mapper / Tanager satellite (CH4 and CO2, kg/hr)
-- Gas volumes: World Bank Global Gas Flaring Reduction Partnership (GGFR) 2024
-- Population exposure: WorldPop Project 2020 UN-adjusted raster
-- Satellite imagery: Esri, NASA GIBS
+
+- [Flare locations](https://www.openstreetmap.org) — mapped from OpenStreetMap (ODbL).
+- [Emission plumes](https://carbonmapper.org) — methane (CH₄) and CO₂ plumes from Carbon Mapper's Tanager satellite program.
+- [Gas volume estimates](https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data) — World Bank GGFR Global Gas Flaring Tracker, 2025 data.
+- [Population exposure](https://www.worldpop.org) — WorldPop (UN-adjusted), used to estimate people living within 5 km of a flare.
+- [Live fire detections](https://firms.modaps.eosdis.nasa.gov) — NASA FIRMS / VIIRS, past 3 days.
+- Satellite imagery — Esri World Imagery and NASA GIBS.
 
 ## Economic methodology
-Wasted gas value estimated at $3.50/MMBtu. Conversion: vol_mm3 × 35,315 × $3.50 / 1,000,000 = USD millions. Electricity equivalent assumes 35% plant efficiency and 4,500 kWh/household/year (Iraqi average).
 
-## Key facts (2024)
-- Iraq national flaring total: ~18,182 million m³/year
-- Largest single site: West Qurna 2 (LUKOIL), 1,642 M m³/yr, ~$202M/yr
-- Total mapped flare sites: 399+
-- Verified emission plumes: 352 (Carbon Mapper Tanager)
+The wasted-gas value assumes a gas price of $3.50/MMBtu (Iraqi Cabinet Session 49, 2025). The electricity-generation estimate assumes ~35% power-plant efficiency and 5,000 kWh per household per year (IEA 2024 consumption divided by the Iraqi census household count; methodology reviewed by Ahmed Gailani, senior energy modeler at NESO). Population exposure is computed from 5 km buffers around each flare, unioned to avoid double-counting, in UTM Zone 38N.
 
-## Live URL
-https://iraqflaringwatch.com
+## Key facts (2025)
 
-## GitHub
-https://github.com/rawazrauf/iraq-flaring-watch
+- National flaring: approximately 24 billion cubic metres per year (World Bank GGFR 2025).
+- Estimated value of wasted gas: approximately $2.98 billion per year.
+- Electricity generation potential if captured: approximately 4,241 MW.
+- People living within 5 km of a flare: approximately 5.1 million.
+
+## Live site
+
+- Website: [iraqflaringwatch.com](https://iraqflaringwatch.com)
+
+## Source code
+
+- GitHub: [rawazrauf/iraq-flaring-watch](https://github.com/rawazrauf/iraq-flaring-watch)
 
 ## License
-Code: MIT. Map data: ODbL. 
+
+- Code: MIT License.
+- Map data: Open Database License (ODbL), © OpenStreetMap contributors.
 
 ## Contact
-@rawaz on X/Twitter
-@IraqFlaring — project account
+
+- Project: [@IraqFlaring](https://twitter.com/IraqFlaring)
+- Creator: [@rawaz](https://twitter.com/rawaz)
