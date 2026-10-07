@@ -387,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.g</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.h</p>
             </div>
         
         </aside>
@@ -411,7 +411,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.g
+           Build: 2026.10.07.h
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -1852,13 +1852,18 @@
                     // in ckb.json). Styled data values are substituted into the {placeholder}
                     // tokens, so the stored strings stay pure translatable prose.
                     function buildWastedPopup(){
+                        // Each substituted value is a Latin "island" (field name, number, $ value).
+                        // Wrap every one in dir="ltr" + unicode-bidi:isolate so it stays intact and
+                        // positions correctly inside the RTL Kurdish sentence — otherwise adjacent
+                        // Latin islands collide/reorder (e.g. "Jambur" + "10" → "Jambur 10", "~$1.3M" splits).
+                        var iso = 'dir="ltr" style="unicode-bidi:isolate"';
                         var wgNarrative = LBL('popup.wasted_narrative',
                             '{operator} flared {volume} million m³ of gas at {field} in 2025. Capturing this could have generated an estimated {value} USD in value — enough electricity to power {homes} Iraqi homes for a year.')
-                            .replace('{operator}', `<b>${wgOperator}</b>`)
-                            .replace('{volume}', `<b>${wgVolStr}</b>`)
-                            .replace('{field}', `<b>${wgField}</b>`)
-                            .replace('{value}', `<span class="text-red-400 font-bold">${valueStr}</span>`)
-                            .replace('{homes}', `<span class="text-amber-400 font-bold">${homesStr}</span>`);
+                            .replace('{operator}', `<b ${iso}>${wgOperator}</b>`)
+                            .replace('{volume}', `<b ${iso}>${wgVolStr}</b>`)
+                            .replace('{field}', `<b ${iso}>${wgField}</b>`)
+                            .replace('{value}', `<span class="text-red-400 font-bold" ${iso}>${valueStr}</span>`)
+                            .replace('{homes}', `<span class="text-amber-400 font-bold" ${iso}>${homesStr}</span>`);
                         var wgFootnote = LBL('popup.wasted_footnote',
                             'Est. at ${price}/MMBtu. Electricity based on ~35% plant efficiency, 5,000 kWh/household/yr. (IEA 2024 × Iraq census).')
                             // Accept both "${price}" (en.json) and "{price}" (if a translator dropped the $)
@@ -2167,11 +2172,12 @@ html[dir="rtl"] .leaflet-popup-content .flex.items-center > span {
 html[dir="rtl"] .leaflet-popup-content .flex.justify-between > span:last-child {
   direction: ltr; text-align: left; unicode-bidi: isolate;
 }
-/* English prose blocks (Wasted Gas narrative + methodology footnote) have no
-   Kurdish key yet, so render them LTR/left so sentence periods sit correctly. */
+/* Wasted Gas narrative + methodology footnote are now Kurdish (RTL). Latin
+   islands inside them (field name, numbers, $ values) are individually isolated
+   at substitution time, so the paragraph itself reads right-to-left. */
 html[dir="rtl"] .leaflet-popup-content p.leading-relaxed,
 html[dir="rtl"] .leaflet-popup-content p.italic {
-  direction: ltr; text-align: left; unicode-bidi: isolate;
+  direction: rtl; text-align: right; unicode-bidi: isolate;
 }
 </style>
 
