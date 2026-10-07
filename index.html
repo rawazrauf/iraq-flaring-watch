@@ -387,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.b</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.c</p>
             </div>
         
         </aside>
@@ -411,7 +411,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.b
+           Build: 2026.10.07.c
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -1842,20 +1842,16 @@
                         opacity: 1 
                     });
         
-                    var wgOperator = f.operator || (CKB_MODE ? 'نەزانراو' : 'Unknown');
-                    var wgField = f.field || (CKB_MODE ? 'نەزانراو' : 'Unknown');
+                    var wgOperator = f.operator || 'Unknown';
+                    var wgField = f.field || 'Unknown';
                     var wgVolStr = Math.round(f.vol_mm3).toLocaleString();
-                    var wgNarrative = CKB_MODE
-                        ? `<b>${wgOperator}</b> لە ساڵی ٢٠٢٥ لە کێڵگەی <b>${wgField}</b> بڕی <b>${wgVolStr} ملیۆن مەتر سێجا</b> گازی سووتاندووە.
-                           گرتنەوەی ئەم گازە دەیتوانی بەهایەکی خەمڵێنراوی <span class="text-red-400 font-bold">${valueStr} دۆلار</span> بەرهەم بهێنێت —
-                           کارەبایەکی بەس بۆ دابینکردنی <span class="text-amber-400 font-bold">${homesStr} ماڵی عێراقی</span> بۆ ماوەی ساڵێک.`
-                        : `<b>${wgOperator}</b> flared <b>${wgVolStr} million m³</b>
+                    // Narrative + footnote kept in English: no translation key exists for these
+                    // in ckb.json yet, and translations are not invented here.
+                    var wgNarrative = `<b>${wgOperator}</b> flared <b>${wgVolStr} million m³</b>
                            of gas at <b>${wgField}</b> in 2025. Capturing this could have generated an estimated
                            <span class="text-red-400 font-bold">${valueStr} USD</span> in value —
                            enough electricity to power <span class="text-amber-400 font-bold">${homesStr} Iraqi homes</span> for a year.`;
-                    var wgFootnote = CKB_MODE
-                        ? `خەمڵاندن بە $${GAS_PRICE_MMBTU}/MMBtu. کارەبا لەسەر بنەمای ~٣٥٪ کارایی نیرۆگە، ٥٬٠٠٠ کیلۆوات‌کاتژمێر/ماڵ/ساڵ (IEA 2024 × ساڵنامەی عێراق).`
-                        : `Est. at $${GAS_PRICE_MMBTU}/MMBtu. Electricity based on ~35% plant efficiency, 5,000 kWh/household/yr.(IEA 2024 × Iraq census).`;
+                    var wgFootnote = `Est. at $${GAS_PRICE_MMBTU}/MMBtu. Electricity based on ~35% plant efficiency, 5,000 kWh/household/yr.(IEA 2024 × Iraq census).`;
                     circle.bindPopup(`
                         <div class="p-1 space-y-2 text-xs" dir="${CKB_MODE ? 'rtl' : 'ltr'}" style="min-width:220px">
                             <div class="flex items-center justify-between border-b border-gray-700 pb-2">
@@ -1972,6 +1968,10 @@
   document.documentElement.setAttribute('lang','ckb');
 
   var CKB_FLAT = {"nav.about": "دەربارەی پڕۆژە", "nav.share": "Share Map", "nav.follow": "فۆڵۆمان بکە", "sidebar.oil_fields": "کێڵگە نەوتییەکان", "sidebar.fields": "کێڵگەکان", "sidebar.gas_value_wasted": "بەهای گازی بەفیڕۆچوو", "sidebar.est_2025": "مەزەندەی ٢٠٢٥", "sidebar.annual_flaring_volume": "قەبارەی ساڵانەی گازی سووتێندراو", "sidebar.bcm_yr": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "sidebar.electricity_potential": "توانای بەرهەمهێنانی کارەبا", "sidebar.mw_if_captured": "مێگاوات ئەگەر بەکاربێت", "sidebar.people_within_5km": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "sidebar.iraqis": "عێراقی", "sidebar.focal_oilfield": "هەڵبژاردنی کێڵگەی نەوتی", "sidebar.all_fields": "هەموو کێلگەکانی عێراق", "sidebar.inspect_random": "پشکنینی مەشخەڵی هەڕەمەکی", "sidebar.data_engine": "سەرچاوەی بزوێنەری داتا", "sidebar.preloaded": "زانیاری پێشوەختە", "sidebar.live_osm": "ڕاستەوخۆ لە OSM", "sidebar.distance_analyzer": "شیکارکەری مەودا", "sidebar.ruler": "ڕاستە", "sidebar.distance_desc": "هەڵسەنگاندنی کاریگەرییەکان بە هەژمارکردنی مەودای دووری نێوان هەر جۆرە مەشخەڵێک و دانیشتووان.", "sidebar.measure_btn": "نزیکیی مەشخەڵ بپێوە", "sidebar.regional_zoom": "تەماشاکردن بە پێی ناوچە", "sidebar.basra": "بەسرە", "sidebar.maysan": "میسان", "sidebar.kirkuk": "کەرکوک", "sidebar.citizen_mapping": "هاوکاری نەخشەسازی ببە", "sidebar.citizen_desc": "ئەگەر مەشخەڵێکی گاز نابینی، تکایە هاوکارمان ببە بە دانانی لە OpenStreetMap بە بەکارهێنانی ئەم تاگە ستاندەردە.", "sidebar.national_stats": "ئامارەکانی عێراق", "sidebar.mapped_flares": "مەشخەڵە نەخشەکراوەکان", "sidebar.active": "چالاک", "legend.title": "ڕێبەری نەخشە", "legend.active_flare": "مەشخەڵی چالاک لە (OSM)", "legend.emission_plume": "پەڵەی دەردانی پشتڕاستکراوە", "legend.wasted_gas": "قەبارەی گازی بەفیڕۆ دراو", "legend.heatmap": "نەخشەی چڕی مەشخەڵ", "legend.low": "کەم", "legend.high": "زۆر", "legend.fire_detection": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "layers.title": "چینەکان پیشان بدە", "layers.flare_locations": "شوێنی مەشخەڵە چالاکەکان", "layers.density_map": "نەخشەی چڕی مەشخەڵەکان", "layers.impact_zone": "ناوچەی کاریگەری (٥ کم)", "layers.emission_plumes": "پەڵەی دەردانی دۆزراوە", "layers.wasted_gas": "گازی بەفێڕۆدراو (٢٠٢٥)", "layers.flare_locations_desc": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "layers.density_map_desc": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "layers.impact_zone_desc": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "layers.emission_plumes_desc": "کنینی مانگی دەستکرد بۆ لێچوونی میثان و CO2 (کگم/کاتژمێر)", "layers.wasted_gas_desc": "بەهای دۆلاری سووتێنراو بۆ هەر دامەزراوەیەک (زانیاری بانکی جیهانی", "layers.fire_detections": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "layers.fire_detections_desc": "خاڵە گەرمەکانی VIIRS، ٣ ڕۆژی ڕابردوو", "background.title": "پاشخانەکان", "background.satellite": "پاشخانی سەتەلایت", "background.archive": "پاشخانی سەتەلایتی ئەرشیف", "background.night": "پاشخانی ڕووناکی شەوان", "background.dark": "پاشخانی تاریک", "background.streets": "پاشخانی OpenStreetMap", "about.title": "چاودێری مەشخەڵەکانی عێراق", "about.desc": "سووتانی گاز لە ڕێی مەشخەڵەکانی گازەوە ئەو گازە پرۆسەی سووتانی گازە کە لە ئەنجامی پرۆسەی دەرهێنانی نەوتەوە دەردەهێنرێت؛ ئەم سووتانی گازە زیان بە دانیشتوانی ناوچەکە دەگەیەنێت و زیانی ئابووری چەندین ملیار دۆلار دەدات ساڵانە لە سوود وەرنەگرتن لە بەکارهێنانی ئەو گازە.", "about.flare_sites": "شوێنی مەشخەڵی گازەکان و خەمڵاندنی ژمارەی دانیشتوانی نزیکی ٥ کم", "about.economic_waste": "بەفیڕۆدانی ئابووری - بەهای بەفیڕۆدراو بە دۆلار و ژمارەی ئەو ماڵانەی دەکرا بەم سەرچاوەیە کارەبای بۆ دابین بکرایە", "about.emission_plumes": "دەردانی گازەکانی میتان و CO₂ بە کیلۆگرام لە کاتژمێرەکەدا", "about.open_source": "سەرچاوەی زانیاری کراوە", "about.take_tour": "ڕابەری بەکارهێنان", "popup.gas_flare": "مەشخەڵی گاز", "popup.assigned_field": "کێلگەی نەوت", "popup.population_5km": "ژمارەی دانیشتووان لە دووری ٥ کم:", "popup.latitude": "Latitude:", "popup.longitude": "Longitude:", "popup.view_google_maps": "لەسەر Google Maps بیبینە", "popup.zoom_in": "زووم بکە", "popup.edit_osm": "لە OSM چاکی بکە", "popup.wasted_gas_title": "گازی بەفیڕۆدراوی ساڵی ٢٠٢٥", "popup.wb_data": "زانیاری World Bank GGFR", "popup.people": "کەس", "popup.source_osm": "سەرچاوە: OpenStreetMap", "popup.co2_plume": "ستوونی دەردانی CO2", "popup.ch4_plume": "ستوونی دەردانی CH4", "popup.emission": "دەردان:", "popup.sector": "کەرت:", "popup.wind": "خێرایی با:", "popup.satellite_detection": "دۆزینەوەی مانگی دەستکرد:", "popup.view_carbon_mapper": "لەسەر Carbon Mapper بیبینە", "popup.source_carbon_mapper": "سەرچاوە: Carbon Mapper", "popup.viirs_title": "دۆزینەوەی ئاگری VIIRS", "popup.viirs_detected": "کات:", "popup.viirs_confidence": "ڕێژەی متمانە:", "popup.viirs_frp": "هێزی تیشکدانی ئاگر:", "popup.viirs_source": "سەرچاوە: NASA FIRMS / VIIRS SNPP", "popup.confidence_high": "بەرز", "popup.confidence_nominal": "ئاسایی", "popup.confidence_low": "نزم", "tour.next": "دواتر", "tour.skip": "تێپەڕاندن", "tour.finish": "تەواو", "tour.welcome_title": "بەخێربێیت بۆ چاودێری مەشخەڵەکانی عێراق", "tour.welcome_text": "ئەم نەخشەیە شوێنی مەشخەڵە گازییەکانی عێراقی تێدایە کە گازی سروشتی لە کاتی دەرهێنانی نەوتدا دەسووتێنرێن و دەبنە هۆکاری زیانی ملیارەها دۆلاری بەفیڕۆ چوو سەڕەڕای زیان گەیاندن بە تەندروستی دانیشتوانی ناوچەکە. با گەشتێکی خێرا بکەین.", "tour.stats_title": "ئامارە نیشتیمانیەکان", "tour.stats_text": "ئەم ژمارە ڕاستەوخۆیانە قەبارەی کێشەکە نیشان دەدەن: بەهای گازی بەفیڕۆچوو، ئەو کارەبایەی کە دەکرا بەرهەم بهێنرایە، و ژمارەی ئەو کەسانەی کە لە نزیکی مەشخەڵێکدا دەژین.", "tour.layers_data_title": "چینەکانی زانیاری", "tour.layers_data_text": "خاڵە پرتەقاڵییەکان مەشخەڵە چالاکەکانن. خاڵە مۆرەکان بەهای گازی بەفیڕۆچوو نیشان دەدەن. خاڵە شینەکان ستوونی دەردانی گازن کە بە مانگی دەستکرد دۆزراونەتەوە.", "tour.controls_title": "گۆڕینی چین و پاشخانەکان", "tour.controls_text": "ئەم کۆنترۆڵانە بەکاربهێنە بۆ کردنەوە و داخستنی چینەکانی زانیاری، و گۆڕین لە نێوان دیمەنی مانگی دەستکرد، شەقام، شەو.", "tour.explore_title": "بگەڕێ و هاوبەشی بکە", "tour.explore_text": "ک لەسەر هەر مەشخەڵێک بکە بۆ بینینی وردەکارییەکان. هەر دیمەنێک بەستەرێکی هاوبەشکردنی هەیە کە بە تەواوی ئەوە دەگرێت کە تۆ تەماشای دەکەیت — گونجاوە بۆ ڕوونکردنەوەی شوێنێکی دیاریکراو.", "guide.button": "ڕابەری بەکارهێنان"};
+  // Expose the translation table so popup label helper LBL() (defined in the main
+  // script) can read Kurdish values. Without this, CKB_FLAT stays trapped in this
+  // IIFE and every popup label falls back to English.
+  window.CKB_FLAT = CKB_FLAT;
   function translateByKey(){
     try {
       var els = document.querySelectorAll('[data-i18n]');
