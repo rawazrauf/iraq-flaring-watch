@@ -387,7 +387,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.d</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.e</p>
             </div>
         
         </aside>
@@ -411,7 +411,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.d
+           Build: 2026.10.07.e
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -1845,13 +1845,19 @@
                     var wgOperator = f.operator || 'Unknown';
                     var wgField = f.field || 'Unknown';
                     var wgVolStr = Math.round(f.vol_mm3).toLocaleString();
-                    // Narrative + footnote kept in English: no translation key exists for these
-                    // in ckb.json yet, and translations are not invented here.
-                    var wgNarrative = `<b>${wgOperator}</b> flared <b>${wgVolStr} million m³</b>
-                           of gas at <b>${wgField}</b> in 2025. Capturing this could have generated an estimated
-                           <span class="text-red-400 font-bold">${valueStr} USD</span> in value —
-                           enough electricity to power <span class="text-amber-400 font-bold">${homesStr} Iraqi homes</span> for a year.`;
-                    var wgFootnote = `Est. at $${GAS_PRICE_MMBTU}/MMBtu. Electricity based on ~35% plant efficiency, 5,000 kWh/household/yr.(IEA 2024 × Iraq census).`;
+                    // Narrative + footnote come from translation keys (English in en.json,
+                    // Kurdish in ckb.json when added). Styled values are substituted into the
+                    // {placeholder} tokens, so the stored strings stay pure translatable prose.
+                    var wgNarrative = LBL('popup.wasted_narrative',
+                        '{operator} flared {volume} million m³ of gas at {field} in 2025. Capturing this could have generated an estimated {value} USD in value — enough electricity to power {homes} Iraqi homes for a year.')
+                        .replace('{operator}', `<b>${wgOperator}</b>`)
+                        .replace('{volume}', `<b>${wgVolStr}</b>`)
+                        .replace('{field}', `<b>${wgField}</b>`)
+                        .replace('{value}', `<span class="text-red-400 font-bold">${valueStr}</span>`)
+                        .replace('{homes}', `<span class="text-amber-400 font-bold">${homesStr}</span>`);
+                    var wgFootnote = LBL('popup.wasted_footnote',
+                        'Est. at ${price}/MMBtu. Electricity based on ~35% plant efficiency, 5,000 kWh/household/yr. (IEA 2024 × Iraq census).')
+                        .replace('${price}', `$${GAS_PRICE_MMBTU}`);
                     circle.bindPopup(`
                         <div class="p-1 space-y-2 text-xs" dir="${CKB_MODE ? 'rtl' : 'ltr'}" style="min-width:220px">
                             <div class="flex items-center justify-between border-b border-gray-700 pb-2">
