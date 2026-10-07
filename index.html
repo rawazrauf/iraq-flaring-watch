@@ -405,7 +405,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.m</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.n</p>
             </div>
         
         </aside>
@@ -429,7 +429,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.m
+           Build: 2026.10.07.n
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -1550,50 +1550,41 @@
         function tryOpenNearestPopup() {
             const zoom = map.getZoom();
             if (zoom < 13) return;
-        
+
             const center = map.getCenter();
             const threshold = 0.01;
-            let found = false;
-        
-            // WB first
-            if (map.hasLayer(wbFlareLayerGroup)) {
-                wbFlareLayerGroup.eachLayer(function(layer) {
-                    if (found || !layer.getLatLng) return;
-                    const latlng = layer.getLatLng();
-                    if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
-                        map.setView(latlng, zoom);
-                        setTimeout(() => layer.openPopup(), 300);
-                        found = true;
-                    }
-                });
-            }
-            if (found) return;
 
-            // Plumes second
-            if (map.hasLayer(plumeLayerGroup)) {
-                plumeLayerGroup.eachLayer(function(layer) {
-                    if (found || !layer.getLatLng) return;
+            // Open the popup WITHOUT moving the map. The view is already at the hash
+            // location, so calling setView here re-centres on the marker and fires
+            // moveend → hash-rewrite, which combined with popup autoPan produced a
+            // pan/zoom feedback loop ("the screen wiggles") that crashes mobile Safari.
+            // We suppress autoPan for this one programmatic open so it opens in place.
+            function openHere(layer) {
+                try {
+                    const p = layer.getPopup && layer.getPopup();
+                    if (p && p.options) { p.options.autoPan = false; }
+                    layer.openPopup();
+                    // restore autoPan after it has opened, so manual taps still pan into view
+                    if (p && p.options) { setTimeout(function(){ p.options.autoPan = true; }, 600); }
+                } catch (e) {}
+            }
+
+            function nearestIn(group) {
+                if (!group || !map.hasLayer(group)) return null;
+                let hit = null;
+                group.eachLayer(function(layer) {
+                    if (hit || !layer.getLatLng) return;
                     const latlng = layer.getLatLng();
+                    if (!latlng || isNaN(latlng.lat) || isNaN(latlng.lng)) return;
                     if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
-                        map.setView(latlng, zoom);
-                        setTimeout(() => layer.openPopup(), 300);
-                        found = true;
+                        hit = layer;
                     }
                 });
+                return hit;
             }
-            if (found) return;
-        
-            // Flares last
-            markerClusterGroup.eachLayer(function(layer) {
-                if (found || !layer.getLatLng) return;
-                const latlng = layer.getLatLng();
-                if (!latlng || isNaN(latlng.lat) || isNaN(latlng.lng)) return;
-                if (Math.abs(latlng.lat - center.lat) < threshold && Math.abs(latlng.lng - center.lng) < threshold) {
-                    map.setView(latlng, zoom);
-                    setTimeout(() => layer.openPopup(), 300);
-                    found = true;
-                }
-            });
+
+            const target = nearestIn(wbFlareLayerGroup) || nearestIn(plumeLayerGroup) || nearestIn(markerClusterGroup);
+            if (target) openHere(target);
         }
 
         const tourSteps = [
