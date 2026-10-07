@@ -405,7 +405,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.l</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.m</p>
             </div>
         
         </aside>
@@ -429,7 +429,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.l
+           Build: 2026.10.07.m
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -2161,7 +2161,17 @@ html[dir="rtl"] #sidebar-drawer { text-align: right; }
 /* --- Mobile drawer slides in from the RIGHT --- */
 html[dir="rtl"] #sidebar-drawer.-translate-x-full { transform: translateX(100%) !important; }
 html[dir="rtl"] #sidebar-drawer.lg\:translate-x-0 { }
-@media (min-width:1024px){ html[dir="rtl"] #sidebar-drawer { transform: none !important; } }
+/* Desktop RTL: dock the drawer in-flow. Must match the SAME .-translate-x-full class with
+   !important so it beats the mobile-hide rule above (equal specificity → later rule wins);
+   a plain #id rule loses to that class rule and leaves the drawer shoved off-screen right. */
+@media (min-width:1024px){
+  html[dir="rtl"] #sidebar-drawer.-translate-x-full,
+  html[dir="rtl"] #sidebar-drawer {
+    transform: none !important;
+    position: relative !important;
+    inset: auto !important;
+  }
+}
 
 /* --- Stat cards: label right, number+unit kept LTR but pinned to the right edge --- */
 html[dir="rtl"] #sidebar-drawer .flex.items-baseline { direction: ltr; justify-content: flex-end; }
