@@ -51,11 +51,21 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow: hidden;
         }
-        /* Belt-and-braces: give the sidebar its dark bg + desktop dock in inline CSS so
-           it's correct at first paint regardless of external-stylesheet timing. */
-        #sidebar-drawer { background-color: #111827; border-color: #1f2937; }
+        /* CRITICAL desktop layout, inlined so it is correct at FIRST PAINT regardless of
+           when the external Tailwind stylesheet finishes parsing. Without this, a slow
+           CDN parse leaves the lg: rules unapplied at desktop width → the page shows the
+           mobile layout (sidebar translated off-screen = white gap, hamburger visible)
+           until a reflow (e.g. opening DevTools) forces a style recalc. These !important
+           rules replicate lg:relative / lg:translate-x-0 / lg:hidden so that never happens. */
+        #sidebar-drawer { background-color: #111827; border-color: #1f2937; width: 18rem; flex-shrink: 0; }
         @media (min-width: 1024px) {
-            #sidebar-drawer { position: relative; transform: none; }
+            #sidebar-drawer {
+                position: relative !important;
+                transform: none !important;
+                inset: auto !important;
+            }
+            #drawer-backdrop { display: none !important; }
+            .lg\:hidden { display: none !important; }
         }
         .map-fill-height {
             height: calc(100vh - 56px);
@@ -395,7 +405,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.k</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.l</p>
             </div>
         
         </aside>
@@ -419,7 +429,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.k
+           Build: 2026.10.07.l
            Last updated: 7 October 2026
            ============================================================ */
         let map;
