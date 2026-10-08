@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Iraq Flaring Watch — Flare Tracker
-     Build: 2026.10.08.a
+     Build: 2026.10.08.b
      A searchable table of every mapped flare, its VIIRS activity status, and the
      World Bank facility-level flaring volume it sits at. WB volumes are shown at
      facility/field level only — never summed across flares (that would 3x the real total). -->
@@ -179,7 +179,7 @@
 <footer>
   Data: OpenStreetMap (flare locations, ODbL) · NASA FIRMS VIIRS S-NPP (activity) · World Bank GGFR 2025 (volume).
   Volumes are facility-level estimates. · <a href="https://github.com/rawazrauf/iraq-flaring-watch">Source &amp; methodology</a>
-  · build 2026.10.08.a
+  · build 2026.10.08.b
 </footer>
 
 <script>
@@ -243,7 +243,7 @@ function drawFlares(){
   document.getElementById('count-flares').textContent=`${rows.length} of ${DATA.flares.length}`;
   const tb=document.querySelector('#tbl-flares tbody');
   tb.innerHTML=rows.map(r=>{
-    const osm=`https://www.openstreetmap.org/node/${r.id}`;
+    const map=`https://iraqflaringwatch.com/#17.00/${r.lat.toFixed(5)}/${r.lon.toFixed(5)}/F,H,P,W/satellite`;
     const wb = r.wb_field
       ? `${r.wb_field}`
       : `<span class="unmatched">no World Bank volume within 3 km</span>`;
@@ -252,7 +252,7 @@ function drawFlares(){
       ? `${fmt(r.cluster_vol_mm3)} <span style="color:var(--dim)">÷ ${r.cluster_flares}</span>`
       : '<span class="unmatched">—</span>';
     return `<tr>
-      <td><a class="idlink mono" href="${osm}" target="_blank" rel="noopener">${r.id}</a></td>
+      <td><a class="idlink mono" href="${map}" target="_blank" rel="noopener" title="Open this flare on the map">${r.id}</a></td>
       <td>${statusCell(r)}</td>
       <td class="mono">${r.last_detection||'—'}</td>
       <td class="num mono">${r.detections?r.detections.toLocaleString():'0'}</td>
