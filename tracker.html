@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Iraq Flaring Watch — Flare Tracker
-     Build: 2026.10.08.b
+     Build: 2026.10.08.c
      A searchable table of every mapped flare, its VIIRS activity status, and the
      World Bank facility-level flaring volume it sits at. WB volumes are shown at
      facility/field level only — never summed across flares (that would 3x the real total). -->
@@ -179,7 +179,7 @@
 <footer>
   Data: OpenStreetMap (flare locations, ODbL) · NASA FIRMS VIIRS S-NPP (activity) · World Bank GGFR 2025 (volume).
   Volumes are facility-level estimates. · <a href="https://github.com/rawazrauf/iraq-flaring-watch">Source &amp; methodology</a>
-  · build 2026.10.08.b
+  · build 2026.10.08.c
 </footer>
 
 <script>
@@ -243,7 +243,12 @@ function drawFlares(){
   document.getElementById('count-flares').textContent=`${rows.length} of ${DATA.flares.length}`;
   const tb=document.querySelector('#tbl-flares tbody');
   tb.innerHTML=rows.map(r=>{
-    const map=`https://iraqflaringwatch.com/#17.00/${r.lat.toFixed(5)}/${r.lon.toFixed(5)}/F,H,P,W/satellite`;
+    // Hard-to-map flares (no WB volume match) land on the cloudless Sentinel-2 background at
+    // its native zoom (15), which is where an unmapped flare is easiest to spot; everything else
+    // opens on the sharper high-res satellite layer.
+    const map = r.match==='none'
+      ? `https://iraqflaringwatch.com/#15.00/${r.lat.toFixed(5)}/${r.lon.toFixed(5)}/F,H,P,W/s2cloudless`
+      : `https://iraqflaringwatch.com/#17.00/${r.lat.toFixed(5)}/${r.lon.toFixed(5)}/F,H,P,W/satellite`;
     const wb = r.wb_field
       ? `${r.wb_field}`
       : `<span class="unmatched">no World Bank volume within 3 km</span>`;
@@ -279,14 +284,16 @@ function drawWbOnly(){
   document.getElementById('count-wbonly').textContent=`${rows.length} of ${DATA.wb_only.length}`;
   const tb=document.querySelector('#tbl-wbonly tbody');
   tb.innerHTML=rows.map(w=>{
-    const gm=`https://www.google.com/maps?q=${w.lat},${w.lon}&t=k&z=15`;
+    // WB-only facilities are unmapped flaring sites — open them on the cloudless Sentinel-2
+    // background at native zoom, the best view for finding and then mapping the flare in OSM.
+    const map=`https://iraqflaringwatch.com/#15.00/${w.lat.toFixed(5)}/${w.lon.toFixed(5)}/F,H,P,W/s2cloudless`;
     return `<tr>
       <td>${w.field||'—'}</td>
       <td>${w.operator||'<span class="unmatched">—</span>'}</td>
       <td class="num mono">${fmt(w.vol_mm3)}</td>
       <td class="num mono">${fmt(w.value_musd)}</td>
       <td class="num mono">${w.nearest_flare_km} km</td>
-      <td><a href="${gm}" target="_blank" rel="noopener" class="mono">${w.lat.toFixed(3)}, ${w.lon.toFixed(3)}</a></td>
+      <td><a href="${map}" target="_blank" rel="noopener" class="mono" title="Open on the Sentinel-2 background to map this site">${w.lat.toFixed(3)}, ${w.lon.toFixed(3)}</a></td>
     </tr>`;
   }).join('');
 }
