@@ -42,6 +42,9 @@
   "legend": {
     "title": "Map Legend",
     "active_flare": "Active Flare (OSM)",
+    "ring_stale": "No satellite sighting in 1–3 months",
+    "ring_dark": "No satellite sighting in 3–12 months",
+    "ring_never": "No satellite sighting in the past year",
     "emission_plume": "Verified Emission Plume",
     "wasted_gas": "Wasted Gas (2025 Est.)",
     "fire_detection": "Live Fire Detection (NASA)",
@@ -129,7 +132,10 @@
     "confidence_nominal": "Nominal",
     "confidence_low": "Low",
     "wasted_narrative": "{operator} flared {volume} million m³ of gas at {field} in 2025. Capturing this could have generated an estimated {value} USD in value — enough electricity to power {homes} Iraqi homes for a year.",
-    "wasted_footnote": "Est. at ${price}/MMBtu. Electricity based on ~35% plant efficiency, 5,000 kWh/household/yr. (IEA 2024 × Iraq census)."
+    "wasted_footnote": "Est. at ${price}/MMBtu. Electricity based on ~35% plant efficiency, 5,000 kWh/household/yr. (IEA 2024 × Iraq census).",
+    "viirs_last_seen": "Last satellite detection:",
+    "viirs_none": "none in last 12 months",
+    "viirs_detections": "Satellite sightings (past year):"
 
   }
 }
