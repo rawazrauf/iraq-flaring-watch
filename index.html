@@ -114,7 +114,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
         }
         .pulsing-flare {
             width: 13px; height: 13px;
@@ -473,7 +472,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.e</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.f</p>
             </div>
         
         </aside>
@@ -497,7 +496,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.08.e
+           Build: 2026.10.08.f
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -1395,11 +1394,14 @@
                 // Flares seen within the last 30 days get no ring (plain orange dot).
                 const vsRing = viirsStatusData[flare.id] || viirsStatusData[String(flare.id)];
                 const ringCls = viirsRingClasses(vsRing);
+                // Keep the SAME 16×16 / [8,8] icon box as the plain marker so the dot sits in the
+                // exact same spot — the ring is an absolutely-centered overlay that overflows the
+                // small box symmetrically, so adding it never shifts the dot off its geo point.
                 const marker = ringCls
                     ? L.marker(coord, { icon: L.divIcon({
                           className: 'custom-flare-container',
                           html: `<div class="viirs-ring ${ringCls}"></div><div class="pulsing-flare"></div>`,
-                          iconSize: [30, 30], iconAnchor: [15, 15]
+                          iconSize: [16, 16], iconAnchor: [8, 8]
                       }) })
                     : L.marker(coord, { icon: flareIcon });
                 marker.flareId = flare.id;
