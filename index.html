@@ -473,7 +473,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.b</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.c</p>
             </div>
         
         </aside>
@@ -497,7 +497,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.08.b
+           Build: 2026.10.08.c
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -1407,7 +1407,7 @@
                     // Detections count (how many times VIIRS saw it burning in the window).
                     var detLine = (vs.detections && vs.detections > 0)
                         ? `<div class="flex justify-between" style="gap:10px">
-                                <span class="text-gray-500">${LBL('popup.viirs_detections','VIIRS detections (12 mo):')}</span>
+                                <span class="text-gray-500">${LBL('popup.viirs_detections','Satellite sightings (past year):')}</span>
                                 <span dir="ltr" style="unicode-bidi:isolate; white-space:nowrap" class="text-gray-300 font-bold">${vs.detections.toLocaleString()}</span>
                             </div>`
                         : '';
