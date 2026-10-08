@@ -156,6 +156,19 @@
         }
         .leaflet-popup-tip { background: #1f2937 !important; }
         .leaflet-bar { border: none !important; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3) !important; }
+        /* Attribution: cap width, wrap, shrink, and leave room so it can't slide under the
+           zoom/locate controls (which sit at the bottom-right). */
+        .leaflet-control-attribution {
+            font-size: 9px !important;
+            line-height: 1.3 !important;
+            max-width: calc(100vw - 110px);
+            white-space: normal !important;
+            background: rgba(255,255,255,0.75) !important;
+            padding: 1px 6px !important;
+        }
+        @media (max-width: 640px) {
+            .leaflet-control-attribution { max-width: calc(100vw - 72px); font-size: 8px !important; }
+        }
         .leaflet-bar a { background-color: #1f2937 !important; color: #f3f4f6 !important; border-bottom: 1px solid #374151 !important; }
         .leaflet-bar a:hover { background-color: #374151 !important; color: #fff !important; }
         /* Guide (?) control: a plain bold question mark sized like the zoom/locate buttons. */
@@ -472,7 +485,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.h</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.i</p>
             </div>
         
         </aside>
@@ -496,7 +509,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.08.h
+           Build: 2026.10.08.i
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -853,7 +866,7 @@
             const eoxYear = '2025', eoxFallbackYear = '2024';
             baseLayers.s2cloudless = L.tileLayer(
                 'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-' + eoxYear + '_3857/default/g/{z}/{y}/{x}.jpg', {
-                attribution: 'Sentinel-2 cloudless ' + eoxYear + ' <a href="https://s2maps.eu">s2maps.eu</a> by EOX IT Services GmbH (Contains modified Copernicus Sentinel data)',
+                attribution: 'Sentinel-2 cloudless ' + eoxYear + ' © <a href="https://s2maps.eu">EOX</a> (modified Copernicus data)',
                 maxNativeZoom: 15, maxZoom: 19
             });
             // Per-tile fallback: swap a failed 2025 tile URL to the 2024 layer once.
