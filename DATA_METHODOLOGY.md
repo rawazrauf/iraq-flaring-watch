@@ -227,17 +227,17 @@ Circle radius is scaled logarithmically by emission rate: `Math.max(6, Math.min(
 ## 4. Gas Volume & Economic Waste (`iraq_wb_flares_all_years.json`)
 
 **Source:** World Bank Global Gas Flaring Reduction Partnership (GGFR)  
-**Dataset:** 2012–2024 Flare Volume Estimates by Individual Flare Location  
+**Dataset:** 2012–2025 Flare Volume Estimates by Individual Flare Location  
 **URL:** https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data  
 
 ### How it was generated
 
-Filtered from the World Bank Excel file to Iraq only, all years, then restructured as a year-keyed JSON:
+Filtered from the World Bank Excel file to Iraq only, all years, then restructured as a year-keyed JSON. The map displays the most recent year (**2025**); earlier years are retained in the file for historical comparison.
 
 ```python
 import pandas as pd, json
 
-df = pd.read_excel('2012-2024-Flare-Volume-Estimates-by-individual-Flare-Location.xlsx')
+df = pd.read_excel('Flare-Volume-Estimates-by-individual-Flare-Location-2012-2025.xlsx')
 iraq = df[df['Country'] == 'Iraq'].copy()
 
 output = {}
@@ -264,7 +264,7 @@ with open('iraq_wb_flares_all_years.json', 'w') as f:
     json.dump(output, f)
 ```
 
-**Total records:** 2,404 (Iraq only, 2012–2024, including zero-volume entries)
+**Total records:** 4,144 across all years (Iraq only, 2012–2025, including zero-volume entries). The displayed 2025 year holds 296 records.
 
 ### Economic value calculation
 
@@ -285,19 +285,16 @@ https://pmo.iq/?article=3907
 
 This rate is also consistent with the World Bank GGFR methodology for associated gas valuation in producing countries without LNG export infrastructure. S&P Global Commodity Insights (July 2025) separately estimates Iraq's flared gas capture cost at ~$2/MMBtu against import prices of ~$8/MMBtu, placing the $3.50/MMBtu figure within a well-supported range.
 
-**Unit explanation:**
-- `vol_mm3` is in millions of cubic metres per year
-- 1 million m³ = 35,315 MMBtu
-- Dividing by 1,000,000 converts USD to USD millions
-
 ### Electricity equivalent calculation
 
 ```
+mwPotential     = (vol_mm3 × 4,400 × 0.35) / 8,760
 homesEquivalent = (vol_mm3 × 4,400 × 1,000) / 5,000
 ```
 
 **Assumptions:**
 - Gas-to-electricity conversion: ~4,400 kWh per thousand m³ at 35% plant efficiency
+- Continuous generation basis: 8,760 hours/year (for the MW capacity figure)
 - Iraqi household annual consumption: 5,000 kWh/year
 - Derived from IEA Iraq electricity data (1.377 MWh/capita) × 2024 census 
   (46.12M population ÷ 8.05M households = 5.73 persons/household), 
@@ -308,7 +305,7 @@ homesEquivalent = (vol_mm3 × 4,400 × 1,000) / 5,000
 
 ### Display filter
 
-Sites with estimated value loss below $1M/year are excluded from the map to reduce clutter. This threshold corresponds to approximately 8,100 M m³/year equivalent.
+Sites with estimated value loss below $1M/year are excluded from the map to reduce clutter. This threshold corresponds to approximately 8.1 M m³/year equivalent (1,000,000 ÷ 35,315 ÷ 3.50).
 
 ### Bubble sizing
 
@@ -316,19 +313,23 @@ Sites with estimated value loss below $1M/year are excluded from the map to redu
 radius = Math.max(6, Math.min(45, Math.pow(vol_mm3, 0.4) × 1.5))
 ```
 
-Power scaling (`^0.4`) provides readable differentiation across the full range from ~2 M m³ to 1,642 M m³.
+Power scaling (`^0.4`) provides readable differentiation across the full range from ~2 M m³ to ~2,755 M m³.
 
 ---
 
-## Key national figures (Iraq, 2024)
+## Key national figures (Iraq, 2025)
+
+Computed from the displayed 2025 World Bank slice using the formulas above.
 
 | Metric | Value |
 |---|---|
-| National flaring total | ~18,182 M m³/yr |
-| Largest single site | West Qurna 2 (LUKOIL), 1,642 M m³/yr |
-| Estimated value — West Qurna 2 | ~$202M/yr |
-| Iraqi homes — West Qurna 2 equivalent | ~1.6 million |
-| Total WB records displayed (≥$1M) | ~170 sites |
+| National flaring total | ~24,122 M m³/yr (~24.1 BCM) |
+| Estimated value of wasted gas | ~$2.98 billion/yr |
+| Electricity generation potential | ~4,241 MW |
+| People within 5 km of a flare | ~5.2 million |
+| Largest single site | West Qurna 2 – Yamama (LUKOIL), ~2,755 M m³/yr |
+| Estimated value — West Qurna 2 | ~$341M/yr |
+| Total WB records displayed (≥$1M) | ~136 sites |
 ---
 
 ## 5. Population Impact (`iraq_flaring_impact.json`)
@@ -355,13 +356,126 @@ Each flare is buffered by 5km in UTM Zone 38N (EPSG:32638) for accurate metric d
 6. Commit it to the repo root
 7. The website reads this file on load and updates the stat automatically
 
-### Key result (June 2026)
+### Key result (October 2026)
 
 | Metric | Value |
 |---|---|
-| Flares analysed | 417 |
-| Impacted population | 5,148,508 |
+| Flares analysed | 437 |
+| Impacted population | 5,181,870 |
 | As % of Iraq population | 11.2% |
 | Buffer radius | 5km |
 | Raster resolution | ~100m per pixel |
 | Iraq population reference | 2024 Census (46,118,793) |
+
+---
+
+## 6. Flare Activity Status — VIIRS Last Detection (`flare_viirs_status.json`)
+
+**Source:** NASA FIRMS — VIIRS S-NPP thermal anomaly / active fire detections  
+**API:** https://firms.modaps.eosdis.nasa.gov/api/area/ (Area API, CSV)  
+**Products:** `VIIRS_SNPP_SP` (science-quality) + `VIIRS_SNPP_NRT` (near-real-time)  
+**Window:** Trailing 365 days  
+**Match radius:** 500 m  
+
+### What it reports
+
+For every mapped flare, this dataset records **the date it was last detected burning by satellite** and **how many times it was detected** over the past 12 months. It deliberately applies **no "active" / "inactive" label** — it reports only the verifiable fact. A flare with no detection in the window may be genuinely shut in (several Iraqi fields have been idled amid regional disruption), burning below VIIRS's detection threshold, or slightly mislocated in OpenStreetMap. Leaving the interpretation to the reader keeps the claim defensible.
+
+### How it was generated
+
+A VIIRS thermal detection is attributed to a flare when it falls within **500 m** of the mapped point, measured as great-circle (haversine) distance. 500 m was chosen after inspecting multiple Iraqi flares against VIIRS detections; a 1 km radius proved too wide and pulled in neighbouring stacks, while 500 m cleanly isolates individual flares.
+
+The dataset is rebuilt **quarterly** via a Google Colab notebook that calls the FIRMS Area API directly (no manual download/upload). Because the Area API returns at most 5 days per request, the notebook steps through the 365-day window in 5-day chunks:
+
+- **`VIIRS_SNPP_SP`** (science-quality) is pulled across the full window — the correct product for historical/archival analysis.
+- **`VIIRS_SNPP_NRT`** tops up the most recent ~60 days, since SP processing lags by a month or two. Without this, the tail of the window would falsely show recently-active flares as "gone dark."
+- The two products are merged and de-duplicated on `(lat, lon, acq_date)`.
+
+Detections are binned into a ~0.01° spatial grid so each flare only compares against detections in its own and neighbouring cells, keeping the match fast across ~150,000 detections. For each flare the notebook records the most recent detection date and the total detection count in the window, then writes `flare_viirs_status.json` to the repo root.
+
+```python
+# Core match (simplified)
+MATCH_RADIUS_M = 500
+WINDOW_DAYS    = 365
+
+def haversine_m(lat1, lon1, lat2, lon2):
+    R = 6371000.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dphi   = math.radians(lat2 - lat1)
+    dlmb   = math.radians(lon2 - lon1)
+    a = math.sin(dphi/2)**2 + math.cos(p1)*math.cos(p2)*math.sin(dlmb/2)**2
+    return 2 * R * math.asin(math.sqrt(a))
+
+for f in flares:
+    last_date, count = None, 0
+    for (lat, lon, d) in nearby_detections(f):           # grid-limited candidates
+        if haversine_m(f['lat'], f['lon'], lat, lon) <= MATCH_RADIUS_M:
+            count += 1
+            if last_date is None or d > last_date:
+                last_date = d
+    status[str(f['id'])] = {
+        'last_detection': last_date.isoformat() if last_date else None,
+        'detections': count
+    }
+```
+
+The flare list is read live from the repo's `query` file, so flare IDs always match the website exactly.
+
+### Output structure
+
+```json
+{
+  "_meta": {
+    "generated": "2026-10-08",
+    "window_days": 365,
+    "match_radius_m": 500,
+    "source": "NASA FIRMS VIIRS S-NPP (SP + NRT topup)",
+    "bbox": "38.7,29.0,48.6,37.4",
+    "flares": 437,
+    "detections_in_window": 148485
+  },
+  "flares": {
+    "13302378269": { "last_detection": "2026-10-07", "detections": 1207 },
+    "13915525284": { "last_detection": null,         "detections": 0 }
+  }
+}
+```
+
+| Field | Description |
+|---|---|
+| `last_detection` | ISO date of the most recent VIIRS detection within 500 m, or `null` if none in the window |
+| `detections` | Number of VIIRS detections attributed to the flare in the 365-day window |
+
+### Visualisation
+
+In each flare popup the map shows **"Last satellite detection"** (the date, or "none in last 12 months") and **"Satellite sightings (past year)"** (the detection count). On the map itself, flares **not** seen within the last 30 days carry a coloured ring around the orange dot — the dot colour is never changed, only a halo is added:
+
+| Ring | Meaning (time since last detection) |
+|---|---|
+| Amber solid | 1–3 months |
+| Red solid | 3–12 months |
+| Grey dashed | No detection in the past 12 months |
+
+Ring **thickness** is scaled to detection frequency (thin for sparse, thick for constant burners), so a flare that burned heavily then stopped reads as a bold ring — the signature of a shut-in rather than a marginal site.
+
+### Updating
+
+1. Open the VIIRS matcher notebook in Google Colab
+2. Provide your FIRMS `MAP_KEY` (stored as a Colab Secret `FIRMS_MAP_KEY` after the first run)
+3. Run all cells — the notebook pulls SP + NRT directly from the FIRMS API and performs the 500 m match
+4. Download the generated `flare_viirs_status.json`
+5. Commit it to the repo root
+6. The website reads this file on load and populates the popup line and status rings automatically
+
+### Key result (October 2026)
+
+| Metric | Value |
+|---|---|
+| Flares analysed | 437 |
+| Detections in window | 148,485 |
+| Seen within last 30 days | 372 |
+| Last seen > 90 days ago | 22 |
+| No detection in 12 months | 34 |
+| Match radius | 500 m |
+| Window | 365 days |
+| Source | NASA FIRMS VIIRS S-NPP (SP + NRT top-up) |
