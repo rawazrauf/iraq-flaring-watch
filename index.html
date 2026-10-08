@@ -472,7 +472,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.f</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.g</p>
             </div>
         
         </aside>
@@ -496,7 +496,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.08.f
+           Build: 2026.10.08.g
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -830,10 +830,18 @@
                 attribution: 'Imagery provided by NASA GIBS',
                 maxNativeZoom: 8, maxZoom: 19
             });
-            baseLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-                maxNativeZoom: 19, maxZoom: 19
-            });
+            // Esri World Dark Gray Canvas — keyless dark basemap (CARTO's free no-key dark tiles
+            // were retired and now return an "API KEY REQUIRED" placeholder). Base + reference
+            // (labels) are two separate Esri services, combined into one layer group.
+            baseLayers.dark = L.layerGroup([
+                L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: 'Tiles © Esri — Esri, DeLorme, HERE, MapmyIndia',
+                    maxNativeZoom: 16, maxZoom: 19
+                }),
+                L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+                    maxNativeZoom: 16, maxZoom: 19
+                })
+            ]);
             baseLayers.streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxNativeZoom: 19, maxZoom: 19
