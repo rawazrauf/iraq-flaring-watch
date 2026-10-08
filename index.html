@@ -452,7 +452,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.07.v</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.a</p>
             </div>
         
         </aside>
@@ -476,7 +476,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.07.v
+           Build: 2026.10.08.a
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -490,6 +490,7 @@
         let safeRadiusGroup;
         let iraqBoundaryLayer;
         let staticPopData = {};
+        let viirsStatusData = {};  // per-flare "last VIIRS detection" data (flare_viirs_status.json)
         let nextRandomFlareTarget = null;
         let plumeLayerGroup = L.layerGroup();
         let viirsFireLayer;
@@ -526,11 +527,13 @@
 
             // Kick off all independent fetches in parallel (don't block one on another).
             const popDataPromise = fetchStaticPopData();   // needed before flares render
+            const viirsStatusPromise = fetchViirsStatus();  // needed before flares render (popup line)
             fetchImpactData();                             // independent — updates a stat
             loadWBFlareData();                             // independent — own data + stats
 
-            // Flares need the population data ready for their popups, so wait for just that.
+            // Flares need the population + VIIRS-status data ready for their popups, so wait for those.
             await popDataPromise;
+            await viirsStatusPromise;
             await loadStaticQueryFile();
 
             try {
@@ -546,6 +549,21 @@
                 if (response.ok) staticPopData = await response.json();
             } catch (error) {
                 console.warn("Static population dataset missing or failed to load.");
+            }
+        }
+
+        // Per-flare "last VIIRS detection" data, generated quarterly by the Colab notebook
+        // (flare_viirs_status.json). Keyed by OSM flare id -> { last_detection, detections }.
+        // Harmless if the file is missing — the popup line simply won't appear.
+        async function fetchViirsStatus() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/flare_viirs_status.json');
+                if (response.ok) {
+                    const j = await response.json();
+                    viirsStatusData = (j && j.flares) ? j.flares : (j || {});
+                }
+            } catch (error) {
+                console.warn("VIIRS status dataset missing or failed to load.");
             }
         }
 
@@ -1314,6 +1332,20 @@
                 popDisplay = `<span class="text-gray-500 italic">No static raster match</span>`;
             }
 
+                // "Last satellite detection" — the date VIIRS last saw this flare burning (if known).
+                // Purely factual: it reports what the data shows, not an active/inactive judgement.
+                var vs = viirsStatusData[flare.id] || viirsStatusData[String(flare.id)];
+                var viirsLine = '';
+                if (vs) {
+                    var val = vs.last_detection
+                        ? `<span dir="ltr" style="unicode-bidi:isolate" class="text-gray-300 font-bold">${vs.last_detection}</span>`
+                        : `<span class="text-gray-500">${LBL('popup.viirs_none','none in last 12 months')}</span>`;
+                    viirsLine = `
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">${LBL('popup.viirs_last_seen','Last satellite detection:')}</span>
+                                ${val}
+                            </div>`;
+                }
                 const popupContent = `
                     <div class="p-1 space-y-3 max-w-xs text-xs" dir="${CKB_MODE ? 'rtl' : 'ltr'}">
                         <div class="flex items-center justify-between border-b border-gray-700 pb-2">
@@ -1336,7 +1368,7 @@
                             <div class="flex justify-between">
                                 <span class="text-gray-500">${LBL('popup.longitude','Longitude:')}</span>
                                 <span class="text-gray-300 font-bold">${flare.lon.toFixed(6)}</span>
-                            </div>
+                            </div>${viirsLine}
                         </div>
                         <div class="bg-blue-900/20 p-2 rounded border border-blue-500/30 text-[10px] text-blue-400 leading-tight">
                             <a href="https://www.google.com/maps?q=${flare.lat},${flare.lon}&t=k&z=19" class="font-bold flex items-center justify-between hover:underline">
