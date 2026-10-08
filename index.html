@@ -473,7 +473,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.d</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.e</p>
             </div>
         
         </aside>
@@ -497,7 +497,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.08.d
+           Build: 2026.10.08.e
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -943,13 +943,18 @@
             loadPlumeData();
         
             const legendControl = L.control({ position: 'bottomleft' });
-        
-            legendControl.onAdd = function() {
-                const div = L.DomUtil.create('div');
-                div.innerHTML = `
-                    <div id="legend-box" style="display:block; background:rgba(17,24,39,0.92); border:1px solid #374151; border-radius:10px; padding:14px 16px; margin-bottom:8px; min-width:180px;">
-                        <div style="font-size:10px; font-weight:600; color:#f9fafb; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Map Legend</div>
-                        <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;">
+
+            // Build the legend HTML. Pulled out so it can be re-rendered after loadLiveCKB()
+            // fetches the Weblate strings (the legend is JS-generated, so a one-time build at
+            // init would freeze the English fallbacks before live translations arrive).
+            function legendHTML() {
+                // Preserve the box's open/closed state across a re-render.
+                var existing = document.getElementById('legend-box');
+                var boxDisplay = existing ? existing.style.display : 'block';
+                return `
+                    <div id="legend-box" style="display:${boxDisplay}; background:rgba(17,24,39,0.92); border:1px solid #374151; border-radius:10px; padding:14px 16px; margin-bottom:8px; min-width:180px;">
+                        <div style="font-size:10px; font-weight:600; color:#f9fafb; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">${LBL('legend.title','Map Legend')}</div>
+                        <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;" dir="${CKB_MODE ? 'rtl' : 'ltr'}">
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span style="width:12px; height:12px; border-radius:50%; background:#f59e0b; border:2px solid #ef4444; flex-shrink:0; display:inline-block;"></span>
                                 <span>${LBL('legend.active_flare','Active Flare (OSM)')}</span>
@@ -972,18 +977,18 @@
                             </div>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span style="width:12px; height:12px; border-radius:50%; background:#a855f7; border:2px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
-                                <span>Wasted Gas (2025 Est.)</span>
+                                <span>${LBL('legend.wasted_gas','Wasted Gas (2025 Est.)')}</span>
                             </div>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span style="width:10px; height:10px; border-radius:50%; background:#ff1a1a; border:1.5px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
-                                <span>Live Fire Detection (NASA)</span>
+                                <span>${LBL('legend.fire_detection','Live Fire Detection (NASA)')}</span>
                             </div>
                             <div style="display:flex; flex-direction:column; gap:4px;">
-                                <span>Flare Density Heatmap</span>
+                                <span>${LBL('legend.heatmap','Flare Density Heatmap')}</span>
                                 <div style="display:flex; align-items:center; gap:6px;">
-                                    <span style="font-size:9px; color:#6b7280;">Low</span>
+                                    <span style="font-size:9px; color:#6b7280;">${LBL('legend.low','Low')}</span>
                                     <span style="flex:1; height:6px; border-radius:3px; background:linear-gradient(to right, #280b54, #932667, #dd513a, #fca50a, #fcffa4); display:inline-block;"></span>
-                                    <span style="font-size:9px; color:#6b7280;">High</span>
+                                    <span style="font-size:9px; color:#6b7280;">${LBL('legend.high','High')}</span>
                                 </div>
                             </div>
                         </div>
@@ -991,14 +996,26 @@
                     <button onclick="const b=document.getElementById('legend-box'); b.style.display=b.style.display==='none'?'block':'none';"
                             style="background:rgba(17,24,39,0.92); border:1px solid #374151; color:#d1d5db; font-size:10px; font-weight:600; padding:6px 12px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px;">
                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
-                        Legend
+                        ${LBL('legend.title','Legend')}
                     </button>
                 `;
+            }
+
+            legendControl.onAdd = function() {
+                const div = L.DomUtil.create('div');
+                div.id = 'legend-control-wrap';
+                div.innerHTML = legendHTML();
                 L.DomEvent.disableClickPropagation(div);
                 return div;
             };
-        
+
             legendControl.addTo(map);
+
+            // Expose a re-render so loadLiveCKB() can refresh the legend once Weblate strings land.
+            window.rerenderLegend = function() {
+                var wrap = document.getElementById('legend-control-wrap');
+                if (wrap) wrap.innerHTML = legendHTML();
+            };
 
             const coordsControl = L.control({ position: 'bottomright' });
             coordsControl.onAdd = function() {
@@ -2209,7 +2226,7 @@
   document.documentElement.setAttribute('dir','rtl');
   document.documentElement.setAttribute('lang','ckb');
 
-  var CKB_FLAT = {"nav.about": "دەربارەی پڕۆژە", "nav.share": "Share Map", "nav.follow": "فۆڵۆمان بکە", "sidebar.oil_fields": "کێڵگە نەوتییەکان", "sidebar.fields": "کێڵگەکان", "sidebar.gas_value_wasted": "بەهای گازی بەفیڕۆچوو", "sidebar.est_2025": "مەزەندەی ٢٠٢٥", "sidebar.annual_flaring_volume": "قەبارەی ساڵانەی گازی سووتێندراو", "sidebar.bcm_yr": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "sidebar.electricity_potential": "توانای بەرهەمهێنانی کارەبا", "sidebar.mw_if_captured": "مێگاوات ئەگەر بەکاربێت", "sidebar.people_within_5km": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "sidebar.iraqis": "عێراقی", "sidebar.focal_oilfield": "هەڵبژاردنی کێڵگەی نەوتی", "sidebar.all_fields": "هەموو کێلگەکانی عێراق", "sidebar.inspect_random": "پشکنینی مەشخەڵی هەڕەمەکی", "sidebar.data_engine": "سەرچاوەی بزوێنەری داتا", "sidebar.preloaded": "زانیاری پێشوەختە", "sidebar.live_osm": "ڕاستەوخۆ لە OSM", "sidebar.distance_analyzer": "شیکارکەری مەودا", "sidebar.ruler": "ڕاستە", "sidebar.distance_desc": "هەڵسەنگاندنی کاریگەرییەکان بە هەژمارکردنی مەودای دووری نێوان هەر جۆرە مەشخەڵێک و دانیشتووان.", "sidebar.measure_btn": "نزیکیی مەشخەڵ بپێوە", "sidebar.regional_zoom": "تەماشاکردن بە پێی ناوچە", "sidebar.basra": "بەسرە", "sidebar.maysan": "میسان", "sidebar.kirkuk": "کەرکوک", "sidebar.citizen_mapping": "هاوکاری نەخشەسازی ببە", "sidebar.citizen_desc": "ئەگەر مەشخەڵێکی گاز نابینی، تکایە هاوکارمان ببە بە دانانی لە OpenStreetMap بە بەکارهێنانی ئەم تاگە ستاندەردە.", "sidebar.national_stats": "ئامارەکانی عێراق", "sidebar.mapped_flares": "مەشخەڵە نەخشەکراوەکان", "sidebar.active": "چالاک", "legend.title": "ڕێبەری نەخشە", "legend.active_flare": "مەشخەڵی چالاک لە (OSM)", "legend.emission_plume": "پەڵەی دەردانی پشتڕاستکراوە", "legend.wasted_gas": "قەبارەی گازی بەفیڕۆ دراو", "legend.heatmap": "نەخشەی چڕی مەشخەڵ", "legend.low": "کەم", "legend.high": "زۆر", "legend.fire_detection": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "layers.title": "چینەکان پیشان بدە", "layers.flare_locations": "شوێنی مەشخەڵە چالاکەکان", "layers.density_map": "نەخشەی چڕی مەشخەڵەکان", "layers.impact_zone": "ناوچەی کاریگەری (٥ کم)", "layers.emission_plumes": "پەڵەی دەردانی دۆزراوە", "layers.wasted_gas": "گازی بەفێڕۆدراو (٢٠٢٥)", "layers.flare_locations_desc": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "layers.density_map_desc": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "layers.impact_zone_desc": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "layers.emission_plumes_desc": "کنینی مانگی دەستکرد بۆ لێچوونی میثان و CO2 (کگم/کاتژمێر)", "layers.wasted_gas_desc": "بەهای دۆلاری سووتێنراو بۆ هەر دامەزراوەیەک (زانیاری بانکی جیهانی", "layers.fire_detections": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "layers.fire_detections_desc": "خاڵە گەرمەکانی VIIRS، ٣ ڕۆژی ڕابردوو", "background.title": "پاشخانەکان", "background.satellite": "پاشخانی سەتەلایت", "background.archive": "پاشخانی سەتەلایتی ئەرشیف", "background.night": "پاشخانی ڕووناکی شەوان", "background.dark": "پاشخانی تاریک", "background.streets": "پاشخانی OpenStreetMap", "about.title": "چاودێری مەشخەڵەکانی عێراق", "about.desc": "سووتانی گاز لە ڕێی مەشخەڵەکانی گازەوە ئەو گازە پرۆسەی سووتانی گازە کە لە ئەنجامی پرۆسەی دەرهێنانی نەوتەوە دەردەهێنرێت؛ ئەم سووتانی گازە زیان بە دانیشتوانی ناوچەکە دەگەیەنێت و زیانی ئابووری چەندین ملیار دۆلار دەدات ساڵانە لە سوود وەرنەگرتن لە بەکارهێنانی ئەو گازە.", "about.flare_sites": "شوێنی مەشخەڵی گازەکان و خەمڵاندنی ژمارەی دانیشتوانی نزیکی ٥ کم", "about.economic_waste": "بەفیڕۆدانی ئابووری - بەهای بەفیڕۆدراو بە دۆلار و ژمارەی ئەو ماڵانەی دەکرا بەم سەرچاوەیە کارەبای بۆ دابین بکرایە", "about.emission_plumes": "دەردانی گازەکانی میتان و CO₂ بە کیلۆگرام لە کاتژمێرەکەدا", "about.open_source": "سەرچاوەی زانیاری کراوە", "about.take_tour": "ڕابەری بەکارهێنان", "popup.gas_flare": "مەشخەڵی گاز", "popup.assigned_field": "کێلگەی نەوت", "popup.population_5km": "ژمارەی دانیشتووان لە دووری ٥ کم:", "popup.latitude": "Latitude:", "popup.longitude": "Longitude:", "popup.view_google_maps": "لەسەر Google Maps بیبینە", "popup.zoom_in": "زووم بکە", "popup.edit_osm": "لە OSM چاکی بکە", "popup.wasted_gas_title": "گازی بەفیڕۆدراوی ساڵی ٢٠٢٥", "popup.wb_data": "زانیاری World Bank GGFR", "popup.people": "کەس", "popup.source_osm": "سەرچاوە: OpenStreetMap", "popup.co2_plume": "ستوونی دەردانی CO2", "popup.ch4_plume": "ستوونی دەردانی CH4", "popup.emission": "دەردان:", "popup.sector": "کەرت:", "popup.wind": "خێرایی با:", "popup.satellite_detection": "دۆزینەوەی مانگی دەستکرد:", "popup.view_carbon_mapper": "لەسەر Carbon Mapper بیبینە", "popup.source_carbon_mapper": "سەرچاوە: Carbon Mapper", "popup.viirs_title": "دۆزینەوەی ئاگری VIIRS", "popup.viirs_detected": "کات:", "popup.viirs_confidence": "ڕێژەی متمانە:", "popup.viirs_frp": "هێزی تیشکدانی ئاگر:", "popup.viirs_source": "سەرچاوە: NASA FIRMS / VIIRS SNPP", "popup.confidence_high": "بەرز", "popup.confidence_nominal": "ئاسایی", "popup.confidence_low": "نزم", "tour.next": "دواتر", "tour.skip": "تێپەڕاندن", "tour.finish": "تەواو", "tour.welcome_title": "بەخێربێیت بۆ چاودێری مەشخەڵەکانی عێراق", "tour.welcome_text": "ئەم نەخشەیە شوێنی مەشخەڵە گازییەکانی عێراقی تێدایە کە گازی سروشتی لە کاتی دەرهێنانی نەوتدا دەسووتێنرێن و دەبنە هۆکاری زیانی ملیارەها دۆلاری بەفیڕۆ چوو سەڕەڕای زیان گەیاندن بە تەندروستی دانیشتوانی ناوچەکە. با گەشتێکی خێرا بکەین.", "tour.stats_title": "ئامارە نیشتیمانیەکان", "tour.stats_text": "ئەم ژمارە ڕاستەوخۆیانە قەبارەی کێشەکە نیشان دەدەن: بەهای گازی بەفیڕۆچوو، ئەو کارەبایەی کە دەکرا بەرهەم بهێنرایە، و ژمارەی ئەو کەسانەی کە لە نزیکی مەشخەڵێکدا دەژین.", "tour.layers_data_title": "چینەکانی زانیاری", "tour.layers_data_text": "خاڵە پرتەقاڵییەکان مەشخەڵە چالاکەکانن. خاڵە مۆرەکان بەهای گازی بەفیڕۆچوو نیشان دەدەن. خاڵە شینەکان ستوونی دەردانی گازن کە بە مانگی دەستکرد دۆزراونەتەوە.", "tour.controls_title": "گۆڕینی چین و پاشخانەکان", "tour.controls_text": "ئەم کۆنترۆڵانە بەکاربهێنە بۆ کردنەوە و داخستنی چینەکانی زانیاری، و گۆڕین لە نێوان دیمەنی مانگی دەستکرد، شەقام، شەو.", "tour.explore_title": "بگەڕێ و هاوبەشی بکە", "tour.explore_text": "کلیک لەسەر هەر مەشخەڵێک بکە بۆ بینینی وردەکارییەکان. هەر دیمەنێک بەستەرێکی هاوبەشکردنی هەیە کە بە تەواوی ئەوە دەگرێت کە تۆ تەماشای دەکەیت — گونجاوە بۆ ڕوونکردنەوەی شوێنێکی دیاریکراو.", "guide.button": "ڕابەری بەکارهێنان"};
+  var CKB_FLAT = {"nav.about": "دەربارەی پڕۆژە", "nav.share": "Share Map", "nav.follow": "فۆڵۆمان بکە", "sidebar.oil_fields": "کێڵگە نەوتییەکان", "sidebar.fields": "کێڵگەکان", "sidebar.gas_value_wasted": "بەهای گازی بەفیڕۆچوو", "sidebar.est_2025": "مەزەندەی ٢٠٢٥", "sidebar.annual_flaring_volume": "قەبارەی ساڵانەی گازی سووتێندراو", "sidebar.bcm_yr": "مليار مەتر سێجا لە ساڵێکدا مەزەندەی ٢٠٢٥", "sidebar.electricity_potential": "توانای بەرهەمهێنانی کارەبا", "sidebar.mw_if_captured": "مێگاوات ئەگەر بەکاربێت", "sidebar.people_within_5km": "دانیشتوان لە مەودای ٥ کلیۆمەتری مەشخەڵێک", "sidebar.iraqis": "عێراقی", "sidebar.focal_oilfield": "هەڵبژاردنی کێڵگەی نەوتی", "sidebar.all_fields": "هەموو کێلگەکانی عێراق", "sidebar.inspect_random": "پشکنینی مەشخەڵی هەڕەمەکی", "sidebar.data_engine": "سەرچاوەی بزوێنەری داتا", "sidebar.preloaded": "زانیاری پێشوەختە", "sidebar.live_osm": "ڕاستەوخۆ لە OSM", "sidebar.distance_analyzer": "شیکارکەری مەودا", "sidebar.ruler": "ڕاستە", "sidebar.distance_desc": "هەڵسەنگاندنی کاریگەرییەکان بە هەژمارکردنی مەودای دووری نێوان هەر جۆرە مەشخەڵێک و دانیشتووان.", "sidebar.measure_btn": "نزیکیی مەشخەڵ بپێوە", "sidebar.regional_zoom": "تەماشاکردن بە پێی ناوچە", "sidebar.basra": "بەسرە", "sidebar.maysan": "میسان", "sidebar.kirkuk": "کەرکوک", "sidebar.citizen_mapping": "هاوکاری نەخشەسازی ببە", "sidebar.citizen_desc": "ئەگەر مەشخەڵێکی گاز نابینی، تکایە هاوکارمان ببە بە دانانی لە OpenStreetMap بە بەکارهێنانی ئەم تاگە ستاندەردە.", "sidebar.national_stats": "ئامارەکانی عێراق", "sidebar.mapped_flares": "مەشخەڵە نەخشەکراوەکان", "sidebar.active": "چالاک", "legend.title": "ڕێبەری نەخشە", "legend.active_flare": "مەشخەڵی چالاک لە (OSM)", "legend.emission_plume": "پەڵەی دەردانی پشتڕاستکراوە", "legend.wasted_gas": "قەبارەی گازی بەفیڕۆ دراو", "legend.heatmap": "نەخشەی چڕی مەشخەڵ", "legend.low": "کەم", "legend.high": "زۆر", "legend.fire_detection": "دۆزینەوەی ڕاستەوخۆی ئاگر (ناسا)", "legend.ring_stale": "لەیەک بۆ سێ مانگی پێشوو نەبینراوە لە سەتەلایت", "legend.ring_dark": "لە سێ بۆ دوازدە مانگی پێشوو نەبینراوە لە سەتەلایت", "legend.ring_never": "لە ساڵی پێشوودا نەبینراوە لە سەتەلایت", "layers.title": "چینەکان پیشان بدە", "layers.flare_locations": "شوێنی مەشخەڵە چالاکەکان", "layers.density_map": "نەخشەی چڕی مەشخەڵەکان", "layers.impact_zone": "ناوچەی کاریگەری (٥ کم)", "layers.emission_plumes": "پەڵەی دەردانی دۆزراوە", "layers.wasted_gas": "گازی بەفێڕۆدراو (٢٠٢٥)", "layers.flare_locations_desc": "شوێنی مەشخەڵەکان کە لە OpenStreetMap نەخشە کراون", "layers.density_map_desc": "نەخشەی چڕی کە نیشانی دەدات لەکوێ مەشخەڵەکان زۆرترین بوونیان هەیە", "layers.impact_zone_desc": "بازنەی ناوچەی مەترسیداری مەشخەڵ بە مەودای ٥ کم بە دەوریدا", "layers.emission_plumes_desc": "کنینی مانگی دەستکرد بۆ لێچوونی میثان و CO2 (کگم/کاتژمێر)", "layers.wasted_gas_desc": "بەهای دۆلاری سووتێنراو بۆ هەر دامەزراوەیەک (زانیاری بانکی جیهانی", "layers.fire_detections": "دۆزینەوەکانی ڕاستەوخۆی ئاگر(ناسا)", "layers.fire_detections_desc": "خاڵە گەرمەکانی VIIRS، ٣ ڕۆژی ڕابردوو", "background.title": "پاشخانەکان", "background.satellite": "پاشخانی سەتەلایت", "background.archive": "پاشخانی سەتەلایتی ئەرشیف", "background.night": "پاشخانی ڕووناکی شەوان", "background.dark": "پاشخانی تاریک", "background.streets": "پاشخانی OpenStreetMap", "about.title": "چاودێری مەشخەڵەکانی عێراق", "about.desc": "سووتانی گاز لە ڕێی مەشخەڵەکانی گازەوە ئەو گازە پرۆسەی سووتانی گازە کە لە ئەنجامی پرۆسەی دەرهێنانی نەوتەوە دەردەهێنرێت؛ ئەم سووتانی گازە زیان بە دانیشتوانی ناوچەکە دەگەیەنێت و زیانی ئابووری چەندین ملیار دۆلار دەدات ساڵانە لە سوود وەرنەگرتن لە بەکارهێنانی ئەو گازە.", "about.flare_sites": "شوێنی مەشخەڵی گازەکان و خەمڵاندنی ژمارەی دانیشتوانی نزیکی ٥ کم", "about.economic_waste": "بەفیڕۆدانی ئابووری - بەهای بەفیڕۆدراو بە دۆلار و ژمارەی ئەو ماڵانەی دەکرا بەم سەرچاوەیە کارەبای بۆ دابین بکرایە", "about.emission_plumes": "دەردانی گازەکانی میتان و CO₂ بە کیلۆگرام لە کاتژمێرەکەدا", "about.open_source": "سەرچاوەی زانیاری کراوە", "about.take_tour": "ڕابەری بەکارهێنان", "popup.gas_flare": "مەشخەڵی گاز", "popup.assigned_field": "کێلگەی نەوت", "popup.population_5km": "ژمارەی دانیشتووان لە دووری ٥ کم:", "popup.latitude": "Latitude:", "popup.longitude": "Longitude:", "popup.view_google_maps": "لەسەر Google Maps بیبینە", "popup.zoom_in": "زووم بکە", "popup.edit_osm": "لە OSM چاکی بکە", "popup.wasted_gas_title": "گازی بەفیڕۆدراوی ساڵی ٢٠٢٥", "popup.wb_data": "زانیاری World Bank GGFR", "popup.people": "کەس", "popup.source_osm": "سەرچاوە: OpenStreetMap", "popup.co2_plume": "ستوونی دەردانی CO2", "popup.ch4_plume": "ستوونی دەردانی CH4", "popup.emission": "دەردان:", "popup.sector": "کەرت:", "popup.wind": "خێرایی با:", "popup.satellite_detection": "دۆزینەوەی مانگی دەستکرد:", "popup.view_carbon_mapper": "لەسەر Carbon Mapper بیبینە", "popup.source_carbon_mapper": "سەرچاوە: Carbon Mapper", "popup.viirs_title": "دۆزینەوەی ئاگری VIIRS", "popup.viirs_detected": "کات:", "popup.viirs_confidence": "ڕێژەی متمانە:", "popup.viirs_frp": "هێزی تیشکدانی ئاگر:", "popup.viirs_source": "سەرچاوە: NASA FIRMS / VIIRS SNPP", "popup.confidence_high": "بەرز", "popup.confidence_nominal": "ئاسایی", "popup.confidence_low": "نزم", "popup.viirs_last_seen": "دوایین بینین لە سەتەلایت:", "popup.viirs_none": "لە دوازدە مانگی پێشوودا نەبینراوە", "popup.viirs_detections": "بینینەکان لە سەتەلایت (ساڵی پێشوو):", "tour.next": "دواتر", "tour.skip": "تێپەڕاندن", "tour.finish": "تەواو", "tour.welcome_title": "بەخێربێیت بۆ چاودێری مەشخەڵەکانی عێراق", "tour.welcome_text": "ئەم نەخشەیە شوێنی مەشخەڵە گازییەکانی عێراقی تێدایە کە گازی سروشتی لە کاتی دەرهێنانی نەوتدا دەسووتێنرێن و دەبنە هۆکاری زیانی ملیارەها دۆلاری بەفیڕۆ چوو سەڕەڕای زیان گەیاندن بە تەندروستی دانیشتوانی ناوچەکە. با گەشتێکی خێرا بکەین.", "tour.stats_title": "ئامارە نیشتیمانیەکان", "tour.stats_text": "ئەم ژمارە ڕاستەوخۆیانە قەبارەی کێشەکە نیشان دەدەن: بەهای گازی بەفیڕۆچوو، ئەو کارەبایەی کە دەکرا بەرهەم بهێنرایە، و ژمارەی ئەو کەسانەی کە لە نزیکی مەشخەڵێکدا دەژین.", "tour.layers_data_title": "چینەکانی زانیاری", "tour.layers_data_text": "خاڵە پرتەقاڵییەکان مەشخەڵە چالاکەکانن. خاڵە مۆرەکان بەهای گازی بەفیڕۆچوو نیشان دەدەن. خاڵە شینەکان ستوونی دەردانی گازن کە بە مانگی دەستکرد دۆزراونەتەوە.", "tour.controls_title": "گۆڕینی چین و پاشخانەکان", "tour.controls_text": "ئەم کۆنترۆڵانە بەکاربهێنە بۆ کردنەوە و داخستنی چینەکانی زانیاری، و گۆڕین لە نێوان دیمەنی مانگی دەستکرد، شەقام، شەو.", "tour.explore_title": "بگەڕێ و هاوبەشی بکە", "tour.explore_text": "کلیک لەسەر هەر مەشخەڵێک بکە بۆ بینینی وردەکارییەکان. هەر دیمەنێک بەستەرێکی هاوبەشکردنی هەیە کە بە تەواوی ئەوە دەگرێت کە تۆ تەماشای دەکەیت — گونجاوە بۆ ڕوونکردنەوەی شوێنێکی دیاریکراو.", "guide.button": "ڕابەری بەکارهێنان"};
   // Expose the translation table so popup label helper LBL() (defined in the main
   // script) can read Kurdish values. Without this, CKB_FLAT stays trapped in this
   // IIFE and every popup label falls back to English.
@@ -2290,6 +2307,9 @@
             }
           } catch(e){ /* keep embedded tour fallback */ }
           run();                                   // re-translate the DOM
+          // Re-render the legend (JS-generated with LBL(), so run() can't touch it) now that
+          // the Weblate strings have been merged into CKB_FLAT.
+          try { if (window.rerenderLegend) window.rerenderLegend(); } catch(e){}
           // Re-translate any popup already open so its labels refresh
           document.querySelectorAll('.leaflet-popup-content').forEach(function(el){ translate(el); });
         })
