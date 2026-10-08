@@ -472,7 +472,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.g</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.h</p>
             </div>
         
         </aside>
@@ -496,7 +496,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.08.g
+           Build: 2026.10.08.h
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -846,7 +846,26 @@
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxNativeZoom: 19, maxZoom: 19
             });
-            
+
+            // EOX Sentinel-2 cloudless 2025 — a keyless, cloud-free annual mosaic (CC BY 4.0).
+            // ~10m resolution: good cloud-free context, coarser than the high-res satellite layer.
+            // If a 2025 tile is missing (the year isn't published yet), fall back to 2024 for that tile.
+            const eoxYear = '2025', eoxFallbackYear = '2024';
+            baseLayers.s2cloudless = L.tileLayer(
+                'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-' + eoxYear + '_3857/default/g/{z}/{y}/{x}.jpg', {
+                attribution: 'Sentinel-2 cloudless ' + eoxYear + ' <a href="https://s2maps.eu">s2maps.eu</a> by EOX IT Services GmbH (Contains modified Copernicus Sentinel data)',
+                maxNativeZoom: 15, maxZoom: 19
+            });
+            // Per-tile fallback: swap a failed 2025 tile URL to the 2024 layer once.
+            baseLayers.s2cloudless.on('tileerror', function(e){
+                try {
+                    if (e.tile && e.tile.src.indexOf('s2cloudless-' + eoxYear) !== -1 && !e.tile.dataset.fellBack) {
+                        e.tile.dataset.fellBack = '1';
+                        e.tile.src = e.tile.src.replace('s2cloudless-' + eoxYear, 's2cloudless-' + eoxFallbackYear);
+                    }
+                } catch(_){}
+            });
+
             // Reference overlays (labels, roads, boundaries) for satellite views
             satelliteLabels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Esri',
@@ -1119,6 +1138,10 @@
                                 <span>📂 Satellite Archive</span>
                             </label>
                             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="basemap" value="s2cloudless" onchange="changeBaseMap('s2cloudless');" style="accent-color:#d97706; width:14px; height:14px;">
+                                <span>☁️ Sentinel-2 Cloudless (2025)</span>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
                                 <input type="radio" name="basemap" value="night" onchange="changeBaseMap('night');" style="accent-color:#d97706; width:14px; height:14px;">
                                 <span>🌃 Night Lights</span>
                             </label>
@@ -1229,7 +1252,7 @@
             baseLayers[type].addTo(map);
         
             // Show reference overlays only on satellite imagery
-            if (type === 'satellite' || type === 'clarity' || type === 'night') {
+            if (type === 'satellite' || type === 'clarity' || type === 'night' || type === 's2cloudless') {
                 if (!map.hasLayer(satelliteLabels)) satelliteLabels.addTo(map);
                 if (!map.hasLayer(satelliteRoads)) satelliteRoads.addTo(map);
             } else {
