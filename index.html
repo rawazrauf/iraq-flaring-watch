@@ -114,6 +114,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         .pulsing-flare {
             width: 13px; height: 13px;
@@ -122,6 +123,26 @@
             border-radius: 50%;
             animation: flarePulse 2s infinite ease-in-out;
         }
+        /* VIIRS-status ring: a coloured halo drawn OUTSIDE the orange dot (not a different
+           dot colour). Ring COLOUR = recency of last detection; ring THICKNESS = how often
+           VIIRS saw it burning. Only flares not seen in the last 30 days get a ring. */
+        .viirs-ring {
+            position: absolute;
+            border-radius: 50%;
+            box-sizing: border-box;
+            pointer-events: none;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .viirs-ring.vr-stale { border-color: #f59e0b; }   /* 31–90 days: amber  */
+        .viirs-ring.vr-dark  { border-color: #ef4444; }   /* 91–365 days: red   */
+        .viirs-ring.vr-never { border-color: #9ca3af; border-style: dashed; } /* never seen: grey dashed */
+        .viirs-ring.vf-low  { width: 23px; height: 23px; border-width: 2px; border-style: solid; }
+        .viirs-ring.vf-mid  { width: 26px; height: 26px; border-width: 3px; border-style: solid; }
+        .viirs-ring.vf-high { width: 29px; height: 29px; border-width: 4px; border-style: solid; }
+        .viirs-ring.vr-never.vf-low,
+        .viirs-ring.vr-never.vf-mid,
+        .viirs-ring.vr-never.vf-high { border-style: dashed; }
         .marker-cluster-small { background-color: rgba(245,158,11,0.4) !important; }
         .marker-cluster-small div { background-color: rgba(239,68,68,0.8) !important; color: #fff !important; font-weight: bold; }
         .marker-cluster-medium { background-color: rgba(239,68,68,0.4) !important; }
@@ -452,7 +473,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.a</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.b</p>
             </div>
         
         </aside>
@@ -476,7 +497,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.08.a
+           Build: 2026.10.08.b
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -565,6 +586,27 @@
             } catch (error) {
                 console.warn("VIIRS status dataset missing or failed to load.");
             }
+        }
+
+        // Decide the ring classes for a flare's marker from its VIIRS status.
+        // Returns '' (no ring) for flares seen within the last 30 days, or when data is missing.
+        // Otherwise: a recency class (vr-stale / vr-dark / vr-never) + a frequency class
+        // (vf-low / vf-mid / vf-high based on detection count in the window).
+        function viirsRingClasses(vs) {
+            if (!vs) return '';
+            var recency;
+            if (vs.last_detection === null || vs.last_detection === undefined) {
+                recency = 'vr-never';
+            } else {
+                var last = new Date(vs.last_detection + 'T00:00:00Z');
+                var days = Math.floor((Date.now() - last.getTime()) / 86400000);
+                if (days <= 30) return '';            // active recently — plain dot, no ring
+                else if (days <= 90) recency = 'vr-stale';
+                else recency = 'vr-dark';
+            }
+            var n = vs.detections || 0;
+            var freq = (n < 205) ? 'vf-low' : (n <= 970 ? 'vf-mid' : 'vf-high');
+            return recency + ' ' + freq;
         }
 
         async function fetchImpactData() {
@@ -910,11 +952,23 @@
                         <div style="display:flex; flex-direction:column; gap:8px; font-size:11px; color:#d1d5db;">
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span style="width:12px; height:12px; border-radius:50%; background:#f59e0b; border:2px solid #ef4444; flex-shrink:0; display:inline-block;"></span>
-                                <span>Active Flare (OSM)</span>
+                                <span>${LBL('legend.active_flare','Active Flare (OSM)')}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:13px; height:13px; border-radius:50%; background:transparent; border:2px solid #f59e0b; flex-shrink:0; display:inline-block;"></span>
+                                <span>${LBL('legend.ring_stale','No VIIRS detection 1–3 months')}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:13px; height:13px; border-radius:50%; background:transparent; border:2px solid #ef4444; flex-shrink:0; display:inline-block;"></span>
+                                <span>${LBL('legend.ring_dark','No VIIRS detection 3–12 months')}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:13px; height:13px; border-radius:50%; background:transparent; border:2px dashed #9ca3af; flex-shrink:0; display:inline-block;"></span>
+                                <span>${LBL('legend.ring_never','No VIIRS detection in 12 months')}</span>
                             </div>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span style="width:12px; height:12px; border-radius:50%; background:#06b6d4; border:2px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
-                                <span>Verified Emission Plume</span>
+                                <span>${LBL('legend.emission_plume','Verified Emission Plume')}</span>
                             </div>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span style="width:12px; height:12px; border-radius:50%; background:#a855f7; border:2px solid #ffffff; flex-shrink:0; display:inline-block;"></span>
@@ -1320,7 +1374,17 @@
             filtered.forEach(flare => {
                 const coord = [flare.lat, flare.lon];
 
-                const marker = L.marker(coord, { icon: flareIcon });
+                // Pick a VIIRS-status ring for this flare (color = recency, thickness = frequency).
+                // Flares seen within the last 30 days get no ring (plain orange dot).
+                const vsRing = viirsStatusData[flare.id] || viirsStatusData[String(flare.id)];
+                const ringCls = viirsRingClasses(vsRing);
+                const marker = ringCls
+                    ? L.marker(coord, { icon: L.divIcon({
+                          className: 'custom-flare-container',
+                          html: `<div class="viirs-ring ${ringCls}"></div><div class="pulsing-flare"></div>`,
+                          iconSize: [30, 30], iconAnchor: [15, 15]
+                      }) })
+                    : L.marker(coord, { icon: flareIcon });
                 marker.flareId = flare.id;
 
             let popDisplay = '';
@@ -1338,13 +1402,20 @@
                 var viirsLine = '';
                 if (vs) {
                     var val = vs.last_detection
-                        ? `<span dir="ltr" style="unicode-bidi:isolate" class="text-gray-300 font-bold">${vs.last_detection}</span>`
-                        : `<span class="text-gray-500">${LBL('popup.viirs_none','none in last 12 months')}</span>`;
+                        ? `<span dir="ltr" style="unicode-bidi:isolate; white-space:nowrap" class="text-gray-300 font-bold">${vs.last_detection}</span>`
+                        : `<span dir="ltr" style="unicode-bidi:isolate; white-space:nowrap" class="text-gray-500">${LBL('popup.viirs_none','none in last 12 months')}</span>`;
+                    // Detections count (how many times VIIRS saw it burning in the window).
+                    var detLine = (vs.detections && vs.detections > 0)
+                        ? `<div class="flex justify-between" style="gap:10px">
+                                <span class="text-gray-500">${LBL('popup.viirs_detections','VIIRS detections (12 mo):')}</span>
+                                <span dir="ltr" style="unicode-bidi:isolate; white-space:nowrap" class="text-gray-300 font-bold">${vs.detections.toLocaleString()}</span>
+                            </div>`
+                        : '';
                     viirsLine = `
-                            <div class="flex justify-between">
+                            <div class="flex justify-between" style="gap:10px">
                                 <span class="text-gray-500">${LBL('popup.viirs_last_seen','Last satellite detection:')}</span>
                                 ${val}
-                            </div>`;
+                            </div>${detLine}`;
                 }
                 const popupContent = `
                     <div class="p-1 space-y-3 max-w-xs text-xs" dir="${CKB_MODE ? 'rtl' : 'ltr'}">
