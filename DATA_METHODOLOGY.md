@@ -289,11 +289,12 @@ This rate is also consistent with the World Bank GGFR methodology for associated
 
 ```
 mwPotential     = (vol_mm3 × 4,400 × 0.35) / 8,760
-homesEquivalent = (vol_mm3 × 4,400 × 1,000) / 5,000
+homesEquivalent = (vol_mm3 × 4,400 × 0.35 × 1,000) / 5,000
 ```
 
 **Assumptions:**
-- Gas-to-electricity conversion: ~4,400 kWh per thousand m³ at 35% plant efficiency
+- Gas calorific content: ~4,400 kWh of thermal energy per thousand m³ of gas
+- Power-plant efficiency: ~35% (the `× 0.35` factor) — applied to BOTH the MW and homes figures so they are mutually consistent
 - Continuous generation basis: 8,760 hours/year (for the MW capacity figure)
 - Iraqi household annual consumption: 5,000 kWh/year
 - Derived from IEA Iraq electricity data (1.377 MWh/capita) × 2024 census 
