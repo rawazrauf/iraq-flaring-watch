@@ -485,7 +485,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.08.j</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.10.a</p>
             </div>
         
         </aside>
@@ -509,7 +509,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.08.j
+           Build: 2026.10.10.a
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -786,6 +786,13 @@
             map.getPane('radiusPane').style.zIndex = 300;
             map.getPane('radiusPane').style.pointerEvents = 'none';
 
+            // Label/road reference tiles sit ABOVE the interactive circle canvas visually, but
+            // must not swallow clicks — otherwise WB/plume dots become unclickable on any view
+            // that shows these overlays (satellite, night, Sentinel-2). A click-through pane fixes it.
+            map.createPane('labelPane');
+            map.getPane('labelPane').style.zIndex = 450;
+            map.getPane('labelPane').style.pointerEvents = 'none';
+
             // Interactive circle layers (WB, plumes) use the DEFAULT canvas renderer so
             // Leaflet's per-layer hit-testing works correctly. Separate stacked panes would
             // create full-map canvases that block clicks to layers beneath them.
@@ -883,13 +890,13 @@
             satelliteLabels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Esri',
                 maxNativeZoom: 18, maxZoom: 19,
-                pane: 'overlayPane'
+                pane: 'labelPane'
             });
-            
+
             satelliteRoads = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Esri',
                 maxNativeZoom: 18, maxZoom: 19,
-                pane: 'overlayPane'
+                pane: 'labelPane'
             });
             
             (baseLayers[currentBaseMapType] || baseLayers.satellite).addTo(map);
