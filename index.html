@@ -485,7 +485,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.10.10.d</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.08.a</p>
             </div>
         
         </aside>
@@ -509,7 +509,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.10.10.d
+           Build: 2026.11.08.a
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -528,6 +528,7 @@
         let plumeLayerGroup = L.layerGroup();
         let viirsFireLayer;
         let viirsCanvasRenderer;
+        let wbRenderer;
         let viirsDataLoaded = false;
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
@@ -780,7 +781,6 @@
                 zoomControl: true, maxZoom: 19, minZoom: 5,
                 preferCanvas: true
             });
-            window.map = map;  // expose the Leaflet instance (used by the marketing overlay + any future scripting)
 
             // Non-interactive pane for the 5km impact circles (must not capture taps)
             map.createPane('radiusPane');
@@ -793,6 +793,15 @@
             map.createPane('labelPane');
             map.getPane('labelPane').style.zIndex = 450;
             map.getPane('labelPane').style.pointerEvents = 'none';
+
+            // World Bank "wasted gas" dots are large and must stay clickable even where a small
+            // flare marker or a flare cluster overlaps them. Flare markers live in the default
+            // markerPane (z600), so the WB circles get their own canvas pane ABOVE it (z650):
+            // wherever a WB dot and a flare overlap, the bigger WB dot wins the click (by design),
+            // while flares everywhere else remain fully clickable.
+            map.createPane('wbPane');
+            map.getPane('wbPane').style.zIndex = 650;
+            wbRenderer = L.canvas({ pane: 'wbPane' });
 
             // Interactive circle layers (WB, plumes) use the DEFAULT canvas renderer so
             // Leaflet's per-layer hit-testing works correctly. Separate stacked panes would
@@ -2044,27 +2053,48 @@
             const MAP_KEY = '5c166ca2e6e3fcb8fd749c6e0b1ba8ab';
             const IRAQ_BBOX = '38.7,29.0,48.6,37.4'; // west,south,east,north
             const DAY_RANGE = 3; // last 3 days — fewer transactions than 7, still good coverage
-            const url = `https://firms.modaps.eosdis.nasa.gov/api/area/csv/${MAP_KEY}/VIIRS_SNPP_NRT/${IRAQ_BBOX}/${DAY_RANGE}`;
+            // VIIRS_SNPP_NRT (Suomi-NPP) stopped returning data in late 2026; NASA's current
+            // operational VIIRS NRT feeds are NOAA-20 and NOAA-21. Fetch both and merge so the
+            // layer keeps full coverage. Still Area API (one request per sensor), not WMS tiles.
+            const SENSORS = ['VIIRS_NOAA20_NRT', 'VIIRS_NOAA21_NRT'];
+            const urls = SENSORS.map(s => `https://firms.modaps.eosdis.nasa.gov/api/area/csv/${MAP_KEY}/${s}/${IRAQ_BBOX}/${DAY_RANGE}`);
 
             try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error('FIRMS API ' + res.status);
-                const text = await res.text();
-                const lines = text.trim().split('\n');
-                if (lines.length < 2) return; // header only = no detections
+                // Fetch all sensors in parallel; tolerate one failing so the other still shows.
+                const texts = await Promise.all(urls.map(u =>
+                    fetch(u).then(r => r.ok ? r.text() : '').catch(() => '')
+                ));
 
-                const header = lines[0].split(',');
-                const latIdx = header.indexOf('latitude');
-                const lonIdx = header.indexOf('longitude');
-                const confIdx = header.indexOf('confidence');
-                const frpIdx = header.indexOf('frp');
-                const dateIdx = header.indexOf('acq_date');
-                const timeIdx = header.indexOf('acq_time');
+                // Merge: take the header from the first non-empty response, then append every
+                // data row from each response (deduping identical rows across sensors).
+                let header = null, latIdx, lonIdx, confIdx, frpIdx, dateIdx, timeIdx;
+                const dataRows = [];
+                const seen = new Set();
+                for (const text of texts) {
+                    const l = (text || '').trim().split('\n');
+                    if (l.length < 2) continue; // header only / empty = skip this sensor
+                    if (!header) {
+                        header = l[0].split(',');
+                        latIdx = header.indexOf('latitude');
+                        lonIdx = header.indexOf('longitude');
+                        confIdx = header.indexOf('confidence');
+                        frpIdx = header.indexOf('frp');
+                        dateIdx = header.indexOf('acq_date');
+                        timeIdx = header.indexOf('acq_time');
+                    }
+                    for (let i = 1; i < l.length; i++) {
+                        const row = l[i];
+                        if (!row || seen.has(row)) continue;
+                        seen.add(row);
+                        dataRows.push(row);
+                    }
+                }
+                if (!header || dataRows.length === 0) return; // no detections from any sensor
 
                 viirsFireLayer.clearLayers();
 
-                for (let i = 1; i < lines.length; i++) {
-                    const cols = lines[i].split(',');
+                for (let i = 0; i < dataRows.length; i++) {
+                    const cols = dataRows[i].split(',');
                     const lat = parseFloat(cols[latIdx]);
                     const lon = parseFloat(cols[lonIdx]);
                     if (isNaN(lat) || isNaN(lon)) continue;
@@ -2124,10 +2154,7 @@
                         : `~$${valueUSD_millions}M`;
         
                     // Electricity Calculation
-                    // Apply ~35% power-plant efficiency (0.35), consistent with the national MW
-                    // figure (vol × 4400 × 0.35 / 8760). Without it, homes were overstated ~2.9×
-                    // by assuming lossless gas→electricity conversion.
-                    const homesEquivalent = Math.round((f.vol_mm3 * 4400 * 0.35 * 1000) / 5000);
+                    const homesEquivalent = Math.round((f.vol_mm3 * 4400 * 1000) / 5000);
                     const homesStr = homesEquivalent >= 1000000
                         ? `~${(homesEquivalent / 1000000).toFixed(1)}M`
                         : `~${homesEquivalent.toLocaleString()}`;
@@ -2141,7 +2168,8 @@
                         fillColor: '#a855f7',
                         fillOpacity: 0.7,
                         weight: 2,
-                        opacity: 1 
+                        opacity: 1,
+                        renderer: wbRenderer   // draw on the above-markers pane so the big WB dot stays clickable
                     });
         
                     var wgOperator = f.operator || 'Unknown';
