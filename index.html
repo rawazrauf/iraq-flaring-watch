@@ -485,7 +485,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.13.a</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.13.b</p>
             </div>
         
         </aside>
@@ -509,7 +509,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.11.13.a
+           Build: 2026.11.13.b
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -527,7 +527,6 @@
         let nextRandomFlareTarget = null;
         let plumeLayerGroup = L.layerGroup();
         let viirsFireLayer;
-        let viirsCanvasRenderer;
         let wbRenderer;
         let viirsDataLoaded = false;
         let wbFlareLayerGroup = L.layerGroup();
@@ -938,17 +937,15 @@
             heatmapLayer = new HeatmapOverlay(heatmapConfig);
             safeRadiusGroup = L.layerGroup();
 
-            // NASA FIRMS active fires — fetched once via API, drawn on a dedicated canvas (see loadViirsData).
-            // The VIIRS markers need their OWN pane. A bare L.canvas() lands in the default overlayPane,
-            // and the wbPane canvas (z-index 650) sits on top of it as a full-map canvas with
-            // pointer-events:auto — so it swallows every click meant for a VIIRS dot and the popup never
-            // opens. The fix is a dedicated pane ABOVE wbPane so the VIIRS canvas is the hit-test target.
-            // (Verified live: at z 660 a VIIRS dot opens its popup; below 650 wbPane still blocks it.)
-            // Trade-off: where a tiny VIIRS dot overlaps a WB bubble, the VIIRS dot now wins the click.
-            map.createPane('viirsPane');
-            map.getPane('viirsPane').style.zIndex = 660;
+            // NASA FIRMS active fires — fetched once via API (see loadViirsData).
+            // VIIRS markers use the map's DEFAULT canvas renderer (preferCanvas: true), exactly like the
+            // plume markers. A separate L.canvas() renderer puts VIIRS on its OWN stacked canvas, and a
+            // full-map canvas pane with pointer-events:auto blocks clicks to/from every other canvas layer
+            // (that's why a dedicated pane either left VIIRS unclickable — blocked by wbPane — or, when
+            // placed above wbPane, blocked the World Bank and flare dots beneath it). On the shared default
+            // renderer Leaflet hit-tests all circle layers together, so flares, plumes, WB and VIIRS are
+            // each clickable. (The one deliberate exception is wbPane, so a big WB dot wins over a flare.)
             viirsFireLayer = L.layerGroup();
-            viirsCanvasRenderer = L.canvas({ pane: 'viirsPane', padding: 0.5 });
         
             iraqBoundaryLayer = L.geoJSON(null, {
                 style: { color: '#f59e0b', weight: 2, opacity: 0.5, fillOpacity: 0.0, dashArray: '4, 6' },
@@ -2111,7 +2108,6 @@
                     const acqTime = timeIdx > -1 ? cols[timeIdx] : '';
 
                     const marker = L.circleMarker([lat, lon], {
-                        renderer: viirsCanvasRenderer,
                         radius: 5,
                         color: '#ffffff',
                         fillColor: '#ff1a1a',
