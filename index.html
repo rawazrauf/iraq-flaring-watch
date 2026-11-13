@@ -485,7 +485,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.13.b</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.13.c</p>
             </div>
         
         </aside>
@@ -509,7 +509,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.11.13.b
+           Build: 2026.11.13.c
            Last updated: 7 October 2026
            ============================================================ */
         let map;
@@ -527,7 +527,6 @@
         let nextRandomFlareTarget = null;
         let plumeLayerGroup = L.layerGroup();
         let viirsFireLayer;
-        let wbRenderer;
         let viirsDataLoaded = false;
         let wbFlareLayerGroup = L.layerGroup();
         let wbFlareDataLoaded = false;
@@ -794,17 +793,17 @@
             map.getPane('labelPane').style.pointerEvents = 'none';
 
             // World Bank "wasted gas" dots are large and must stay clickable even where a small
-            // flare marker or a flare cluster overlaps them. Flare markers live in the default
-            // markerPane (z600), so the WB circles get their own canvas pane ABOVE it (z650):
-            // wherever a WB dot and a flare overlap, the bigger WB dot wins the click (by design),
-            // while flares everywhere else remain fully clickable.
-            map.createPane('wbPane');
-            map.getPane('wbPane').style.zIndex = 650;
-            wbRenderer = L.canvas({ pane: 'wbPane' });
-
-            // Interactive circle layers (WB, plumes) use the DEFAULT canvas renderer so
-            // Leaflet's per-layer hit-testing works correctly. Separate stacked panes would
-            // create full-map canvases that block clicks to layers beneath them.
+            // ALL interactive circle layers (WB, plumes, VIIRS) use the map's DEFAULT canvas
+            // renderer (preferCanvas: true). This is essential: a separate L.canvas({pane:...})
+            // renderer creates its own FULL-VIEWPORT canvas with pointer-events:auto, and because
+            // that canvas sits in a pane above the others it silently swallows every click meant
+            // for the layers beneath it — the flare divIcons in markerPane (z600) AND the shared
+            // overlay canvas. (That is exactly what the old wbPane at z650 did: it made World Bank
+            // dots clickable but left flares, plumes and VIIRS dead to clicks wherever the canvas
+            // covered them, i.e. everywhere.) On one shared default renderer Leaflet hit-tests all
+            // circle layers together and the markerPane flares sit cleanly on top, so every layer
+            // is clickable. WB-vs-flare overlap priority is now by draw order, not a blocking pane.
+            // (Verified live: with WB off its own top pane, flare/WB/VIIRS popups all open.)
 
             const drawerElement = document.getElementById('sidebar-drawer');
             if (drawerElement) {
@@ -938,13 +937,8 @@
             safeRadiusGroup = L.layerGroup();
 
             // NASA FIRMS active fires — fetched once via API (see loadViirsData).
-            // VIIRS markers use the map's DEFAULT canvas renderer (preferCanvas: true), exactly like the
-            // plume markers. A separate L.canvas() renderer puts VIIRS on its OWN stacked canvas, and a
-            // full-map canvas pane with pointer-events:auto blocks clicks to/from every other canvas layer
-            // (that's why a dedicated pane either left VIIRS unclickable — blocked by wbPane — or, when
-            // placed above wbPane, blocked the World Bank and flare dots beneath it). On the shared default
-            // renderer Leaflet hit-tests all circle layers together, so flares, plumes, WB and VIIRS are
-            // each clickable. (The one deliberate exception is wbPane, so a big WB dot wins over a flare.)
+            // VIIRS markers use the map's DEFAULT canvas renderer, like WB and plumes — no separate
+            // L.canvas() renderer and no dedicated pane (see the renderer note near map init).
             viirsFireLayer = L.layerGroup();
         
             iraqBoundaryLayer = L.geoJSON(null, {
@@ -2170,8 +2164,8 @@
                         fillColor: '#a855f7',
                         fillOpacity: 0.7,
                         weight: 2,
-                        opacity: 1,
-                        renderer: wbRenderer   // draw on the above-markers pane so the big WB dot stays clickable
+                        opacity: 1
+                        // default renderer (shared overlay canvas) — see note where wbPane was removed
                     });
         
                     var wgOperator = f.operator || 'Unknown';
