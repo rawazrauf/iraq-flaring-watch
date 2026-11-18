@@ -4,7 +4,7 @@ This document explains how each dataset used in Iraq Flaring Watch was sourced, 
 
 ---
 
-## 1. Active Flare Locations (`query`)
+## 1. Active Flare Locations (`data/query`)
 
 **Source:** OpenStreetMap via Overpass API  
 **Tag:** `man_made=flare`  
@@ -24,13 +24,13 @@ area["ISO3166-1"="IQ"]->.searchArea;
 out center;
 ```
 
-The result is stored as `query` in the repo root. The map also supports live querying against three Overpass endpoints with automatic failover.
+The result is stored as `query` in the repo's `data/` folder. The map also supports live querying against three Overpass endpoints with automatic failover.
 
 Field detection (assigning flares to named oil fields) uses a proximity lookup against 24 known field centroids within a 0.25° radius threshold.
 
 ---
 
-## 2. Population Exposure (`query_population.json`)
+## 2. Population Exposure (`data/query_population.json`)
 
 **Source:** WorldPop Project — Iraq 2020 UN-adjusted constrained population raster  
 **File:** `irq_ppp_2020_UNadj_constrained.tif`  
@@ -39,7 +39,7 @@ Field detection (assigning flares to named oil fields) uses a proximity lookup a
 
 ### How it was generated
 
-Run locally in Google Colab or any Python environment with the raster file present:
+Run locally in Google Colab or any Python environment with the raster file present (script: `tools/worldpop_colab.py`):
 
 ```python
 !pip install rasterio pyproj shapely requests
@@ -50,7 +50,7 @@ from shapely.geometry import Point
 from shapely.ops import transform
 
 # Fetch current flare coordinates from GitHub
-url = "https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query"
+url = "https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/query"
 flare_data = requests.get(url).json()
 
 # Setup UTM Zone 38N projection for accurate 5km buffering
@@ -83,11 +83,11 @@ with open('query_population.json', 'w') as f:
 
 The script fetches the latest `query` file from GitHub automatically, so re-running it after adding new flares to OSM will generate a fully updated `query_population.json`.
 
-**Output:** A flat JSON dictionary mapping OSM element IDs to integer population counts within 5km.
+**Output:** A flat JSON dictionary mapping OSM element IDs to integer population counts within 5km. Commit it to `data/`.
 
 ---
 
-## 3. Emission Plumes (`iraq_tanager_plumes.json`)
+## 3. Emission Plumes (`data/iraq_tanager_plumes.json`)
 
 **Source:** Carbon Mapper — Tanager satellite  
 **API:** https://api.carbonmapper.org/api/v1/catalog/plumes/annotated  
@@ -96,7 +96,7 @@ The script fetches the latest `query` file from GitHub automatically, so re-runn
 
 ### How it was generated
 
-Requires a Carbon Mapper API token. Run in Python:
+Requires a Carbon Mapper API token. Run in Python (script: `tools/carbon_mapper_query.py`); commit the output to `data/`:
 
 ```python
 import requests, json, time
@@ -224,7 +224,7 @@ Circle radius is scaled logarithmically by emission rate: `Math.max(6, Math.min(
 
 ---
 
-## 4. Gas Volume & Economic Waste (`iraq_wb_flares_all_years.json`)
+## 4. Gas Volume & Economic Waste (`data/iraq_wb_flares_all_years.json`)
 
 **Source:** World Bank Global Gas Flaring Reduction Partnership (GGFR)  
 **Dataset:** 2012–2025 Flare Volume Estimates by Individual Flare Location  
@@ -334,15 +334,15 @@ Computed from the displayed 2025 World Bank slice using the formulas above.
 
 ---
 
-## 5. Population Impact (`iraq_flaring_impact.json`)
+## 5. Population Impact (`data/iraq_flaring_impact.json`)
 
 **Source:** WorldPop Project — Iraq 2020 UN-adjusted constrained population raster  
-**Script:** `population_impact.py` (repo root)  
-**Output:** `iraq_flaring_impact.json` (repo root)  
+**Script:** `tools/population_impact.py`  
+**Output:** `data/iraq_flaring_impact.json`  
 
 ### How it was generated
 
-Run `population_impact.py` in Google Colab with `irq_ppp_2020_UNadj_constrained.tif` uploaded to the session. The script fetches the latest flare locations from GitHub automatically, so re-running after adding new flares to OSM will produce an updated figure.
+Run `tools/population_impact.py` in Google Colab with `irq_ppp_2020_UNadj_constrained.tif` uploaded to the session. The script fetches the latest flare locations from GitHub automatically, so re-running after adding new flares to OSM will produce an updated figure.
 
 ### Methodology
 
@@ -351,11 +351,11 @@ Each flare is buffered by 5km in UTM Zone 38N (EPSG:32638) for accurate metric d
 ### Updating
 
 1. Add new flares to OpenStreetMap with tag `man_made=flare`
-2. Open `population_impact.py` in Google Colab
+2. Open `tools/population_impact.py` in Google Colab
 3. Upload `irq_ppp_2020_UNadj_constrained.tif` to the Colab session
 4. Run the script
 5. Download the output `iraq_flaring_impact.json`
-6. Commit it to the repo root
+6. Commit it to the `data/` folder
 7. The website reads this file on load and updates the stat automatically
 
 ### Key result (October 2026)
@@ -373,7 +373,7 @@ Based on the 2 October 2026 OSM snapshot. The live OpenStreetMap count can be sl
 
 ---
 
-## 6. Flare Activity Status — VIIRS Last Detection (`flare_viirs_status.json`)
+## 6. Flare Activity Status — VIIRS Last Detection (`data/flare_viirs_status.json`)
 
 **Source:** NASA FIRMS — VIIRS S-NPP thermal anomaly / active fire detections  
 **API:** https://firms.modaps.eosdis.nasa.gov/api/area/ (Area API, CSV)  
@@ -395,7 +395,7 @@ The dataset is rebuilt **quarterly** via a Google Colab notebook that calls the 
 - **`VIIRS_SNPP_NRT`** tops up the most recent ~60 days, since SP processing lags by a month or two. Without this, the tail of the window would falsely show recently-active flares as "gone dark."
 - The two products are merged and de-duplicated on `(lat, lon, acq_date)`.
 
-Detections are binned into a ~0.01° spatial grid so each flare only compares against detections in its own and neighbouring cells, keeping the match fast across ~150,000 detections. For each flare the notebook records the most recent detection date and the total detection count in the window, then writes `flare_viirs_status.json` to the repo root.
+Detections are binned into a ~0.01° spatial grid so each flare only compares against detections in its own and neighbouring cells, keeping the match fast across ~150,000 detections. For each flare the notebook records the most recent detection date and the total detection count in the window, then writes `flare_viirs_status.json`, which is committed to the `data/` folder.
 
 ```python
 # Core match (simplified)
@@ -423,7 +423,7 @@ for f in flares:
     }
 ```
 
-The flare list is read live from the repo's `query` file, so flare IDs always match the website exactly.
+The flare list is read live from the repo's `data/query` file, so flare IDs always match the website exactly.
 
 ### Output structure
 
@@ -464,11 +464,11 @@ Ring **thickness** is scaled to detection frequency (thin for sparse, thick for 
 
 ### Updating
 
-1. Open the VIIRS matcher notebook in Google Colab
+1. Open the VIIRS matcher notebook (`tools/iraq_flaring_viirs_match.ipynb`) in Google Colab
 2. Provide your FIRMS `MAP_KEY` (stored as a Colab Secret `FIRMS_MAP_KEY` after the first run)
 3. Run all cells — the notebook pulls SP + NRT directly from the FIRMS API and performs the 500 m match
 4. Download the generated `flare_viirs_status.json`
-5. Commit it to the repo root
+5. Commit it to the `data/` folder
 6. The website reads this file on load and populates the popup line and status rings automatically
 
 ### Key result (October 2026)

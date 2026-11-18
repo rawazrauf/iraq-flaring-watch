@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-18 (later)
+- Repository reorganised into folders: datasets in `data/`, scripts and notebooks in `tools/`, screenshots in `images/`. The site, tracker, README, methodology and tools all point to the new paths. `carbon_mapper_query` and `worldpop_colab` gained a `.py` extension
+- Old raw GitHub links to the data files (e.g. `…/main/query`) no longer work; use `…/main/data/query`. `Iraq Flaring Watch.jpeg` is now `images/iraq-flaring-watch-mobile.jpeg`, and `iraq-osm-flares-history.png` is in `images/`; the OSM diary post links were updated to match
+- README: new Repository layout section; tracker page build 2026.11.18.a
+
 ## 2026-11-18
 - **Night lights background replaced.** The 2012 NASA city-lights composite is gone. The Night background now shows NOAA-20 VIIRS Day/Night Band imagery (NASA GIBS) from the most recent night when the moon was down at the satellite's ~01:30 pass. The night is picked automatically from the lunar cycle, then checked against the imagery itself. The date is shown in the map attribution
 - **Fixed: "homes powered" in the World Bank popup was overstated about 2.86×.** The 35% plant-efficiency factor had dropped out of the per-site formula again in the 2026-11-08 build; it is restored, so the popup now matches the national MW figure and `DATA_METHODOLOGY.md` (e.g. Kirkuk 200 M m³: ~175,673 → ~61,485 homes)

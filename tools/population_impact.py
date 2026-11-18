@@ -41,7 +41,7 @@ BUFFER_RADIUS_M  = 5000          # 5km health risk threshold
 UTM_CRS          = "EPSG:32638"  # UTM Zone 38N (Iraq)
 WGS84_CRS        = "EPSG:4326"
 WORLDPOP_FILE    = "irq_ppp_2020_UNadj_constrained.tif"
-GITHUB_QUERY_URL = "https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query"
+GITHUB_QUERY_URL = "https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/query"
 OUTPUT_FILE      = "iraq_flaring_impact.json"
 
 # ── Step 1: Fetch flare locations ────────────────────────────
@@ -129,4 +129,4 @@ print(f"\n{'='*50}")
 print(f"OUTPUT: {OUTPUT_FILE}")
 print(f"{'='*50}")
 print(json.dumps(output, indent=2))
-print(f"\nDone. Download {OUTPUT_FILE} and commit to your GitHub repo root.")
+print(f"\nDone. Download {OUTPUT_FILE} and commit it to the repo's data/ folder.")

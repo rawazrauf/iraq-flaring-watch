@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Iraq Flaring Watch — Flare Tracker
-     Build: 2026.10.08.c
+     Build: 2026.11.18.a
      A searchable table of every mapped flare, its VIIRS activity status, and the
      World Bank facility-level flaring volume it sits at. WB volumes are shown at
      facility/field level only — never summed across flares (that would 3x the real total). -->
@@ -179,11 +179,11 @@
 <footer>
   Data: OpenStreetMap (flare locations, ODbL) · NASA FIRMS VIIRS S-NPP (activity) · World Bank GGFR 2025 (volume).
   Volumes are facility-level estimates. · <a href="https://github.com/rawazrauf/iraq-flaring-watch">Source &amp; methodology</a>
-  · build 2026.10.08.c
+  · build 2026.11.18.a
 </footer>
 
 <script>
-const DATA_URL='https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_flare_tracker.json';
+const DATA_URL='https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/iraq_flare_tracker.json';
 const STATUS_RANK={active:0,stale:1,dark:2,never:3};
 const fmt=n=>n==null?'':n.toLocaleString(undefined,{maximumFractionDigits:1});
 let DATA=null, fRows=[], wRows=[];

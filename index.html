@@ -37,7 +37,7 @@
     <meta property="og:url" content="https://iraqflaringwatch.com">
     <meta property="og:title" content="Iraq Flaring Watch">
     <meta property="og:description" content="Interactive map tracking gas flaring across Iraq. See active flare sites, verified emission plumes, and annual economic waste per facility based on World Bank GGFR 2025 data.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.jpg">
+    <meta property="og:image" content="https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/images/iraq-flaring-overview.jpg">
     <meta property="og:image:width" content="1680">
     <meta property="og:image:height" content="1050">
     <meta property="og:site_name" content="Iraq Flaring Watch">
@@ -48,7 +48,7 @@
     <meta name="twitter:url" content="https://iraqflaringwatch.com">
     <meta name="twitter:title" content="Iraq Flaring Watch">
     <meta name="twitter:description" content="Interactive map tracking gas flaring across Iraq. See active flare sites, verified emission plumes, and annual economic waste per facility based on World Bank GGFR 2025 data.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.jpg">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/images/iraq-flaring-overview.jpg">
     <meta name="twitter:site" content="@IraqFlaring">
     <meta name="twitter:creator" content="@rawaz">
 
@@ -485,7 +485,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.18.d</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.18.e</p>
             </div>
         
         </aside>
@@ -509,7 +509,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.11.18.d
+           Build: 2026.11.18.e
            Last updated: 18 November 2026
            ============================================================ */
         /* ------------------------------------------------------------
@@ -689,7 +689,7 @@
 
         async function fetchStaticPopData() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query_population.json');
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/query_population.json');
                 if (response.ok) staticPopData = await response.json();
             } catch (error) {
                 console.warn("Static population dataset missing or failed to load.");
@@ -701,7 +701,7 @@
         // Harmless if the file is missing — the popup line simply won't appear.
         async function fetchViirsStatus() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/flare_viirs_status.json');
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/flare_viirs_status.json');
                 if (response.ok) {
                     const j = await response.json();
                     viirsStatusData = (j && j.flares) ? j.flares : (j || {});
@@ -734,7 +734,7 @@
 
         async function fetchImpactData() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_flaring_impact.json');
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/iraq_flaring_impact.json');
                 const data = await response.json();
                 const el = document.getElementById('stat-impacted');
                 if (el) el.textContent = `~${(data.impacted_population / 1000000).toFixed(1)} Million`;
@@ -746,7 +746,7 @@
         
         async function loadPlumeData() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_tanager_plumes.json');
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/iraq_tanager_plumes.json');
                 const plumes = await response.json();
         
                 plumes.forEach(p => {
@@ -823,7 +823,7 @@
             progressBar.style.width = "30%";
 
             try {
-                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query');
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/query');
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 progressBar.style.width = "70%";
                 const data = await response.json();
@@ -2253,7 +2253,7 @@
 
         async function loadWBFlareData() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq_wb_flares_all_years.json');
+                const response = await fetch('https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/iraq_wb_flares_all_years.json');
                 wbFlareData = await response.json();
                 const flares = wbFlareData['2025'] || [];
         

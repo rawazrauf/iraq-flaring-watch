@@ -24,27 +24,27 @@ Gas flaring burns off associated natural gas during oil extraction rather than c
 ### National Overview
 Flare clusters, emission plumes, wasted-gas bubbles and the density heatmap across Iraq's oil fields, with the background and layer menus open.
 
-![Iraq Flaring Watch national overview](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.jpg)
+![Iraq Flaring Watch national overview](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/images/iraq-flaring-overview.jpg)
 
 ### Background Maps
 Six backgrounds, switched from the **Background** menu at the top-left of the map: high-resolution satellite, satellite archive, Sentinel-2 cloudless, night lights, dark canvas and OpenStreetMap. **Night Lights** shows NOAA-20 VIIRS imagery from the most recent moonless night, so flaring oil fields glow alongside Iraq's cities.
 
-![The same view of Iraq on all six background maps](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/background-options.jpg)
+![The same view of Iraq on all six background maps](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/images/background-options.jpg)
 
 ### Economic Waste — Wasted Gas Popup
 Click any purple bubble to see annual gas volume (World Bank GGFR 2025), estimated USD value lost, and Iraqi homes that could have been powered.
 
-![Wasted gas popup showing Basra Energy Company's 2025 flaring at Rumaila](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/emission-inspection-satellite.png)
+![Wasted gas popup showing Basra Energy Company's 2025 flaring at Rumaila](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/images/emission-inspection-satellite.png)
 
 ### Active Flare Inspection
 Zoom into any flare on satellite imagery to see population within 5km, coordinates, when a satellite last detected it burning and how often in the past year, and direct links to Google Maps and the OSM editor. Red dots are live NASA fire detections.
 
-![Gas flare inspection popup on satellite imagery](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/flare-inspection-satellite.png)
+![Gas flare inspection popup on satellite imagery](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/images/flare-inspection-satellite.png)
 
 ### Emission Plume — OpenStreetMap Background
 CH₄ and CO₂ plumes detected by Carbon Mapper's Tanager satellite, shown with emission rate in kg/hr, sector, wind speed and the satellite detection image.
 
-![CH4 emission plume popup on OpenStreetMap background](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/plume-inspection-OSM.png)
+![CH4 emission plume popup on OpenStreetMap background](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/images/plume-inspection-OSM.png)
 
 ---
 
@@ -100,6 +100,19 @@ Homes        = (vol_mm3 × 4,400 × 0.35 × 1,000) / 5,000
 ```
 
 Full details in [DATA_METHODOLOGY.md](DATA_METHODOLOGY.md).
+
+---
+
+## Repository layout
+
+| Path | What's in it |
+|---|---|
+| `index.html` | The whole web map (single file, no build step) |
+| `tracker.html` | Searchable flare tracker table (test page) |
+| `data/` | Datasets the map loads: OSM flare snapshot (`query`), population, World Bank volumes, Tanager plumes, VIIRS status, tracker data |
+| `tools/` | Scripts and notebooks that regenerate the files in `data/` (see [DATA_METHODOLOGY.md](DATA_METHODOLOGY.md)) |
+| `images/` | Screenshots and charts used in this README, the OSM diary post and link previews |
+| `locales/` | Translation files managed on Weblate (`en.json` is the source) |
 
 ---
 

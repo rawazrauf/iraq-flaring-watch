@@ -11,7 +11,7 @@ from shapely.ops import transform
 
 # 1. Fetch your live OSM flare coordinates from GitHub
 print("Fetching current map coordinates...")
-url = "https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/query"
+url = "https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/data/query"
 flare_data = requests.get(url).json()
 
 # 2. Setup 5km precision projection math (UTM Zone 38N)
