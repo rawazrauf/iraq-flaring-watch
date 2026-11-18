@@ -26,6 +26,11 @@ Flare clusters, emission plumes, wasted-gas bubbles and the density heatmap acro
 
 ![Iraq Flaring Watch national overview](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/iraq-flaring-overview.jpg)
 
+### Background Maps
+Six backgrounds, switched from the **Background** menu at the top-left of the map: high-resolution satellite, satellite archive, Sentinel-2 cloudless, night lights, dark canvas and OpenStreetMap. **Night Lights** shows NOAA-20 VIIRS imagery from the most recent moonless night, so flaring oil fields glow alongside Iraq's cities.
+
+![The same view of Iraq on all six background maps](https://raw.githubusercontent.com/rawazrauf/iraq-flaring-watch/main/background-options.jpg)
+
 ### Economic Waste — Wasted Gas Popup
 Click any purple bubble to see annual gas volume (World Bank GGFR 2025), estimated USD value lost, and Iraqi homes that could have been powered.
 
