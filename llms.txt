@@ -12,19 +12,21 @@ Iraq Flaring Watch visualizes where natural gas is burned off ("flared") during 
 - [Emission plumes](https://carbonmapper.org) — methane (CH₄) and CO₂ plumes from Carbon Mapper's Tanager satellite program.
 - [Gas volume estimates](https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data) — World Bank GGFR Global Gas Flaring Tracker, 2025 data.
 - [Population exposure](https://www.worldpop.org) — WorldPop (UN-adjusted), used to estimate people living within 5 km of a flare.
-- [Live fire detections](https://firms.modaps.eosdis.nasa.gov) — NASA FIRMS / VIIRS, past 3 days.
-- Satellite imagery — Esri World Imagery and NASA GIBS.
+- [Live fire detections](https://firms.modaps.eosdis.nasa.gov) — NASA FIRMS / VIIRS (NOAA-20 and NOAA-21 satellites), past 3 days.
+- Flare activity status — when NASA VIIRS last detected each mapped flare burning, over the past 12 months (refreshed quarterly).
+- Background imagery — Esri World Imagery, EOX Sentinel-2 cloudless, and NASA GIBS (NOAA-20 VIIRS night lights from a recent moonless night).
 
 ## Economic methodology
 
-The wasted-gas value assumes a gas price of $3.50/MMBtu (Iraqi Cabinet Session 49, 2025). The electricity-generation estimate assumes ~35% power-plant efficiency and 5,000 kWh per household per year (IEA 2024 consumption divided by the Iraqi census household count; methodology reviewed by Ahmed Gailani, senior energy modeler at NESO). Population exposure is computed from 5 km buffers around each flare, unioned to avoid double-counting, in UTM Zone 38N.
+The wasted-gas value assumes a gas price of $3.50/MMBtu (Iraqi Cabinet Session 49, 2025). The electricity-generation estimate (both the national MW figure and the per-site "homes powered" figure) assumes ~35% power-plant efficiency and 5,000 kWh per household per year (IEA 2024 consumption divided by the Iraqi census household count; methodology reviewed by Ahmed Gailani, senior energy modeler at NESO). Population exposure is computed from 5 km buffers around each flare, unioned to avoid double-counting, in UTM Zone 38N.
 
 ## Key facts (2025)
 
 - National flaring: approximately 24 billion cubic metres per year (World Bank GGFR 2025).
 - Estimated value of wasted gas: approximately $2.98 billion per year.
 - Electricity generation potential if captured: approximately 4,241 MW.
-- People living within 5 km of a flare: approximately 5.1 million.
+- People living within 5 km of a flare: approximately 5.2 million (about 11% of Iraq's population).
+- Mapped flare sites: 437 (OpenStreetMap snapshot, October 2026).
 
 ## Live site
 

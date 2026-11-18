@@ -351,7 +351,7 @@
                     <div class="col-span-2 bg-gray-950 p-2 rounded-lg border border-gray-800 flex flex-col justify-between">
                         <span class="text-[9px] text-gray-400 font-medium" data-i18n="sidebar.electricity_potential">Electricity Generation Potential</span>
                         <div class="flex items-baseline space-x-1 mt-0.5">
-                            <span id="stat-homes" class="text-lg font-extrabold text-amber-400">—</span>
+                            <span id="stat-mw" class="text-lg font-extrabold text-amber-400">—</span>
                             <span class="text-[9px] text-gray-500 font-mono" data-i18n="sidebar.mw_if_captured">MW if captured</span>
                         </div>
                     </div>
@@ -485,7 +485,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.18.b</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.18.c</p>
             </div>
         
         </aside>
@@ -509,7 +509,7 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.11.18.b
+           Build: 2026.11.18.c
            Last updated: 18 November 2026
            ============================================================ */
         /* ------------------------------------------------------------
@@ -2099,7 +2099,7 @@
             const mwPotential = Math.round((totalVol * 4400 * 0.35) / 8760);
         
             document.getElementById('stat-value-wasted').textContent = `~$${valueUSD_billions}B`;
-            document.getElementById('stat-homes').textContent = `~${mwPotential.toLocaleString()}`;
+            document.getElementById('stat-mw').textContent = `~${mwPotential.toLocaleString()}`;
         }
 
         function updateBaseMapControl(type) {

@@ -1,5 +1,46 @@
 # Changelog
 
+## 2026-11-18
+- **Night lights background replaced.** The 2012 NASA city-lights composite is gone. The Night background now shows NOAA-20 VIIRS Day/Night Band imagery (NASA GIBS) from the most recent night when the moon was down at the satellite's ~01:30 pass. The night is picked automatically from the lunar cycle, then checked against the imagery itself. The date is shown in the map attribution
+- **Fixed: "homes powered" in the World Bank popup was overstated about 2.86×.** The 35% plant-efficiency factor had dropped out of the per-site formula again in the 2026-11-08 build; it is restored, so the popup now matches the national MW figure and `DATA_METHODOLOGY.md` (e.g. Kirkuk 200 M m³: ~175,673 → ~61,485 homes)
+- VIIRS popup source now reads "Source: NASA FIRMS / VIIRS" (it still said "VIIRS SNPP" after the switch to NOAA-20/21)
+- Docs refreshed: README (four data layers, data sources, formulas), `llms.txt`, `DATA_METHODOLOGY.md`, sitemap; README popup screenshot retaken with 2025 data
+- Internal: sidebar element `stat-homes` renamed `stat-mw` (it holds the MW figure)
+
+## 2026-11-13
+- Fixed click-blocking: World Bank bubbles had their own full-screen canvas layer above the flares, so only the purple bubbles could be clicked. All circle layers (World Bank, plumes, VIIRS) now share one canvas, and flares sit on top
+- Behaviour change: where a flare and a World Bank bubble overlap, the flare now wins the click
+
+## 2026-11-08
+- Live fire detections switched to NOAA-20 + NOAA-21 (VIIRS_SNPP_NRT stopped returning data). Both feeds are fetched in parallel, merged and de-duplicated
+
+## 2026-10-17
+- Restored the October homes-powered fix after it was lost in an intermediate build
+
+## 2026-10-10
+- Fixed: World Bank popup "homes powered" now applies the 35% plant efficiency, matching the national MW figure
+- Reference labels and roads moved to their own non-clickable layer so they no longer block markers
+
+## 2026-10-08
+- Added **satellite activity status** for every mapped flare: last VIIRS detection date and number of detections over the past 12 months (`flare_viirs_status.json`, 500 m match radius, `iraq_flaring_viirs_match.ipynb`)
+- Flares not detected recently get a coloured ring: amber (1–3 months), red (3–12 months), grey dashed (none in 12 months)
+- Added EOX Sentinel-2 cloudless background
+- Dark background switched to Esri Dark Gray Canvas (CARTO's free dark tiles were retired)
+- Added `iraq_flare_tracker.json` and a test tracker page (`tracker.html`)
+
+## 2026-10-05 – 2026-10-07
+- Added **Sorani Kurdish** interface with full right-to-left layout; translations managed on Weblate (`locales/`), English is the source
+
+## 2026-10-02
+- Refreshed OSM flare snapshot (437 flares) and regenerated population figures: ~5.2 million Iraqis (5,181,870) within 5 km of a flare
+- Refreshed Carbon Mapper Tanager plumes
+
+## 2026-08-09
+- Added **live fire detections** layer from NASA FIRMS VIIRS
+
+## 2026-08-04
+- Added first-visit guided tour
+
 ## 2026-06-29
 - Updated OSM flare dataset — new flare locations added from latest Overpass snapshot (June 29, 2026)
 - Regenerated `query_population.json` and `iraq_flaring_impact.json` to reflect new flares

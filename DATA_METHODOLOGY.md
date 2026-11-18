@@ -264,7 +264,7 @@ with open('iraq_wb_flares_all_years.json', 'w') as f:
     json.dump(output, f)
 ```
 
-**Total records:** 4,144 across all years (Iraq only, 2012–2025, including zero-volume entries). The displayed 2025 year holds 296 records.
+**Total records:** 4,144 across all years (Iraq only, 2012–2025, including zero-volume entries). The displayed 2025 year holds 296 records, of which **136** pass the $1M/year display filter (see *Display filter* below) and appear on the map. The national totals use all 296.
 
 ### Economic value calculation
 
@@ -330,7 +330,8 @@ Computed from the displayed 2025 World Bank slice using the formulas above.
 | People within 5 km of a flare | ~5.2 million |
 | Largest single site | West Qurna 2 – Yamama (LUKOIL), ~2,755 M m³/yr |
 | Estimated value — West Qurna 2 | ~$341M/yr |
-| Total WB records displayed (≥$1M) | ~136 sites |
+| Total WB records displayed (≥$1M) | 136 of 296 sites |
+
 ---
 
 ## 5. Population Impact (`iraq_flaring_impact.json`)
@@ -358,6 +359,8 @@ Each flare is buffered by 5km in UTM Zone 38N (EPSG:32638) for accurate metric d
 7. The website reads this file on load and updates the stat automatically
 
 ### Key result (October 2026)
+
+Based on the 2 October 2026 OSM snapshot. The live OpenStreetMap count can be slightly higher as new flares are mapped; the figure updates when the script is re-run.
 
 | Metric | Value |
 |---|---|
@@ -480,3 +483,36 @@ Ring **thickness** is scaled to detection frequency (thin for sparse, thick for 
 | Match radius | 500 m |
 | Window | 365 days |
 | Source | NASA FIRMS VIIRS S-NPP (SP + NRT top-up) |
+
+### Note on the S-NPP feed (November 2026)
+
+NASA's `VIIRS_SNPP_NRT` feed stopped returning data in November 2026. The October 2026 status file above was built before this and is unaffected. Before the next quarterly run (due around January 2027), the notebook's near-real-time top-up has to move to the NOAA-20 / NOAA-21 feeds, and the science-quality archive source needs checking. Any change of sensor will be reviewed and documented here before the new file is published.
+
+---
+
+## 7. Live Fire Detections (map layer)
+
+**Source:** NASA FIRMS Area API (CSV), fetched in the browser on page load  
+**Products:** `VIIRS_NOAA20_NRT` and `VIIRS_NOAA21_NRT` (near-real-time)  
+**Window:** last 3 days  
+**Area:** Iraq bounding box `38.7,29.0,48.6,37.4`
+
+Both feeds are requested in parallel and merged; identical rows are removed. If one feed fails, the other is still shown. Until November 2026 this layer used `VIIRS_SNPP_NRT`, which stopped returning data. Each red dot's popup shows the detection time, confidence and fire radiative power (FRP).
+
+This layer is a live view of what is burning now. It is separate from the 12-month activity status in section 6, which is pre-computed quarterly.
+
+---
+
+## 8. Night Lights Background
+
+**Source:** NASA GIBS, layer `VIIRS_NOAA20_DayNightBand_At_Sensor_Radiance` (Web Mercator, max native zoom 8, ~600 m per pixel)  
+**Coverage:** one recent night, chosen automatically  
+
+The Day/Night Band image is not corrected for moonlight, so a moonlit night washes out the desert and lowers contrast. The site therefore picks the night as follows:
+
+1. **Lunar check.** NOAA-20 passes over Iraq at about 01:30 local time (about 22:35 UTC on the GIBS date). For each of the last 35 days the site computes the moon's altitude and illuminated fraction at that moment over Baghdad (an inline port of SunCalc, BSD-2-Clause). A night is usable when *illuminated fraction × sin(altitude)* is below 0.15, i.e. the moon is down, or low and dim.
+2. **Image check.** For the most recent usable nights, the site reads one desert tile (zoom 6, covering western Iraq and Baghdad) and accepts the first night whose tile has data and a median brightness below 50 (0–255). Moonlit desert measures 60+; dark nights 20–40. This also skips a night whose data has not arrived yet.
+
+If the tile cannot be read, the lunar choice is used. Around full moon the background can be up to about 12 days old. The chosen date is shown in the map attribution ("night of …").
+
+This is a background only. Bright spots include cities, roads and greenhouses as well as flares; flare locations and detections come from sections 1 and 7.
