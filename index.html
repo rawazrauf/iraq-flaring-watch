@@ -485,7 +485,7 @@
                     © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="hover:underline">OpenStreetMap contributors</a> <br>
                     <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data" target="_blank" class="hover:underline text-gray-600">World Bank GGFR Global Flaring Data 2025</a>
                 </p>
-                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.13.c</p>
+                <p class="text-[9px] text-gray-700 font-mono mt-1.5">build 2026.11.18.a</p>
             </div>
         
         </aside>
@@ -509,9 +509,121 @@
     <script>
         /* ============================================================
            Iraq Flaring Watch — iraqflaringwatch.com
-           Build: 2026.11.13.c
-           Last updated: 7 October 2026
+           Build: 2026.11.18.a
+           Last updated: 18 November 2026
            ============================================================ */
+        /* ------------------------------------------------------------
+           Night lights background — moon-aware date picking
+           NOAA-20 passes over Iraq at ~01:30 local solar time, i.e. ~22:35 UTC on the
+           GIBS date. Moon position/illumination: compact port of SunCalc
+           (c) 2011-2015 Vladimir Agafonkin, BSD-2-Clause.
+           ------------------------------------------------------------ */
+        const NIGHT_LAYER_ID = 'VIIRS_NOAA20_DayNightBand_At_Sensor_Radiance';
+        const NIGHT_TILE_URL = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/' + NIGHT_LAYER_ID +
+            '/default/{time}/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png';
+        const NIGHT_PASS_UTC_MIN = 22 * 60 + 35;          // overpass time over central Iraq
+        const NIGHT_REF = { lat: 33.3, lng: 44.4 };       // Baghdad
+        const NIGHT_CHECK_TILE = { z: 6, y: 25, x: 39 };  // western desert + Baghdad
+        const MOON_SCORE_MAX = 0.15;    // illuminated fraction x sin(altitude)
+        const NIGHT_MEDIAN_MAX = 50;    // 0-255; moonlit desert reads 60+, dark nights 20-40
+        let nightDate = null;
+
+        function isoDayUTC(d) { return d.toISOString().slice(0, 10); }
+
+        const moonCalc = (function () {
+            const rad = Math.PI / 180, dayMs = 864e5, J1970 = 2440588, J2000 = 2451545, e = rad * 23.4397;
+            const toDays = d => d.valueOf() / dayMs - 0.5 + J1970 - J2000;
+            const ra = (l, b) => Math.atan2(Math.sin(l) * Math.cos(e) - Math.tan(b) * Math.sin(e), Math.cos(l));
+            const dec = (l, b) => Math.asin(Math.sin(b) * Math.cos(e) + Math.cos(b) * Math.sin(e) * Math.sin(l));
+            function sun(d) {
+                const M = rad * (357.5291 + 0.98560028 * d);
+                const L = M + rad * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M)) + rad * 102.9372 + Math.PI;
+                return { ra: ra(L, 0), dec: dec(L, 0) };
+            }
+            function moon(d) {
+                const L = rad * (218.316 + 13.176396 * d), M = rad * (134.963 + 13.064993 * d), F = rad * (93.272 + 13.229350 * d);
+                const l = L + rad * 6.289 * Math.sin(M), b = rad * 5.128 * Math.sin(F);
+                return { ra: ra(l, b), dec: dec(l, b), dist: 385001 - 20905 * Math.cos(M) };
+            }
+            return {
+                altitude(date, lat, lng) {
+                    const d = toDays(date), m = moon(d);
+                    const H = rad * (280.16 + 360.9856235 * d) - rad * -lng - m.ra, phi = rad * lat;
+                    return Math.asin(Math.sin(phi) * Math.sin(m.dec) + Math.cos(phi) * Math.cos(m.dec) * Math.cos(H));
+                },
+                fraction(date) {
+                    const d = toDays(date), s = sun(d), m = moon(d), sdist = 149598000;
+                    const phi = Math.acos(Math.sin(s.dec) * Math.sin(m.dec) + Math.cos(s.dec) * Math.cos(m.dec) * Math.cos(s.ra - m.ra));
+                    const inc = Math.atan2(sdist * Math.sin(phi), m.dist - sdist * Math.cos(phi));
+                    return (1 + Math.cos(inc)) / 2;
+                }
+            };
+        })();
+
+        // Moonlight score at the overpass for a GIBS date (YYYY-MM-DD). 0 = moon down.
+        function nightMoonScore(iso) {
+            const t = new Date(iso + 'T00:00:00Z'); t.setUTCMinutes(NIGHT_PASS_UTC_MIN);
+            const alt = moonCalc.altitude(t, NIGHT_REF.lat, NIGHT_REF.lng);
+            return moonCalc.fraction(t) * Math.max(0, Math.sin(alt));
+        }
+
+        // Most recent first: dates from today back `days` days whose overpass was moon-safe.
+        function moonSafeNightDates(now, days) {
+            const out = [];
+            for (let i = 0; i <= days; i++) {
+                const iso = isoDayUTC(new Date(now.getTime() - i * 864e5));
+                if (nightMoonScore(iso) < MOON_SCORE_MAX) out.push(iso);
+            }
+            return out;
+        }
+
+        function nightAttribution(iso) {
+            const label = new Date(iso + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+            return 'NASA GIBS · NOAA-20 VIIRS Day/Night Band, night of ' + label;
+        }
+
+        // Median brightness and transparency of the check tile for one date (null if unreadable).
+        function nightTileStats(iso) {
+            return new Promise(resolve => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                    try {
+                        const c = document.createElement('canvas'); c.width = c.height = 256;
+                        const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+                        const px = ctx.getImageData(0, 0, 256, 256).data, v = [];
+                        let transparent = 0;
+                        for (let i = 0; i < px.length; i += 4) { if (px[i + 3] < 10) transparent++; else v.push(px[i]); }
+                        v.sort((a, b) => a - b);
+                        resolve({ transparentPct: 100 * transparent / 65536, median: v.length ? v[v.length >> 1] : null });
+                    } catch (_) { resolve(null); }
+                };
+                img.onerror = () => resolve(null);
+                img.src = L.Util.template(NIGHT_TILE_URL, Object.assign({ time: iso }, NIGHT_CHECK_TILE));
+            });
+        }
+
+        // First candidate whose tile is present and dark. Falls back to null (keep the moon pick).
+        async function verifyNightDate(candidates) {
+            for (const iso of candidates.slice(0, 6)) {
+                const s = await nightTileStats(iso);
+                if (!s) return null;                       // can't read pixels: trust the moon pick
+                if (s.transparentPct < 10 && s.median !== null && s.median < NIGHT_MEDIAN_MAX) return iso;
+            }
+            return null;
+        }
+
+        function setNightDate(iso) {
+            const layer = baseLayers.night;
+            const active = map && map.hasLayer(layer);
+            if (active && map.attributionControl) map.attributionControl.removeAttribution(layer.options.attribution);
+            nightDate = iso;
+            layer.options.time = iso;
+            layer.options.attribution = nightAttribution(iso);
+            if (active && map.attributionControl) map.attributionControl.addAttribution(layer.options.attribution);
+            layer.redraw();
+        }
+
         let map;
         let preloadFlares = [];
         let currentFlares = [];
@@ -854,10 +966,19 @@
                 attribution: 'Tiles © Esri — Esri, Earthstar Geographics',
                 maxNativeZoom: 16, maxZoom: 19
             });
-            baseLayers.night = L.tileLayer('https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default//GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg', {
-                attribution: 'Imagery provided by NASA GIBS',
+            // Night lights: one recent night from the NOAA-20 VIIRS Day/Night Band (NASA GIBS),
+            // replacing the 2012 city-lights composite. This product is not moon-corrected, so we
+            // pick the most recent night when the moon was down (or low and dim) at NOAA-20's
+            // ~01:30 local overpass, then confirm with one desert tile that the night is really
+            // dark and the data is in. See pickNightDate() / verifyNightDate() below.
+            const nightCandidates = moonSafeNightDates(new Date(), 35);
+            nightDate = nightCandidates.find(d => d !== isoDayUTC(new Date())) || isoDayUTC(new Date(Date.now() - 864e5));
+            baseLayers.night = L.tileLayer(NIGHT_TILE_URL, {
+                time: nightDate,
+                attribution: nightAttribution(nightDate),
                 maxNativeZoom: 8, maxZoom: 19
             });
+            verifyNightDate(nightCandidates).then(d => { if (d && d !== nightDate) setNightDate(d); });
             // Esri World Dark Gray Canvas — keyless dark basemap (CARTO's free no-key dark tiles
             // were retired and now return an "API KEY REQUIRED" placeholder). Base + reference
             // (labels) are two separate Esri services, combined into one layer group.
@@ -2150,7 +2271,7 @@
                         : `~$${valueUSD_millions}M`;
         
                     // Electricity Calculation
-                    const homesEquivalent = Math.round((f.vol_mm3 * 4400 * 1000) / 5000);
+                    const homesEquivalent = Math.round((f.vol_mm3 * 4400 * 0.35 * 1000) / 5000);
                     const homesStr = homesEquivalent >= 1000000
                         ? `~${(homesEquivalent / 1000000).toFixed(1)}M`
                         : `~${homesEquivalent.toLocaleString()}`;
